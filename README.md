@@ -7,7 +7,7 @@ De momento para instalar la aplicacion de manera local solo ejecuto:
   
   'docker-compose build' y 'docker-compose up'
 - Despues se carga la Base de datos desde
-- Tambien ejecutelo siguiente para crear una imagen y cargarla en el docker hub:  
+- Tambien ejecute lo siguiente para crear una imagen y cargarla en el docker hub:  
   'docker push suvin1/gcar_app'
   
 ### Cargar datos desde Adminer
