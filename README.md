@@ -6,8 +6,24 @@ De momento para instalar la aplicacion de manera local solo ejecuto:
 - En consola desde la carpeta que contiene el Dockerfile, dockercompose.yml y la carptea gcar que contiene la aplicion:
   
   'docker-compose build' y 'docker-compose up'
+- Despues se carga la Base de datos desde
 - Tambien ejecutelo siguiente para crear una imagen y cargarla en el docker hub:  
   'docker push suvin1/gcar_app'
+  
+### Cargar datos desde Adminer
+- Conectarse al software Adminer, interface gráfica: http://localhost:9080.
+- Ingresar con las credenciales:
+    - Motor de BD: PostgreSQL
+    - Servidor: postgres
+    - Usuario: gcar
+    - Password: admin
+    - Base de Datos: gcar
+- importar y ejecutar contenidos de AR.sql que se encuentra en la carpeta GCAR.  
+
+### Ingresar a aplicación GCAR
+- Ingresar a http://localhost:8080/GCAR
+- Ingresar usuario '18851998' y contraseña '12345678'.
+  
   
 # Repositorios
 - Este es el link del dockerHub de la imagen: 
