@@ -26,7 +26,7 @@ Para instalar la aplicacion de manera local se siguen los siguientes pasos:
   
 # Repositorios
 - Este es el link del dockerHub de la imagen: 
-  'https://hub.docker.com/r/suvin1/gcar_app/tags'
+  'https://hub.docker.com/r/suvin1/gcar_app'
 - Link del repositorio de todos los archivos en github:
   'https://github.com/ysuvin/GCAR.git'
 
