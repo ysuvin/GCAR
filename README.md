@@ -2,7 +2,7 @@
 GCAR es una aplicacion web para la gestion de consultas en ÁLGEBRA RELACIONAL y SQL destinada a los estudiantes de Bases de Datos de la carrera de Ing. Civil en Informática de la Universidad de Valparaíso
 
 # Instalación
-De momento para instalar la aplicacion solo ejecuto:
+De momento para instalar la aplicacion de manera local solo ejecuto:
 - En consola desde la carpeta que contiene el Dockerfile, dockercompose.yml y la carptea gcar que contiene la aplicion:
   
   'docker-compose build' y 'docker-compose up'
