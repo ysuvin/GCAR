@@ -6,7 +6,7 @@ De momento para instalar la aplicacion de manera local solo ejecuto:
 - En consola desde la carpeta que contiene el Dockerfile, dockercompose.yml y la carptea gcar que contiene la aplicion:
   
   'docker-compose build' y 'docker-compose up'
-- Tambien ejecute para crear una imagen y cargarla en el docker hub:  
+- Tambien ejecutelo siguiente para crear una imagen y cargarla en el docker hub:  
   'docker push suvin1/gcar_app'
   
 # Repositorios
