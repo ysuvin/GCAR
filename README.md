@@ -3,7 +3,7 @@ GCAR es una aplicacion web para la gestion de consultas en ÁLGEBRA RELACIONAL y
 
 # Instalación
 Para instalar la aplicacion de manera local se siguen los siguientes pasos:
-- En consola desde la carpeta que contiene el Dockerfile, dockercompose.yml y la carptea gcar que contiene la aplicion:
+- En consola desde la carpeta que contiene el Dockerfile, dockercompose.yml y la carptea gcar que contiene la aplicación:
   
   `docker-compose build` y `docker-compose up`
 - Tambien ejecute lo siguiente para crear una imagen y cargarla en el docker hub:  
