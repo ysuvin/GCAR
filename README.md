@@ -38,7 +38,11 @@ De momento para instalar la aplicacion de manera local solo ejecuto:
   
 ### Realizar Consulta SQL
   - En el Menú Consultas seleccionar Hacer Consulta SQL
-  - Ingresar query `SELECT * FROM trabajador;` en barra de consultas
+  - Ingresar query `SELECT * FROM trabajador` en barra de consultas
   - Seleccionar botón Ejecutar 
 
+### Realizar Consulta en Algebra Relacional
+  - En el Menú Consultas seleccionar Hacer Consulta AR
+  - Ingresar query `PROYECTAR (id_trabajador, nom_trabajador, tarifa_sem, oficio, id_supervisor) (trabajador)` en barra de consultas
+  - Seleccionar botón Ejecutar
 
