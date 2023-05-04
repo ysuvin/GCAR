@@ -18,7 +18,7 @@ De momento para instalar la aplicacion de manera local solo ejecuto:
     - Usuario: gcar
     - Password: admin
     - Base de Datos: gcar
-- importar y ejecutar contenidos de AR.sql que se encuentra en la carpeta GCAR.  
+- importar y ejecutar contenidos de `AR.sql` que se encuentra en la carpeta GCAR.  
 
 ### Ingresar a aplicación GCAR
 - Ingresar a http://localhost:8080/GCAR
