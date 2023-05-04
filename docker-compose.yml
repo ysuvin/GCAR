@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:9.5
+    restart: always
+    container_name: postgres
+    environment:
+      POSTGRES_USER: "gcar"      
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "gcar"
+    ports:
+        - "5432:5432"
+    volumes:
+      - ./GCAR/postgres.conf:/etc/postgresql/postgresql.conf
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 9080:8080
+
+  gcar-app:
+    build:                # Instrucciones para crear imagen
+      context: .          # Dontexto actual
+      dockerfile: ./Dockerfile # Nombre Dockerfile
+    restart: always
+    image: suvin1/gcar_app
+    container_name: gcar_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - default
+                    #    enviroments:
+                    #      VIRTUAL_HOST: LOCALHOST
