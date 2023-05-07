@@ -294,10 +294,17 @@ public class GestionarRelacionBean implements Serializable {
 			    	session.setAttribute("bd",esquemaBean);
 	    		}
 	    		
+	    		
 	    	}
-			
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Se ha agregado la Relación " + relacion.getNombre(),"");
-            FacesContext.getCurrentInstance().addMessage(null, msg);
+	    	System.out.println("=================== Se cre ocon exito la nueva relación ");
+	    	FacesContext  context = FacesContext.getCurrentInstance();
+			context.addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO,
+							"Se ha agregado la Relación " + relacion.getNombre(),""));
+			context.getExternalContext().getFlash().setKeepMessages(true);
+			//FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Se ha agregado la Relación " + relacion.getNombre(),"");
+            //FacesContext.getCurrentInstance().addMessage(null, msg);
             return "home";
 		}else{
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al crear la Relación", "");
@@ -434,7 +441,7 @@ public class GestionarRelacionBean implements Serializable {
 		    					}
 		    					System.out.println();
 		    				}
-		    			}
+		    			}System.out.print("========= FIN PRIMER FOR BEAN");
 		    			for(RelacionBean r : esquemaBean.getRelacionesEjercicios()){
 		    				System.out.println("Nombre Relacion: " + r.getNombre());
 		    				for(TuplaBean t : r.getTuplasBean()){
@@ -443,10 +450,11 @@ public class GestionarRelacionBean implements Serializable {
 		    					}
 		    					System.out.println();
 		    				}
-		    			}    	    	
+		    			}  System.out.print("========= FIN SEGUNDO FOR BEAN");  	    	
 		    					    	
 				    	session.setAttribute("nombreBd",esquemaBean.getNombre());
 				    	session.setAttribute("bd",esquemaBean);
+				    	
 		    		}
 		    		
 		    	}

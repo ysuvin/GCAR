@@ -136,28 +136,35 @@
 											<p:commandButton type="push" title="Reunion Externa Derecha" value="⋈["
 												disabled="#{dtGestionarEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"
 												action="#{dtGestionarEjerciciosBean.ayudaReunionExtDer}" update=":form" ajax="true"/>
+												
+												
 											<p:commandButton type="push" title="Reunion Externa Completa" value="]⋈["
 												disabled="#{dtGestionarEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"
 												action="#{dtGestionarEjerciciosBean.ayudaReunionExtComp}" update=":form" ajax="true"/>
+											
 											<p:commandButton type="push" title="Asignar" value="&#8592;"
 												disabled="#{dtGestionarEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"
 												action="#{dtGestionarEjerciciosBean.ayudaAsignar}" update=":form" ajax="true"/>
 												
 											<p:commandButton type="push" title="Division" value="&#247;"
-												action="#{dtResponderEjerciciosBean.ayudaDivision}" update=":form" ajax="true"
-												disabled="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"/>
+												disabled="#{dtGestionarEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"
+												action="#{dtGestionarEjerciciosBean.ayudaDivision}" update=":form" ajax="true"/>
+												
 							
 											<p:commandButton type="push" title="Ordenar" value="&#932;"
-												action="#{dtResponderEjerciciosBean.ayudaOrdenar}" update=":form" ajax="true"
-												disabled="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"/>
+												disabled="#{dtGestionarEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"
+												action="#{dtGestionarEjerciciosBean.ayudaOrdenar}" update=":form" ajax="true"
+												/>
 							
 											<p:commandButton type="push" title="Agrupar" value="&#915;"
-												action="#{dtResponderEjerciciosBean.ayudaAgrupar}" update=":form" ajax="true"
-												disabled="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"/>
+											disabled="#{dtGestionarEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"
+												action="#{dtGestionarEjerciciosBean.ayudaAgrupar}" update=":form" ajax="true"
+												/>
 							
 											<p:commandButton type="push" title="Funcion de Agregacion" value="F. Agregación"
-												action="#{dtResponderEjerciciosBean.ayudaFuncionAgregacion}" update=":form" ajax="true"
-												disabled="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"/>
+												disabled="#{dtGestionarEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"
+												action="#{dtGestionarEjerciciosBean.ayudaFuncionAgregacion}" update=":form" ajax="true"
+												/>
 								
 												
 												

@@ -94,13 +94,8 @@
 			            
 			                <h:panelGrid columns="3" columnClasses="label, value">
 			                
-			                    <h:outputText value="Rut *" styleClass="formato"/>
-			                    <p:inputText id="rut" value="#{gestionarCuentasBean.userBean.rut}" label="Rut" required="true" 
-			                    	validatorMessage="Ingrese 8 Digitos, sin puntos ni dígito verificador" 
-			                    	requiredMessage="Debe ingresar su Rut">
-			                    	<f:validateRegex pattern="[0-9]{8}$" />
-			            			<p:watermark for="rut" value="Ej: 12345678"/>
-			            		</p:inputText>
+			                    <h:outputText value="Rut" styleClass="formato"/>
+			                    <p:outputLabel id="rut" value="#{gestionarCuentasBean.userBean.rut}" />
 			            		<p:message for="rut"/>
 			                    
 			                    <h:outputText value="Mail *" styleClass="formato"/>

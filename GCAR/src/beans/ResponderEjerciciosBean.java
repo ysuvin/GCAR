@@ -1078,7 +1078,7 @@ public class ResponderEjerciciosBean implements Serializable {
 										consulta.setError("Consulta utiliza Tokens");
 									}else{
 										resultado = ConsultaDAO.asigRenombrarRelAtt(aux3[0],relacion.getNombre(),aux1[0],atributos,userBean.getRut());
-										tableName = aux1[0].toLowerCase();
+										tableName = aux3[0].toLowerCase();
 									}
 									
 								}else{
@@ -1107,7 +1107,7 @@ public class ResponderEjerciciosBean implements Serializable {
 										consulta.setError("Consulta utiliza Tokens");
 									}else{
 										resultado = ConsultaDAO.verRelacion(aux3[0],relacion.getNombre(),userBean.getRut());
-										tableName = relacion.getNombre();
+										tableName = aux3[0].toLowerCase();
 									}
 									
 								}else{
@@ -1681,7 +1681,7 @@ public class ResponderEjerciciosBean implements Serializable {
 	}
 	
 	public void ayudaFuncionAgregacion(){
-		query = "funcion_agregacion_minuscula atributo (relacion) ";
+		query = "funcion_agregacion atributo (relacion) ";
 	}
 
 }

@@ -709,13 +709,6 @@ public class HacerConsultaBean implements Serializable {
 								
 								if(relacion != null && atributos.length == relacion.getAtributos().size()){
 									
-//									String att = "";
-//									for(int i = 0 ; i < atributos.length ; i++){
-//										atributos[i] = relacion.getAtributos().get(i).getNombre() + " as " + atributos[i];		
-//										att = att + atributos[i] + ",";
-//									}
-//									att = att.substring(0,att.length()-1);
-									
 									System.out.println(aux3[0]);
 									System.out.println(aux1[0]);
 									//System.out.println(att);
@@ -727,7 +720,7 @@ public class HacerConsultaBean implements Serializable {
 										resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 									}else{
 										resultado = ConsultaDAO.asigRenombrarRelAtt(aux3[0],relacion.getNombre(),aux1[0],atributos,userBean.getRut());
-										tableName = aux1[0].toLowerCase();
+										tableName = aux3[0].toLowerCase();
 									}
 									
 								}else{
@@ -753,7 +746,7 @@ public class HacerConsultaBean implements Serializable {
 										resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 									}else{
 										resultado = ConsultaDAO.verRelacion(aux3[0],relacion.getNombre(),userBean.getRut());
-										tableName = relacion.getNombre();
+										tableName = aux3[0].toLowerCase();
 									}
 									
 								}else{
@@ -1320,7 +1313,7 @@ public class HacerConsultaBean implements Serializable {
 	}
 	
 	public void ayudaFuncionAgregacion(){
-		query = "funcion_agregacion_minuscula atributo (relacion) ";
+		query = "funcion_agregacion atributo (relacion) ";
 	}
 }
 

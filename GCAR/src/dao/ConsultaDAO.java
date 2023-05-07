@@ -1627,7 +1627,6 @@ public class ConsultaDAO {
         }
 	}
 	
-	
 	public static RelacionBean asigRenombrarRelAtt(String res, String rel,String nRel, String[] atributos, String rut){
 		try{
 			
@@ -2147,48 +2146,55 @@ public class ConsultaDAO {
 	
 	public static RelacionBean funcionAgregacion(String agregacion, String atributoFa,String rel1, String rut){
 		try{
-		String query = "select " + agregacion +"("+ atributoFa +")"+ " from load" + rut + "." + rel1;
-				   
-		System.out.println("Query: " + query);
-		
-		
-		
-		con = Database.getConnection();
-		ps = con.prepareStatement(query);
-		ResultSet rs = ps.executeQuery();
-		ResultSetMetaData rsmd = rs.getMetaData();
-		
-		RelacionBean relacionBean = new RelacionBean();
-		List<TuplaBean> tuplasBean = new ArrayList<TuplaBean>();
-					
-		while(rs.next()){
-			TuplaBean tuplaBean = new TuplaBean();
-			Object atributo[] = new Object[rsmd.getColumnCount()];
-			for(int i = 0 ; i < atributo.length ; i++){
-				atributo[i] = rs.getObject(i+1);
+			String query;
+			if(agregacion.equalsIgnoreCase("avg")) {
+				query = "select ROUND(" + agregacion +"("+ atributoFa +"),2)"+ " from load" + rut + "." + rel1;
+				System.out.println("Query: " + query);
+				
+			}else {
+				query = "select " + agregacion +"("+ atributoFa +")"+ " from load" + rut + "." + rel1;
+				System.out.println("Query: " + query);
+				
 			}
-			tuplaBean.setAtributos(atributo);
-			tuplasBean.add(tuplaBean);
-		}
+			
+								
+			
+			con = Database.getConnection();
+			ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			
+			RelacionBean relacionBean = new RelacionBean();
+			List<TuplaBean> tuplasBean = new ArrayList<TuplaBean>();
+						
+			while(rs.next()){
+				TuplaBean tuplaBean = new TuplaBean();
+				Object atributo[] = new Object[rsmd.getColumnCount()];
+				for(int i = 0 ; i < atributo.length ; i++){
+					atributo[i] = rs.getObject(i+1);
+				}
+				tuplaBean.setAtributos(atributo);
+				tuplasBean.add(tuplaBean);
+			}
+			
+			List<AtributoBean> atributosBean = new ArrayList<AtributoBean>();
+			for(int i = 0 ; i < rsmd.getColumnCount() ; i++){
+				AtributoBean atributoBean = new AtributoBean();
+				atributoBean.setNombre(rsmd.getColumnName(i+1));
+				if(rsmd.getColumnTypeName(i+1).equals("text"))
+					atributoBean.setTipo("Cadena");
+				else if(rsmd.getColumnTypeName(i+1).equals("float8"))
+					atributoBean.setTipo("Real");
+				else
+					atributoBean.setTipo("Entero");
+				System.out.println(atributoBean.getTipo());
+				atributosBean.add(atributoBean);
+			}
+			
+			relacionBean.setTuplas(tuplasBean);
+			relacionBean.setAtributos(atributosBean);
 		
-		List<AtributoBean> atributosBean = new ArrayList<AtributoBean>();
-		for(int i = 0 ; i < rsmd.getColumnCount() ; i++){
-			AtributoBean atributoBean = new AtributoBean();
-			atributoBean.setNombre(rsmd.getColumnName(i+1));
-			if(rsmd.getColumnTypeName(i+1).equals("text"))
-				atributoBean.setTipo("Cadena");
-			else if(rsmd.getColumnTypeName(i+1).equals("float8"))
-				atributoBean.setTipo("Real");
-			else
-				atributoBean.setTipo("Entero");
-			System.out.println(atributoBean.getTipo());
-			atributosBean.add(atributoBean);
-		}
-		
-		relacionBean.setTuplas(tuplasBean);
-		relacionBean.setAtributos(atributosBean);
-	
-		return relacionBean;
+			return relacionBean;
 		
 		} catch (Exception ex) {
 		RelacionBean err = new RelacionBean();
@@ -2202,7 +2208,7 @@ public class ConsultaDAO {
 	
 	public static RelacionBean funcionAgregacion(String res, String agregacion, String atributoFa,String rel1, String rut){
 		try{
-					
+			String query;		
 			String query2 = "drop table if exists load" + rut + "." + res;
 			System.out.println(query2);
 			
@@ -2210,11 +2216,22 @@ public class ConsultaDAO {
 			ps = con.prepareStatement(query2);
 			ps.execute();
 			
-			String query = "create  table load" + rut + "." + res + " as " + 
+			if(agregacion.equalsIgnoreCase("avg")) {
+				query = "create  table load" + rut + "." + res + " as " + 
+						   "select ROUND(" + agregacion +"("+ atributoFa +"),2)"+ 
+						   " from load" + rut + "." + rel1;
+				System.out.println("Query: " + query);
+				
+			}else {
+				query = "create  table load" + rut + "." + res + " as " + 
 						   "select " + agregacion +"("+ atributoFa +")"+ 
 						   " from load" + rut + "." + rel1;
-			System.out.println("Query: " + query);
-
+				System.out.println("Query: " + query);
+				
+			}
+			
+			//SELECT ROUND(SUM(columna), 2) FROM tabla;
+			
 			ps = con.prepareStatement(query);
 			ps.execute();
 			

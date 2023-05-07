@@ -357,44 +357,56 @@ public class RelacionDAO {
 			ps = con.prepareStatement(query);
 			ps.execute();
 			
-			query = "ALTER TABLE " + bd.getNombre() + "_" + bd.getRut() + "." + oldName + 
-					" RENAME TO "+ relacion.getNombre() ;
-					// + bd.getNombre() + "_" + bd.getRut() + "." + relacion.getNombre()
-			System.out.println("Query: " + query);
-			
-			ps = con.prepareStatement(query);
-			ps.executeUpdate();
-		
-//			System.out.println("Eliminando Relacion");
-//			
-//			query = "create table " + bd.getNombre() + "_" + bd.getRut() + "." + relacion.getNombre() + "(\n";
-//			for(AtributoBean a : relacion.getAtributos()){
-//				query = query + a.getNombre() + " ";
-//				if(a.getTipo().equals("Entero")){
-//					query = query + "int,\n";
-//				}else if(a.getTipo().equals("Real")){
-//					query = query + "float,\n";
-//				}else if(a.getTipo().equals("Cadena")){
-//					query = query + "text,\n";
-//				}else{
-//					return false;
-//				}
-//			}
-//			query = query + "primary key(";
-//			for(AtributoBean a : relacion.getAtributos()){
-//				if(a.getEsPrimario().equals("Sí")){
-//					query = query + a.getNombre() + ",";
-//				}
-//			}
-//			query = query.substring(0,query.length()-1);
-//			query = query + ")\n)";
-//			
+//			query = "ALTER TABLE " + bd.getNombre() + "_" + bd.getRut() + "." + oldName + 
+//					" RENAME TO "+ relacion.getNombre() ;
+//					// + bd.getNombre() + "_" + bd.getRut() + "." + relacion.getNombre()
 //			System.out.println("Query: " + query);
 //			
 //			ps = con.prepareStatement(query);
-//			ps.execute();
-//			
-//			System.out.println("Creando Relacion");
+//			ps.executeUpdate();
+			
+			query = "drop table " + bd.getNombre() + "_" + bd.getRut() + "." + oldName;
+			System.out.println("Query: " + query);
+			
+			ps = con.prepareStatement(query);
+			ps.execute();
+			System.out.println("Eliminando Relacion");
+			
+			query = "create table " + bd.getNombre() + "_" + bd.getRut() + "." + relacion.getNombre() + "(\n";
+			for(AtributoBean a : relacion.getAtributos()){
+				System.out.println(a);
+				System.out.println("Query: " + query);
+				query = query + a.getNombre() + " ";
+				if(a.getTipo().equals("Entero")){
+					query = query + "int,\n";
+				}else if(a.getTipo().equals("Real")){
+					query = query + "float,\n";
+				}else if(a.getTipo().equals("Cadena")){
+					query = query + "text,\n";
+				}else{
+					return false;
+				}
+			}
+			System.out.println("=========== FIN PRIMER FOR");
+			
+			query = query + "primary key(";
+			for(AtributoBean a : relacion.getAtributos()){
+				System.out.println("Query: " + query);
+				if(a.getEsPrimario().equals("Sí")){
+					query = query + a.getNombre() + ",";
+				}
+			}
+			System.out.println("=========== FIN SEGUNDO FOR");
+			
+			query = query.substring(0,query.length()-1);
+			query = query + ")\n)";
+			
+			System.out.println("Query a ejecutar: " + query);
+			
+			ps = con.prepareStatement(query);
+			ps.execute();
+			
+			System.out.println("Creando Relacion");
 		
 			query = "update esquemas set  fecha=(select current_timestamp) where rut=? and nombre=?";
 			System.out.println("Query: " + query);
