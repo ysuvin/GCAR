@@ -1,4 +1,4 @@
-# Instalación
+# Instalación (Proceso de instalación antiguo!!!)
 
 ## Requisitos
 - Java SDK 1.8 o superior.
@@ -42,3 +42,4 @@ En caso de tener conflicto con los puertos, modificar el archivo docker-compose.
 Cada vez que se hagan cambios en el código fuente, deben detenerse los
 contenedores (`docker-compose down`) y generarse un nuevo archivo GCAR.war.
 Luego de eso, volver a levantar todos los servicios (`docker-compose up`).
+
