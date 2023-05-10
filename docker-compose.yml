@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:9.5
     restart: always
-    container_name: postgres
+    container_name: serverGcar
     environment:
       POSTGRES_USER: "gcar"      
       POSTGRES_PASSWORD: "admin"
@@ -12,7 +12,7 @@ services:
     ports:
         - "5432:5432"
     volumes:
-      - ./GCAR/postgres.conf:/etc/postgresql/postgresql.conf
+      - gcar_data:/var/lib/postgresql/data
 
   adminer:
     image: adminer
@@ -27,11 +27,15 @@ services:
     restart: always
     image: suvin1/gcar_app
     container_name: gcar_app
+    env_file:
+      - .env
     ports:
-      - "8080:8080"
+      - "8081:8081"
     depends_on:
       - postgres
     networks:
       - default
+volumes:
+  gcar_data:
                     #    enviroments:
                     #      VIRTUAL_HOST: LOCALHOST

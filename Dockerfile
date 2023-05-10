@@ -2,11 +2,14 @@ FROM tomcat:9-jdk8
 
 MAINTAINER Yian Vera Soto "yian.vera@alumnos.uv.cl"
 
+# Copiamos la aplicación WAR al directorio webapps
 COPY GCAR/dist/GCAR.war /usr/local/tomcat/webapps/
-# Repositorio git de la aplicacion
-# https://github.com/ysuvin/GCAR.git
 
-# Este es el link del dockerHub de la imagen
-# https://hub.docker.com/r/suvin1/gcar_app
+# Modificamos el archivo server.xml para cambiar el puerto
+RUN sed -i 's/port="8080"/port="8081"/g' /usr/local/tomcat/conf/server.xml
 
-EXPOSE 8080
+# Exponemos el puerto 8081
+EXPOSE 8081
+
+# Comando por defecto de Tomcat
+CMD ["catalina.sh", "run"]
