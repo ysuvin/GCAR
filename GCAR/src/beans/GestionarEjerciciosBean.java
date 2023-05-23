@@ -1943,9 +1943,9 @@ public class GestionarEjerciciosBean implements Serializable {
 	
 	public void ayudaDivision(){
 		if(selectedEjercicio != null)
-		selectedEjercicio.setQuery("(atributoY,atributoX) (relacion) DIVISION (atributoX) (relacion)");
+		selectedEjercicio.setQuery("(atributo1,atributo2) (relacion1) DIVISION (atributo2) (relacion2)");
 		else
-		query = "(atributoY,atributoX) (relacion) DIVISION (atributoX) (relacion)";
+		query = "(atributo1,atributo2) (relacion1) DIVISION (atributo2) (relacion2)";
 	}
 	
 	public void ayudaAgrupar(){

@@ -20,7 +20,7 @@
 					<h:panelGrid columns="3" cellpadding="5">
 						<h:commandLink value="Inicio" styleClass="linkTitulo" action="home"/>
 						>
-						<h:outputText value="Crear Cuenta" styleClass="tituloPagina"/>
+						<h:outputText value="Crear Cuenta Estudiante" styleClass="tituloPagina"/>
 					</h:panelGrid>
 				</p:panel>
 			</h:form>
@@ -30,12 +30,12 @@
 			<h:form onkeypress="if (event.keyCode == 13) {return false; }">
 			
 				<p:dialog id="help" widgetVar="dlg" header="Ayuda" resizable="false" showEffect="fade" hideEffect="fade">
-					<p:fieldset legend="Crear Cuenta" style="font-weight: bold;" >
+					<p:fieldset legend="Crear Cuenta Estudiante" style="font-weight: bold;" >
 						<h2/>
 						1. Ingrese todos los campos solicitados del formulario <p/>
 						2. Cuando esté listo, seleccione el botón <p:commandButton value="Siguiente" icon="ui-icon-arrowthick-1-e" readonly="true" /> para seguir llenando el formulario <p/>
 						3. Seleccione el botón <p:commandButton value="Atrás" icon="ui-icon-arrowthick-1-w" readonly="true" /> para volver al formulario anterior <p/>						
-						4. Finalmente, seleccione el botón <p:commandButton value="Crear" icon="ui-icon-check" readonly="true" /> para generar la nueva Cuenta de Alumno <p/>
+						4. Finalmente, seleccione el botón <p:commandButton value="Crear" icon="ui-icon-check" readonly="true" /> para generar la nueva Cuenta Estudiante <p/>
 						<h2/>
 					</p:fieldset>
 			    </p:dialog> 
@@ -52,7 +52,7 @@
 				</f:facet>	 	
 			    <p:wizard showStepStatus="false" nextLabel="Siguiente" backLabel="Atrás">
 			        <p:tab id="personal" title="Personal">
-			            <p:panel header="Datos Personales" styleClass="formato">
+			            <p:panel header="Datos Personales Estudiante" styleClass="formato">
 			            
 			                <h:panelGrid columns="3" columnClasses="label, value">
 			                    <h:outputText value="Primer Nombre *"  styleClass="formato"/>
@@ -87,9 +87,9 @@
 			                    </p:inputText>
 			                    <p:message for="materno"/>
 			 
-			                    <h:outputText value="Edad *" styleClass="formato"/>
+			                    <h:outputText value="Año de Nacimiento *" styleClass="formato"/>
 			                    <p:inputText id="edad" value="#{gestionarCuentasBean.user.edad}" label="Edad"
-			                    	required="true" requiredMessage="Debe ingresar su Edad"
+			                    	required="true" requiredMessage="Debe ingresar Año de Nacimiento"
 			                    	validatorMessage="Debe ingresar sólo dígitos">
 			                    	<f:validateRegex pattern="[0-9]*$" />
 			                    </p:inputText>
@@ -100,7 +100,7 @@
 			        </p:tab>
 			 
 			        <p:tab id="cuenta" title="Cuenta">
-			            <p:panel header="Datos de la Cuenta" styleClass="formato">
+			            <p:panel header="Datos de la Cuenta Estudiante" styleClass="formato">
 			            
 			                <h:panelGrid columns="3" columnClasses="label, value">
 			                    <h:outputText value="Rut *" styleClass="formato"/>
@@ -136,7 +136,7 @@
 			        </p:tab>
 			 
 			        <p:tab id="academico" title="Academico">
-			            <p:panel header="Datos Academicos">
+			            <p:panel header="Datos Academicos Estudiante">
 			            
 			                <h:panelGrid columns="3" columnClasses="label, value">
 			                    <h:outputText value="Año de Ingreso *" />
@@ -160,7 +160,7 @@
 			        </p:tab>
 			 
 			        <p:tab id="confirm" title="Confirmacion">
-			            <p:panel header="Verificar Datos">
+			            <p:panel header="Verificar Datos del Estudiante">
 			                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid" style="margin:0 auto !important;">
 			                
 			                	<p:fieldset legend="Datos Personales">
@@ -178,7 +178,7 @@
 			                        <h:outputText value="Apellido Materno: " styleClass="formato"/>
 			                        <h:outputText value="#{gestionarCuentasBean.user.materno}" styleClass="outputLabel"/>
 			 
-			                        <h:outputText value="Edad: " styleClass="formato"/>
+			                        <h:outputText value="Año de Nacimiento: " styleClass="formato"/>
 			                        <h:outputText value="#{gestionarCuentasBean.user.edad}" styleClass="outputLabel"/>
 			                        
 			                    </h:panelGrid>			                	

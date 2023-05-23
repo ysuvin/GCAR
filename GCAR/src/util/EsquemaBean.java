@@ -3,7 +3,7 @@ package util;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
-
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 	
@@ -163,6 +163,16 @@ import javax.faces.bean.SessionScoped;
 			this.relacionesAuxiliares= relacionesAuxiliares;
 		}
 		
+		public List<AtributoBean> getAtributosParaRelacion(String nombreRelacion) {
+
+		    List<AtributoBean> atributos = new ArrayList<>();
+		    RelacionBean relacion = getRelacion(nombreRelacion);
+		    if (relacion != null) {
+		        atributos = relacion.getAtributos();
+		    }
+		    
+		    return atributos;
+		}
 		
 		
 	}

@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"  
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:body>
 	<h:form id="formDataList">
 
 	<p:outputPanel autoUpdate="true">
-	
-		<h3/>
-		
-		<p:dataList value="#{bd.relacionesBean}" var="relBean" type="ordered"
-			emptyMessage="No hay relaciones en esta base de datos">
-	        <f:facet name="header">
-	            Relaciones
-	        </f:facet>
-	        #{relBean.getNombre()}
-	        
-	    </p:dataList>
-	    
+
+		<p:dataList value="#{bd.relacionesBean}" var="relBean" type="ordered" emptyMessage="No hay relaciones en esta base de datos" styleClass="miDataList">
+		    <f:facet name="header">
+		        Relaciones
+		    </f:facet>
+		     <strong>#{relBean.getNombre()}</strong>
+		    <ul>
+		        <ui:repeat value="#{relBean.atributos}" var="atributo" varStatus="loop">
+		            <li>
+		                <h:outputText rendered="#{not empty atributo.nombre}" value="#{atributo.nombre} " />
+		                <h:outputText rendered="#{not empty atributo.esPrimario}" value="#{atributo.esPrimario eq 'Sí' ? '(PK)' : atributo.esPrimario eq 'No' ? '' : atributo.esPrimario}" style="font-style: italic;"/>
+		                <h:outputText rendered="#{not empty atributo.tipo}" value=" #{atributo.tipo}" escape="false" style="font-style: italic;"/>
+		            </li>
+		        </ui:repeat>
+		    </ul>
+		</p:dataList>
+		        
+        
 	    <h3/>
-	    
 	    <p:dataList value="#{bd.relacionesAuxiliares}" var="relBean" type="ordered"
-	    	emptyMessage="No hay relaciones auxiliares en esta base de datos">
+	    	emptyMessage="No hay relaciones auxiliares en esta base de datos" styleClass="miDataList">
 	        <f:facet name="header">
 	            Relaciones Auxiliares
 	        </f:facet>
-	        #{relBean.getNombre()}
 	        
+	       <div class="miAccordionPanel">
+			  <div class="miAccordionTab">
+			    <h3 class="miAccordionTabTitle" onclick="toggleAccordion(this)">#{relBean.getNombre()}</h3>
+			    <div class="miAccordionTabContent">
+			      <ul>
+			        <ui:repeat value="#{relBean.atributos}" var="atributo" varStatus="loop">
+			          <li>
+			            <h:outputText rendered="#{not empty atributo.nombre}" value="#{atributo.nombre}" />
+			            <h:outputText rendered="#{not empty atributo.esPrimario}" value="#{atributo.esPrimario eq 'Sí' ? '(PK)' : atributo.esPrimario eq 'No' ? '' : atributo.esPrimario}" style="font-style: italic;" />
+			            <h:outputText rendered="#{not empty atributo.tipo}" value=" #{atributo.tipo}" escape="false" style="font-style: italic;" />
+			          </li>
+			        </ui:repeat>
+			      </ul>
+			    </div>
+			  </div>
+			</div>
+
+
+
+
 	    </p:dataList>
 	</p:outputPanel>
 	
@@ -37,15 +63,14 @@
 	    	<p:commandButton icon="ui-icon-close" value="Cerrar Base de Datos" action="#{dataListView.cerrarBD}" ajax="false" />
 	    </h:panelGrid>
 	    
-	    
-	    
-<!-- 	    <p:dataList value="#{bd.relacionesBean}" var="relBean" type="ordered"> -->
-<!-- 	        <f:facet name="header"> -->
-<!-- 	            Respuestas Ejercicios -->
-<!-- 	        </f:facet> -->
-<!-- 	        #{relBean.getNombre()} -->
-	        
-<!-- 	    </p:dataList> -->
+	    <script>
+		    function toggleAccordion(element) {
+		    	  element.classList.toggle("active");
+		    	  var content = element.nextElementSibling;
+		    	  content.classList.toggle("active");
+		    	}
+	    </script>
+
 	</h:form>
 </h:body>
 

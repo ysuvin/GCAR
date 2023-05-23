@@ -34,6 +34,7 @@
 						2. Cuando esté listo, seleccione el botón <p:commandButton value="Siguiente" icon="ui-icon-arrowthick-1-e" readonly="true" /> para seguir llenando el formulario <p/>
 						3. Seleccione el botón <p:commandButton value="Atrás" icon="ui-icon-arrowthick-1-w" readonly="true" /> para volver al formulario anterior <p/>						
 						4. Finalmente, seleccione el botón <p:commandButton value="Crear" icon="ui-icon-check" readonly="true" /> para generar la nueva Base de Datos<p/>
+						5. El nombre de la BD debe comenzar con una letra minúscula y después puede contener solo letras minúsculas, números y guiones bajos, sin incluir caracteres especiales ni letras mayúsculas.<p/>
 						<h2/>
 					</p:fieldset>
 			    </p:dialog> 
@@ -56,7 +57,9 @@
 			                    <h:outputText value="Nombre *"  styleClass="formato"/>
 			                    <p:inputText id="nombre" value="#{gestionarEsquemasBean.nuevo.nombre}" label="Nombre" 
 			                    	required="true" requiredMessage="Debe ingresar el nombre de la Base de Datos"
-			                    	validatorMessage="Debe comenzar con una letra minuscula y sólo debe contener caracteres alfanuméricos (exceptuando acentos y la letra 'ñ') en minuscula o el guión bajo" >
+			                    	validatorMessage="El nombre de la BD debe comenzar con una letra minúscula y después
+			                    						puede contener solo letras minúsculas, números y guiones bajos, sin 
+			                    						incluir caracteres especiales ni letras mayúsculas." >
 			                    	<f:validateRegex pattern="^[a-z][a-z0-9_]*" />
 			                    </p:inputText>
 			                    <p:message for="nombre" />

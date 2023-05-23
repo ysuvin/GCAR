@@ -2023,7 +2023,7 @@ public class ConsultaDAO {
 	
 	public static RelacionBean ordenar(String atributosOr, String tipoOr, String rel1, String rut){
 		try{
-		String query = "select " + atributosOr + " from load" + rut + "." + rel1+
+		String query = "select *" + " from load" + rut + "." + rel1+
 				   " order by " + atributosOr + " " + tipoOr;
 		System.out.println("Query: " + query);
 		
@@ -2087,7 +2087,7 @@ public class ConsultaDAO {
 			ps.execute();
 			
 			String query = "create  table load" + rut + "." + res + " as " + 
-						   "select" + atributosOr + " from load" + rut + "." + rel1+
+						   "select *"+ " from load" + rut + "." + rel1+
 						   " order by" + atributosOr +" "+ tipoOr;
 			System.out.println("Query: " + query);
 

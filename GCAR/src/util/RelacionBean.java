@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+
 @ManagedBean(name = "relacionBean")
 @SessionScoped
 
@@ -31,6 +32,13 @@ public class RelacionBean implements Serializable {
 	public List<AtributoBean> getAtributos() {
 		return atributos;
 	}
+	
+	public List<AtributoBean> getAtributosAr() {
+	    if (atributos == null) {
+	        atributos = new ArrayList<>();
+	    }
+	    return atributos;
+	}
 
 	public void setAtributos(List<AtributoBean> atributos) {
 		this.atributos = atributos;
@@ -43,7 +51,5 @@ public class RelacionBean implements Serializable {
 	public void setTuplas(List<TuplaBean> tuplas) {
 		this.tuplas = tuplas;
 	}
-	
-	
 	
 }

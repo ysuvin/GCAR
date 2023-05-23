@@ -42,22 +42,30 @@
 
 .tituloHeader{
 	font-family: sans-serif;
-	font-size: x-large;
+	font-size: xx-large;
+	text-decoration: none;
+	color: #003965;
 }
+.linkTitulo {
+    text-decoration: none;
+}
+
 .tituloPagina{
 	color: #e69700;	
 	font-weight: bold;
 }
 .linkTitulo{
-	color: #3383bb !important;
+	color: #003965 !important;
 	font-weight: bold;
 }
+
+
 .nombreHeader{
 	font-size: small;
 	font-style: italic;
 }
 .logo{
-	width:130px;
+	width:115px;
 }
 
 .divs{
@@ -113,3 +121,42 @@ body {
 	font-weight: bold;
 }
 
+.toolbar-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.toolbar-row p\\:commandButton {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.miAccordionPanel .miAccordionTabContent {
+  display: none;
+}
+
+.miAccordionPanel .miAccordionTabTitle {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.miAccordionPanel .miAccordionTabTitle::after {
+  content: "∨";
+  display: inline-block;
+  margin-left: 5px;
+  font-weight: normal;
+}
+
+.miAccordionPanel .miAccordionTabTitle.active::after {
+  content: "∧";
+  font-weight: normal;
+}
+
+.miAccordionPanel .miAccordionTabContent.active {
+  display: block;
+}
+
+.miDataList ul {
+  padding-left: 10px;
+}

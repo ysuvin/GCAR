@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import dao.EsquemaDAO;
+import util.AtributoBean;
 import util.EsquemaBean;
 import util.RelacionBean;
 import util.UserBean;
@@ -26,16 +27,32 @@ public class DataListView implements Serializable {
     private List<RelacionBean> relacionesBean;     
     private RelacionBean selectedRelacionBean;
  
+//    public List<RelacionBean> getRelacionesBean() {
+//    	
+//    	ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+//		EsquemaBean bdBean = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
+//			    .getELResolver().getValue(elContext, null, "bd");
+//		
+//		relacionesBean = bdBean.getRelacionesBean();   	
+//        return relacionesBean;
+//    }
+
     public List<RelacionBean> getRelacionesBean() {
-    	
-    	ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-		EsquemaBean bdBean = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
-			    .getELResolver().getValue(elContext, null, "bd");
-		
-		relacionesBean = bdBean.getRelacionesBean();   	
+        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+        EsquemaBean bdBean = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
+            .getELResolver().getValue(elContext, null, "bd");
+            
+        relacionesBean = bdBean.getRelacionesBean();
+        
+        for (RelacionBean relacion : relacionesBean) {
+            // Obtener los atributos para cada relación y asignarlos a la lista de atributos en RelacionBean
+            List<AtributoBean> atributos = bdBean.getAtributosParaRelacion(relacion.getNombre());
+            relacion.setAtributos(atributos);
+        }
+        
         return relacionesBean;
     }
-    
+
     public String cerrarBD(){
     	ELContext elContext = FacesContext.getCurrentInstance().getELContext();
 		EsquemaBean bd = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()

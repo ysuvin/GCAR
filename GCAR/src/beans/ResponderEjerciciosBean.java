@@ -1667,9 +1667,9 @@ public class ResponderEjerciciosBean implements Serializable {
 	public void ayudaAsignar(){
 		query = "relacion := consulta ";
 	}
-	
+
 	public void ayudaDivision(){
-		query = "relacion DIVISION relacion";
+		query = "(atributo1,atributo2) (relacion1) DIVISION (atributo2) (relacion2)";
 	}
 	
 	public void ayudaAgrupar(){

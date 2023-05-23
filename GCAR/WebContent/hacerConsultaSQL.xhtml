@@ -13,7 +13,7 @@
 	</f:metadata>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-	<ui:composition template="/templates/consultaTemplate.xhtml">
+	<ui:composition template="/templates/consultaSQLtemplate.xhtml">
 		<ui:define name="title">Algebra Relacional - UV</ui:define>
 		<ui:define name="content">
 		
@@ -38,6 +38,7 @@
 						1. El nombre de las <h:outputText value="Relaciones" style="color:#e69700"/> de la Base de Datos cargada, adem&#225;s de las <h:outputText value="Relaciones Auxiliares" style="color:#e69700"/> generadas en cada consulta, se muestran a la Izquierda de la pantalla <p/>
 						2. Luego de ingresar la consulta, seleccione el bot&#243;n <p:commandButton value="Ejecutar" icon="ui-icon-check" readonly="true" /> para ejecutar la consulta SQL <p/>
 						3. En la secci&#243;n <p:commandButton value="Historial" readonly="true" /> se guarda el Historial de consultas realizadas <p/>
+						4. Todas las clausulas de <strong>Manipulaci&#243;n de Tablas</strong> estan bloqueadas. Solo se permiten Clausulas de Consulta. <p/>
 						<h2/>
 					</p:fieldset>
 			    </p:dialog>  
@@ -72,40 +73,59 @@
 				<p:panel header="Consultas" id="consultaPanel" mode="native" style="margin:0 auto !important;">	
 				<p:toolbar>
 					<f:facet name="left">
-						<p:commandButton type="push" title="Select" value="SELECT" 
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaSelect}" update="form" ajax="true"/>
-							
-						<p:commandButton type="push" title="From" value="FROM"
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaFrom}" update="form" ajax="true"/>
-							
-						<p:commandButton type="push" title="Where" value="WHERE"
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaWhere}" update="form" ajax="true"/>
-							
-						<p:commandButton type="push" title="Distinct" value="DISTINCT"
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaDistinct}" update="form" ajax="true"/>
-							
-						<p:commandButton type="push" title="Orderby" value="ORDER BY"
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaOrderby}" update="form" ajax="true"/>
-							
-						<p:commandButton type="push" title="Groupby" value="GROUP BY"
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaGroupby}" update="form" ajax="true"/>
-							
-						<p:commandButton type="push" title="Having" value="HAVING"
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaHaving}" update="form" ajax="true"/>
-							
-						<p:commandButton type="push" title="Join" value="JOIN"
-							action="#{dtGestionarEjerciciosBeanSQL.ayudaJoin}" update="form" ajax="true"/>
-							
+						<div class="toolbar-row">
+							<p:commandButton type="button" title="Select" value="SELECT" 
+								onclick="insertText('SELECT ');" update="form" ajax="true"/>
+								
+							<p:commandButton type="button" title="From" value="FROM"
+								onclick="insertText('FROM ');" update="form" ajax="true"/>
+								
+							<p:commandButton type="button" title="Where" value="WHERE"
+								onclick="insertText('WHERE ');" update="form" ajax="true"/>
+								
+							<p:commandButton type="button" title="Distinct" value="DISTINCT"
+								onclick="insertText('DISTINCT ');" update="form" ajax="true"/>
+								
+							<p:commandButton type="button" title="Orderby" value="ORDER BY"
+								onclick="insertText('ORDER BY ');" update="form" ajax="true"/>
+								
+							<p:commandButton type="button" title="innerJoin" value="INER JOIN"
+								onclick="insertText('INNER JOIN ');" update="form" ajax="true"/>
+							<p:commandButton type="button" title="leftJoin" value="LEFT JOIN"
+								onclick="insertText('LEFT JOIN ');" update="form" ajax="true"/>
+							<p:commandButton type="button" title="rightJoin" value="RIGHT JOIN"
+								onclick="insertText('RIGHT JOIN ');" update="form" ajax="true"/>								
+							<p:commandButton type="button" title="fullJoin" value="FULL JOIN"
+								onclick="insertText('FULL JOIN ');" update="form" ajax="true"/>
+																
+						</div>
+        				<div class="toolbar-row">	
+							<p:commandButton type="button" title="Groupby" value="GROUP BY"
+								onclick="insertText('GROUP BY ');" update="form" ajax="true"/>
+							<p:commandButton type="button" title="Having" value="HAVING"
+								onclick="insertText('HAVING ');" update="form" ajax="true"/>	
+							<p:commandButton type="button" title="Count" value="COUNT"
+								onclick="insertText2('COUNT()');" update="form" ajax="true"/>
+							<p:commandButton type="button" title="Sum" value="SUM"
+								onclick="insertText2('SUM()');" update="form" ajax="true"/>
+							<p:commandButton type="button" title="Average" value="AVG"
+								onclick="insertText2('AVG()');" update="form" ajax="true"/>
+							<p:commandButton type="button" title="Max" value="MAX"
+								onclick="insertText2('MAX()');" update="form" ajax="true"/>
+							<p:commandButton type="button" title="Min" value="MIN"
+								onclick="insertText2('MIN()');" update="form" ajax="true"/>
+						</div>
 									
 					</f:facet>
 				</p:toolbar>
 				
-				<h:panelGrid columns="2" style="width:100%">
-					<p:inputText size="150" style="width:95%" id="query" value="#{dtGestionarEjerciciosBeanSQL.query}"/>
-					<p:commandButton id="ejecutar" type="push" title="Ejecutar" value="Ejecutar" ajax="true" 
-						action="#{dtGestionarEjerciciosBeanSQL.ejecutar}" icon="ui-icon-check" update="form :formDataList"/>	
+				<h:panelGrid columns="2" style="width:100%; position: relative;">
+				    <p:inputTextarea rows="5" style="width:90%; resize: none;" id="query" value="#{dtGestionarEjerciciosBeanSQL.query}" onkeypress="handleKeyPress(event)" />
+				    <p:commandButton id="ejecutar" type="submit" title="Ejecutar" value="Ejecutar" ajax="false" 
+				        action="#{dtGestionarEjerciciosBeanSQL.ejecutar}" icon="ui-icon-check" update="form :formDataList"
+				        style="position: absolute; top: 0; right: 0; margin-top: 10px; margin-right: 10px;" /> 	
 				</h:panelGrid>
-				
+
 				<p:spacer/>
 							
 				<p:fieldset legend="Historial">
@@ -118,6 +138,57 @@
 				
 							
 				</p:panel>
+				
+				<script>
+					function insertText(text) {
+					    var queryTextArea = document.getElementById("form:query");
+					    var start = queryTextArea.selectionStart;
+					    var end = queryTextArea.selectionEnd;
+					    var currentValue = queryTextArea.value;
+					    var newValue = currentValue.substring(0, start) + text + currentValue.substring(end);				    
+					    queryTextArea.value = newValue;
+					    
+					    queryTextArea.selectionStart = start + text.length;
+					    queryTextArea.selectionEnd = start + text.length;
+					    queryTextArea.focus();
+					}
+					
+					function insertText2(text) {
+					    var queryTextArea = document.getElementById("form:query");
+					    var start = queryTextArea.selectionStart;
+					    var end = queryTextArea.selectionEnd;
+
+					    var currentValue = queryTextArea.value;
+					    var newValue = currentValue.substring(0, start) + text + currentValue.substring(end);
+					    
+					    queryTextArea.value = newValue;
+					    
+					    var newCursorPosition = start + text.length - 1;
+					    queryTextArea.setSelectionRange(newCursorPosition, newCursorPosition);
+					    queryTextArea.focus();
+					}
+					
+					function handleKeyPress(event) {
+					    if (event.keyCode === 13) { 
+					        event.preventDefault();
+					        
+					        var queryTextArea = document.getElementById("form:query");
+					        var start = queryTextArea.selectionStart;
+					        var end = queryTextArea.selectionEnd;
+					        
+					        var currentValue = queryTextArea.value;
+					        var newValue = currentValue.substring(0, start) + "\n" + currentValue.substring(end);
+					        
+					        queryTextArea.value = newValue;
+					        
+					        var newCursorPosition = start + 1;
+					        queryTextArea.setSelectionRange(newCursorPosition, newCursorPosition);
+					        queryTextArea.focus();
+					    }
+					}
+				</script>
+				
+				
 				</p:fieldset>
 			
 			</h:form>

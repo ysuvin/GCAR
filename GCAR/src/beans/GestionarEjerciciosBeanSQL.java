@@ -5,8 +5,15 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+
+
+import javax.faces.view.facelets.FaceletContext;
+
+
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -14,8 +21,12 @@ import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.EditableValueHolder;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
+import org.primefaces.component.inputtext.InputText;
 
 //import org.antlr.runtime.ANTLRStringStream;
 //import org.antlr.runtime.CommonTokenStream;
@@ -173,50 +184,29 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 	
 
 	private boolean nombreValido(String query){
-		if(		/*Revisa si la relacion auxiliar contiene palabras reservadas*/
+		if(		/*Revisa si la relacion contiene palabras bloqueadas*/
+				
 				//DDL
 				query.contains("CREATE") ||
+				query.contains("create") ||
 				query.contains("ALTER") ||
+				query.contains("alter") ||
 				query.contains("DROP") ||
+				query.contains("drop") ||
 				query.contains("TRUNCATE") ||
+				query.contains("truncate") ||
+				query.contains("GRANT") ||
+				query.contains("grant") ||
+				query.contains("REVOKE") ||
+				query.contains("revoke") ||
+				
 				//DML
-				query.contains("SELECT") ||
 				query.contains("INSERT") ||
+				query.contains("insert") ||
 				query.contains("UPDATE") ||
-				query.contains("DELETE") ||
-					//CLAUSULAS
-					query.contains("FROM") ||
-					query.contains("GROUPBY") ||
-					query.contains("HAVING") ||
-					query.contains("ORDERBY") ||
-					query.contains("WHERE") ||
-					//OPERADORES LOGICOS
-					query.contains("AND") ||
-					query.contains("OR") ||
-					query.contains("NOT") ||
-					
-					//OPERADORES DE COMPARACIÓN
-					query.contains("<") ||
-					query.contains(">") ||
-					query.contains("<>") ||
-					query.contains("<=") ||
-					query.contains(">=") ||
-					query.contains("BETWEEN") ||
-					query.contains("LIKE") ||
-					query.contains("IN") ||
-					//FUNCIONES DE AGREGADO
-					query.contains("AVG") ||
-					query.contains("COUNT") ||
-					query.contains("SUM") ||
-					query.contains("MAX") ||
-					query.contains("MIN") ||
-					//MANEJO DE TABLAS
-					query.contains("JOIN") ||
-					query.contains("LEFTJOIN") ||
-					query.contains("RIGHTJOIN") ||
-					query.contains("UNION") 
-					
-				//query.contains(":=") || DE ASIGNACION
+				query.contains("update") ||
+				query.contains("delete") ||
+				query.contains("DELETE") 
 				
 				){
 			return false;
@@ -234,16 +224,27 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 		if(selectedEjercicio != null){
 			query = selectedEjercicio.getQuery(); //recoje la query escrita por el usuario
 		}
-		
-		String test0[] = query.split("\\s+");
+
 		System.out.println("query: " + query);
 		
 		// Revisa si tiene errores de sintaxis
-		if(nombreValido(test0[0]) == false){
+		if(nombreValido(query) == false){
 			
-			ELContext elContext = FacesContext.getCurrentInstance().getELContext(); // obtiene el contexto de evaluación de expresiones de lenguaje actual en una aplicación web JSF.
+			tableName = "";
+			columnNames = null;
+			data = null;
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Clausula no permitida en la consulta de SQL","");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			
+			
+		}
+		
+		// Error de sintaxis de consultas
+		else{
+
+			ELContext elContext = FacesContext.getCurrentInstance().getELContext(); // obtiene el contexto de evaluaciï¿½n de expresiones de lenguaje actual en una aplicaciï¿½n web JSF.
 			UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication() 
-				    .getELResolver().getValue(elContext, null, "usuario");//OBTIENE una instancia del objeto UserBean en la aplicación web JSF, resolviendo su nombre en el contexto de evaluación de expresiones de lenguaje actual.
+				    .getELResolver().getValue(elContext, null, "usuario");//OBTIENE una instancia del objeto UserBean en la aplicaciï¿½n web JSF, resolviendo su nombre en el contexto de evaluaciï¿½n de expresiones de lenguaje actual.
 //			EsquemaBean esquema = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
 //				    .getELResolver().getValue(elContext, null, "bd");
 			RelacionBean resultado = new RelacionBean(); //VARIABLE PARA CONSTRUIR LA RELACION RESULTANTE
@@ -291,62 +292,8 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 				
 				
 			}
-		
-		// Error de sintaxis de consultas
-		else{
-			tableName = "";
-			columnNames = null;
-			data = null;
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error de sintaxis en la consulta de SQL","");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 
-	}
-
-	
-	
-	
-	public void ayudaSelect(){
-		
-			query = query +"SELECT ";
-	}
-	
-	public void ayudaFrom(){
-		
-			query = query +" FROM ";
-	}
-	
-	public void ayudaWhere(){
-		
-			query = query +" WHERE ";
-	}
-	
-	public void ayudaDistinct(){
-		
-			query = query +" DISTINCT ";
-	}
-	
-	public void ayudaOrderby(){
-		
-			query = query +" ORDER BY ";
-	}
-	
-	public void ayudaGroupby(){
-		
-			query = query +" GROUP BY ";
-	}
-	
-	public void ayudaHaving(){
-		
-			query = query +" HAVING ";
-	}
-	
-	public void ayudaJoin(){
-		
-			query = query + " JOIN ";
-	}
-	
-	
 
 }
 

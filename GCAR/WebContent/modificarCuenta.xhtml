@@ -21,7 +21,7 @@
 					<h:panelGrid columns="3" cellpadding="5">
 						<h:commandLink value="Inicio" styleClass="linkTitulo" action="home"/>
 						>
-						<h:outputText value="Modificar Cuenta" styleClass="tituloPagina"/>
+						<h:outputText value="Modificar Cuenta Estudiante" styleClass="tituloPagina"/>
 					</h:panelGrid>
 				</p:panel>
 			</h:form>
@@ -32,12 +32,12 @@
 				<p:growl id="growl" showDetail="false"/>
 				
 				<p:dialog id="help" widgetVar="dlg" header="Ayuda" resizable="false" showEffect="fade" hideEffect="fade">
-					<p:fieldset legend="Modificar Cuenta" style="font-weight: bold;" >
+					<p:fieldset legend="Modificar Cuenta Estudiante" style="font-weight: bold;" >
 						<h2/>
-						1. Elija un alumno de la tabla seleccionando el botón <p:commandButton icon="ui-icon-pencil" readonly="true" /> <p/>
-						2. Modifique los datos del alumno y seleccione el botón <p:commandButton value="Modificar" icon="ui-icon-pencil" readonly="true" /> para aceptar los cambios <p/>
-						3. Si no es el alumno que desea modificar, sólo basta con cerrar el cuadro de mensaje y elegir otro alumno apretando el botón <p:commandButton icon="ui-icon-pencil" readonly="true" /> <p/>
-						4. Si desea buscar un alumno, ingrese algún campo de búsqueda en la sección <h:outputText value="Buscar en todos los Campos: " style="color:#e69700"/> <p:inputText style="width:150px" placeholder="Buscar" readonly="true"/>
+						1. Elija un estudiante de la tabla seleccionando el botón <p:commandButton icon="ui-icon-pencil" readonly="true" /> <p/>
+						2. Modifique los datos del estudiante y seleccione el botón <p:commandButton value="Modificar" icon="ui-icon-pencil" readonly="true" /> para aceptar los cambios <p/>
+						3. Si no es el Estudiante que desea modificar, sólo basta con cerrar el cuadro de mensaje y elegir otro estudiante apretando el botón <p:commandButton icon="ui-icon-pencil" readonly="true" /> <p/>
+						4. Si desea buscar un estudiante, ingrese algún campo de búsqueda en la sección <h:outputText value="Buscar en todos los Campos: " style="color:#e69700"/> <p:inputText style="width:150px" placeholder="Buscar" readonly="true"/>
 						<h2/>
 					</p:fieldset>
 			    </p:dialog>  
@@ -53,7 +53,7 @@
 				</f:facet>	
 				
 			    <p:dataTable id="radioDT" var="user" value="#{gestionarCuentasBean.users}" widgetVar="usersTable"
-			                 emptyMessage="No se encuentran Alumnos con este criterio" filteredValue="#{gestionarCuentasBean.filteredUsers}"
+			                 emptyMessage="No se encuentran Estudiantes con este criterio" filteredValue="#{gestionarCuentasBean.filteredUsers}"
 			                 paginator="true" rows="6"
 				             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 			        <f:facet name="header">
@@ -82,6 +82,9 @@
 			        <p:column headerText="Mail" filterBy="#{user.mail}" filterStyle="display:none" filterMatchMode="contains">
 			            <h:outputText value="#{user.mail}" />
 			        </p:column>
+			  		<p:column headerText="Vez Cursando" filterBy="#{user.vezCursando}" filterStyle="display:none">
+				        <h:outputText value="#{user.vezCursando}" />
+				    </p:column>
 			        <p:column headerText="Año de Ingreso" filterStyle="display:none" filterBy="#{user.anyo}">
 			            <h:outputText value="#{user.anyo}" />
 			        </p:column>			        
@@ -152,9 +155,9 @@
 			                    <f:validateRegex pattern="[0-9]*$" />
 			               </p:inputText>
 					        
-					        <h:outputLabel for="edad" value="Edad: *" />
+					        <h:outputLabel for="edad" value="Año de Nacimiento: *" />
 					       	<p:inputText value="#{gestionarCuentasBean.selectedUser.edad}"
-					            requiredMessage="El campo Edad no debe ser vacío" required="true" label="text"
+					            requiredMessage="El campo Año de Nacimiento no debe ser vacío" required="true" label="text"
 			                   	validatorMessage="Debe ingresar sólo dígitos">
 			                   	<f:validateRegex pattern="[0-9]*$" />
 			                </p:inputText>

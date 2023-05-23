@@ -33,6 +33,7 @@
 						2. Modifique los datos de la Base de Datos y seleccione el botón <p:commandButton value="Modificar" icon="ui-icon-pencil" readonly="true" /> para aceptar los cambios <p/>
 						3. Si no es la Base de Datos que desea modificar, sólo basta con cerrar el cuadro de mensaje y elegir otra Base de Datos apretando el botón <p:commandButton icon="ui-icon-pencil" readonly="true" /> <p/>
 						4. Si desea buscar una Base de Datos, ingrese algún campo de búsqueda en la sección <h:outputText value="Buscar en todos los Campos: " style="color:#e69700"/> <p:inputText style="width:150px" placeholder="Buscar" readonly="true"/>
+						5. El nombre de la BD debe comenzar con una letra minúscula y después puede contener solo letras minúsculas, números y guiones bajos, sin incluir caracteres especiales ni letras mayúsculas.<p/>
 						<h2/>
 					</p:fieldset>
 			    </p:dialog>  
@@ -92,7 +93,9 @@
 			                <h:outputText for="nombre" value="Nombre: *" />
 					        <p:inputText value="#{gestionarEsquemasBean.selectedBd.nombre}" 
 					           	requiredMessage="El campo Nombre no debe ser vacío" required="true" label="text"
-			                   	validatorMessage="El Nombre debe comenzar con una letra minúsucala y sólo debe contener caracteres alfanuméricos en minúscula o el guión bajo" >
+			                   	validatorMessage="El nombre de la BD debe comenzar con una letra minúscula y después
+			                    						puede contener solo letras minúsculas, números y guiones bajos, sin 
+			                    						incluir caracteres especiales ni letras mayúsculas." >
 			                	<f:validateRegex pattern="^[a-z][a-z0-9_]*" />
 			                </p:inputText>
 					        

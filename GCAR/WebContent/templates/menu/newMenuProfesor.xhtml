@@ -29,19 +29,14 @@
     			<p:menuitem value="Gestionar Ejercicios" disabled="#{bd == null}" styleClass="formato" action="#{menuView.gestionarEjercicio}" ajax="false"/>
     			<p:separator/>
     			<p:menuitem value="Responder Ejercicios" disabled="#{bd == null}" styleClass="formato" action="#{menuView.responderEjercicio}" ajax="false"/>
-    			<p:menuitem value="Obtener Calificación" disabled="#{bd == null}" styleClass="formato" action="#{menuView.obtenerCalificacion}" ajax="false"/>
     		</p:submenu>
     		<p:submenu label="Consultas" disabled="#{bd == null}" styleClass="formato" >
     			<p:menuitem value="Hacer Consulta AR" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsulta}" />
     			<p:menuitem value="Hacer Consulta SQL" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsultaSQL}" />
     		</p:submenu>
     		
-    		<p:submenu label="Análisis de Datos" styleClass="formato">
-    		<p:menuitem value="Hacer Análisis" styleClass="formato" action="analisis" ajax="false"/>
     		<p:menuitem value="Ver Estadísticas" styleClass="formato" action="verEstadisticas" ajax="false"/>
-    		
-    		</p:submenu>
-    		
+    		    		
 			<p:menuitem value="Modificar Cuenta" styleClass="formato" action="modificarCuentaProfesor" ajax="false"/>
 
     		<f:facet name="options">

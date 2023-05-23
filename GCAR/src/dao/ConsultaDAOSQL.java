@@ -76,7 +76,9 @@ public class ConsultaDAOSQL {
 			
 		} catch (Exception ex) {
 			System.out.println("Error en verRespuesta() -->" + ex.getMessage());
-            return null;
+			RelacionBean err = new RelacionBean();
+			err.setNombre(ex.getMessage().toString());
+            return err;
         } finally {
             Database.close(con);
         }

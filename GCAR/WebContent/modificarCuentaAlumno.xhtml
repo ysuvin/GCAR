@@ -77,9 +77,9 @@
 			                    	required="true" requiredMessage="Debe ingresar su Apellido Materno"/>
 			                    <p:message for="materno"/>
 			                    
-			                    <h:outputText value="Edad *" styleClass="formato"/>
+			                    <h:outputText value="Año de Nacimiento *" styleClass="formato"/>
 			                    <p:inputText id="edad" value="#{gestionarCuentasBean.userBean.edad}" label="Edad"
-			                    	required="true" requiredMessage="Debe ingresar su Edad"
+			                    	required="true" requiredMessage="Debe ingresar su Año de Nacimiento"
 			                    	validatorMessage="Debe ingresar sólo dígitos">
 			                    	<f:validateRegex pattern="[0-9]*$" />
 			                    </p:inputText>
@@ -165,7 +165,7 @@
 			                        <h:outputText value="Apellido Materno: " styleClass="formato"/>
 			                        <h:outputText value="#{gestionarCuentasBean.userBean.materno}" styleClass="outputLabel"/>
 			 
-			                        <h:outputText value="Edad: " styleClass="formato"/>
+			                        <h:outputText value="Año de Nacimiento: " styleClass="formato"/>
 			                        <h:outputText value="#{gestionarCuentasBean.userBean.edad}" styleClass="outputLabel"/>
 			                        
 			                    </h:panelGrid>			                	
