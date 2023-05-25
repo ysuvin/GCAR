@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  postgres-gcar:
+    image: postgres:9.5
+    restart: always
+    container_name: postgres-gcar 
+    environment:
+      POSTGRES_USER: "gcar"      
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "gcar"
+    expose:
+      - "5432"
+    networks:
+      - red-privada
+    volumes:
+      - gcar_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    networks:
+      - red-privada
+    ports:
+      - 9080:8080
+
+  gcar-app:
+    build:                # Instrucciones para crear imagen
+      context: .          # Dontexto actual
+      dockerfile: ./Dockerfile # Nombre Dockerfile
+    restart: always
+    container_name: gcar_app
+    env_file:
+      - .env
+    expose:
+      - "80"
+    depends_on:
+      - postgres-gcar
+    networks:
+      - red-proxy
+      - red-privada
+    environment:
+      PORT: 80
+      VIRTUAL_HOST: gcar.informatica.uv.cl
+
+volumes:
+  gcar_data:
+
+networks:
+    red-proxy:
+        external:
+            name: network-docker
+    red-privada:
