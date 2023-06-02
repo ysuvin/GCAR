@@ -1,4 +1,4 @@
-// $ANTLR null C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g 2023-04-30 19:24:53
+// $ANTLR null G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g 2023-05-30 17:17:44
 package parser;
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -102,18 +102,18 @@ public class AlgebraRelacionalParser extends Parser {
 	}
 
 	@Override public String[] getTokenNames() { return AlgebraRelacionalParser.tokenNames; }
-	@Override public String getGrammarFileName() { return "C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g"; }
+	@Override public String getGrammarFileName() { return "G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g"; }
 
 
 
 	// $ANTLR start "st"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:3:1: st : ( asg | con ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:3:1: st : ( asg | con ) ;
 	public final void st() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:3:4: ( ( asg | con ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:3:6: ( asg | con )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:3:4: ( ( asg | con ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:3:6: ( asg | con )
 			{
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:3:6: ( asg | con )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:3:6: ( asg | con )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0==CAD) ) {
@@ -150,7 +150,7 @@ public class AlgebraRelacionalParser extends Parser {
 
 			switch (alt1) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:3:8: asg
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:3:8: asg
 					{
 					pushFollow(FOLLOW_asg_in_st12);
 					asg();
@@ -159,7 +159,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:3:14: con
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:3:14: con
 					{
 					pushFollow(FOLLOW_con_in_st16);
 					con();
@@ -186,11 +186,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "asg"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:4:1: asg : rel ':=' con ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:1: asg : rel ':=' con ;
 	public final void asg() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:4:5: ( rel ':=' con )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:4:7: rel ':=' con
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:5: ( rel ':=' con )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:7: rel ':=' con
 			{
 			pushFollow(FOLLOW_rel_in_asg25);
 			rel();
@@ -217,18 +217,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "con"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:1: con : ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:1: con : ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division | reunatural | reuizq | reuder | reuext ) ;
 	public final void con() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:5: ( ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:5: ( ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division | reunatural | reuizq | reuder | reuext ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division | reunatural | reuizq | reuder | reuext )
 			{
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division )
-			int alt2=11;
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division | reunatural | reuizq | reuder | reuext )
+			int alt2=15;
 			alt2 = dfa2.predict(input);
 			switch (alt2) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:9: bin
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:9: bin
 					{
 					pushFollow(FOLLOW_bin_in_con38);
 					bin();
@@ -237,7 +237,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:15: select
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:15: select
 					{
 					pushFollow(FOLLOW_select_in_con42);
 					select();
@@ -246,7 +246,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 3 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:24: proy
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:24: proy
 					{
 					pushFollow(FOLLOW_proy_in_con46);
 					proy();
@@ -255,7 +255,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 4 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:31: renom1
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:31: renom1
 					{
 					pushFollow(FOLLOW_renom1_in_con50);
 					renom1();
@@ -264,7 +264,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 5 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:40: renom2
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:40: renom2
 					{
 					pushFollow(FOLLOW_renom2_in_con54);
 					renom2();
@@ -273,7 +273,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 6 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:49: renom3
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:49: renom3
 					{
 					pushFollow(FOLLOW_renom3_in_con58);
 					renom3();
@@ -282,7 +282,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 7 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:58: join
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:58: join
 					{
 					pushFollow(FOLLOW_join_in_con62);
 					join();
@@ -291,7 +291,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 8 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:65: groupby
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:65: groupby
 					{
 					pushFollow(FOLLOW_groupby_in_con66);
 					groupby();
@@ -300,7 +300,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 9 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:75: orderby
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:75: orderby
 					{
 					pushFollow(FOLLOW_orderby_in_con70);
 					orderby();
@@ -309,7 +309,7 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 10 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:85: agregation
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:85: agregation
 					{
 					pushFollow(FOLLOW_agregation_in_con74);
 					agregation();
@@ -318,10 +318,46 @@ public class AlgebraRelacionalParser extends Parser {
 					}
 					break;
 				case 11 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:5:98: division
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:98: division
 					{
 					pushFollow(FOLLOW_division_in_con78);
 					division();
+					state._fsp--;
+
+					}
+					break;
+				case 12 :
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:109: reunatural
+					{
+					pushFollow(FOLLOW_reunatural_in_con82);
+					reunatural();
+					state._fsp--;
+
+					}
+					break;
+				case 13 :
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:122: reuizq
+					{
+					pushFollow(FOLLOW_reuizq_in_con86);
+					reuizq();
+					state._fsp--;
+
+					}
+					break;
+				case 14 :
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:131: reuder
+					{
+					pushFollow(FOLLOW_reuder_in_con90);
+					reuder();
+					state._fsp--;
+
+					}
+					break;
+				case 15 :
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:140: reuext
+					{
+					pushFollow(FOLLOW_reuext_in_con94);
+					reuext();
 					state._fsp--;
 
 					}
@@ -345,11 +381,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "bin"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:8:1: bin : ( rel ( 'UNION' | 'union' ) rel | rel ( 'INTER' | 'inter' ) rel | rel ( 'DIFERENCIA' | 'diferencia' ) rel | rel ( 'CRUZ' | 'cruz' ) rel | rel ( 'REUNION_NATURAL' | 'reunion_natural' ) rel | rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) rel | rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) rel | rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) rel );
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:8:1: bin : ( rel ( 'UNION' | 'union' ) rel | rel ( 'INTER' | 'inter' ) rel | rel ( 'DIFERENCIA' | 'diferencia' ) rel | rel ( 'CRUZ' | 'cruz' ) rel );
 	public final void bin() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:8:5: ( rel ( 'UNION' | 'union' ) rel | rel ( 'INTER' | 'inter' ) rel | rel ( 'DIFERENCIA' | 'diferencia' ) rel | rel ( 'CRUZ' | 'cruz' ) rel | rel ( 'REUNION_NATURAL' | 'reunion_natural' ) rel | rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) rel | rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) rel | rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) rel )
-			int alt3=8;
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:8:5: ( rel ( 'UNION' | 'union' ) rel | rel ( 'INTER' | 'inter' ) rel | rel ( 'DIFERENCIA' | 'diferencia' ) rel | rel ( 'CRUZ' | 'cruz' ) rel )
+			int alt3=4;
 			int LA3_0 = input.LA(1);
 			if ( (LA3_0==CAD) ) {
 				switch ( input.LA(2) ) {
@@ -377,30 +413,6 @@ public class AlgebraRelacionalParser extends Parser {
 					alt3=4;
 					}
 					break;
-				case 39:
-				case 64:
-					{
-					alt3=5;
-					}
-					break;
-				case 38:
-				case 63:
-					{
-					alt3=6;
-					}
-					break;
-				case 36:
-				case 61:
-					{
-					alt3=7;
-					}
-					break;
-				case 37:
-				case 62:
-					{
-					alt3=8;
-					}
-					break;
 				default:
 					int nvaeMark = input.mark();
 					try {
@@ -422,9 +434,9 @@ public class AlgebraRelacionalParser extends Parser {
 
 			switch (alt3) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:8:7: rel ( 'UNION' | 'union' ) rel
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:8:7: rel ( 'UNION' | 'union' ) rel
 					{
-					pushFollow(FOLLOW_rel_in_bin88);
+					pushFollow(FOLLOW_rel_in_bin104);
 					rel();
 					state._fsp--;
 
@@ -436,16 +448,16 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_rel_in_bin96);
+					pushFollow(FOLLOW_rel_in_bin112);
 					rel();
 					state._fsp--;
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:9:3: rel ( 'INTER' | 'inter' ) rel
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:9:3: rel ( 'INTER' | 'inter' ) rel
 					{
-					pushFollow(FOLLOW_rel_in_bin100);
+					pushFollow(FOLLOW_rel_in_bin116);
 					rel();
 					state._fsp--;
 
@@ -457,16 +469,16 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_rel_in_bin108);
+					pushFollow(FOLLOW_rel_in_bin124);
 					rel();
 					state._fsp--;
 
 					}
 					break;
 				case 3 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:10:3: rel ( 'DIFERENCIA' | 'diferencia' ) rel
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:10:3: rel ( 'DIFERENCIA' | 'diferencia' ) rel
 					{
-					pushFollow(FOLLOW_rel_in_bin112);
+					pushFollow(FOLLOW_rel_in_bin128);
 					rel();
 					state._fsp--;
 
@@ -478,16 +490,16 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_rel_in_bin120);
+					pushFollow(FOLLOW_rel_in_bin136);
 					rel();
 					state._fsp--;
 
 					}
 					break;
 				case 4 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:11:3: rel ( 'CRUZ' | 'cruz' ) rel
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:11:3: rel ( 'CRUZ' | 'cruz' ) rel
 					{
-					pushFollow(FOLLOW_rel_in_bin124);
+					pushFollow(FOLLOW_rel_in_bin140);
 					rel();
 					state._fsp--;
 
@@ -499,91 +511,7 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_rel_in_bin132);
-					rel();
-					state._fsp--;
-
-					}
-					break;
-				case 5 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:12:3: rel ( 'REUNION_NATURAL' | 'reunion_natural' ) rel
-					{
-					pushFollow(FOLLOW_rel_in_bin136);
-					rel();
-					state._fsp--;
-
-					if ( input.LA(1)==39||input.LA(1)==64 ) {
-						input.consume();
-						state.errorRecovery=false;
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
-					}
-					pushFollow(FOLLOW_rel_in_bin144);
-					rel();
-					state._fsp--;
-
-					}
-					break;
-				case 6 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:13:3: rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) rel
-					{
 					pushFollow(FOLLOW_rel_in_bin148);
-					rel();
-					state._fsp--;
-
-					if ( input.LA(1)==38||input.LA(1)==63 ) {
-						input.consume();
-						state.errorRecovery=false;
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
-					}
-					pushFollow(FOLLOW_rel_in_bin156);
-					rel();
-					state._fsp--;
-
-					}
-					break;
-				case 7 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:14:3: rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) rel
-					{
-					pushFollow(FOLLOW_rel_in_bin160);
-					rel();
-					state._fsp--;
-
-					if ( input.LA(1)==36||input.LA(1)==61 ) {
-						input.consume();
-						state.errorRecovery=false;
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
-					}
-					pushFollow(FOLLOW_rel_in_bin168);
-					rel();
-					state._fsp--;
-
-					}
-					break;
-				case 8 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:15:3: rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) rel
-					{
-					pushFollow(FOLLOW_rel_in_bin172);
-					rel();
-					state._fsp--;
-
-					if ( input.LA(1)==37||input.LA(1)==62 ) {
-						input.consume();
-						state.errorRecovery=false;
-					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
-					}
-					pushFollow(FOLLOW_rel_in_bin180);
 					rel();
 					state._fsp--;
 
@@ -605,11 +533,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "select"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:17:1: select : ( 'seleccionar' | 'SELECCIONAR' ) '(' conds1 ')' '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:13:1: select : ( 'seleccionar' | 'SELECCIONAR' ) '(' conds1 ')' '(' rel ')' ;
 	public final void select() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:17:8: ( ( 'seleccionar' | 'SELECCIONAR' ) '(' conds1 ')' '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:17:10: ( 'seleccionar' | 'SELECCIONAR' ) '(' conds1 ')' '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:13:8: ( ( 'seleccionar' | 'SELECCIONAR' ) '(' conds1 ')' '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:13:10: ( 'seleccionar' | 'SELECCIONAR' ) '(' conds1 ')' '(' rel ')'
 			{
 			if ( input.LA(1)==40||input.LA(1)==65 ) {
 				input.consume();
@@ -619,18 +547,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_select193); 
-			pushFollow(FOLLOW_conds1_in_select194);
+			match(input,8,FOLLOW_8_in_select161); 
+			pushFollow(FOLLOW_conds1_in_select162);
 			conds1();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_select195); 
-			match(input,8,FOLLOW_8_in_select196); 
-			pushFollow(FOLLOW_rel_in_select197);
+			match(input,9,FOLLOW_9_in_select163); 
+			match(input,8,FOLLOW_8_in_select164); 
+			pushFollow(FOLLOW_rel_in_select165);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_select198); 
+			match(input,9,FOLLOW_9_in_select166); 
 			}
 
 		}
@@ -647,11 +575,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "proy"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:18:1: proy : ( 'proyectar' | 'PROYECTAR' ) '(' atts ')' '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:14:1: proy : ( 'proyectar' | 'PROYECTAR' ) '(' atts ')' '(' rel ')' ;
 	public final void proy() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:18:6: ( ( 'proyectar' | 'PROYECTAR' ) '(' atts ')' '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:18:8: ( 'proyectar' | 'PROYECTAR' ) '(' atts ')' '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:14:6: ( ( 'proyectar' | 'PROYECTAR' ) '(' atts ')' '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:14:8: ( 'proyectar' | 'PROYECTAR' ) '(' atts ')' '(' rel ')'
 			{
 			if ( input.LA(1)==33||input.LA(1)==58 ) {
 				input.consume();
@@ -661,18 +589,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_proy210); 
-			pushFollow(FOLLOW_atts_in_proy211);
+			match(input,8,FOLLOW_8_in_proy178); 
+			pushFollow(FOLLOW_atts_in_proy179);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_proy212); 
-			match(input,8,FOLLOW_8_in_proy213); 
-			pushFollow(FOLLOW_rel_in_proy214);
+			match(input,9,FOLLOW_9_in_proy180); 
+			match(input,8,FOLLOW_8_in_proy181); 
+			pushFollow(FOLLOW_rel_in_proy182);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_proy215); 
+			match(input,9,FOLLOW_9_in_proy183); 
 			}
 
 		}
@@ -689,11 +617,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "renom1"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:19:1: renom1 : ( 'renombrar' | 'RENOMBRAR' ) rel '(' atts ')' '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:15:1: renom1 : ( 'renombrar' | 'RENOMBRAR' ) rel '(' atts ')' '(' rel ')' ;
 	public final void renom1() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:19:8: ( ( 'renombrar' | 'RENOMBRAR' ) rel '(' atts ')' '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:19:10: ( 'renombrar' | 'RENOMBRAR' ) rel '(' atts ')' '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:15:8: ( ( 'renombrar' | 'RENOMBRAR' ) rel '(' atts ')' '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:15:10: ( 'renombrar' | 'RENOMBRAR' ) rel '(' atts ')' '(' rel ')'
 			{
 			if ( input.LA(1)==34||input.LA(1)==59 ) {
 				input.consume();
@@ -703,22 +631,22 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_rel_in_renom1228);
+			pushFollow(FOLLOW_rel_in_renom1196);
 			rel();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_renom1230); 
-			pushFollow(FOLLOW_atts_in_renom1231);
+			match(input,8,FOLLOW_8_in_renom1198); 
+			pushFollow(FOLLOW_atts_in_renom1199);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom1232); 
-			match(input,8,FOLLOW_8_in_renom1233); 
-			pushFollow(FOLLOW_rel_in_renom1234);
+			match(input,9,FOLLOW_9_in_renom1200); 
+			match(input,8,FOLLOW_8_in_renom1201); 
+			pushFollow(FOLLOW_rel_in_renom1202);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom1235); 
+			match(input,9,FOLLOW_9_in_renom1203); 
 			}
 
 		}
@@ -735,11 +663,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "renom2"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:20:1: renom2 : ( 'renombrar' | 'RENOMBRAR' ) rel '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:16:1: renom2 : ( 'renombrar' | 'RENOMBRAR' ) rel '(' rel ')' ;
 	public final void renom2() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:20:8: ( ( 'renombrar' | 'RENOMBRAR' ) rel '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:20:10: ( 'renombrar' | 'RENOMBRAR' ) rel '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:16:8: ( ( 'renombrar' | 'RENOMBRAR' ) rel '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:16:10: ( 'renombrar' | 'RENOMBRAR' ) rel '(' rel ')'
 			{
 			if ( input.LA(1)==34||input.LA(1)==59 ) {
 				input.consume();
@@ -749,16 +677,16 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_rel_in_renom2248);
+			pushFollow(FOLLOW_rel_in_renom2216);
 			rel();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_renom2250); 
-			pushFollow(FOLLOW_rel_in_renom2251);
+			match(input,8,FOLLOW_8_in_renom2218); 
+			pushFollow(FOLLOW_rel_in_renom2219);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom2252); 
+			match(input,9,FOLLOW_9_in_renom2220); 
 			}
 
 		}
@@ -775,11 +703,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "renom3"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:21:1: renom3 : ( 'renombrar' | 'RENOMBRAR' ) '(' atts ')' '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:17:1: renom3 : ( 'renombrar' | 'RENOMBRAR' ) '(' atts ')' '(' rel ')' ;
 	public final void renom3() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:21:8: ( ( 'renombrar' | 'RENOMBRAR' ) '(' atts ')' '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:21:10: ( 'renombrar' | 'RENOMBRAR' ) '(' atts ')' '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:17:8: ( ( 'renombrar' | 'RENOMBRAR' ) '(' atts ')' '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:17:10: ( 'renombrar' | 'RENOMBRAR' ) '(' atts ')' '(' rel ')'
 			{
 			if ( input.LA(1)==34||input.LA(1)==59 ) {
 				input.consume();
@@ -789,18 +717,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_renom3264); 
-			pushFollow(FOLLOW_atts_in_renom3265);
+			match(input,8,FOLLOW_8_in_renom3232); 
+			pushFollow(FOLLOW_atts_in_renom3233);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom3266); 
-			match(input,8,FOLLOW_8_in_renom3267); 
-			pushFollow(FOLLOW_rel_in_renom3268);
+			match(input,9,FOLLOW_9_in_renom3234); 
+			match(input,8,FOLLOW_8_in_renom3235); 
+			pushFollow(FOLLOW_rel_in_renom3236);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom3269); 
+			match(input,9,FOLLOW_9_in_renom3237); 
 			}
 
 		}
@@ -817,18 +745,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "join"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:22:1: join : '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:18:1: join : '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')' ;
 	public final void join() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:22:6: ( '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:22:8: '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:18:6: ( '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:18:8: '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')'
 			{
-			match(input,8,FOLLOW_8_in_join276); 
-			pushFollow(FOLLOW_rel_in_join277);
+			match(input,8,FOLLOW_8_in_join244); 
+			pushFollow(FOLLOW_rel_in_join245);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_join278); 
+			match(input,9,FOLLOW_9_in_join246); 
 			if ( input.LA(1)==35||input.LA(1)==60 ) {
 				input.consume();
 				state.errorRecovery=false;
@@ -837,18 +765,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_join284); 
-			pushFollow(FOLLOW_conds2_in_join285);
+			match(input,8,FOLLOW_8_in_join252); 
+			pushFollow(FOLLOW_conds2_in_join253);
 			conds2();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_join286); 
-			match(input,8,FOLLOW_8_in_join287); 
-			pushFollow(FOLLOW_rel_in_join288);
+			match(input,9,FOLLOW_9_in_join254); 
+			match(input,8,FOLLOW_8_in_join255); 
+			pushFollow(FOLLOW_rel_in_join256);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_join289); 
+			match(input,9,FOLLOW_9_in_join257); 
 			}
 
 		}
@@ -865,18 +793,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "groupby"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:23:1: groupby : '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:19:1: groupby : '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')' ;
 	public final void groupby() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:23:9: ( '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:23:11: '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:19:9: ( '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:19:11: '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')'
 			{
-			match(input,8,FOLLOW_8_in_groupby296); 
-			pushFollow(FOLLOW_atts_in_groupby298);
+			match(input,8,FOLLOW_8_in_groupby264); 
+			pushFollow(FOLLOW_atts_in_groupby266);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_groupby299); 
+			match(input,9,FOLLOW_9_in_groupby267); 
 			if ( input.LA(1)==19||input.LA(1)==44 ) {
 				input.consume();
 				state.errorRecovery=false;
@@ -885,16 +813,16 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_fagregas_in_groupby307);
+			pushFollow(FOLLOW_fagregas_in_groupby275);
 			fagregas();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_groupby309); 
-			pushFollow(FOLLOW_rel_in_groupby310);
+			match(input,8,FOLLOW_8_in_groupby277); 
+			pushFollow(FOLLOW_rel_in_groupby278);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_groupby311); 
+			match(input,9,FOLLOW_9_in_groupby279); 
 			}
 
 		}
@@ -911,11 +839,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "orderby"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:24:1: orderby : ( 'ordenar' | 'ORDENAR' ) orders '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:20:1: orderby : ( 'ordenar' | 'ORDENAR' ) orders '(' rel ')' ;
 	public final void orderby() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:24:9: ( ( 'ordenar' | 'ORDENAR' ) orders '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:24:11: ( 'ordenar' | 'ORDENAR' ) orders '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:20:9: ( ( 'ordenar' | 'ORDENAR' ) orders '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:20:11: ( 'ordenar' | 'ORDENAR' ) orders '(' rel ')'
 			{
 			if ( input.LA(1)==32||input.LA(1)==57 ) {
 				input.consume();
@@ -925,16 +853,16 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_orders_in_orderby326);
+			pushFollow(FOLLOW_orders_in_orderby294);
 			orders();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_orderby328); 
-			pushFollow(FOLLOW_rel_in_orderby329);
+			match(input,8,FOLLOW_8_in_orderby296); 
+			pushFollow(FOLLOW_rel_in_orderby297);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_orderby330); 
+			match(input,9,FOLLOW_9_in_orderby298); 
 			}
 
 		}
@@ -951,29 +879,29 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "agregation"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:25:1: agregation : fagrega ( att '(' rel ')' ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:21:1: agregation : fagrega ( att '(' rel ')' ) ;
 	public final void agregation() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:25:12: ( fagrega ( att '(' rel ')' ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:25:14: fagrega ( att '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:21:12: ( fagrega ( att '(' rel ')' ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:21:14: fagrega ( att '(' rel ')' )
 			{
-			pushFollow(FOLLOW_fagrega_in_agregation338);
+			pushFollow(FOLLOW_fagrega_in_agregation306);
 			fagrega();
 			state._fsp--;
 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:25:22: ( att '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:25:24: att '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:21:22: ( att '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:21:24: att '(' rel ')'
 			{
-			pushFollow(FOLLOW_att_in_agregation342);
+			pushFollow(FOLLOW_att_in_agregation310);
 			att();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_agregation344); 
-			pushFollow(FOLLOW_rel_in_agregation345);
+			match(input,8,FOLLOW_8_in_agregation312); 
+			pushFollow(FOLLOW_rel_in_agregation313);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_agregation346); 
+			match(input,9,FOLLOW_9_in_agregation314); 
 			}
 
 			}
@@ -992,24 +920,24 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "division"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:26:1: division : '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:1: division : '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' ;
 	public final void division() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:26:9: ( '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:26:11: '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:9: ( '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:11: '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')'
 			{
-			match(input,8,FOLLOW_8_in_division355); 
-			pushFollow(FOLLOW_atts_in_division356);
+			match(input,8,FOLLOW_8_in_division322); 
+			pushFollow(FOLLOW_atts_in_division323);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division357); 
-			match(input,8,FOLLOW_8_in_division358); 
-			pushFollow(FOLLOW_rel_in_division359);
+			match(input,9,FOLLOW_9_in_division324); 
+			match(input,8,FOLLOW_8_in_division325); 
+			pushFollow(FOLLOW_rel_in_division326);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division360); 
+			match(input,9,FOLLOW_9_in_division327); 
 			if ( input.LA(1)==27||input.LA(1)==52 ) {
 				input.consume();
 				state.errorRecovery=false;
@@ -1018,18 +946,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_division366); 
-			pushFollow(FOLLOW_att_in_division367);
+			match(input,8,FOLLOW_8_in_division333); 
+			pushFollow(FOLLOW_att_in_division334);
 			att();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division368); 
-			match(input,8,FOLLOW_8_in_division369); 
-			pushFollow(FOLLOW_rel_in_division370);
+			match(input,9,FOLLOW_9_in_division335); 
+			match(input,8,FOLLOW_8_in_division336); 
+			pushFollow(FOLLOW_rel_in_division337);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division371); 
+			match(input,9,FOLLOW_9_in_division338); 
 			}
 
 		}
@@ -1045,18 +973,194 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 
+	// $ANTLR start "reunatural"
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:23:1: reunatural : rel ( 'REUNION_NATURAL' | 'reunion_natural' ) '(' conds2 ')' rel ;
+	public final void reunatural() throws RecognitionException {
+		try {
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:23:11: ( rel ( 'REUNION_NATURAL' | 'reunion_natural' ) '(' conds2 ')' rel )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:23:13: rel ( 'REUNION_NATURAL' | 'reunion_natural' ) '(' conds2 ')' rel
+			{
+			pushFollow(FOLLOW_rel_in_reunatural344);
+			rel();
+			state._fsp--;
+
+			if ( input.LA(1)==39||input.LA(1)==64 ) {
+				input.consume();
+				state.errorRecovery=false;
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				throw mse;
+			}
+			match(input,8,FOLLOW_8_in_reunatural351); 
+			pushFollow(FOLLOW_conds2_in_reunatural352);
+			conds2();
+			state._fsp--;
+
+			match(input,9,FOLLOW_9_in_reunatural353); 
+			pushFollow(FOLLOW_rel_in_reunatural355);
+			rel();
+			state._fsp--;
+
+			}
+
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "reunatural"
+
+
+
+	// $ANTLR start "reuizq"
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:24:1: reuizq : rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) '(' conds2 ')' rel ;
+	public final void reuizq() throws RecognitionException {
+		try {
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:24:7: ( rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) '(' conds2 ')' rel )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:24:9: rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) '(' conds2 ')' rel
+			{
+			pushFollow(FOLLOW_rel_in_reuizq361);
+			rel();
+			state._fsp--;
+
+			if ( input.LA(1)==38||input.LA(1)==63 ) {
+				input.consume();
+				state.errorRecovery=false;
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				throw mse;
+			}
+			match(input,8,FOLLOW_8_in_reuizq368); 
+			pushFollow(FOLLOW_conds2_in_reuizq369);
+			conds2();
+			state._fsp--;
+
+			match(input,9,FOLLOW_9_in_reuizq370); 
+			pushFollow(FOLLOW_rel_in_reuizq372);
+			rel();
+			state._fsp--;
+
+			}
+
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "reuizq"
+
+
+
+	// $ANTLR start "reuder"
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:25:1: reuder : rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) '(' conds2 ')' rel ;
+	public final void reuder() throws RecognitionException {
+		try {
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:25:7: ( rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) '(' conds2 ')' rel )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:25:9: rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) '(' conds2 ')' rel
+			{
+			pushFollow(FOLLOW_rel_in_reuder378);
+			rel();
+			state._fsp--;
+
+			if ( input.LA(1)==36||input.LA(1)==61 ) {
+				input.consume();
+				state.errorRecovery=false;
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				throw mse;
+			}
+			match(input,8,FOLLOW_8_in_reuder385); 
+			pushFollow(FOLLOW_conds2_in_reuder386);
+			conds2();
+			state._fsp--;
+
+			match(input,9,FOLLOW_9_in_reuder387); 
+			pushFollow(FOLLOW_rel_in_reuder389);
+			rel();
+			state._fsp--;
+
+			}
+
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "reuder"
+
+
+
+	// $ANTLR start "reuext"
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:26:1: reuext : rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) '(' conds2 ')' rel ;
+	public final void reuext() throws RecognitionException {
+		try {
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:26:7: ( rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) '(' conds2 ')' rel )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:26:9: rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) '(' conds2 ')' rel
+			{
+			pushFollow(FOLLOW_rel_in_reuext395);
+			rel();
+			state._fsp--;
+
+			if ( input.LA(1)==37||input.LA(1)==62 ) {
+				input.consume();
+				state.errorRecovery=false;
+			}
+			else {
+				MismatchedSetException mse = new MismatchedSetException(null,input);
+				throw mse;
+			}
+			match(input,8,FOLLOW_8_in_reuext402); 
+			pushFollow(FOLLOW_conds2_in_reuext403);
+			conds2();
+			state._fsp--;
+
+			match(input,9,FOLLOW_9_in_reuext404); 
+			pushFollow(FOLLOW_rel_in_reuext406);
+			rel();
+			state._fsp--;
+
+			}
+
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "reuext"
+
+
+
 	// $ANTLR start "atts"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:29:1: atts : att ( ',' att )* ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:1: atts : att ( ',' att )* ;
 	public final void atts() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:29:6: ( att ( ',' att )* )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:29:8: att ( ',' att )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:6: ( att ( ',' att )* )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:8: att ( ',' att )*
 			{
-			pushFollow(FOLLOW_att_in_atts380);
+			pushFollow(FOLLOW_att_in_atts415);
 			att();
 			state._fsp--;
 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:29:12: ( ',' att )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:12: ( ',' att )*
 			loop4:
 			while (true) {
 				int alt4=2;
@@ -1067,10 +1171,10 @@ public class AlgebraRelacionalParser extends Parser {
 
 				switch (alt4) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:29:13: ',' att
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:13: ',' att
 					{
-					match(input,10,FOLLOW_10_in_atts383); 
-					pushFollow(FOLLOW_att_in_atts385);
+					match(input,10,FOLLOW_10_in_atts418); 
+					pushFollow(FOLLOW_att_in_atts420);
 					att();
 					state._fsp--;
 
@@ -1098,17 +1202,17 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "conds1"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:30:1: conds1 : cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )* ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:30:1: conds1 : cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )* ;
 	public final void conds1() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:30:8: ( cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )* )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:30:10: cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:30:8: ( cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )* )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:30:10: cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )*
 			{
-			pushFollow(FOLLOW_cond1_in_conds1394);
+			pushFollow(FOLLOW_cond1_in_conds1429);
 			cond1();
 			state._fsp--;
 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:30:16: ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:30:16: ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )*
 			loop5:
 			while (true) {
 				int alt5=2;
@@ -1119,7 +1223,7 @@ public class AlgebraRelacionalParser extends Parser {
 
 				switch (alt5) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:30:17: ( 'and' | 'or' | 'AND' | 'OR' ) cond1
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:30:17: ( 'and' | 'or' | 'AND' | 'OR' ) cond1
 					{
 					if ( input.LA(1)==20||input.LA(1)==31||input.LA(1)==45||input.LA(1)==56 ) {
 						input.consume();
@@ -1129,7 +1233,7 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_cond1_in_conds1415);
+					pushFollow(FOLLOW_cond1_in_conds1450);
 					cond1();
 					state._fsp--;
 
@@ -1157,17 +1261,17 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "conds2"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:31:1: conds2 : cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )* ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:31:1: conds2 : cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )* ;
 	public final void conds2() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:31:8: ( cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )* )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:31:10: cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:31:8: ( cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )* )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:31:10: cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )*
 			{
-			pushFollow(FOLLOW_cond2_in_conds2424);
+			pushFollow(FOLLOW_cond2_in_conds2459);
 			cond2();
 			state._fsp--;
 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:31:16: ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:31:16: ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )*
 			loop6:
 			while (true) {
 				int alt6=2;
@@ -1178,7 +1282,7 @@ public class AlgebraRelacionalParser extends Parser {
 
 				switch (alt6) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:31:17: ( 'and' | 'or' | 'AND' | 'OR' ) cond2
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:31:17: ( 'and' | 'or' | 'AND' | 'OR' ) cond2
 					{
 					if ( input.LA(1)==20||input.LA(1)==31||input.LA(1)==45||input.LA(1)==56 ) {
 						input.consume();
@@ -1188,7 +1292,7 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_cond2_in_conds2445);
+					pushFollow(FOLLOW_cond2_in_conds2480);
 					cond2();
 					state._fsp--;
 
@@ -1216,13 +1320,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "cond1"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:32:1: cond1 : ( con1 | con11 ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:1: cond1 : ( con1 | con11 ) ;
 	public final void cond1() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:32:7: ( ( con1 | con11 ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:32:9: ( con1 | con11 )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:7: ( ( con1 | con11 ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:9: ( con1 | con11 )
 			{
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:32:9: ( con1 | con11 )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:9: ( con1 | con11 )
 			int alt7=2;
 			int LA7_0 = input.LA(1);
 			if ( (LA7_0==CAD) ) {
@@ -1274,18 +1378,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 			switch (alt7) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:32:11: con1
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:11: con1
 					{
-					pushFollow(FOLLOW_con1_in_cond1456);
+					pushFollow(FOLLOW_con1_in_cond1491);
 					con1();
 					state._fsp--;
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:32:17: con11
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:17: con11
 					{
-					pushFollow(FOLLOW_con11_in_cond1459);
+					pushFollow(FOLLOW_con11_in_cond1494);
 					con11();
 					state._fsp--;
 
@@ -1310,13 +1414,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "cond2"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:33:1: cond2 : ( con2 | con3 ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:1: cond2 : ( con2 | con3 ) ;
 	public final void cond2() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:33:7: ( ( con2 | con3 ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:33:9: ( con2 | con3 )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:7: ( ( con2 | con3 ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:9: ( con2 | con3 )
 			{
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:33:9: ( con2 | con3 )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:9: ( con2 | con3 )
 			int alt8=2;
 			int LA8_0 = input.LA(1);
 			if ( (LA8_0==CAD) ) {
@@ -1404,18 +1508,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 			switch (alt8) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:33:11: con2
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:11: con2
 					{
-					pushFollow(FOLLOW_con2_in_cond2470);
+					pushFollow(FOLLOW_con2_in_cond2505);
 					con2();
 					state._fsp--;
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:33:17: con3
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:17: con3
 					{
-					pushFollow(FOLLOW_con3_in_cond2473);
+					pushFollow(FOLLOW_con3_in_cond2508);
 					con3();
 					state._fsp--;
 
@@ -1440,23 +1544,23 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "orders"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:34:1: orders : att '(' order ')' ( ',' att '(' order ')' )* ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:1: orders : att '(' order ')' ( ',' att '(' order ')' )* ;
 	public final void orders() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:34:8: ( att '(' order ')' ( ',' att '(' order ')' )* )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:34:10: att '(' order ')' ( ',' att '(' order ')' )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:8: ( att '(' order ')' ( ',' att '(' order ')' )* )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:10: att '(' order ')' ( ',' att '(' order ')' )*
 			{
-			pushFollow(FOLLOW_att_in_orders482);
+			pushFollow(FOLLOW_att_in_orders517);
 			att();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_orders484); 
-			pushFollow(FOLLOW_order_in_orders485);
+			match(input,8,FOLLOW_8_in_orders519); 
+			pushFollow(FOLLOW_order_in_orders520);
 			order();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_orders486); 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:34:26: ( ',' att '(' order ')' )*
+			match(input,9,FOLLOW_9_in_orders521); 
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:26: ( ',' att '(' order ')' )*
 			loop9:
 			while (true) {
 				int alt9=2;
@@ -1467,19 +1571,19 @@ public class AlgebraRelacionalParser extends Parser {
 
 				switch (alt9) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:34:27: ',' att '(' order ')'
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:27: ',' att '(' order ')'
 					{
-					match(input,10,FOLLOW_10_in_orders489); 
-					pushFollow(FOLLOW_att_in_orders491);
+					match(input,10,FOLLOW_10_in_orders524); 
+					pushFollow(FOLLOW_att_in_orders526);
 					att();
 					state._fsp--;
 
-					match(input,8,FOLLOW_8_in_orders493); 
-					pushFollow(FOLLOW_order_in_orders494);
+					match(input,8,FOLLOW_8_in_orders528); 
+					pushFollow(FOLLOW_order_in_orders529);
 					order();
 					state._fsp--;
 
-					match(input,9,FOLLOW_9_in_orders495); 
+					match(input,9,FOLLOW_9_in_orders530); 
 					}
 					break;
 
@@ -1504,11 +1608,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "order"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:35:1: order : ( 'asc' | 'ASC' | 'desc' | 'DESC' ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:35:1: order : ( 'asc' | 'ASC' | 'desc' | 'DESC' ) ;
 	public final void order() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:35:7: ( ( 'asc' | 'ASC' | 'desc' | 'DESC' ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:35:7: ( ( 'asc' | 'ASC' | 'desc' | 'DESC' ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:
 			{
 			if ( input.LA(1)==21||input.LA(1)==25||input.LA(1)==46||input.LA(1)==50 ) {
 				input.consume();
@@ -1534,23 +1638,23 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "fagregas"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:36:1: fagregas : fagrega '(' att ')' ( ',' fagrega '(' att ')' )* ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:1: fagregas : fagrega '(' att ')' ( ',' fagrega '(' att ')' )* ;
 	public final void fagregas() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:36:9: ( fagrega '(' att ')' ( ',' fagrega '(' att ')' )* )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:36:11: fagrega '(' att ')' ( ',' fagrega '(' att ')' )*
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:9: ( fagrega '(' att ')' ( ',' fagrega '(' att ')' )* )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:11: fagrega '(' att ')' ( ',' fagrega '(' att ')' )*
 			{
-			pushFollow(FOLLOW_fagrega_in_fagregas529);
+			pushFollow(FOLLOW_fagrega_in_fagregas564);
 			fagrega();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_fagregas531); 
-			pushFollow(FOLLOW_att_in_fagregas532);
+			match(input,8,FOLLOW_8_in_fagregas566); 
+			pushFollow(FOLLOW_att_in_fagregas567);
 			att();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_fagregas533); 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:36:29: ( ',' fagrega '(' att ')' )*
+			match(input,9,FOLLOW_9_in_fagregas568); 
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:29: ( ',' fagrega '(' att ')' )*
 			loop10:
 			while (true) {
 				int alt10=2;
@@ -1561,19 +1665,19 @@ public class AlgebraRelacionalParser extends Parser {
 
 				switch (alt10) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:36:30: ',' fagrega '(' att ')'
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:30: ',' fagrega '(' att ')'
 					{
-					match(input,10,FOLLOW_10_in_fagregas536); 
-					pushFollow(FOLLOW_fagrega_in_fagregas538);
+					match(input,10,FOLLOW_10_in_fagregas571); 
+					pushFollow(FOLLOW_fagrega_in_fagregas573);
 					fagrega();
 					state._fsp--;
 
-					match(input,8,FOLLOW_8_in_fagregas540); 
-					pushFollow(FOLLOW_att_in_fagregas541);
+					match(input,8,FOLLOW_8_in_fagregas575); 
+					pushFollow(FOLLOW_att_in_fagregas576);
 					att();
 					state._fsp--;
 
-					match(input,9,FOLLOW_9_in_fagregas542); 
+					match(input,9,FOLLOW_9_in_fagregas577); 
 					}
 					break;
 
@@ -1598,11 +1702,11 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "fagrega"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:37:1: fagrega : ( 'sum' | 'SUM' | 'avg' | 'AVG' | 'count' | 'COUNT' | 'min' | 'MIN' | 'max' | 'MAX' ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:37:1: fagrega : ( 'sum' | 'SUM' | 'avg' | 'AVG' | 'count' | 'COUNT' | 'min' | 'MIN' | 'max' | 'MAX' ) ;
 	public final void fagrega() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:37:9: ( ( 'sum' | 'SUM' | 'avg' | 'AVG' | 'count' | 'COUNT' | 'min' | 'MIN' | 'max' | 'MAX' ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:37:9: ( ( 'sum' | 'SUM' | 'avg' | 'AVG' | 'count' | 'COUNT' | 'min' | 'MIN' | 'max' | 'MAX' ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:
 			{
 			if ( (input.LA(1) >= 22 && input.LA(1) <= 23)||(input.LA(1) >= 29 && input.LA(1) <= 30)||input.LA(1)==41||(input.LA(1) >= 47 && input.LA(1) <= 48)||(input.LA(1) >= 54 && input.LA(1) <= 55)||input.LA(1)==66 ) {
 				input.consume();
@@ -1628,13 +1732,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "con1"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:38:1: con1 : att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:38:1: con1 : att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons ;
 	public final void con1() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:38:6: ( att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:38:8: att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:38:6: ( att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:38:8: att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons
 			{
-			pushFollow(FOLLOW_att_in_con1598);
+			pushFollow(FOLLOW_att_in_con1633);
 			att();
 			state._fsp--;
 
@@ -1646,7 +1750,7 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_cons_in_con1624);
+			pushFollow(FOLLOW_cons_in_con1659);
 			cons();
 			state._fsp--;
 
@@ -1666,13 +1770,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "con11"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:39:1: con11 : att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:39:1: con11 : att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att ;
 	public final void con11() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:39:7: ( att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:39:9: att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:39:7: ( att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:39:9: att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att
 			{
-			pushFollow(FOLLOW_att_in_con11631);
+			pushFollow(FOLLOW_att_in_con11666);
 			att();
 			state._fsp--;
 
@@ -1684,7 +1788,7 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_att_in_con11657);
+			pushFollow(FOLLOW_att_in_con11692);
 			att();
 			state._fsp--;
 
@@ -1704,18 +1808,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "con2"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:40:1: con2 : rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:40:1: con2 : rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att ;
 	public final void con2() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:40:6: ( rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:40:8: rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:40:6: ( rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:40:8: rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att
 			{
-			pushFollow(FOLLOW_rel_in_con2664);
+			pushFollow(FOLLOW_rel_in_con2699);
 			rel();
 			state._fsp--;
 
-			match(input,12,FOLLOW_12_in_con2665); 
-			pushFollow(FOLLOW_att_in_con2666);
+			match(input,12,FOLLOW_12_in_con2700); 
+			pushFollow(FOLLOW_att_in_con2701);
 			att();
 			state._fsp--;
 
@@ -1727,12 +1831,12 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_rel_in_con2692);
+			pushFollow(FOLLOW_rel_in_con2727);
 			rel();
 			state._fsp--;
 
-			match(input,12,FOLLOW_12_in_con2693); 
-			pushFollow(FOLLOW_att_in_con2694);
+			match(input,12,FOLLOW_12_in_con2728); 
+			pushFollow(FOLLOW_att_in_con2729);
 			att();
 			state._fsp--;
 
@@ -1752,18 +1856,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "con3"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:41:1: con3 : rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:41:1: con3 : rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons ;
 	public final void con3() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:41:6: ( rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:41:8: rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:41:6: ( rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:41:8: rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons
 			{
-			pushFollow(FOLLOW_rel_in_con3701);
+			pushFollow(FOLLOW_rel_in_con3736);
 			rel();
 			state._fsp--;
 
-			match(input,12,FOLLOW_12_in_con3702); 
-			pushFollow(FOLLOW_att_in_con3703);
+			match(input,12,FOLLOW_12_in_con3737); 
+			pushFollow(FOLLOW_att_in_con3738);
 			att();
 			state._fsp--;
 
@@ -1775,7 +1879,7 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_cons_in_con3729);
+			pushFollow(FOLLOW_cons_in_con3764);
 			cons();
 			state._fsp--;
 
@@ -1795,13 +1899,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "cons"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:42:1: cons : ( num | cad ) ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:1: cons : ( num | cad ) ;
 	public final void cons() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:42:6: ( ( num | cad ) )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:42:8: ( num | cad )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:6: ( ( num | cad ) )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:8: ( num | cad )
 			{
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:42:8: ( num | cad )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:8: ( num | cad )
 			int alt11=2;
 			int LA11_0 = input.LA(1);
 			if ( (LA11_0==NUM||LA11_0==11) ) {
@@ -1819,18 +1923,18 @@ public class AlgebraRelacionalParser extends Parser {
 
 			switch (alt11) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:42:10: num
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:10: num
 					{
-					pushFollow(FOLLOW_num_in_cons738);
+					pushFollow(FOLLOW_num_in_cons773);
 					num();
 					state._fsp--;
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:42:16: cad
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:16: cad
 					{
-					pushFollow(FOLLOW_cad_in_cons742);
+					pushFollow(FOLLOW_cad_in_cons777);
 					cad();
 					state._fsp--;
 
@@ -1855,13 +1959,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "num"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:1: num : ( '-' )? ( NUM )+ ( '.' ( NUM )+ )? ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:1: num : ( '-' )? ( NUM )+ ( '.' ( NUM )+ )? ;
 	public final void num() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:5: ( ( '-' )? ( NUM )+ ( '.' ( NUM )+ )? )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:7: ( '-' )? ( NUM )+ ( '.' ( NUM )+ )?
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:5: ( ( '-' )? ( NUM )+ ( '.' ( NUM )+ )? )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:7: ( '-' )? ( NUM )+ ( '.' ( NUM )+ )?
 			{
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:7: ( '-' )?
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:7: ( '-' )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
 			if ( (LA12_0==11) ) {
@@ -1869,15 +1973,15 @@ public class AlgebraRelacionalParser extends Parser {
 			}
 			switch (alt12) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:8: '-'
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:8: '-'
 					{
-					match(input,11,FOLLOW_11_in_num752); 
+					match(input,11,FOLLOW_11_in_num787); 
 					}
 					break;
 
 			}
 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:13: ( NUM )+
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:13: ( NUM )+
 			int cnt13=0;
 			loop13:
 			while (true) {
@@ -1889,9 +1993,9 @@ public class AlgebraRelacionalParser extends Parser {
 
 				switch (alt13) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:14: NUM
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:14: NUM
 					{
-					match(input,NUM,FOLLOW_NUM_in_num756); 
+					match(input,NUM,FOLLOW_NUM_in_num791); 
 					}
 					break;
 
@@ -1903,7 +2007,7 @@ public class AlgebraRelacionalParser extends Parser {
 				cnt13++;
 			}
 
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:19: ( '.' ( NUM )+ )?
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:19: ( '.' ( NUM )+ )?
 			int alt15=2;
 			int LA15_0 = input.LA(1);
 			if ( (LA15_0==12) ) {
@@ -1911,10 +2015,10 @@ public class AlgebraRelacionalParser extends Parser {
 			}
 			switch (alt15) {
 				case 1 :
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:20: '.' ( NUM )+
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:20: '.' ( NUM )+
 					{
-					match(input,12,FOLLOW_12_in_num760); 
-					// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:23: ( NUM )+
+					match(input,12,FOLLOW_12_in_num795); 
+					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:23: ( NUM )+
 					int cnt14=0;
 					loop14:
 					while (true) {
@@ -1926,9 +2030,9 @@ public class AlgebraRelacionalParser extends Parser {
 
 						switch (alt14) {
 						case 1 :
-							// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:43:24: NUM
+							// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:24: NUM
 							{
-							match(input,NUM,FOLLOW_NUM_in_num762); 
+							match(input,NUM,FOLLOW_NUM_in_num797); 
 							}
 							break;
 
@@ -1961,15 +2065,15 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "cad"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:44:1: cad : '\\u0027' CAD '\\u0027' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:44:1: cad : '\\u0027' CAD '\\u0027' ;
 	public final void cad() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:44:5: ( '\\u0027' CAD '\\u0027' )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:44:7: '\\u0027' CAD '\\u0027'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:44:5: ( '\\u0027' CAD '\\u0027' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:44:7: '\\u0027' CAD '\\u0027'
 			{
-			match(input,43,FOLLOW_43_in_cad773); 
-			match(input,CAD,FOLLOW_CAD_in_cad774); 
-			match(input,43,FOLLOW_43_in_cad775); 
+			match(input,43,FOLLOW_43_in_cad808); 
+			match(input,CAD,FOLLOW_CAD_in_cad809); 
+			match(input,43,FOLLOW_43_in_cad810); 
 			}
 
 		}
@@ -1986,13 +2090,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "att"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:45:1: att : CAD ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:45:1: att : CAD ;
 	public final void att() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:45:5: ( CAD )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:45:7: CAD
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:45:5: ( CAD )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:45:7: CAD
 			{
-			match(input,CAD,FOLLOW_CAD_in_att782); 
+			match(input,CAD,FOLLOW_CAD_in_att817); 
 			}
 
 		}
@@ -2009,13 +2113,13 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "rel"
-	// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:46:1: rel : CAD ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:1: rel : CAD ;
 	public final void rel() throws RecognitionException {
 		try {
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:46:5: ( CAD )
-			// C:\\Users\\yianv\\OneDrive\\Trabajo de titulo 1\\implementacion\\gramatica\\AlgebraRelacional.g:46:7: CAD
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:5: ( CAD )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:7: CAD
 			{
-			match(input,CAD,FOLLOW_CAD_in_rel789); 
+			match(input,CAD,FOLLOW_CAD_in_rel824); 
 			}
 
 		}
@@ -2034,44 +2138,51 @@ public class AlgebraRelacionalParser extends Parser {
 
 	protected DFA2 dfa2 = new DFA2(this);
 	static final String DFA2_eotS =
-		"\27\uffff";
+		"\34\uffff";
 	static final String DFA2_eofS =
-		"\24\uffff\1\26\2\uffff";
+		"\31\uffff\1\33\2\uffff";
 	static final String DFA2_minS =
-		"\1\4\3\uffff\2\4\3\uffff\1\10\1\11\1\4\1\10\1\4\1\11\3\uffff\1\11\1\uffff"+
-		"\2\10\1\uffff";
+		"\1\4\1\30\2\uffff\2\4\10\uffff\1\10\1\11\1\4\1\10\1\4\1\11\3\uffff\1\11"+
+		"\1\uffff\2\10\1\uffff";
 	static final String DFA2_maxS =
-		"\1\102\3\uffff\1\10\1\4\3\uffff\1\10\1\12\1\4\1\74\1\4\1\12\3\uffff\1"+
-		"\12\1\uffff\1\10\1\54\1\uffff";
+		"\1\102\1\103\2\uffff\1\10\1\4\10\uffff\1\10\1\12\1\4\1\74\1\4\1\12\3\uffff"+
+		"\1\12\1\uffff\1\10\1\54\1\uffff";
 	static final String DFA2_acceptS =
-		"\1\uffff\1\1\1\2\1\3\2\uffff\1\11\1\12\1\6\6\uffff\1\7\1\10\1\13\1\uffff"+
-		"\1\4\2\uffff\1\5";
+		"\2\uffff\1\2\1\3\2\uffff\1\11\1\12\1\1\1\14\1\15\1\16\1\17\1\6\6\uffff"+
+		"\1\7\1\10\1\13\1\uffff\1\4\2\uffff\1\5";
 	static final String DFA2_specialS =
-		"\27\uffff}>";
+		"\34\uffff}>";
 	static final String[] DFA2_transitionS = {
 			"\1\1\3\uffff\1\5\15\uffff\2\7\5\uffff\2\7\1\uffff\1\6\1\3\1\4\5\uffff"+
 			"\1\2\1\7\5\uffff\2\7\5\uffff\2\7\1\uffff\1\6\1\3\1\4\5\uffff\1\2\1\7",
+			"\1\10\1\uffff\1\10\1\uffff\1\10\7\uffff\1\13\1\14\1\12\1\11\2\uffff"+
+			"\1\10\6\uffff\1\10\1\uffff\1\10\1\uffff\1\10\7\uffff\1\13\1\14\1\12\1"+
+			"\11\2\uffff\1\10",
+			"",
+			"",
+			"\1\16\3\uffff\1\15",
+			"\1\17",
 			"",
 			"",
 			"",
-			"\1\11\3\uffff\1\10",
-			"\1\12",
 			"",
 			"",
 			"",
-			"\1\13",
-			"\1\14\1\15",
-			"\1\16",
-			"\1\21\12\uffff\1\20\17\uffff\1\17\10\uffff\1\20\17\uffff\1\17",
-			"\1\22",
-			"\1\24\1\23",
 			"",
 			"",
-			"",
-			"\1\25\1\15",
-			"",
+			"\1\20",
+			"\1\21\1\22",
 			"\1\23",
-			"\1\21\12\uffff\1\20\30\uffff\1\20",
+			"\1\26\12\uffff\1\25\17\uffff\1\24\10\uffff\1\25\17\uffff\1\24",
+			"\1\27",
+			"\1\31\1\30",
+			"",
+			"",
+			"",
+			"\1\32\1\22",
+			"",
+			"\1\30",
+			"\1\26\12\uffff\1\25\30\uffff\1\25",
 			""
 	};
 
@@ -2106,7 +2217,7 @@ public class AlgebraRelacionalParser extends Parser {
 		}
 		@Override
 		public String getDescription() {
-			return "5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division )";
+			return "5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division | reunatural | reuizq | reuder | reuext )";
 		}
 	}
 
@@ -2126,163 +2237,179 @@ public class AlgebraRelacionalParser extends Parser {
 	public static final BitSet FOLLOW_orderby_in_con70 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_agregation_in_con74 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_division_in_con78 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin88 = new BitSet(new long[]{0x0000040000000000L,0x0000000000000008L});
-	public static final BitSet FOLLOW_set_in_bin90 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin96 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin100 = new BitSet(new long[]{0x0020000010000000L});
-	public static final BitSet FOLLOW_set_in_bin102 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin108 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin112 = new BitSet(new long[]{0x0008000004000000L});
-	public static final BitSet FOLLOW_set_in_bin114 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin120 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin124 = new BitSet(new long[]{0x0002000001000000L});
-	public static final BitSet FOLLOW_set_in_bin126 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin132 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin136 = new BitSet(new long[]{0x0000008000000000L,0x0000000000000001L});
-	public static final BitSet FOLLOW_set_in_bin138 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin144 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin148 = new BitSet(new long[]{0x8000004000000000L});
-	public static final BitSet FOLLOW_set_in_bin150 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin156 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin160 = new BitSet(new long[]{0x2000001000000000L});
-	public static final BitSet FOLLOW_set_in_bin162 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin168 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_bin172 = new BitSet(new long[]{0x4000002000000000L});
-	public static final BitSet FOLLOW_set_in_bin174 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_bin180 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_select188 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_select193 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds1_in_select194 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_select195 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_select196 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_select197 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_select198 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_proy205 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_proy210 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_proy211 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_proy212 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_proy213 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_proy214 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_proy215 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_renom1222 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom1228 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom1230 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_renom1231 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom1232 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom1233 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom1234 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom1235 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_renom2242 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom2248 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom2250 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom2251 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom2252 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_renom3259 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom3264 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_renom3265 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom3266 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom3267 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom3268 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom3269 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_8_in_join276 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_join277 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_join278 = new BitSet(new long[]{0x1000000800000000L});
-	public static final BitSet FOLLOW_set_in_join279 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_join284 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds2_in_join285 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_join286 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_join287 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_join288 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_join289 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_8_in_groupby296 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_groupby298 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_groupby299 = new BitSet(new long[]{0x0000100000080000L});
-	public static final BitSet FOLLOW_set_in_groupby301 = new BitSet(new long[]{0x00C1820060C00000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_fagregas_in_groupby307 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_groupby309 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_groupby310 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_groupby311 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_orderby318 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_orders_in_orderby326 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_orderby328 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_orderby329 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_orderby330 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_fagrega_in_agregation338 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_agregation342 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_agregation344 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_agregation345 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_agregation346 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_8_in_division355 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_division356 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division357 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_division358 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_division359 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division360 = new BitSet(new long[]{0x0010000008000000L});
-	public static final BitSet FOLLOW_set_in_division361 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_division366 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_division367 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division368 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_division369 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_division370 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division371 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_att_in_atts380 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_10_in_atts383 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_atts385 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_cond1_in_conds1394 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_set_in_conds1397 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_cond1_in_conds1415 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_cond2_in_conds2424 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_set_in_conds2427 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_cond2_in_conds2445 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_con1_in_cond1456 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_con11_in_cond1459 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_con2_in_cond2470 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_con3_in_cond2473 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_att_in_orders482 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_orders484 = new BitSet(new long[]{0x0004400002200000L});
-	public static final BitSet FOLLOW_order_in_orders485 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_orders486 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_10_in_orders489 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_orders491 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_orders493 = new BitSet(new long[]{0x0004400002200000L});
-	public static final BitSet FOLLOW_order_in_orders494 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_orders495 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_fagrega_in_fagregas529 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_fagregas531 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_fagregas532 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_fagregas533 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_10_in_fagregas536 = new BitSet(new long[]{0x00C1820060C00000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_fagrega_in_fagregas538 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_fagregas540 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_fagregas541 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_fagregas542 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_att_in_con1598 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con1600 = new BitSet(new long[]{0x0000080000000820L});
-	public static final BitSet FOLLOW_cons_in_con1624 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_att_in_con11631 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con11633 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con11657 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_con2664 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_12_in_con2665 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con2666 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con2668 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_con2692 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_12_in_con2693 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con2694 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_con3701 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_12_in_con3702 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con3703 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con3705 = new BitSet(new long[]{0x0000080000000820L});
-	public static final BitSet FOLLOW_cons_in_con3729 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_num_in_cons738 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_cad_in_cons742 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_11_in_num752 = new BitSet(new long[]{0x0000000000000020L});
-	public static final BitSet FOLLOW_NUM_in_num756 = new BitSet(new long[]{0x0000000000001022L});
-	public static final BitSet FOLLOW_12_in_num760 = new BitSet(new long[]{0x0000000000000020L});
-	public static final BitSet FOLLOW_NUM_in_num762 = new BitSet(new long[]{0x0000000000000022L});
-	public static final BitSet FOLLOW_43_in_cad773 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_CAD_in_cad774 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_43_in_cad775 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CAD_in_att782 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CAD_in_rel789 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_reunatural_in_con82 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_reuizq_in_con86 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_reuder_in_con90 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_reuext_in_con94 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_bin104 = new BitSet(new long[]{0x0000040000000000L,0x0000000000000008L});
+	public static final BitSet FOLLOW_set_in_bin106 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_bin112 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_bin116 = new BitSet(new long[]{0x0020000010000000L});
+	public static final BitSet FOLLOW_set_in_bin118 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_bin124 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_bin128 = new BitSet(new long[]{0x0008000004000000L});
+	public static final BitSet FOLLOW_set_in_bin130 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_bin136 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_bin140 = new BitSet(new long[]{0x0002000001000000L});
+	public static final BitSet FOLLOW_set_in_bin142 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_bin148 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_select156 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_select161 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_conds1_in_select162 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_select163 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_select164 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_select165 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_select166 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_proy173 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_proy178 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_atts_in_proy179 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_proy180 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_proy181 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_proy182 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_proy183 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_renom1190 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_renom1196 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_renom1198 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_atts_in_renom1199 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom1200 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_renom1201 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_renom1202 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom1203 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_renom2210 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_renom2216 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_renom2218 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_renom2219 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom2220 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_renom3227 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_renom3232 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_atts_in_renom3233 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom3234 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_renom3235 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_renom3236 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom3237 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_8_in_join244 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_join245 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_join246 = new BitSet(new long[]{0x1000000800000000L});
+	public static final BitSet FOLLOW_set_in_join247 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_join252 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_conds2_in_join253 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_join254 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_join255 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_join256 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_join257 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_8_in_groupby264 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_atts_in_groupby266 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_groupby267 = new BitSet(new long[]{0x0000100000080000L});
+	public static final BitSet FOLLOW_set_in_groupby269 = new BitSet(new long[]{0x00C1820060C00000L,0x0000000000000004L});
+	public static final BitSet FOLLOW_fagregas_in_groupby275 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_groupby277 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_groupby278 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_groupby279 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_orderby286 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_orders_in_orderby294 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_orderby296 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_orderby297 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_orderby298 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_fagrega_in_agregation306 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_agregation310 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_agregation312 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_agregation313 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_agregation314 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_8_in_division322 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_atts_in_division323 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_division324 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_division325 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_division326 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_division327 = new BitSet(new long[]{0x0010000008000000L});
+	public static final BitSet FOLLOW_set_in_division328 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_division333 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_division334 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_division335 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_division336 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_division337 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_division338 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reunatural344 = new BitSet(new long[]{0x0000008000000000L,0x0000000000000001L});
+	public static final BitSet FOLLOW_set_in_reunatural346 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_reunatural351 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_conds2_in_reunatural352 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reunatural353 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_reunatural355 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reuizq361 = new BitSet(new long[]{0x8000004000000000L});
+	public static final BitSet FOLLOW_set_in_reuizq363 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_reuizq368 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_conds2_in_reuizq369 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reuizq370 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_reuizq372 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reuder378 = new BitSet(new long[]{0x2000001000000000L});
+	public static final BitSet FOLLOW_set_in_reuder380 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_reuder385 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_conds2_in_reuder386 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reuder387 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_reuder389 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reuext395 = new BitSet(new long[]{0x4000002000000000L});
+	public static final BitSet FOLLOW_set_in_reuext397 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_reuext402 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_conds2_in_reuext403 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reuext404 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_reuext406 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_att_in_atts415 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_10_in_atts418 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_atts420 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_cond1_in_conds1429 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_set_in_conds1432 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_cond1_in_conds1450 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_cond2_in_conds2459 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_set_in_conds2462 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_cond2_in_conds2480 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_con1_in_cond1491 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_con11_in_cond1494 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_con2_in_cond2505 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_con3_in_cond2508 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_att_in_orders517 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_orders519 = new BitSet(new long[]{0x0004400002200000L});
+	public static final BitSet FOLLOW_order_in_orders520 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_orders521 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_10_in_orders524 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_orders526 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_orders528 = new BitSet(new long[]{0x0004400002200000L});
+	public static final BitSet FOLLOW_order_in_orders529 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_orders530 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_fagrega_in_fagregas564 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_fagregas566 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_fagregas567 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_fagregas568 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_10_in_fagregas571 = new BitSet(new long[]{0x00C1820060C00000L,0x0000000000000004L});
+	public static final BitSet FOLLOW_fagrega_in_fagregas573 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_8_in_fagregas575 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_fagregas576 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_fagregas577 = new BitSet(new long[]{0x0000000000000402L});
+	public static final BitSet FOLLOW_att_in_con1633 = new BitSet(new long[]{0x000000000007C080L});
+	public static final BitSet FOLLOW_set_in_con1635 = new BitSet(new long[]{0x0000080000000820L});
+	public static final BitSet FOLLOW_cons_in_con1659 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_att_in_con11666 = new BitSet(new long[]{0x000000000007C080L});
+	public static final BitSet FOLLOW_set_in_con11668 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_con11692 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_con2699 = new BitSet(new long[]{0x0000000000001000L});
+	public static final BitSet FOLLOW_12_in_con2700 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_con2701 = new BitSet(new long[]{0x000000000007C080L});
+	public static final BitSet FOLLOW_set_in_con2703 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_rel_in_con2727 = new BitSet(new long[]{0x0000000000001000L});
+	public static final BitSet FOLLOW_12_in_con2728 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_con2729 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_con3736 = new BitSet(new long[]{0x0000000000001000L});
+	public static final BitSet FOLLOW_12_in_con3737 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_att_in_con3738 = new BitSet(new long[]{0x000000000007C080L});
+	public static final BitSet FOLLOW_set_in_con3740 = new BitSet(new long[]{0x0000080000000820L});
+	public static final BitSet FOLLOW_cons_in_con3764 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_num_in_cons773 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_cad_in_cons777 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_11_in_num787 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_NUM_in_num791 = new BitSet(new long[]{0x0000000000001022L});
+	public static final BitSet FOLLOW_12_in_num795 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_NUM_in_num797 = new BitSet(new long[]{0x0000000000000022L});
+	public static final BitSet FOLLOW_43_in_cad808 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_CAD_in_cad809 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_43_in_cad810 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CAD_in_att817 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CAD_in_rel824 = new BitSet(new long[]{0x0000000000000002L});
 }

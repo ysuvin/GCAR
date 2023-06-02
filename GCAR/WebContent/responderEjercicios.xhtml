@@ -122,13 +122,16 @@
 						        <div>
 						            <strong>SELECCIONAR</strong><br/>
 						            Permite obtener datos de una relaci&#243;n, siempre y cuando se cumplan una condici&#243;n.<br/>
+						            Seleccionar permite condiciones como: &#61;, !&#61;, &#60;, &#62;, &#60;=, &#62;=, !=, AND y OR.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            SELECCIONAR (<strong>lista_de_condiciones</strong>) (<strong>relacion</strong>)<br/>
 						            Borrar "<strong>lista_de_condiciones</strong>" y "<strong>relacion</strong>", ingresar condiciones y la relaci&#243;n a la cual aplicar estas.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
+						            <br/>
 						            <strong>SELECCIONAR (oficio = 'conserje' AND tarifa_sem > 150) (trabajador)</strong>	 <br/>
-						            Seleccionar permite condiciones como: &#61;, !&#61;, &#60;, >&#62;, &#60;=, &#62;=, !=, AND y OR.						            						            
+						            					            						            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>			
@@ -141,11 +144,13 @@
 						            <strong>PROYECTAR</strong><br/>
 						            Devuelve los datos de atributos que se&#241;ales de una relaci&#243;n.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            PROYECTAR (<strong>lista_de_atributos</strong>) (<strong>relacion</strong>) <br/>
 						            Borrar "<strong>lista_de_atributos</strong>" y "<strong>relacion</strong>", ingresar los atributos a proyectar en la relaci&#243;n escogida.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-						            <strong>PROYECTAR (id_trabajador, oficio) (trabajador)</strong>			            						            
+						            <br/>
+						            <strong>PROYECTAR (id_trabajador, oficio) (trabajador)</strong>				            						            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>
@@ -158,17 +163,19 @@
 						            <strong>RENOMBRAR</strong><br/>
 						            Se utiliza para cambiar el nombre de una relaci&#243;n.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            Hay dos formas de utilizar Renombrar en este ejecutor:<br/>
 						            1. RENOMBRAR <strong>nuevo_nombre</strong>(<strong>lista_de_atributos</strong>) (<strong>relacion</strong>)<br/>
-						            Borrar "<strong>nuevo_nombre</strong>", "<strong>lista_de_atributos</strong>" y "<strong>relacion</strong>", ingresar un nuevo nombre para la relaci&#243;n (este se a&#241;dir&#225; como prefijo para cada atributo),<br/>
-						            ingresar todos los atributos relaci&#243;n y  la relaci&#243;n a renombrar.<br/>
+						            Borrar "<strong>nuevo_nombre</strong>", "<strong>lista_de_atributos</strong>" y "<strong>relacion</strong>", ingresar un nuevo nombre para la relaci&#243;n (este se a&#241;dir&#225; como prefijo para cada atributo)<br/>
+						            e ingresar todos los atributos relaci&#243;n y  la relaci&#243;n a renombrar.<br/>
 						            <br/>
 						            2. RENOMBRAR <strong>nuevo_nombre</strong> (<strong>relacion</strong>)  <br/>
 						            Borrar "<strong>nuevo_nombre</strong>" y "<strong>relacion</strong>", ingresar un nuevo nombre para la relaci&#243;n y la relaci&#243;n a renombrar. Esta forma no modifica los atributos.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
+						            <br/>
 						            <strong>RENOMBRAR aux(id_asignacion, id_trabajador1, id_edificio1, fecha_inicio) (asignacion)</strong><br/>
-						            <strong>RENOMBRAR aux(asignacion)</strong>	            						            
+						            <strong>RENOMBRAR aux(asignacion)</strong>            						            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>
@@ -181,10 +188,12 @@
 						            <strong>UNION</strong><br/>
 						            Recupera los datos de dos relaciones que contengan los mismos atributos y excluye las tuplas repetidas.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            <strong>relacion</strong> UNION <strong>relacion</strong><br/>
 						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>", ingresar las relaciones a unir.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde une los datos de los trabajadores 'electricistas' y 'guardia', por pasos:</strong><br/>
+						            <br/>
 						            1. t_electricista := SELECCIONAR (oficio = 'electricista') (trabajador)<br/>
 						            2. t_guardia := SELECCIONAR (oficio = 'guardia') (trabajador)<br/>
 									<strong>3. t_electricista UNION t_guardia</strong>
@@ -206,6 +215,7 @@
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde intersecta los datos de los trabajadores<br/> 
 						            'electricistas' y 'guardia' con todos los trabajadores, por pasos:</strong><br/>
+						            <br/>
 						            1. t_elec_guar := SELECCIONAR (oficio = 'electricista' OR oficio = 'guardia') (trabajador)<br/>
 									<strong>2. t_elec_guar INTER trabajador</strong>
 		            						            
@@ -221,14 +231,16 @@
 						            <strong>DIFERENCIA</strong><br/>
 						            Recupera las tuplas que est&#225;n en una relaci&#243;n 1 pero no est&#225;n en la relaci&#243;n 2.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            <strong>relacion</strong> DIFERENCIA <strong>relacion</strong><br/>
-						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>", ingresar las relaciones a diferenciar, donde la segunda resta a la primera.<br/>
+						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>".<br/>
+						            Ingresar las relaciones a diferenciar, donde la segunda resta a la primera.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv", resta de la lista de todos los trabajadores a los trabadores<br/> 
 						            'electricistas' y 'guardia', por pasos:</strong><br/>
+						            <br/>
 						            1. t_elec_guar := SELECCIONAR (oficio = 'electricista' OR oficio = 'guardia') (trabajador)<br/>
-									<strong>2. trabajador DIFERENCIA t_elec_guar</strong>
-		            						            
+									<strong>2. trabajador DIFERENCIA t_elec_guar</strong>		            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>								
@@ -241,10 +253,12 @@
 						            <strong>PRODUCTO CRUZ</strong><br/>
 						            Recupera la combinacion de tuplas de dos relaciones.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            <strong>relacion</strong> CRUZ <strong>relacion</strong><br/>
 						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>", ingresar las relaciones a combinar.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
+						            <br/>
 									<strong>edificio CRUZ trabajador</strong>
 		            						            
 						        </div>
@@ -259,10 +273,13 @@
 						            <strong>DIVISION</strong><br/>
 						            La operaci&#243;n de divisi&#243;n devuelve todas las tuplas del dividendo que coinciden con cada tupla de la relaci&#243;n divisor.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            (<strong>atributo1</strong>,<strong>atributo2</strong>) (<strong>relacion1</strong>) DIVISION (<strong>atributo2</strong>) (<strong>relacion2</strong>)<br/>
-						            Borrar "<strong>atributo1</strong>", "<strong>atributo2</strong>", "<strong>relacion1</strong>", "<strong>atributo2</strong>", "<strong>relacion2</strong>",  ingresar atributos y relaciones para dividir.<br/>
+						            Borrar "<strong>atributo1</strong>", "<strong>atributo2</strong>", "<strong>relacion1</strong>", "<strong>atributo2</strong>", "<strong>relacion2</strong>".<br/>
+						            Ingresar atributos y relaciones para dividir.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
+						            <br/>
 									<strong>(id_trabajador1, id_edificio1) (asignacion) DIVISION (id_edificio) (edificio)</strong>
 		            						            
 						        </div>
@@ -275,13 +292,16 @@
 						    <p:tooltip for="rnaturalButton" escape="false">
 						        <div>
 						            <strong>REUNION NATURAL</strong><br/>
-						            Operaci&#243;n de reuni&#243;n que conecta relaciones cuando las columnas comunes tienen iguales valores.<br/>
+						            Operaci&#243;n de reuni&#243;n que combina relaciones cuando las columnas comunes tienen iguales valores.<br/>
 						            <br/>
-						            <strong>relacion</strong> REUNION_NATURAL <strong>relacion</strong><br/>
-						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>", ingresar las relaciones a conectar.<br/>
+						            <strong>Estructura:</strong><br/>
+						            <strong>relacion</strong> REUNION_NATURAL (<strong>condicion_de_igualdad</strong>) <strong>relacion</strong><br/>
+						            Borrar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>"<br/>
+						            Ingresar las relaciones a combinar y su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									<strong>asignacion REUNION_NATURAL trabajador</strong>
+						            <br/>
+									<strong>asignacion REUNION_NATURAL (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador</strong>
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -293,13 +313,16 @@
 						    <p:tooltip for="rizqButton" escape="false">
 						        <div>
 						            <strong>REUNION EXTERNA IZQUIERDA</strong><br/>
-						            Conecta todas las tuplas de la primera relaci&#243;n (izquierda) con las tuplas coincidentes de la segunda relaci&#243;n (derecha).<br/>
+						            Combina todas las tuplas de la primera relaci&#243;n (izquierda) con las tuplas coincidentes de la segunda relaci&#243;n (derecha).<br/>
 						            <br/>
-						            <strong>relacion</strong> REUNION_EXT_IZQ <strong>relacion</strong><br/>
-						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>", ingresar las relaciones a conectar.<br/>
+						            <strong>Estructura:</strong><br/>
+						            <strong>relacion</strong> REUNION_EXT_IZQ (<strong>condicion_de_igualdad</strong>) <strong>relacion</strong><br/>
+						            Borrar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>".<br/>
+						            Ingresar las relaciones a combinar y su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									<strong>asignacion REUNION_EXT_IZQ edificio</strong>
+						            <br/>
+									<strong>asignacion REUNION_EXT_IZQ (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador</strong>
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -313,11 +336,15 @@
 						            <strong>REUNION EXTERNA DERECHA</strong><br/>
 						            Combina todas las tuplas de la segunda relaci&#243;n (derecha) con las tuplas coincidentes de la primera relaci&#243;n (izquierda).<br/>
 						            <br/>
-						            <strong>relacion</strong> REUNION_EXT_DER <strong>relacion</strong><br/>
-						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>", ingresar las relaciones a conectar.<br/>
+						            <strong>Estructura:</strong><br/>
+						            <strong>relacion</strong> REUNION_EXT_DER (<strong>condicion_de_igualdad</strong>) <strong>relacion</strong><br/>
+						            Borrar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>".<br/>
+						            Ingresar las relaciones a combinar y su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									<strong>asignacion REUNION_EXT_IZQ edificio</strong>
+						            <br/>
+									<strong>asignacion REUNION_EXT_DER (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador</strong>
+		            				
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -331,11 +358,15 @@
 						            <strong>REUNION EXTERNA COMPLETA</strong><br/>
 						            Combina todas las tuplas de ambas relaciones (izquierda y derecha).<br/>
 						            <br/>
-						            <strong>relacion</strong> REUNION_EXT_FULL <strong>relacion</strong><br/>
-						            Borrar "<strong>relacion</strong>" y "<strong>relacion</strong>", ingresar las relaciones a conectar.<br/>
+						            <strong>Estructura:</strong><br/>
+						            <strong>relacion</strong> REUNION_EXT_FULL (<strong>condicion_de_igualdad</strong>) <strong>relacion</strong><br/>
+						            Borrar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>".<br/>
+						            Ingresar las relaciones a combinar y su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									<strong>asignacion REUNION_EXT_FULL edificio</strong>
+						            <br/>
+									<strong>asignacion REUNION_EXT_FULL (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador</strong>
+		            				
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -349,12 +380,14 @@
 						            <strong>ASIGNAR</strong><br/>
 						            Crea una relaci&#243;n auxiliar de una consulta.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            <strong>relacion</strong> := <strong>consulta</strong><br/>
 						            Borrar "<strong>relacion</strong>" y "<strong>consulta</strong>", ingresar el nombre de su relaci&#243;n auxiliar y la consulta que almacenar&#225;.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
+						            <br/>
 									<strong>t_electricista := SELECCIONAR (oficio = 'electricista') (trabajador)<br/></strong>
-		            						            
+		            					            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>	
@@ -366,15 +399,16 @@
 						        <div>
 						            <strong>ORDERNAR POR</strong><br/>
 						            Permite ordenar una relaci&#243;n por ascendente o descendente seg&#250;n un atributo.<br/>
+						            Ordenar Por permite los siguiente tipos de ordenaci&#243;n: <strong>ASC</strong> o <strong>asc</strong> para Ascendente y <strong>DESC</strong> o <strong>desc</strong> para Descendente.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            ORDENAR <strong>atributo</strong>(<strong>asc/desc</strong>) (<strong>relacion</strong>) 
 						            Borrar "<strong>atributo</strong>", "<strong>asc/desc</strong>" y "<strong>relacion</strong>", ingresar el atributo y el tipo de<br/>
 						            ordenaci&#243;n para la relaci&#243;n a ordenar.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									<strong>ORDENAR tarifa_sem(desc) (trabajador) <br/></strong>
-									Ordenar Por permite los siguiente tipos de ordenaci&#243;n: <strong>ASC</strong> o <strong>asc</strong> para Ascendente y <strong>DESC</strong> o <strong>desc</strong> para Descendente.
-		            						            
+						            <br/>
+									<strong>ORDENAR tarifa_sem(desc) (trabajador) <br/></strong>		            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>		
@@ -386,16 +420,17 @@
 						        <div>
 						            <strong>AGRUPAR POR</strong><br/>
 						            Se utiliza para combinar tuplas similares en una relaci&#243;n y calcular agregaciones sobre esos grupos.<br/>
+						            Agrupar Por permite las siguientes agregaciones: <strong>COUNT</strong> o <strong>count</strong> para contar, <strong>MAX</strong> o <strong>max</strong> para m&#225;ximo, <strong>MIN</strong> o <strong>min</strong> para minimo,<br/>
+									<strong>SUM</strong> o <strong>sum</strong> para suma y <strong>AVG</strong> o <strong>avg</strong> para promedio.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            (<strong>Lista_de_atributos</strong>) AGRUPAR <strong>agregacion</strong>(<strong>atributo</strong>) (<strong>relacion</strong>) 
 						            Borrar "<strong>Lista_de_atributos</strong>", "<strong>agregacion</strong>", "<strong>atributo</strong>" y "<strong>relacion</strong>", ingresar atributos a agrupar<br/>
 						            el tipo de agregaci&#243;n a aplicar a un atributo, todos estos de una misma relaci&#243;n.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									<strong>(oficio) AGRUPAR sum(tarifa_sem) (trabajador)  <br/></strong>
-									Agrupar Por permite las siguientes agregaciones: <strong>COUNT</strong> o <strong>count</strong> para contar, <strong>MAX</strong> o <strong>max</strong> para m&#225;ximo, <strong>MIN</strong> o <strong>min</strong> para minimo,<br/>
-									<strong>SUM</strong> o <strong>sum</strong> para suma y <strong>AVG</strong> o <strong>avg</strong> para promedio.
-		            						            
+						            <br/>
+									<strong>(oficio) AGRUPAR sum(tarifa_sem) (trabajador)  <br/></strong>	            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>		
@@ -407,15 +442,16 @@
 						        <div>
 						            <strong>FUNCION DE AGREGACION</strong><br/>
 						            Estas funciones operan en columnas num&#233;ricas y devuelven un &#250;nico valor que representa el resultado de la operaci&#243;n.<br/>
+						            Funciones de Agregaci&#243;n permite las siguientes agregaciones: <strong>COUNT</strong> o <strong>count</strong> para contar, <strong>MAX</strong> o <strong>max</strong> para m&#225;ximo, <strong>MIN</strong> o <strong>min</strong> para minimo,<br/>
+									<strong>SUM</strong> o <strong>sum</strong> para suma y <strong>AVG</strong> o <strong>avg</strong> para promedio.<br/>
 						            <br/>
+						            <strong>Estructura:</strong><br/>
 						            <strong>funcion_agregacion</strong> <strong>atributo</strong> (<strong>relacion</strong>) <br/>
 						            Borrar "<strong>funcion_agregacion</strong>", "<strong>atributo</strong>" y "<strong>relacion</strong>", ingresar agregaci&#243;n a aplicar sobre un atributo de una relaci&#243;n.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									<strong>count tarifa_sem (trabajador)<br/></strong>
-									Funciones de Agregaci&#243;n permite las siguientes agregaciones: <strong>COUNT</strong> o <strong>count</strong> para contar, <strong>MAX</strong> o <strong>max</strong> para m&#225;ximo, <strong>MIN</strong> o <strong>min</strong> para minimo,<br/>
-									<strong>SUM</strong> o <strong>sum</strong> para suma y <strong>AVG</strong> o <strong>avg</strong> para promedio.
-		            						            
+						            <br/>
+									<strong>count tarifa_sem (trabajador)</strong>		            
 						        </div>
 						    </p:tooltip>
 						</p:commandButton>

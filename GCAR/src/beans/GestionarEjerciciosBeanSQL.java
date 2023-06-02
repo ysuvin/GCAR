@@ -2,145 +2,44 @@ package beans;
 	 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-
-
-import javax.faces.view.facelets.FaceletContext;
-
-
-
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.el.ELContext;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.EditableValueHolder;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
-import org.primefaces.component.inputtext.InputText;
-
-//import org.antlr.runtime.ANTLRStringStream;
-//import org.antlr.runtime.CommonTokenStream;
-//import org.antlr.runtime.RecognitionException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import dao.ConsultaDAOSQL;
-import dao.EjercicioDAO;
-import dao.EsquemaDAO;
-import dao.RelacionDAO;
-import dao.ResultadoDAO;
-//import parser.AlgebraRelacionalLexer;
-//import parser.AlgebraRelacionalParser;
 import util.AtributoBean;
-import util.Consulta;
 import util.Ejercicio;
 import util.EsquemaBean;
 import util.RelacionBean;
-import util.Respuesta;
-import util.Resultado;
 import util.TuplaBean;
 import util.UserBean;
+import util.EstadisticasEjecutorSQL;
  
 @ManagedBean(name="dtGestionarEjerciciosBeanSQL")
 @ViewScoped
 public class GestionarEjerciciosBeanSQL implements Serializable {
      
-	//Ejemplo
 	private String tableName;
 	private List<Object[]> data;
 	private List<String> columnNames;
 	private String query = "";
 	private String queryList = "";
 	
-	private List<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
 	private Ejercicio selectedEjercicio;
-	private int cantEjercicios;
-	
-	private List<Respuesta> respuestas = new ArrayList<Respuesta>();	
-	private Respuesta respuesta;
-	private List<Consulta> consultas;
-	private Consulta consulta;
+
 	
     @PreDestroy
     public void destroy(){
 //    	Util.reloadBd();
     }
 	
-	@PostConstruct
-    public void init() {
-		
-		ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-    	EsquemaBean esquemaBean = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
-			    .getELResolver().getValue(elContext, null, "bd");
-    	
-    	if(esquemaBean != null){
-			ejercicios = EjercicioDAO.cargarEjercicios(esquemaBean);
-			if(ejercicios == null){
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar los ejercicios","");
-	       		FacesContext.getCurrentInstance().addMessage(null, msg);
-			}else{
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Ejercicios Cargados","");
-	       		FacesContext.getCurrentInstance().addMessage(null, msg);
-			}
-			cantEjercicios = ejercicios.size();
-    	}
-  		
-    }
-	
-	public Ejercicio getSelectedEjercicio() {
-		return selectedEjercicio;
-	}
-
-	public void setSelectedEjercicio(Ejercicio selectedEjercicio) {
-		this.selectedEjercicio = selectedEjercicio;
-	}
-
-	public int getCantEjercicios() {
-		return cantEjercicios;
-	}
-
-	public void setCantEjercicios(int cantEjercicios) {
-		this.cantEjercicios = cantEjercicios;
-	}
-
-	public List<Ejercicio> getEjercicios() {
-		if(ejercicios.size() == 0){
-			for(int i = 0 ; i < cantEjercicios ; i++){
-				System.out.println("Hola");
-				Ejercicio ejercicio = new Ejercicio();
-				ejercicios.add(ejercicio);
-			}
-		}else if(ejercicios.size() < cantEjercicios){
-			for(int i = ejercicios.size() ; i < cantEjercicios ; i++){
-				Ejercicio ejercicio = new Ejercicio();
-				ejercicio.setId(i);
-				ejercicios.add(ejercicio);
-			}
-		}else if(ejercicios.size() > cantEjercicios){
-			for(int i = ejercicios.size(); i > cantEjercicios ; i--){
-				ejercicios.remove(i-1);
-			}
-			
-		}
-		for(int i = 0 ; i < ejercicios.size() ; i++){
-			Ejercicio ejercicio = ejercicios.get(i);
-			ejercicio.setId(i);
-			ejercicios.set(i,ejercicio);
-		}
-		return ejercicios;
-	}
-
-	public void setEjercicios(List<Ejercicio> ejercicios) {
-		this.ejercicios = ejercicios;
-	}
 
 	public String getQueryList() {
 		return queryList;
@@ -182,8 +81,7 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 		this.query = query;
 	}
 	
-
-	private boolean nombreValido(String query){
+	private boolean clausulaBloqueada(String query){
 		if(		/*Revisa si la relacion contiene palabras bloqueadas*/
 				
 				//DDL
@@ -214,56 +112,169 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 			return true;
 		}
 	}
+ 
+	private String obtenerClausulaBloqueada(String query) {
+	    String clausulaSQL = null;
+
+	    if (query.contains("CREATE") || query.contains("create") || query.contains("ALTER") || query.contains("alter") || query.contains("DROP") || query.contains("drop") ||
+	            query.contains("TRUNCATE") || query.contains("truncate") || query.contains("GRANT") || query.contains("grant") || query.contains("REVOKE") || query.contains("revoke") ||
+	            query.contains("INSERT") || query.contains("insert") || query.contains("UPDATE") || query.contains("update") || query.contains("DELETE") || query.contains("delete")) {
+	    	
+	        if (query.contains("CREATE") || query.contains("create")) {
+	            clausulaSQL = "CREATE";
+	        } else if (query.contains("ALTER") || query.contains("truncate")) {
+	            clausulaSQL = "ALTER";
+	        } else if (query.contains("DROP") || query.contains("drop")) {
+	            clausulaSQL = "DROP";
+	        } else if (query.contains("TRUNCATE") || query.contains("inner join")) {
+	            clausulaSQL = "TRUNCATE";
+	        } else if (query.contains("GRANT") || query.contains("grant")) {
+	            clausulaSQL = "GRANT";
+	        } else if (query.contains("REVOKE") || query.contains("revoke") ) {
+	            clausulaSQL = "REVOKE";
+	        } else if (query.contains("INSERT") || query.contains("insert") ) {
+	            clausulaSQL = "INSERT";
+	        } else if (query.contains("UPDATE") || query.contains("update") ) {
+	            clausulaSQL = "UPDATE";
+	        } else if (query.contains("DELETE") || query.contains("delete")) {
+	            clausulaSQL = "DELETE";
+	        }
+	    }
+
+	    return clausulaSQL;
+	}
+
+	private String obtenerClausula(String query) {
+	    String clausulaSQL = "SELECT";
+
+	    if (query.contains("WHERE") || query.contains("where") || query.contains("ORDER BY") || query.contains("order by") || query.contains("JOIN") || query.contains("join") ||
+	            query.contains("INNER JOIN") || query.contains("inner join") || query.contains("LEFT JOIN") || query.contains("left join") || query.contains("RIGHT JOIN") || query.contains("right join") ||
+	            query.contains("FULL JOIN") || query.contains("full join") || query.contains("GROUP BY") || query.contains("group by") || query.contains("HAVING") || query.contains("having")) {
+	    	
+	        if (query.contains("WHERE") || query.contains("where")) {
+	            clausulaSQL = "WHERE";
+	        } else if (query.contains("ORDER BY") || query.contains("order by")) {
+	            clausulaSQL = "ORDER BY";
+	        } else if (query.contains("JOIN") || query.contains("join")) {
+	            clausulaSQL = "JOIN";
+	        } else if (query.contains("INNER JOIN") || query.contains("inner join")) {
+	            clausulaSQL = "INNER JOIN";
+	        } else if (query.contains("LEFT JOIN") || query.contains("left join")) {
+	            clausulaSQL = "LEFT JOIN";
+	        } else if (query.contains("RIGHT JOIN") || query.contains("right join") ) {
+	            clausulaSQL = "RIGHT JOIN";
+	        } else if (query.contains("FULL JOIN") || query.contains("full join") ) {
+	            clausulaSQL = "FULL JOIN";
+	        } else if (query.contains("GROUP BY") || query.contains("group by") ) {
+	            clausulaSQL = "GROUP BY";
+	        } else if (query.contains("HAVING") || query.contains("having")) {
+	            clausulaSQL = "HAVING";
+	        }
+	    }
+
+	    return clausulaSQL;
+	}
+
+
+	private String clasificarError(String errorMessage) {
+        if (errorMessage == null) {
+            return null;
+        }
+        if (errorMessage.contains("no tables specified is not valid")) {
+            return "Tabla no especificada";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("does not exist")) {
+            return "Columna inexistente";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("specified more than once")) {
+            return "Columna duplicada";
+        }
+        if (errorMessage.contains("relation") && errorMessage.contains("does not exist")) {
+            return "Relacion inexistente";
+        }
+        if (errorMessage.contains("syntax error at or near")) {
+            return "Error de sintaxis";
+        }
+        if (errorMessage.contains("function") && errorMessage.contains("does not exist")) {
+            return "Funcion desconocida";
+        }
+        if (errorMessage.contains("argument of WHERE must be type boolean, not type")) {
+            return "Argumento Where incorrecto";
+        }
+        if (errorMessage.contains("column reference") && errorMessage.contains("is ambiguous")) {
+            return "Referencia columna ambigua";
+        }
+        return "otro";
+}
+
 
 	
 	
-	
-	// Filtra consulta y luego las ejecuta
 	public void ejecutar(){
 		
 		if(selectedEjercicio != null){
-			query = selectedEjercicio.getQuery(); //recoje la query escrita por el usuario
+			query = selectedEjercicio.getQuery(); 
 		}
 
 		System.out.println("query: " + query);
 		
-		// Revisa si tiene errores de sintaxis
-		if(nombreValido(query) == false){
-			
+
+		if(clausulaBloqueada(query) == false){
+			ELContext elContext = FacesContext.getCurrentInstance().getELContext(); 
+			UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication() 
+				    .getELResolver().getValue(elContext, null, "usuario");
+			EsquemaBean esquemaActual = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
+				    .getELResolver().getValue(elContext, null, "bd");
 			tableName = "";
 			columnNames = null;
 			data = null;
+			
+			EstadisticasEjecutorSQL estadisticas = new EstadisticasEjecutorSQL();
+			estadisticas.setRut(userBean.getRut());
+			estadisticas.setBd(esquemaActual.getNombre());
+			estadisticas.setQuery(query);
+			estadisticas.setClausula(obtenerClausulaBloqueada(query));
+			estadisticas.setQuery_correcta(false);
+	        estadisticas.setQuery_incorrecta(true);
+	        estadisticas.setClasificacion_error("Clausula bloqueada");
+	        estadisticas.setDescripcion_error("Clausula no permitida en ejecutor SQL GCAR");
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			String fechaEjecucion = ConsultaDAOSQL.fechaHora(timestamp);
+			estadisticas.setFecha(fechaEjecucion);	
+			ConsultaDAOSQL.insertarEstadisticas(estadisticas);
+			
+			
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Clausula no permitida en la consulta de SQL","");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			
+
+			
 			
 		}
-		
-		// Error de sintaxis de consultas
+
 		else{
 
-			ELContext elContext = FacesContext.getCurrentInstance().getELContext(); // obtiene el contexto de evaluaci�n de expresiones de lenguaje actual en una aplicaci�n web JSF.
+			ELContext elContext = FacesContext.getCurrentInstance().getELContext(); 
 			UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication() 
-				    .getELResolver().getValue(elContext, null, "usuario");//OBTIENE una instancia del objeto UserBean en la aplicaci�n web JSF, resolviendo su nombre en el contexto de evaluaci�n de expresiones de lenguaje actual.
-//			EsquemaBean esquema = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
-//				    .getELResolver().getValue(elContext, null, "bd");
-			RelacionBean resultado = new RelacionBean(); //VARIABLE PARA CONSTRUIR LA RELACION RESULTANTE
-			boolean band = false;
-		
+				    .getELResolver().getValue(elContext, null, "usuario");
+			EsquemaBean esquemaActual = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
+				    .getELResolver().getValue(elContext, null, "bd");
 			
+			RelacionBean resultado = new RelacionBean(); 
 			
-			
-			resultado = ConsultaDAOSQL.ejecutarQuery(query,userBean.getRut()); // EJECUTA  EL CONTENIDO DE LA QUERY EN EL DAO QUE ES QUE REALIZA LA CONSULTA
+			resultado = ConsultaDAOSQL.ejecutarQuery(query,userBean.getRut()); 
 			tableName = resultado.getNombre();
-			band = true;
-
-			
-			
 			
 			columnNames = new ArrayList<String>();
 			data = new ArrayList<Object[]>();
-
-		// Revisa el resultado de la consulta normal
+			
+			/////INSERT ejecutor_sql
+			EstadisticasEjecutorSQL estadisticas = new EstadisticasEjecutorSQL();
+			estadisticas.setRut(userBean.getRut());
+			estadisticas.setBd(esquemaActual.getNombre());
+			estadisticas.setQuery(query);
+			estadisticas.setClausula(obtenerClausula(query));
+			
 				
 			if(resultado.getTuplasBean()!= null){
 					
@@ -283,18 +294,28 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 				
 					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 		       		FacesContext.getCurrentInstance().addMessage(null, msg);
+		       		estadisticas.setQuery_correcta(true);
+		            estadisticas.setQuery_incorrecta(false);
+		            estadisticas.setClasificacion_error(null);
+		            estadisticas.setDescripcion_error(null);
+		            
 			}else{
 					tableName = "";
 					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta: " + resultado.getNombre(),"");
 		       		FacesContext.getCurrentInstance().addMessage(null, msg);
 					System.out.println("Error: " + resultado.getNombre());
+					estadisticas.setQuery_correcta(false);
+		            estadisticas.setQuery_incorrecta(true);
+		            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
+		            estadisticas.setDescripcion_error(resultado.getNombre());
 				}
-				
-				
+			
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			String fechaEjecucion = ConsultaDAOSQL.fechaHora(timestamp);
+			estadisticas.setFecha(fechaEjecucion);	
+			ConsultaDAOSQL.insertarEstadisticas(estadisticas);	
 			}
 		}
-
-
 }
 
 

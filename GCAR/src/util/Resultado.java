@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 public class Resultado implements Serializable {
 	
+	private String rut;
 	private String bd;
 	private Timestamp fechaBd;
 	private int cantEjercicios;
@@ -68,6 +69,18 @@ public class Resultado implements Serializable {
 
 	public void setCantOmitidas(int cantOmitidas) {
 		this.cantOmitidas = cantOmitidas;
+	}
+
+
+
+	public String getRut() {
+		return rut;
+	}
+
+
+
+	public void setRut(String rut) {
+		this.rut = rut;
 	}
 	
 	

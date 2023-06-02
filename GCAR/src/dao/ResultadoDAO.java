@@ -60,18 +60,19 @@ public class ResultadoDAO {
 	
 	public static boolean guardarResultado(Resultado resultado){
 		try{
-			String query = 	"insert into resultados (bd,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas,fecha) values " +
-							"(?,?,?,?,?,?,(select current_timestamp))";
+			String query = 	"insert into resultados (bd,rut,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas,fecha) values " +
+							"(?, ?, ?,?,?,?,?,(select current_timestamp))";
 			System.out.println("Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
 			ps.setString(1,resultado.getBd());
-			ps.setTimestamp(2,resultado.getFechaBd());
-			ps.setInt(3,resultado.getCantEjercicios());
-			ps.setInt(4,resultado.getCantCorrectas());
-			ps.setInt(5,resultado.getCantErroneas());
-			ps.setInt(6,resultado.getCantOmitidas());
+			ps.setString(2,resultado.getRut());
+			ps.setTimestamp(3,resultado.getFechaBd());
+			ps.setInt(4,resultado.getCantEjercicios());
+			ps.setInt(5,resultado.getCantCorrectas());
+			ps.setInt(6,resultado.getCantErroneas());
+			ps.setInt(7,resultado.getCantOmitidas());
 			ps.execute();
 			
 			return true;
@@ -141,7 +142,7 @@ public class ResultadoDAO {
 	
 	public static List<Resultado> cargarResultado(String bd, String fecha){
 		try{
-			String query = 	"select * from resultados where bd = ? and fecha_bd = '" + fecha + "'";
+			String query = 	"select id,bd,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas from resultados where bd = ? and fecha_bd = '" + fecha + "'";
 			System.out.println("Query: " + query);
 			
 			con = Database.getConnection();
@@ -291,6 +292,35 @@ public class ResultadoDAO {
 		}finally{
 			Database.close(con);
 		}
+	}
+	
+	public static List<String> obtenerRut(String bd){
+		try{
+			String query = "select distinct rut from resultados where bd=?";
+			System.out.println("Query: " + query);
+			
+			con = Database.getConnection();
+			ps = con.prepareStatement(query);
+			ps.setString(1,bd);
+			ResultSet rs = ps.executeQuery();
+			
+			List<String> fechas = new ArrayList<String>();
+			
+			while(rs.next()){
+				String fecha = rs.getString(1);
+				fechas.add(fecha);
+			}
+			
+			System.out.println("Cargado todos las fechas");
+
+			return fechas;
+		}catch (Exception ex){
+			System.out.println("Error en obtenerFechas() -->" + ex.getMessage());
+			return null;
+		}finally{
+			Database.close(con);
+		}
 	}	
+
 
 }

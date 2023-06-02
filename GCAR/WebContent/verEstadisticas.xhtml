@@ -34,6 +34,12 @@
 				<p:dialog id="help" widgetVar="dlg" header="Ayuda" resizable="false" showEffect="fade" hideEffect="fade">
 					<p:fieldset legend="Ver Estadísticas" style="font-weight: bold;" >
 						<h2/>
+						<h:outputText value="Estadísticas: " style="color:#e69700"/> <p/>
+						a. En la sección <h:outputText value="Estadísticas" style="color:#e69700"/> se pueden observar estadísticos descriptivos de una Base de Datos <p/>
+						b. Seleccione la Base de Datos y la Fecha de la versión de la Base de Datos <p/>
+						c. Seleccione el botón <p:commandButton value="Ver Estadísticas" icon="ui-icon-zoomin" readonly="true" /> para ver las Estadísticas de la Base de Datos seleccionada <p/>
+						
+						
 						<h:outputText value="Descargas: " style="color:#e69700"/> <p/>
 						a. En la sección <h:outputText value="Descargar" style="color:#e69700"/> se pueden descargar los datos del trabajo de los alumnos mientras realizan los Ejercicios <p/>
 						b. Seleccione el botón <p:commandButton value="Generar Descarga" icon="ui-icon-check" readonly="true" /> para generar la descarga de archivos en formato <h:outputText value="ARFF" style="color:#e69700"/> <p/>
@@ -41,11 +47,7 @@
 						d. Seleccione el botón <p:commandButton value="Descargar Resultados" icon="ui-icon-document" readonly="true" /> para descargar sólo los Resultados de los alumnos <p/>
 						e. Seleccione el botón <p:commandButton value="Descargar Respuestas" icon="ui-icon-document" readonly="true" /> para descargar sólo las Respuestas de los alumnos <p/>
 						f. Seleccione el botón <p:commandButton value="Descargar Consultas" icon="ui-icon-document" readonly="true" /> para descargar sólo las Consultas de los alumnos <p/>
-						
-						<h:outputText value="Estadísticas: " style="color:#e69700"/> <p/>
-						a. En la sección <h:outputText value="Estadísticas" style="color:#e69700"/> se pueden observar estadísticos descriptivos de una Base de Datos <p/>
-						b. Seleccione la Base de Datos y la Fecha de la versión de la Base de Datos <p/>
-						c. Seleccione el botón <p:commandButton value="Ver Estadísticas" icon="ui-icon-zoomin" readonly="true" /> para ver las Estadísticas de la Base de Datos seleccionada <p/>
+												
 						<h2/>
 					</p:fieldset>
 			    </p:dialog>  
@@ -60,66 +62,33 @@
 					</h:panelGrid>
 				</f:facet>
 				
-				<p:panel header="Descargar"  >
-						
-					<h:panelGrid style="margin: 0 auto !important">
-						<p:commandButton icon="ui-icon-check" value="Generar Descarga" update=":form:botonesDescargas :form:growl" 
-							actionListener="#{estadisticasView.generarDescarga}" />
-					</h:panelGrid>
-										
-					<h:panelGrid id="botonesDescargas" columns="4" cellpadding="5" style="margin: 0 auto !important" >
-						
-						<p:commandButton icon="ui-icon-document" value="Descargar Todo" ajax="false"
-							actionListener="#{estadisticasView.descargarTodo}" disabled="#{!estadisticasView.descargar}">	
-							<p:fileDownload value="#{estadisticasView.file}"/>
-						</p:commandButton>						
-						
-						<p:commandButton icon="ui-icon-document" value="Descargar Resultados" ajax="false"
-							actionListener="#{estadisticasView.descargarResultados}" disabled="#{!estadisticasView.descargar}">	
-							<p:fileDownload value="#{estadisticasView.file}"/>
-						</p:commandButton>
-						
-						<p:commandButton icon="ui-icon-document" value="Descargar Respuestas" ajax="false"
-							actionListener="#{estadisticasView.descargarRespuestas}" disabled="#{!estadisticasView.descargar}">	
-							<p:fileDownload value="#{estadisticasView.file}"/>
-						</p:commandButton>
-						
-						<p:commandButton icon="ui-icon-document" value="Descargar Consultas" ajax="false"
-							actionListener="#{estadisticasView.descargarConsultas}" disabled="#{!estadisticasView.descargar}">	
-							<p:fileDownload value="#{estadisticasView.file}"/>
-						</p:commandButton>
-						
-					</h:panelGrid>
-					
-				</p:panel>
-			
-				<p:spacer/>
+				
 				
 				<p:panel header="Estadísticas">
 				
-				<p:panel styleClass="divs">
-					<h:panelGrid columns="2" cellpadding="10" style="width:100%">
-						<h:panelGrid columns="2" cellpadding="5" style="width:100%">
-							<h:outputText value="Seleccione una Base de Datos" />
-							<p:selectOneListbox value="#{estadisticasView.selectedBd}">
-								<p:ajax update=":form:fechas" listener="#{estadisticasView.onBdChangue}"/>
-								<f:selectItems value="#{estadisticasView.bds}"/>
-							</p:selectOneListbox>
+					<p:panel styleClass="divs">
+						<h:panelGrid columns="2" cellpadding="10" style="width:100%">
+							<h:panelGrid columns="2" cellpadding="5" style="width:100%">
+								<h:outputText value="Seleccione una Base de Datos" />
+								<p:selectOneListbox value="#{estadisticasView.selectedBd}">
+									<p:ajax update=":form:fechas" listener="#{estadisticasView.onBdChangue}"/>
+									<f:selectItems value="#{estadisticasView.bds}"/>
+								</p:selectOneListbox>
+							</h:panelGrid>
+							<h:panelGrid  id="fechas" columns="2" cellpadding="5" style="width:100%">
+								<h:outputText value="Seleccione una Fecha" />
+								<p:selectOneListbox value="#{estadisticasView.selectedFecha}" style="width:100%">
+									<p:ajax update=":form:verEstadisticas"/>
+									<f:selectItems value="#{estadisticasView.fechas}"/>
+								</p:selectOneListbox>
+							</h:panelGrid>
 						</h:panelGrid>
-						<h:panelGrid  id="fechas" columns="2" cellpadding="5" style="width:100%">
-							<h:outputText value="Seleccione una Fecha" />
-							<p:selectOneListbox value="#{estadisticasView.selectedFecha}" style="width:100%">
-								<p:ajax update=":form:verEstadisticas"/>
-								<f:selectItems value="#{estadisticasView.fechas}"/>
-							</p:selectOneListbox>
+						<h:panelGrid id="verEstadisticas" style="margin: 0 auto !important">
+							<p:commandButton value="Ver Estadísticas" disabled="#{estadisticasView.selectedFecha == null}"
+								icon="ui-icon-zoomin" action="#{estadisticasView.verEstadisticas}" update=":form:estadisticas" />
+	<!-- 							oncomplete="PF('estadisticasDialog').show()"/> -->
 						</h:panelGrid>
-					</h:panelGrid>
-					<h:panelGrid id="verEstadisticas" style="margin: 0 auto !important">
-						<p:commandButton value="Ver Estadísticas" disabled="#{estadisticasView.selectedFecha == null}"
-							icon="ui-icon-zoomin" action="#{estadisticasView.verEstadisticas}" update=":form:estadisticas" />
-<!-- 							oncomplete="PF('estadisticasDialog').show()"/> -->
-					</h:panelGrid>
-				</p:panel>
+					</p:panel>
 				
 				<p:spacer/>				
 				
@@ -158,9 +127,48 @@
 							
 						</h:panelGrid>												
 					
+						</p:panel>
 					</p:panel>
-					</p:panel>
+					
+					
+					<p:spacer/>
+					
+					
+					<p:panel header="Descargar"  >
+						
+					<h:panelGrid style="margin: 0 auto !important">
+						<p:commandButton icon="ui-icon-check" value="Generar Descarga" update=":form:botonesDescargas :form:growl" 
+							actionListener="#{estadisticasView.generarDescarga}" />
+					</h:panelGrid>
+										
+					<h:panelGrid id="botonesDescargas" columns="4" cellpadding="5" style="margin: 0 auto !important" >
+						
+						<p:commandButton icon="ui-icon-document" value="Descargar Todo" ajax="false"
+							actionListener="#{estadisticasView.descargarTodo}" disabled="#{!estadisticasView.descargar}">	
+							<p:fileDownload value="#{estadisticasView.file}"/>
+						</p:commandButton>						
+						
+						<p:commandButton icon="ui-icon-document" value="Descargar Resultados" ajax="false"
+							actionListener="#{estadisticasView.descargarResultados}" disabled="#{!estadisticasView.descargar}">	
+							<p:fileDownload value="#{estadisticasView.file}"/>
+						</p:commandButton>
+						
+						<p:commandButton icon="ui-icon-document" value="Descargar Respuestas" ajax="false"
+							actionListener="#{estadisticasView.descargarRespuestas}" disabled="#{!estadisticasView.descargar}">	
+							<p:fileDownload value="#{estadisticasView.file}"/>
+						</p:commandButton>
+						
+						<p:commandButton icon="ui-icon-document" value="Descargar Consultas" ajax="false"
+							actionListener="#{estadisticasView.descargarConsultas}" disabled="#{!estadisticasView.descargar}">	
+							<p:fileDownload value="#{estadisticasView.file}"/>
+						</p:commandButton>
+						
+					</h:panelGrid>
+					
+				</p:panel>
+	
 				</p:fieldset>
+				
 			</h:form>
 			
 		</ui:define>

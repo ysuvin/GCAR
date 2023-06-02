@@ -1,6 +1,7 @@
 package beans;
 	 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -22,10 +23,12 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
 import dao.ConsultaDAO;
+import dao.ConsultaDAOSQL;
 import dao.EjercicioDAO;
 import dao.EsquemaDAO;
 import dao.RelacionDAO;
 import dao.ResultadoDAO;
+
 import parser.AlgebraRelacionalLexer;
 import parser.AlgebraRelacionalParser;
 import util.AtributoBean;
@@ -37,6 +40,7 @@ import util.Respuesta;
 import util.Resultado;
 import util.TuplaBean;
 import util.UserBean;
+import util.EstadisticasEjecutorAR;
  
 @ManagedBean(name="dtGestionarEjerciciosBean")
 @ViewScoped
@@ -693,9 +697,96 @@ public class GestionarEjerciciosBean implements Serializable {
 		}
 	}
 
+	private String obtenerOperador(String query) {
+	    String OperadorAR = null;
+
+	    if (query.contains(":=") || query.contains("SELECCIONAR") || query.contains("seleccionar") || query.contains("PROYECTAR") || query.contains("proyectar") 
+	    		|| query.contains("RENOMBRAR") || query.contains("renombrar") || query.contains("UNION") || query.contains("union")
+	    		|| query.contains("INTER") || query.contains("inter") || query.contains("DIFERENCIA") || query.contains("diferencia") 
+	    		|| query.contains("CRUZ") || query.contains("cruz") || query.contains("DIVISION") || query.contains("division") 
+	    		|| query.contains("REUNION_NATURAL") || query.contains("reunion_natural") || query.contains("REUNION_EXT_IZQ") || query.contains("reunion_ext_izq")
+	    		|| query.contains("REUNION_EXT_DER") || query.contains("reunion_ext_der") || query.contains("REUNION_EXT_FULL") || query.contains("reunion_ext_full")
+	    		|| query.contains("ORDENAR") || query.contains("ordenar") || query.contains("AGRUPAR") || query.contains("agrupar")
+	    		|| query.contains("MAX") || query.contains("max") || query.contains("MIN") || query.contains("min")
+        		|| query.contains("SUM") || query.contains("sum") || query.contains("COUNT") || query.contains("count") 
+	    		) {	    		    	
+	    	
+	        if (query.contains(":=")) {
+	        	OperadorAR = "ASIGNAR";
+	        } else if (query.contains("PROYECTAR") || query.contains("proyectar")) {
+	        	OperadorAR = "PROYECTAR";
+	        } else if (query.contains("RENOMBRAR") || query.contains("renombrar")) {
+	        	OperadorAR = "RENOMBRAR";
+	        } else if (query.contains("INTER") || query.contains("inter")) {
+	        	OperadorAR = "INTERSECCION";
+	        } else if (query.contains("DIFERENCIA") || query.contains("diferencia") ) {
+	        	OperadorAR = "DIFERENCIA";
+	        } else if (query.contains("CRUZ") || query.contains("cruz") ) {
+	        	OperadorAR = "PRODUCTO CRUZ";
+	        } else if (query.contains("DIVISION") || query.contains("division") ) {
+	        	OperadorAR = "DIVISION";
+	        } else if (query.contains("REUNION_NATURAL") || query.contains("reunion_natural")) {
+	        	OperadorAR = "REUNION NATURAL";
+	        } else if (query.contains("REUNION_EXT_IZQ") || query.contains("reunion_ext_izq")) {
+	        	OperadorAR = "REUNION_EXT_IZQ";
+	        } else if (query.contains("REUNION_EXT_DER") || query.contains("reunion_ext_der")) {
+	        	OperadorAR = "REUNION_EXT_DER";
+	        } else if (query.contains("REUNION_EXT_FULL") || query.contains("reunion_ext_full")) {
+	        	OperadorAR = "REUNION_EXT_FULL";
+	        } else if (query.contains("UNION") || query.contains("union")) {
+	        	OperadorAR = "UNION";
+	        } else if (query.contains("SELECCIONAR") || query.contains("seleccionar")) {
+	        	OperadorAR = "SELECCIONAR";
+	        } else if (query.contains("ORDENAR") || query.contains("ordenar")) {
+	        	OperadorAR = "ORDENAR";
+	        } else if (query.contains("AGRUPAR") || query.contains("agrupar")) {
+	        	OperadorAR = "AGRUPAR";
+	        } else if (query.contains("MAX") || query.contains("max") || query.contains("MIN") || query.contains("min") ||
+	        		query.contains("SUM") || query.contains("sum") || query.contains("COUNT") || query.contains("count")) {
+	        	OperadorAR = "FUNCION_AGREGACION";
+	        }
+	    }
+
+	    return OperadorAR;
+	}
+	
+	
+	private String clasificarError(String errorMessage) {
+        if (errorMessage == null) {
+            return null;
+        }
+        if (errorMessage.contains("no tables specified is not valid")) {
+            return "Tabla no especificada";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("does not exist")) {
+            return "Columna inexistente";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("specified more than once")) {
+            return "Columna duplicada";
+        }
+        if (errorMessage.contains("relation") && errorMessage.contains("does not exist")) {
+            return "Relacion inexistente";
+        }
+        if (errorMessage.contains("syntax error at or near")) {
+            return "Error de sintaxis";
+        }
+        if (errorMessage.contains("function") && errorMessage.contains("does not exist")) {
+            return "Funcion desconocida";
+        }
+        if (errorMessage.contains("argument of WHERE must be type boolean, not type")) {
+            return "Argumento Where incorrecto";
+        }
+        if (errorMessage.contains("column reference") && errorMessage.contains("is ambiguous")) {
+            return "Referencia columna ambigua";
+        }
+        return "otro";
+}
+	
+	
 	// Filtra consulta y luego las ejecuta
 	public void ejecutar(){
 		
+
 		if(selectedEjercicio != null){
 			query = selectedEjercicio.getQuery();
 		}
@@ -714,16 +805,28 @@ public class GestionarEjerciciosBean implements Serializable {
 			parser.st();
 			System.out.println("query st: " + query);
 			
+			ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+			UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
+				    .getELResolver().getValue(elContext, null, "usuario");
+			EsquemaBean esquema = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
+				    .getELResolver().getValue(elContext, null, "bd");
+			RelacionBean resultado = new RelacionBean();
+			
+			
+			EstadisticasEjecutorAR estadisticas = new EstadisticasEjecutorAR();
+			estadisticas.setRut(userBean.getRut());
+			estadisticas.setBd(esquema.getNombre());
+			estadisticas.setQuery(query);
+			estadisticas.setOperador(obtenerOperador(query));
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			String fechaEjecucion = ConsultaDAOSQL.fechaHora(timestamp);
+			estadisticas.setFecha(fechaEjecucion);
+			
+			
 			// Revisa si tiene errores de sintaxis
 			if(parser.getNumberOfSyntaxErrors() == 0){
 				System.out.println("Query AR: " + query);
 				
-				ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-				UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
-					    .getELResolver().getValue(elContext, null, "usuario");
-				EsquemaBean esquema = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
-					    .getELResolver().getValue(elContext, null, "bd");
-				RelacionBean resultado = new RelacionBean();
 				System.out.println("Query AR elcontext: " + query);
 				
 				if(query.contains(":=")){ // Revisa si es una consulta de asignacion
@@ -749,16 +852,20 @@ public class GestionarEjerciciosBean implements Serializable {
 						aux2[0] = aux2[0].replaceAll(" ", "");
 						aux2[1] = aux2[1].replaceAll(" ", "");
 						
+						aux2[1] = aux2[1].replaceAll("\\(", "");
+						
+						String aux3[] = aux2[1].split("\\)");
 						System.out.println(aux1[0]);
 						System.out.println(aux2[0]);
-						System.out.println(aux2[1]);
+						System.out.println(aux3[0]);
+						System.out.println(aux3[1]);
 						
-						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
+						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 						}else{
-							resultado = ConsultaDAO.reunionNatural(aux1[0],aux2[0],aux2[1],userBean.getRut());
+							resultado = ConsultaDAO.reunionNatural(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
 							tableName = resultado.getNombre().toLowerCase();
 						}
@@ -775,16 +882,20 @@ public class GestionarEjerciciosBean implements Serializable {
 						aux2[0] = aux2[0].replaceAll(" ", "");
 						aux2[1] = aux2[1].replaceAll(" ", "");
 						
+						aux2[1] = aux2[1].replaceAll("\\(", "");
+						
+						String aux3[] = aux2[1].split("\\)");
 						System.out.println(aux1[0]);
 						System.out.println(aux2[0]);
-						System.out.println(aux2[1]);
+						System.out.println(aux3[0]);
+						System.out.println(aux3[1]);
 						
-						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
+						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 						}else{
-							resultado = ConsultaDAO.reunionExtFull(aux1[0],aux2[0],aux2[1],userBean.getRut());
+							resultado = ConsultaDAO.reunionExtFull(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
 							tableName = resultado.getNombre().toLowerCase();
 						}
@@ -802,16 +913,20 @@ public class GestionarEjerciciosBean implements Serializable {
 						aux2[0] = aux2[0].replaceAll(" ", "");
 						aux2[1] = aux2[1].replaceAll(" ", "");
 						
+						aux2[1] = aux2[1].replaceAll("\\(", "");
+						
+						String aux3[] = aux2[1].split("\\)");
 						System.out.println(aux1[0]);
 						System.out.println(aux2[0]);
-						System.out.println(aux2[1]);
+						System.out.println(aux3[0]);
+						System.out.println(aux3[1]);
 						
-						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
+						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 						}else{
-							resultado = ConsultaDAO.reunionExtIzq(aux1[0],aux2[0],aux2[1],userBean.getRut());
+							resultado = ConsultaDAO.reunionExtIzq(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
 							tableName = resultado.getNombre().toLowerCase();
 						}
@@ -829,16 +944,20 @@ public class GestionarEjerciciosBean implements Serializable {
 						aux2[0] = aux2[0].replaceAll(" ", "");
 						aux2[1] = aux2[1].replaceAll(" ", "");
 						
+						aux2[1] = aux2[1].replaceAll("\\(", "");
+						
+						String aux3[] = aux2[1].split("\\)");
 						System.out.println(aux1[0]);
 						System.out.println(aux2[0]);
-						System.out.println(aux2[1]);
+						System.out.println(aux3[0]);
+						System.out.println(aux3[1]);
 						
-						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
+						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 						}else{
-							resultado = ConsultaDAO.reunionExtDer(aux1[0],aux2[0],aux2[1],userBean.getRut());
+							resultado = ConsultaDAO.reunionExtDer(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
 							tableName = resultado.getNombre().toLowerCase();
 						}
@@ -1378,8 +1497,12 @@ public class GestionarEjerciciosBean implements Serializable {
 						if(selectedEjercicio != null){
 							selectedEjercicio.setQueryList(queryList);
 						}
+						estadisticas.setQuery_correcta(true);
+			            estadisticas.setQuery_incorrecta(false);
+			            estadisticas.setDescripcion_error(null);
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
 						
-//						selectedEjercicio.setRespuesta(tableName);
+
 						
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1388,6 +1511,11 @@ public class GestionarEjerciciosBean implements Serializable {
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta: " + resultado.getNombre(),"");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 						System.out.println("Error: " + resultado.getNombre());
+						estadisticas.setQuery_correcta(false);
+			            estadisticas.setQuery_incorrecta(true);
+			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
+			            estadisticas.setDescripcion_error(resultado.getNombre());
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
 					}
 					
 					
@@ -1401,16 +1529,28 @@ public class GestionarEjerciciosBean implements Serializable {
 				}else{		// Consulta normal
 					System.out.println("Query normal: " + query);
 					boolean band = false;
-					//Reunion Natural
+					
+					
+					
+					//Reunion Natural: relacion1 REUNION_NATURAL (condicion_de_igualdad) relacion2
 					if(!band && (query.contains("reunion_natural") || query.contains("REUNION_NATURAL"))){
 						String aux[] = query.split("reunion_natural|REUNION_NATURAL");
+						
 						aux[0] = aux[0].replaceAll(" ", "");
+						System.out.println("aux(0): "+aux[0]);//listo relacion1
+						
 						aux[1] = aux[1].replaceAll(" ", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						System.out.println(aux[0]);
-						System.out.println(aux[1]);
+						aux[1] = aux[1].replaceAll("\\(", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						resultado = ConsultaDAO.reunionNatural(aux[0],aux[1],userBean.getRut());
+						String aux2[] = aux[1].split("\\)");
+						System.out.println("aux2(0): "+aux2[0]);//listo condiciones
+						System.out.println("aux2(1): "+aux2[1]);//listo rel2
+						
+						
+						resultado = ConsultaDAO.reunionNatural(aux[0],aux2[1],aux2[0],userBean.getRut());
 						tableName = resultado.getNombre();
 						band = true;
 					}
@@ -1418,12 +1558,20 @@ public class GestionarEjerciciosBean implements Serializable {
 					if(!band && (query.contains("reunion_ext_full") || query.contains("REUNION_EXT_FULL"))){
 						String aux[] = query.split("reunion_ext_full|REUNION_EXT_FULL");
 						aux[0] = aux[0].replaceAll(" ", "");
+						System.out.println("aux(0): "+aux[0]);//listo relacion1
+						
 						aux[1] = aux[1].replaceAll(" ", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						System.out.println(aux[0]);
-						System.out.println(aux[1]);
+						aux[1] = aux[1].replaceAll("\\(", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						resultado = ConsultaDAO.reunionExtFull(aux[0],aux[1],userBean.getRut());
+						String aux2[] = aux[1].split("\\)");
+						System.out.println("aux2(0): "+aux2[0]);//listo condiciones
+						System.out.println("aux2(1): "+aux2[1]);//listo rel2
+						
+						
+						resultado = ConsultaDAO.reunionExtFull(aux[0],aux2[1],aux2[0],userBean.getRut());
 						tableName = resultado.getNombre();
 						band = true;
 					}
@@ -1431,12 +1579,20 @@ public class GestionarEjerciciosBean implements Serializable {
 					if(!band && (query.contains("reunion_ext_izq") || query.contains("REUNION_EXT_IZQ"))){
 						String aux[] = query.split("reunion_ext_izq|REUNION_EXT_IZQ");
 						aux[0] = aux[0].replaceAll(" ", "");
+						System.out.println("aux(0): "+aux[0]);//listo relacion1
+						
 						aux[1] = aux[1].replaceAll(" ", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						System.out.println(aux[0]);
-						System.out.println(aux[1]);
+						aux[1] = aux[1].replaceAll("\\(", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						resultado = ConsultaDAO.reunionExtIzq(aux[0],aux[1],userBean.getRut());
+						String aux2[] = aux[1].split("\\)");
+						System.out.println("aux2(0): "+aux2[0]);//listo condiciones
+						System.out.println("aux2(1): "+aux2[1]);//listo rel2
+						
+						
+						resultado = ConsultaDAO.reunionExtIzq(aux[0],aux2[1],aux2[0],userBean.getRut());
 						tableName = resultado.getNombre();
 						band = true;
 					}
@@ -1444,12 +1600,20 @@ public class GestionarEjerciciosBean implements Serializable {
 					if(!band && (query.contains("reunion_ext_der") || query.contains("REUNION_EXT_DER"))){
 						String aux[] = query.split("reunion_ext_der|REUNION_EXT_DER");
 						aux[0] = aux[0].replaceAll(" ", "");
+						System.out.println("aux(0): "+aux[0]);//listo relacion1
+						
 						aux[1] = aux[1].replaceAll(" ", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						System.out.println(aux[0]);
-						System.out.println(aux[1]);
+						aux[1] = aux[1].replaceAll("\\(", "");
+						System.out.println("aux(1): "+aux[1]);
 						
-						resultado = ConsultaDAO.reunionExtDer(aux[0],aux[1],userBean.getRut());
+						String aux2[] = aux[1].split("\\)");
+						System.out.println("aux2(0): "+aux2[0]);//listo condiciones
+						System.out.println("aux2(1): "+aux2[1]);//listo rel2
+						
+						
+						resultado = ConsultaDAO.reunionExtDer(aux[0],aux2[1],aux2[0],userBean.getRut());
 						tableName = resultado.getNombre();
 						band = true;
 					}
@@ -1819,6 +1983,12 @@ public class GestionarEjerciciosBean implements Serializable {
 						if(selectedEjercicio != null){
 							selectedEjercicio.setQueryList(queryList);
 						}
+						
+						estadisticas.setQuery_correcta(true);
+			            estadisticas.setQuery_incorrecta(false);
+			            estadisticas.setDescripcion_error(null);
+			            estadisticas.setDescripcion_error(null);
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
 					
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1827,6 +1997,12 @@ public class GestionarEjerciciosBean implements Serializable {
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta: " + resultado.getNombre(),"");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 						System.out.println("Error: " + resultado.getNombre());
+						
+						estadisticas.setQuery_correcta(false);
+			            estadisticas.setQuery_incorrecta(true);
+			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
+			            estadisticas.setDescripcion_error(resultado.getNombre());
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
 					}
 					
 					
@@ -1839,6 +2015,12 @@ public class GestionarEjerciciosBean implements Serializable {
 				data = null;
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error de sintaxis en consulta de Algebra Relacional","");
 	       		FacesContext.getCurrentInstance().addMessage(null, msg);
+	       		estadisticas.setQuery_correcta(false);
+	            estadisticas.setQuery_incorrecta(true);
+	            estadisticas.setClasificacion_error("Error de Sintaxis");
+	            estadisticas.setDescripcion_error("Error de sintaxis en consulta de Algebra Relacional");
+	            
+	            ConsultaDAO.insertarEstadisticas(estadisticas);
 			}
 		} catch (RecognitionException e) {
 			tableName = "";
@@ -1846,6 +2028,7 @@ public class GestionarEjerciciosBean implements Serializable {
 			data = null;
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_FATAL,"Error Interno al ejecutar la consulta","");
        		FacesContext.getCurrentInstance().addMessage(null, msg);
+       		
 		}
 
 	}
@@ -1908,30 +2091,30 @@ public class GestionarEjerciciosBean implements Serializable {
 	
 	public void ayudaReunionNatural(){
 		if(selectedEjercicio != null)
-		selectedEjercicio.setQuery("relacion REUNION_NATURAL relacion ");
+		selectedEjercicio.setQuery("relacion REUNION_NATURAL (condicion_de_igualdad) relacion ");
 		else
-		query = "relacion REUNION_NATURAL relacion";
+		query = "relacion REUNION_NATURAL (condicion_de_igualdad) relacion";
 	}
 	
 	public void ayudaReunionExtIzq(){
 		if(selectedEjercicio != null)
-		selectedEjercicio.setQuery("relacion REUNION_EXT_IZQ relacion ");
+		selectedEjercicio.setQuery("relacion REUNION_EXT_IZQ (condicion_de_igualdad) relacion ");
 		else
-		query = "relacion REUNION_EXT_IZQ relacion";
+		query = "relacion REUNION_EXT_IZQ (condicion_de_igualdad) relacion";
 	}
 	
 	public void ayudaReunionExtDer(){
 		if(selectedEjercicio != null)
-		selectedEjercicio.setQuery("relacion REUNION_EXT_DER relacion ");
+		selectedEjercicio.setQuery("relacion REUNION_EXT_DER (condicion_de_igualdad) relacion ");
 		else
-		query = "relacion REUNION_EXT_DER relacion";
+		query = "relacion REUNION_EXT_DER (condicion_de_igualdad) relacion";
 	}
 	
 	public void ayudaReunionExtComp(){
 		if(selectedEjercicio != null)
-		selectedEjercicio.setQuery("relacion REUNION_EXT_FULL relacion ");
+		selectedEjercicio.setQuery("relacion REUNION_EXT_FULL (condicion_de_igualdad) relacion ");
 		else
-		query = "relacion REUNION_EXT_FULL relacion";
+		query = "relacion REUNION_EXT_FULL (condicion_de_igualdad) relacion";
 	}
 	
 	public void ayudaAsignar(){

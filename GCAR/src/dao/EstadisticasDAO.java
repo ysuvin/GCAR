@@ -11,8 +11,17 @@ import util.EstadisticaConsulta;
 import util.EstadisticaRespuesta;
 import util.EstadisticaResultado;
 import util.EstadisticaTodo;
+import util.EstadisticasEjecutorAR;
+import util.EstadisticasEjecutorSQL;
 
-public class EstadisticasDAO {
+
+//crear util para EJECUTORAR Y SQL
+
+
+
+public class EstadisticasDAO {  //consulta las variables de la BD para enviarseal al bean de estadisticasview
+								//AQUI AGREGAR LAS CONSULTAS A LAS TABLAS ejecutor_sql y ejecutor_ar PARA ENVIAR AL VIEW
+								//penultimo paso
 
 	static Connection con = null;
     static PreparedStatement ps = null;
@@ -116,13 +125,14 @@ public class EstadisticasDAO {
 			while(rs.next()){
 				EstadisticaResultado resultado = new EstadisticaResultado();
 				resultado.setId(rs.getInt(1));
-				resultado.setBd(rs.getString(2));
-				resultado.setFechaBd(rs.getString(3));
-				resultado.setCantEjercicios(rs.getInt(4));
-				resultado.setCantCorrectas(rs.getInt(5));
-				resultado.setCantErroneas(rs.getInt(6));
-				resultado.setCantOmitidas(rs.getInt(7));
-				resultado.setFecha(rs.getString(8));
+				resultado.setRut(rs.getString(2));
+				resultado.setBd(rs.getString(3));
+				resultado.setFechaBd(rs.getString(4));
+				resultado.setCantEjercicios(rs.getInt(5));
+				resultado.setCantCorrectas(rs.getInt(6));
+				resultado.setCantErroneas(rs.getInt(7));
+				resultado.setCantOmitidas(rs.getInt(8));
+				resultado.setFecha(rs.getString(9));
 				resultados.add(resultado);
 			}
 			
@@ -141,7 +151,7 @@ public class EstadisticasDAO {
     public static List<EstadisticaTodo> selectTodo(){
     	try{
     		
-    		String query = 	"select	result.id as \"id_resultado\", result.bd, result.fecha_bd, " +
+    		String query = 	"select	result.id as \"id_resultado\",result.rut, result.bd, result.fecha_bd, " +
     						"result.cant_ejercicios, result.cant_correctas, result.cant_erroneas, " +
 				    		"result.cant_omitidas, result.fecha as \"fecha_resultado\", " +
 				    		"resp.id as \"id_respuesta\", resp.rut as \"rut_alumno\", resp.ejercicio, " + 
@@ -204,4 +214,90 @@ public class EstadisticasDAO {
     		Database.close(con);
     	}
     }
+
+
+    public static List<EstadisticasEjecutorAR> selectEjecutorAR(){
+    	try{
+    		
+    		String query = "select * from ejecutor_ar";
+    		
+    		System.out.println("Query " + query);
+    		
+    		con = Database.getConnection();	
+			ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			List<EstadisticasEjecutorAR> estadisticasAR = new ArrayList<EstadisticasEjecutorAR>();
+			
+			while(rs.next()){
+				EstadisticasEjecutorAR estadistica = new EstadisticasEjecutorAR();
+				estadistica.setId(rs.getInt(1));
+				estadistica.setRut(rs.getString(2));
+				estadistica.setBd(rs.getString(3));
+				estadistica.setQuery(rs.getString(4));
+				estadistica.setOperador(rs.getString(5));
+				estadistica.setQuery_correcta(rs.getBoolean(6));
+				estadistica.setQuery_incorrecta(rs.getBoolean(7));
+				estadistica.setClasificacion_error(rs.getString(8));
+				estadistica.setDescripcion_error(rs.getString(9));
+				estadistica.setFecha(rs.getString(10));
+				estadisticasAR.add(estadistica);
+			}
+			
+			System.out.println("Carga: lista de estadísticas de ejecutor AR");
+			
+			return estadisticasAR;			
+	
+    	} catch (Exception e){
+    		System.out.println("Error selectEjecutorAR() -> " + e.getMessage());
+    		return null;
+    	} finally {
+    		Database.close(con);
+    	}
+    }
+
+    public static List<EstadisticasEjecutorSQL> selectEjecutorSQL(){
+    	try{
+    		
+    		String query = "select * from ejecutor_sql";
+    		
+    		System.out.println("Query " + query);
+    		
+    		con = Database.getConnection();	
+			ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			List<EstadisticasEjecutorSQL> estadisticasSQL = new ArrayList<EstadisticasEjecutorSQL>();
+			
+			while(rs.next()){
+				EstadisticasEjecutorSQL estadistica = new EstadisticasEjecutorSQL();
+				estadistica.setId(rs.getInt(1));
+				estadistica.setRut(rs.getString(2));
+				estadistica.setBd(rs.getString(3));
+				estadistica.setQuery(rs.getString(4));
+				estadistica.setClausula(rs.getString(5));
+				estadistica.setQuery_correcta(rs.getBoolean(6));
+				estadistica.setQuery_incorrecta(rs.getBoolean(7));
+				estadistica.setClasificacion_error(rs.getString(8));
+				estadistica.setDescripcion_error(rs.getString(9));
+				estadistica.setFecha(rs.getString(10));
+				estadisticasSQL.add(estadistica);
+			}
+			
+			System.out.println("Carga: lista de estadísticas de ejecutor SQL");
+			
+			return estadisticasSQL;			
+	
+    	} catch (Exception e){
+    		System.out.println("Error selectEjecutorSQL() -> " + e.getMessage());
+    		return null;
+    	} finally {
+    		Database.close(con);
+    		}
+    	}
+
+    
+    
+    
+
 }

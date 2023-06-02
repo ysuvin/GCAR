@@ -274,6 +274,7 @@ create sequence sec_resultados;
 	
 create table resultados(
 	id int default nextval('sec_resultados'),
+	rut varchar(60),
 	bd varchar(60),
 	fecha_bd timestamp,
 	cant_ejercicios int,
@@ -313,5 +314,33 @@ create table consultas(
 	foreign key(id_respuestas) references respuestas(id) on delete cascade on update cascade
 	);
 
-	
+create sequence sec_ejecutorsql;
+create table ejecutor_sql(
+	id int default nextval('sec_ejecutorsql'),
+	rut VARCHAR(255) NOT NULL,
+	bd VARCHAR(255) NOT NULL,
+  	query_ejecutada TEXT,
+  	clausulas_sql TEXT,
+  	query_correcta BOOLEAN,
+  	query_incorrecta BOOLEAN,
+	clasificacion_error TEXT,
+  	descripcion_error TEXT,
+  	fecha_hora_ejecucion TIMESTAMP,
+	primary key(id)
+);
+
+create sequence sec_ejecutorar;
+create table ejecutor_ar(
+	id int default nextval('sec_ejecutorar'),
+	rut VARCHAR(255) NOT NULL,
+	bd VARCHAR(255) NOT NULL,
+  	query_ejecutada TEXT,
+  	operador TEXT,
+  	query_correcta BOOLEAN,
+  	query_incorrecta BOOLEAN,
+	clasificacion_error TEXT,
+  	descripcion_error TEXT,
+  	fecha_hora_ejecucion TIMESTAMP,
+	primary key(id)
+);	
 	

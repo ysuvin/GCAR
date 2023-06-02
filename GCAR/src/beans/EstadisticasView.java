@@ -29,6 +29,11 @@ import org.primefaces.model.chart.ChartSeries;
 
 import dao.EstadisticasDAO;
 import dao.ResultadoDAO;
+import dao.ConsultaDAO;
+import dao.ConsultaDAOSQL;
+
+import util.EstadisticasEjecutorAR;
+import util.EstadisticasEjecutorSQL;
 import util.EstadisticaConsulta;
 import util.EstadisticaRespuesta;
 import util.EstadisticaResultado;
@@ -60,6 +65,8 @@ public class EstadisticasView implements Serializable {
    
    private List<String> bds;
    private String selectedBd;
+   private List<String> ruts;
+   private String selectedRut;
    private List<String> fechas;
    private String selectedFecha;
    private String fecha;
@@ -70,8 +77,8 @@ public class EstadisticasView implements Serializable {
    private boolean descargar = false;
    
    
-   public boolean isDescargar() {
-	return descargar;
+   	public boolean isDescargar() {
+   		return descargar;
 	}
 	public void setDescargar(boolean descargar) {
 		this.descargar = descargar;
@@ -85,10 +92,10 @@ public class EstadisticasView implements Serializable {
 	public boolean getVer(){
 	   return ver;
    }
-   public void setVer(boolean ver){
+	public void setVer(boolean ver){
 	   this.ver = ver;
    }
-   public List<String> getBds() {
+	public List<String> getBds() {
 	   return bds;
 	}
 	public void setBds(List<String> bds) {
@@ -112,6 +119,23 @@ public class EstadisticasView implements Serializable {
 	public void setSelectedFecha(String selectedFecha) {
 		this.selectedFecha = selectedFecha;
 	}
+	
+	
+	public List<String> getRuts() {
+		return ruts;
+	}
+	public void setRuts(List<String> ruts) {
+		ruts = this.ruts;
+	}
+	public String getSelectedRut() {
+		return selectedFecha;
+	}
+	public void setSelectedRut(String selectedRut) {
+		this.selectedRut = selectedRut;
+	}
+	
+	
+	
 	public String getNombreBd() {
 		return nombreBd;
 	}

@@ -3,16 +3,20 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.Statement;
 import java.sql.ResultSetMetaData;
-
+ 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
 import util.AtributoBean;
 import util.EsquemaBean;
 import util.RelacionBean;
 import util.TuplaBean;
+import util.EstadisticasEjecutorSQL;
 
 public class ConsultaDAOSQL {
 	
@@ -85,4 +89,36 @@ public class ConsultaDAOSQL {
 	}
 	
 
+	public static void insertarEstadisticas(EstadisticasEjecutorSQL estadisticas){
+	    try {
+	        con = Database.getConnection();
+	        
+
+	        String insertSQL = "INSERT INTO ejecutor_sql(rut,bd, query_ejecutada, clausulas_sql, query_correcta, query_incorrecta, clasificacion_error, descripcion_error, fecha_hora_ejecucion) "
+	        					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, (select current_timestamp))";
+	        PreparedStatement preparedStatement = con.prepareStatement(insertSQL);
+
+	        preparedStatement.setString(1, estadisticas.getRut());
+	        preparedStatement.setString(2, estadisticas.getBd());
+	        preparedStatement.setString(3, estadisticas.getQuery());
+	        preparedStatement.setString(4, estadisticas.getClausula());
+	        preparedStatement.setBoolean(5, estadisticas.isQuery_correcta());
+	        preparedStatement.setBoolean(6, estadisticas.isQuery_incorrecta());
+	        preparedStatement.setString(7, estadisticas.getClasificacion_error());
+	        preparedStatement.setString(8, estadisticas.getDescripcion_error());
+	        preparedStatement.executeUpdate();
+	        
+	    } catch (Exception ex) {
+	        System.out.println("Error en insertarEstadisticasSQL(): " + ex.getMessage());
+	    } finally {
+	        Database.close(con);
+	    }
+	}
+	
+	public static String fechaHora(Timestamp timestamp) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    return dateFormat.format(timestamp);
+	}
+	
+	
 }

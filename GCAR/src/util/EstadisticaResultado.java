@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class EstadisticaResultado implements Serializable {
 
 	private int id;
+	private String rut;
 	private String bd;
 	private String fechaBd;
 	private int cantEjercicios;
@@ -63,6 +64,12 @@ public class EstadisticaResultado implements Serializable {
 	}
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+	public String getRut() {
+		return rut;
+	}
+	public void setRut(String rut) {
+		this.rut = rut;
 	}
 	
 	
