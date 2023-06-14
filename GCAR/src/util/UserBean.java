@@ -19,7 +19,7 @@ public class UserBean implements Serializable {
 	private String materno;
 	private String mail;
 	private String anyo;
-	private String vezCursando;
+	//private String vezCursando;
 	private String edad;
 	private int tipo;
 
@@ -93,14 +93,6 @@ public class UserBean implements Serializable {
 
 	public void setAnyo(String anyo) {
 		this.anyo = anyo;
-	}
-
-	public String getVezCursando() {
-		return vezCursando;
-	}
-
-	public void setVezCursando(String vezCursando) {
-		this.vezCursando = vezCursando;
 	}
 
 	public String getEdad() {

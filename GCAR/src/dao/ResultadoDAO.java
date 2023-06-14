@@ -136,13 +136,14 @@ public class ResultadoDAO {
 			System.out.println("Error en guardarRespuestas() -->" + ex.getMessage());
 			return false;
         }finally{
-        	Database.close(con);
+        	Database.close(con); 
         }
 	}
 	
+	
 	public static List<Resultado> cargarResultado(String bd, String fecha){
 		try{
-			String query = 	"select id,bd,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas from resultados where bd = ? and fecha_bd = '" + fecha + "'";
+			String query = 	"select id,rut,bd,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas from resultados where bd = ? and fecha_bd = '" + fecha + "'";
 			System.out.println("Query: " + query);
 			
 			con = Database.getConnection();
@@ -154,12 +155,13 @@ public class ResultadoDAO {
 			
 			while(rs.next()){
 				Resultado r = new Resultado();
-				r.setBd(rs.getString(2));
-				r.setFechaBd(rs.getTimestamp(3));
-				r.setCantEjercicios(rs.getInt(4));
-				r.setCantCorrectas(rs.getInt(5));
-				r.setCantErroneas(rs.getInt(6));
-				r.setCantOmitidas(rs.getInt(7));
+				r.setRut(rs.getString(2));
+				r.setBd(rs.getString(3));
+				r.setFechaBd(rs.getTimestamp(4));
+				r.setCantEjercicios(rs.getInt(5));
+				r.setCantCorrectas(rs.getInt(6));
+				r.setCantErroneas(rs.getInt(7));
+				r.setCantOmitidas(rs.getInt(8));
 				resultados.add(r);
 			}
 			
@@ -187,7 +189,7 @@ public class ResultadoDAO {
 			List<Respuesta> respuestas = new ArrayList<Respuesta>();
 			
 			while(rs.next()){
-				Respuesta r = new Respuesta();
+				Respuesta r = new Respuesta(); 
 				r.setRut(rs.getString(2));
 				r.setBd(rs.getString(3));
 				r.setFechaBd(rs.getTimestamp(4));
@@ -238,6 +240,106 @@ public class ResultadoDAO {
         }
 	}
 	
+	public static List<Resultado> cargarResultadoRut(String bd, String fecha, String rut){
+		try{
+			String query = 	"select id,bd,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas from resultados "
+					+ "where bd = ? and fecha_bd = '" + fecha + "' and rut = '"+rut+"'";
+			System.out.println("Query: " + query);
+			
+			con = Database.getConnection();
+			ps = con.prepareStatement(query);
+			ps.setString(1,bd);
+			ResultSet rs = ps.executeQuery();
+			
+			List<Resultado> resultados = new ArrayList<Resultado>();
+			
+			while(rs.next()){
+				Resultado r = new Resultado();
+				r.setBd(rs.getString(2));
+				r.setFechaBd(rs.getTimestamp(3));
+				r.setCantEjercicios(rs.getInt(4));
+				r.setCantCorrectas(rs.getInt(5));
+				r.setCantErroneas(rs.getInt(6));
+				r.setCantOmitidas(rs.getInt(7));
+				resultados.add(r);
+			}
+			
+			System.out.println("Resultados Cargados");
+			
+			return resultados;
+		} catch (Exception ex) {
+			System.out.println("Error en cargarResultados() -->" + ex.getMessage());
+			return null;
+        } finally {
+        	Database.close(con);
+        }
+	}
+	
+	public static List<Respuesta> cargarRespuestasRut(String bd, String fecha, String rut){
+		try{
+			String query = 	"select * from respuestas "
+					+ "where bd = ? and fecha_bd = '" + fecha + "' and rut = '"+ rut+"'";
+			System.out.println("Query: " + query);
+			
+			con = Database.getConnection();
+			ps = con.prepareStatement(query);
+			ps.setString(1,bd);
+			ResultSet rs = ps.executeQuery();
+			
+			List<Respuesta> respuestas = new ArrayList<Respuesta>();
+			
+			while(rs.next()){
+				Respuesta r = new Respuesta(); 
+				r.setRut(rs.getString(2));
+				r.setBd(rs.getString(3));
+				r.setFechaBd(rs.getTimestamp(4));
+				r.setEjercicio(rs.getInt(5));
+				r.setResultado(rs.getBoolean(6));
+				r.setIntento(rs.getInt(7));
+				
+				Time tiempoEjercicio = rs.getTime(8);
+				Calendar tiempoEjercicioCal = new GregorianCalendar();
+				tiempoEjercicioCal.setTimeInMillis(tiempoEjercicio.getTime());
+				r.setTiempoEjercicio(tiempoEjercicioCal);
+				
+				Time tiempoSesion = rs.getTime(9);
+				Calendar tiempoSesionCal = new GregorianCalendar();
+				tiempoSesionCal.setTimeInMillis(tiempoSesion.getTime());
+				r.setTiempoEjercicio(tiempoEjercicioCal);
+				
+				query = "select * from consultas where id_respuestas = ?";
+				System.out.println("Query: " + query);
+				
+				ps = con.prepareStatement(query);
+				ps.setInt(1,rs.getInt(1));
+				ResultSet rs1 = ps.executeQuery();
+				
+				List<Consulta> consultas = new ArrayList<Consulta>();
+				
+				while(rs1.next()){
+					Consulta c = new Consulta();
+					c.setNumero(rs1.getInt(3));
+					c.setQuery(rs1.getString(4));
+					c.setError(rs1.getString(5));
+					consultas.add(c);
+				}
+				
+				System.out.println("Consultas Cargadas");
+				r.setConsultas(consultas);
+				respuestas.add(r);
+			}
+			
+			System.out.println("Respuestas Cargados");
+			
+			return respuestas;
+		} catch (Exception ex) {
+			System.out.println("Error en guardarResultado() -->" + ex.getMessage());
+			return null;
+        } finally {
+        	Database.close(con);
+        }
+	}
+
 	
 	public static List<String> obtenerEsquemas(){
 		try{
@@ -294,28 +396,28 @@ public class ResultadoDAO {
 		}
 	}
 	
-	public static List<String> obtenerRut(String bd){
+	public static List<String> obtenerRuts(String fechabd){
 		try{
-			String query = "select distinct rut from resultados where bd=?";
+			String query = "select distinct rut from respuestas where fecha_bd= '"+fechabd+"'";
 			System.out.println("Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
-			ps.setString(1,bd);
+			//ps.setString(1,fechabd);
 			ResultSet rs = ps.executeQuery();
 			
-			List<String> fechas = new ArrayList<String>();
+			List<String> ruts = new ArrayList<String>();
 			
 			while(rs.next()){
-				String fecha = rs.getString(1);
-				fechas.add(fecha);
+				String rut = rs.getString(1);
+				ruts.add(rut);
 			}
 			
-			System.out.println("Cargado todos las fechas");
+			System.out.println("Cargado todos los ruts");
 
-			return fechas;
+			return ruts;
 		}catch (Exception ex){
-			System.out.println("Error en obtenerFechas() -->" + ex.getMessage());
+			System.out.println("Error en obtenerRut() -->" + ex.getMessage());
 			return null;
 		}finally{
 			Database.close(con);

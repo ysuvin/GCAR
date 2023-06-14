@@ -58,7 +58,7 @@ public class GestionarRelacionBean implements Serializable {
 	
 	@PreDestroy
 	public void destroy(){
-//		Util.reloadBd();
+		Util.reloadBd();
 		
 		ELContext elContext = FacesContext.getCurrentInstance().getELContext();
     	UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
@@ -173,9 +173,9 @@ public class GestionarRelacionBean implements Serializable {
     	
 	    	relaciones = esquemaBean.getRelacionesBean();
 	    	
-	    	for (RelacionBean r : relaciones){
-	    		System.out.println("Nombre: " + r.getNombre());
-	    	}
+//	    	for (RelacionBean r : relaciones){
+//	    		//System.out.println("Nombre: " + r.getNombre());
+//	    	}
     	}
 	    	
 		return relaciones;
@@ -441,7 +441,7 @@ public class GestionarRelacionBean implements Serializable {
 		    					}
 		    					System.out.println();
 		    				}
-		    			}System.out.print("========= FIN PRIMER FOR BEAN");
+		    			}System.out.print("====modrel===== FIN PRIMER FOR BEAN");
 		    			for(RelacionBean r : esquemaBean.getRelacionesEjercicios()){
 		    				System.out.println("Nombre Relacion: " + r.getNombre());
 		    				for(TuplaBean t : r.getTuplasBean()){
@@ -450,7 +450,7 @@ public class GestionarRelacionBean implements Serializable {
 		    					}
 		    					System.out.println();
 		    				}
-		    			}  System.out.print("========= FIN SEGUNDO FOR BEAN");  	    	
+		    			}  System.out.print("====modrel===== FIN SEGUNDO FOR BEAN");  	    	
 		    					    	
 				    	session.setAttribute("nombreBd",esquemaBean.getNombre());
 				    	session.setAttribute("bd",esquemaBean);

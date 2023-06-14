@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.LinkedHashSet;
+
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -40,6 +44,7 @@ import util.EstadisticaResultado;
 import util.EstadisticaTodo;
 import util.Respuesta;
 import util.Resultado;
+import util.User;
 
  
 @ManagedBean(name = "estadisticasView")
@@ -58,6 +63,7 @@ public class EstadisticasView implements Serializable {
    
    private List<Respuesta> respuestas;
    private List<Resultado> resultados;
+   private List<EstadisticasEjecutorSQL> datasql;
    
    private DecimalFormat df = new DecimalFormat("##.##");
    
@@ -70,12 +76,33 @@ public class EstadisticasView implements Serializable {
    private List<String> fechas;
    private String selectedFecha;
    private String fecha;
+   private String rut;
+   private List<User> nombres;
+   private User usuario;
    
    private StreamedContent file;
    private String path;
    private String contentType;
    private boolean descargar = false;
    
+   private String tipoEstadisticaSeleccionada = "ejerciciosAR";
+   private int cantQueryEjec;
+   private String promQueryCorrecta;
+   private String promQueryIncorrecta;
+   
+   
+   
+   
+   
+   
+   
+   public String getTipoEstadisticaSeleccionada() {
+       return tipoEstadisticaSeleccionada;
+   }
+
+   public void setTipoEstadisticaSeleccionada(String tipoEstadisticaSeleccionada) {
+       this.tipoEstadisticaSeleccionada = tipoEstadisticaSeleccionada;
+   }
    
    	public boolean isDescargar() {
    		return descargar;
@@ -125,7 +152,7 @@ public class EstadisticasView implements Serializable {
 		return ruts;
 	}
 	public void setRuts(List<String> ruts) {
-		ruts = this.ruts;
+		this.ruts = ruts;
 	}
 	public String getSelectedRut() {
 		return selectedFecha;
@@ -135,7 +162,7 @@ public class EstadisticasView implements Serializable {
 	}
 	
 	
-	
+	// ESTADISTICAS EJERCICIOS AR
 	public String getNombreBd() {
 		return nombreBd;
 	}
@@ -203,6 +230,28 @@ public class EstadisticasView implements Serializable {
 		this.animatedModel2 = animatedModel2;
 	}
 	
+	// ESTADISTICAS EJECUTOR SQL
+	public int getCantQueryEjec() {
+		return cantQueryEjec;
+	}
+	public void setCantQueryEjec(int cantQueryEjec) {
+		this.cantQueryEjec = cantQueryEjec;
+	}
+	public String getPromQueryCorrecta() {
+		return promQueryCorrecta;
+	}
+	public void setPromQueryCorrecta(String promQueryCorrecta) {
+		this.promQueryCorrecta = promQueryCorrecta;
+	}
+	public String getPromQueryIncorrecta() {
+		return promQueryIncorrecta;
+	}
+	public void setPromQueryIncorrecta(String promQueryIncorrecta) {
+		this.promQueryIncorrecta = promQueryIncorrecta;
+	}
+	
+	
+	
 	@PostConstruct
 	public void init(){	
 		bds = ResultadoDAO.obtenerEsquemas();         
@@ -211,13 +260,16 @@ public class EstadisticasView implements Serializable {
 		resultados = new ArrayList<Resultado>();
 		respuestas = new ArrayList<Respuesta>();
 		cantidadResp = resultados.size();
-				
+		//crear lista de ruts, llenarlas aqui?		
 		this.promedioPorcentaje = df.format(0);
 		this.promedioAcertadas = df.format(0);
 		this.promedioErroneas = df.format(0);
 		this.promedioOmitidas = df.format(0);
 		this.promedioIntentosRespuestas = df.format(0);
 		this.promedioTiempoRespuestas =	"0:0:0";
+		
+		selectedRut = "GLOBAL";
+		//isGlobalSelected();
 		createAnimatedModels();	
 	}
 		
@@ -226,27 +278,46 @@ public class EstadisticasView implements Serializable {
 	public void onBdChangue(){
 		System.out.println(selectedBd);
 		fechas = ResultadoDAO.obtenerFechas(selectedBd);
+		
 	}
-	
+	public void onFechaBdChangue(){
+		System.out.println(selectedFecha);
+		ruts = ResultadoDAO.obtenerRuts(selectedFecha);
+		LinkedHashSet<String> rutsSet = new LinkedHashSet<String>();
+		rutsSet.add("GLOBAL"); 
+		rutsSet.addAll(ruts); 
+		ruts.clear(); 
+		ruts.addAll(rutsSet); 
+		ruts.forEach(System.out::println);
+		
+	}
+		
 	public void verEstadisticas(){
 		
 		nombreBd = selectedBd;
 		fecha = selectedFecha;
 		
-		resultados = ResultadoDAO.cargarResultado(selectedBd,selectedFecha);
+		resultados = ResultadoDAO.cargarResultado(selectedBd,selectedFecha);	
 		
 		if(resultados != null){
 			
-			respuestas = ResultadoDAO.cargarRespuestas(selectedBd,selectedFecha);
+			if (!"GLOBAL".equals(selectedRut)) {
+			    respuestas = ResultadoDAO.cargarRespuestasRut(selectedBd, selectedFecha, selectedRut);
+			    cargarDatosUsuario();
+		        isGlobalSelected();
+			}else {	
+				respuestas = ResultadoDAO.cargarRespuestas(selectedBd,selectedFecha);
+			}
 			
 			if(respuestas != null){
-				
+								
 				cantidadResp = resultados.size();
 				ver = true;
 				
 				float promedioAcertadas = 0;
 				float promedioErroneas = 0;
 				float promedioOmitidas = 0;
+				
 				int totales = 0;
 				for(Resultado r : resultados){
 					promedioAcertadas = promedioAcertadas + r.getCantCorrectas();
@@ -273,7 +344,6 @@ public class EstadisticasView implements Serializable {
 												Integer.toString(tiempoR.get(Calendar.MINUTE)) + ":" +
 												Integer.toString(tiempoR.get(Calendar.SECOND));
 					
-					
 				}
 				createAnimatedModels();
 				
@@ -295,9 +365,10 @@ public class EstadisticasView implements Serializable {
     private void createAnimatedModels() {
          
         animatedModel2 = initBarModel();
-        animatedModel2.setTitle("Grafico de Respuestas");
+        //animatedModel2.setTitle("Grafico de Respuestas");
         animatedModel2.setAnimate(true);
         animatedModel2.setLegendPosition("ne");
+        animatedModel2.setSeriesColors("1484e6,e69700,fcde4c");
         
         Axis yAxis = animatedModel2.getAxis(AxisType.Y);
         Axis xAxis = animatedModel2.getAxis(AxisType.X);
@@ -319,7 +390,6 @@ public class EstadisticasView implements Serializable {
 	        		max = r.getEjercicio();
         }
         
-        
         ChartSeries acertadas = new ChartSeries();
         acertadas.setLabel("Acertadas");
         
@@ -328,8 +398,7 @@ public class EstadisticasView implements Serializable {
         
         ChartSeries intentos = new ChartSeries();
         intentos.setLabel("Intentos");
-        
-        
+                
         if(respuestas != null){
 	        for(int i = 0 ; i <= max ; i++){
 	        	int acert = 0;
@@ -358,7 +427,24 @@ public class EstadisticasView implements Serializable {
         
         return model;
     }  
+   
+    public String cargarDatosUsuario() {
+	    List<User> nombres = ConsultaDAOSQL.cargarDatosUser(selectedRut);
+	    if (!nombres.isEmpty()) {
+	        usuario = nombres.get(0);
+	        return usuario.getNombre1() + " " + usuario.getPaterno() + " " + usuario.getMaterno();
+	    } else {
+	        return "Usuario no encontrado";
+	    }
+	}
     
+    
+    public boolean isGlobalSelected() {
+        return "GLOBAL".equalsIgnoreCase(selectedRut);
+    }
+
+    
+
     public void generarDescarga(){
     	System.out.println("Preparando Descarga");
     	
@@ -582,5 +668,15 @@ public class EstadisticasView implements Serializable {
     	contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(path);
     	file = new DefaultStreamedContent(new FileInputStream(path), contentType, "Todos.arff");
     }
+
+	public List<User> getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(List<User> nombres) {
+		this.nombres = nombres;
+	}
+
+
     
 }

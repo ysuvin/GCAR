@@ -6,7 +6,7 @@ import java.sql.DriverManager;
  
 public class Database {
 	
-    public static Connection getConnection() {
+    public static Connection getConnection() { 
         try {
             Class.forName("org.postgresql.Driver");
 

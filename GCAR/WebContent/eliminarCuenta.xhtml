@@ -82,9 +82,6 @@
 					        <p:column headerText="Mail" filterBy="#{user.mail}" filterStyle="display:none" filterMatchMode="contains">
 				            <h:outputText value="#{user.mail}" />
 				        </p:column>
-				        <p:column headerText="Vez Cursando" filterBy="#{user.vezCursando}" filterStyle="display:none">
-				            <h:outputText value="#{user.vezCursando}" />
-				        </p:column>
 				        <p:column headerText="Año de Ingreso" filterBy="#{user.anyo}" filterStyle="display:none">
 				            <h:outputText value="#{user.anyo}" />
 				        </p:column>
@@ -124,10 +121,7 @@
 			                <h:outputText value="Año de Ingreso: " />
 			                <h:outputText value="#{gestionarCuentasBean.selectedUser.anyo}" />
 			                
-			                <h:outputText value="Vez Cursando: " />
-			                <h:outputText value="#{gestionarCuentasBean.selectedUser.vezCursando}" />
-			                
-			                <h:outputText value="Edad: " />
+			                <h:outputText value="Año de Nacimiento: " />
 			                <h:outputText value="#{gestionarCuentasBean.selectedUser.edad}" />
 			                
 			            </h:panelGrid>

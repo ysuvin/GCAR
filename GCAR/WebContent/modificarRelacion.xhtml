@@ -77,87 +77,95 @@
 			    </p:dataTable>
 			    </p:fieldset>
 
+
+
+
+
 			    <p:dialog header="Modificar Relación" widgetVar="relacionDialog" modal="false" showEffect="fade" hideEffect="fade" resizable="false">
 			        <p:outputPanel id="relacionDetail" style="text-align:left;">
 			        			        
-			        <p:fieldset>
-			            	<f:facet name="legend">
-			            	<h:panelGrid styleClass="divs" columns="2" cellpadding="10">
-				        		<span class="ui-icon ui-icon-info" />	
-				        		<h:panelGrid>
-				        			<!--  -->
-				        			<h:outputText  value="Al modificar la relación, se perderán todos los datos que ésta contenga" style="font-weight: bold;"/>	        			
-				        			<h:outputText  value="Seleccione el botón Modificar para guardar los cambios" style="font-weight: bold;"/>
-				        		</h:panelGrid>        					        						        		
-			        		</h:panelGrid>	
-			            	</f:facet>
-			        <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto !important">
-						<h:outputText value="Nombre de la Relación: *" />
-						<p:inputText id="nombre" value="#{gestionarRelacionBean.selectedRelacion.nombre}"
-							requiredMessage="El Nombre de la Relación no debe ser vacío" required="true"
-							validatorMessage="La relación debe comenzar con una letra y sólo debe contener caracteres alfanuméricos o el guión bajo" >
-					        <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_]*" />
-							<p:ajax event="change" update=":form:growl" />
-						</p:inputText>
-								 
-				        <h:outputText value="Cantidad de Atributos: *" />
-					    <p:spinner id="cant" value="#{gestionarRelacionBean.cantSelected}" min="1" max="10">
-					    	<p:ajax event="change" update=":form:growl :form:relacionDetail" />
-					   	</p:spinner>
-				    </h:panelGrid> 			   
-			            
-			            
-			        <p:dataTable id="relacionDT" var="atributo" value="#{gestionarRelacionBean.atributosBean}" widgetVar="atributosTable"
-			          	emptyMessage="No hay atributos" style="width:500px; margin: 0 auto !important" editable="true" editmode="cell">
-				        <f:facet name="header">
-							Atributos
-				        </f:facet>
-				        <p:column style="width:32px">
-				           <p:rowEditor />
-				       	</p:column>
-				        <p:column headerText="Nombre Atributo">
-				        	<p:cellEditor>
-				        		<f:facet name="output"><h:outputText value="#{atributo.nombre}"/></f:facet>
-				        		<f:facet name="input">
-				        			<p:inputText id="nombreInput" value="#{atributo.nombre}" style="width:100%"
-				        				requiredMessage="El Nombre del Atributo no debe ser vacío" required="true"
-										validatorMessage="La Atributo debe comenzar con una letra y sólo debe contener caracteres alfanuméricos o el guión bajo" >
-							            <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_]*" />
-										<p:ajax event="change" update=":form:growl" />
-				        			</p:inputText>
-				        		</f:facet>
-				        	</p:cellEditor>
-				        </p:column>
-				        <p:column headerText="Primario">
-				        	<p:cellEditor>
-				        		<f:facet name="output"><h:outputText value="#{atributo.esPrimario}" /></f:facet>
-				        		<f:facet name="input">
-				        			<h:selectOneMenu id="primarioInput" value="#{atributo.esPrimario}" style="width:100%">
-				        				<f:selectItem itemLabel="Sí" itemValue="Sí"/>
-				        				<f:selectItem itemLabel="No" itemValue="No"/>
-				        			</h:selectOneMenu>
-				        		</f:facet>
-				        	</p:cellEditor>
-				        </p:column>
-				        <p:column headerText="Tipo">
-				        	<p:cellEditor>
-				        		<f:facet name="output"><h:outputText value="#{atributo.tipo}" /></f:facet>
-				        		<f:facet name="input">
-				        			<h:selectOneMenu id="tipoInput" value="#{atributo.tipo}" style="width:100%">
-				        				<f:selectItem itemLabel="Entero" itemValue="Entero"/>
-				        				<f:selectItem itemLabel="Real" itemValue="Real"/>
-				        				<f:selectItem itemLabel="Cadena" itemValue="Cadena"/>
-				        			</h:selectOneMenu>
-				        		</f:facet>
-				        	</p:cellEditor>
-				        </p:column>			      
-				    </p:dataTable>
-				    </p:fieldset>
-			        
-			        <h:panelGrid style="margin: 0 auto !important">    
-			            <p:commandButton update="form" icon="ui-icon-pencil" value="Modificar" ajax="false" 
-			            	action="#{gestionarRelacionBean.modificarRelacion}" />			        
-					</h:panelGrid>
+				        <p:fieldset>
+					        <f:facet name="legend">
+					            <h:panelGrid styleClass="divs" columns="2" cellpadding="10">
+						        	<span class="ui-icon ui-icon-info" />	
+						        		<h:panelGrid>
+						        			<!--  -->
+						        			<h:outputText  value="Al modificar la relación, se perderán todos los datos que ésta contenga." style="font-weight: bold;"/>	        			
+						        			<h:outputText  value="Seleccione el botón Modificar para guardar los cambios." style="font-weight: bold;"/>
+						        		</h:panelGrid>        					        						        		
+					        	</h:panelGrid>	
+					        </f:facet>
+					        <h:panelGrid columns="2" cellpadding="5" style="margin: 0 auto !important">
+								<h:outputText value="Nombre de la Relación: *" />
+								<p:inputText id="nombre" value="#{gestionarRelacionBean.selectedRelacion.nombre}"
+									requiredMessage="El Nombre de la Relación no debe ser vacío" required="true"
+									validatorMessage="La relación debe comenzar con una letra y sólo debe contener caracteres alfanuméricos o el guión bajo" >
+							        <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_]*" />							
+									<!-- <p:ajax event="change" update=":form:growl" /> -->
+								</p:inputText>
+										 
+						        <h:outputText value="Cantidad de Atributos: *" />
+							    <p:spinner id="cant" value="#{gestionarRelacionBean.cantSelected}" min="1" max="10">
+							    	<p:ajax update=":form:growl :form:relacionDetail" />
+							   	</p:spinner>
+						    </h:panelGrid> 			   
+					            
+				<!-- TABLA ATRIBUTOS /> -->     
+					        <p:dataTable id="relacionDT" var="atributo" value="#{gestionarRelacionBean.atributosBean}" widgetVar="atributosTable"
+					          	emptyMessage="No hay atributos" style="width:500px; margin: 0 auto !important" editable="true" editmode="cell">
+						        <f:facet name="header">
+									Atributos
+						        </f:facet>
+						        
+						        <p:column style="width:32px">
+						           <p:rowEditor />
+						       	</p:column>
+						       	
+						        <p:column headerText="Nombre Atributo">
+						        	<p:cellEditor>
+						        		<f:facet name="output"><h:outputText value="#{atributo.nombre}"/></f:facet>
+						        		<f:facet name="input">
+						        			<p:inputText id="nombreInput" value="#{atributo.nombre}" style="width:100%"
+						        				requiredMessage="El Nombre del Atributo no debe ser vacío" required="true"
+												validatorMessage="La Atributo debe comenzar con una letra y sólo debe contener caracteres alfanuméricos o el guión bajo" >
+									            <f:validateRegex pattern="^[a-zA-Z][a-zA-Z0-9_]*" />
+												<p:ajax event="change" update=":form:growl" />
+						        			</p:inputText>
+						        		</f:facet>
+						        	</p:cellEditor>
+						        </p:column>
+						        
+						        <p:column headerText="Primario">
+						        	<p:cellEditor>
+						        		<f:facet name="output"><h:outputText value="#{atributo.esPrimario}" /></f:facet>
+						        		<f:facet name="input">
+						        			<h:selectOneMenu id="primarioInput" value="#{atributo.esPrimario}" style="width:100%">
+						        				<f:selectItem itemLabel="Sí" itemValue="Sí"/>
+						        				<f:selectItem itemLabel="No" itemValue="No"/>
+						        			</h:selectOneMenu>
+						        		</f:facet>
+						        	</p:cellEditor>
+						        </p:column>
+						        
+						        <p:column headerText="Tipo">
+						        	<p:cellEditor>
+						        		<f:facet name="output"><h:outputText value="#{atributo.tipo}" /></f:facet>
+						        		<f:facet name="input">
+						        			<h:selectOneMenu id="tipoInput" value="#{atributo.tipo}" style="width:100%">
+						        				<f:selectItem itemLabel="Entero" itemValue="Entero"/>
+						        				<f:selectItem itemLabel="Real" itemValue="Real"/>
+						        				<f:selectItem itemLabel="Cadena" itemValue="Cadena"/>
+						        			</h:selectOneMenu>
+						        		</f:facet>
+						        	</p:cellEditor>
+						        </p:column>			      
+						    </p:dataTable>
+					    </p:fieldset>
+				        
+				        <h:panelGrid style="margin: 0 auto !important">    
+				            <p:commandButton update="form" icon="ui-icon-pencil" value="Modificar" ajax="false" 
+				            	action="#{gestionarRelacionBean.modificarRelacion}" />			        
+						</h:panelGrid>
 			            	
 			        </p:outputPanel>
 			    </p:dialog>

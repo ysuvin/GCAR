@@ -27,6 +27,19 @@
 			
 				<p:panel styleClass="divs">
 				
+					<p:fieldset legend="Atajos">
+						
+							Para <strong>ejecutar</strong> una consulta en <strong>SQL</strong> o <strong>Álgebra Relacional</strong>, primero debe <strong>cargar</strong> una <strong>Base de Datos</strong>  <p/>					
+						
+						<h:panelGrid columns="3" cellpadding="4"  >
+							<p:commandButton value="Cargar Base de Datos" ajax="false" action="cargarBD" />
+							<p:commandButton value="Hacer Consulta SQL" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsultaSQL}" />
+							<p:commandButton value="Hacer Consulta AR" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsulta}" />							
+						</h:panelGrid>				
+					</p:fieldset>
+					
+					<p:spacer />
+					
 					<p:fieldset legend="Datos Usuario">					
 						<h:panelGrid columns="2" cellpadding="4" columnClasses="label, value" >
 						
@@ -64,21 +77,21 @@
 					
 					<p:fieldset legend="¿Qué es GCAR?">
 						<p:panel styleClass="divs">
-							<strong>GCAR</strong> es una herramienta ideada para la ejecución de consultas en 
+							<strong>GCAR</strong> es una aplicación web ideada para la gestión de consultas en 
 							<strong>Álgebra Relacional y SQL</strong> que utiliza 
 							<a style="color:#e69700;font-weight: bold;" href="http://www.postgresql.org">PostgreSQL</a> 
-							para la Gestión de Bases de Datos. 
+							para la Gestión de Bases de Datos. <br/>
 							Dentro de sus capacidades, <strong>GCAR</strong> es capaz de ejecutar consultas en 
 							<strong>Álgebra Relacional</strong> y <strong>SQL</strong>, generar y modificar Bases de Datos para el ingreso de consultas, 
-							crear Guias de Ejercicios para cada Base de Datos para medir el desempeño de los Alumnos.
+							crear y responder Guias de Ejercicios para cada Base de Datos y el análisis de datos generados por el uso de la aplicación, para medir el desempeño de las y los Estudiantes.<br/>
 							<strong>GCAR v2</strong> es el resultado del Trabajo de Título: <strong>"Perfeccionamiento y validación empírica de una 
 							plataforma de enseñanza-aprendizaje para Álgebra Relacional y SQL"</strong> 
 							para optar al título de <strong>Ingeniero Civil en Informática</strong> en la <strong>Universidad de 
-							Valparaíso</strong> <p/>
+							Valparaíso.</strong> <p/>
 							
 							<h:panelGrid style="text-align: right;width:100%">
-								<h:outputText value="Alumno: Sebastián Segovia (Primera Version)" style="color:#e69700;font-weight: bold;"/>
-								<h:outputText value="Alumno: Yian Vera Soto (Segunda Version)" style="color:#e69700;font-weight: bold;"/>
+								<h:outputText value="Estudiante: Sebastián Segovia (Primera Version)" style="color:#e69700;font-weight: bold;"/>
+								<h:outputText value="Estudiante: Yian Vera Soto (Segunda Version)" style="color:#e69700;font-weight: bold;"/>
 								<h:outputText value="Profesor Guía: Eliana Providel" style="color:#e69700;font-weight: bold;" />
 							</h:panelGrid>
 							

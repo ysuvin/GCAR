@@ -2417,5 +2417,83 @@ public class ConsultaDAO {
 	    }
 	}
 	
+	public static List<EstadisticasEjecutorAR> cargarEstEjecAR(){
+		try{
+			String query = 	"select rut,bd, query_ejecutada, operador, query_correcta, "
+							+ "query_incorrecta, clasificacion_error, "
+							+ "fecha_hora_ejecucion from ejecutor_ar";
+			System.out.println("Query: " + query);
+			
+			con = Database.getConnection();
+			ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			List<EstadisticasEjecutorAR> statsar = new ArrayList<EstadisticasEjecutorAR>();
+			
+			while(rs.next()){
+				EstadisticasEjecutorAR e = new EstadisticasEjecutorAR();
+				e.setRut(rs.getString(1));
+				e.setBd(rs.getString(2));
+				e.setQuery(rs.getString(3));
+				e.setOperador(rs.getString(4));
+				e.setQuery_correcta(rs.getBoolean(5));
+				e.setQuery_incorrecta(rs.getBoolean(6));
+				e.setClasificacion_error(rs.getString(7));
+				e.setFecha(rs.getString(8));
+				statsar.add(e);
+			}
+			
+			System.out.println("Datos Ejecutor AR cargados");
+			
+			return statsar;
+		} catch (Exception ex) {
+			System.out.println("Error en cargarEstEjecAR() -->" + ex.getMessage());
+			return null;
+        } finally {
+        	Database.close(con);
+        }
+	}
+	
+	public static List<EstadisticasEjecutorAR> cargarEstEjecARRut(String rut){
+		try{
+			String query = 	"select bd, query_ejecutada, operador, query_correcta, "
+							+ "query_incorrecta, clasificacion_error, "
+							+ "fecha_hora_ejecucion from ejecutor_ar"
+							+ " where rut = '"+ rut+"'";
+			System.out.println("Query: " + query);
+			
+			con = Database.getConnection();
+			ps = con.prepareStatement(query);
+			//ps.setString(2,rut);
+			ResultSet rs = ps.executeQuery();
+			
+			List<EstadisticasEjecutorAR> statsar = new ArrayList<EstadisticasEjecutorAR>();
+			
+			while(rs.next()){
+				EstadisticasEjecutorAR e = new EstadisticasEjecutorAR();
+				//e.setId(rs.getInt(1));
+				//e.setRut(rs.getString(2));
+				e.setBd(rs.getString(1));
+				e.setQuery(rs.getString(2));
+				e.setOperador(rs.getString(3));
+				e.setQuery_correcta(rs.getBoolean(4));
+				e.setQuery_incorrecta(rs.getBoolean(5));
+				e.setClasificacion_error(rs.getString(6));
+				//e.setDescripcion_error(rs.getString(9));
+				e.setFecha(rs.getString(7));
+				statsar.add(e);
+			}
+			
+			System.out.println("Datos Ejecutor AR cargados");
+			
+			return statsar;
+		} catch (Exception ex) {
+			System.out.println("Error en cargarEstEjecARRUT() -->" + ex.getMessage());
+			return null;
+        } finally {
+        	Database.close(con);
+        }
+	}
+	
 	
 }

@@ -76,8 +76,8 @@ public class UserDAO {
                     
                     if(rs1.next()){
                     	userBean.setAnyo(rs1.getString(2));
-                    	userBean.setVezCursando(rs1.getString(3));
-                    	userBean.setEdad(rs1.getString(4));
+                    	//userBean.setVezCursando(rs1.getString(3));
+                    	userBean.setEdad(rs1.getString(3));
                     	System.out.println("Usuario " + userBean.getRut() + " encontrado en la tabla Estudiantes");
                     	return userBean;
                     }else{
@@ -141,12 +141,12 @@ public class UserDAO {
         	
             System.out.println("Alumno agregado en tabla Usuario");
             
-            query = "INSERT INTO alumnos VALUES (?,?,?,?)";
+            query = "INSERT INTO alumnos VALUES (?,?,?)";
             ps = con.prepareStatement(query);
             ps.setString(1,user.getRut());
             ps.setString(2,user.getAnyo());
-            ps.setString(3,user.getVezCursando());
-            ps.setString(4,user.getEdad());
+            //ps.setString(3,user.getVezCursando());
+            ps.setString(3,user.getEdad());
             ps.execute();
            
             System.out.println("Alumno agregado en tabla Alumnos");
@@ -156,7 +156,7 @@ public class UserDAO {
         	return user;
         } catch (Exception ex) {
             System.out.println("Error en crearUsuario() -->" + ex.getMessage());
-            if(ex.getMessage().contains("llave duplicada viola restricción de unicidad")){
+            if(ex.getMessage().contains("llave duplicada viola restricciï¿½n de unicidad")){
             	UserBean userBean = new UserBean();
             	userBean.setNombre1("duplicado");
             	return userBean;
@@ -188,12 +188,12 @@ public class UserDAO {
         	
             System.out.println("Alumno agregado en tabla Usuario");
             
-            query = "INSERT INTO alumnos VALUES (?,?,?,?)";
+            query = "INSERT INTO alumnos VALUES (?,?,?)";
             ps = con.prepareStatement(query);
             ps.setString(1,user.getRut());
             ps.setString(2,user.getAnyo());
-            ps.setString(3,user.getVezCursando());
-            ps.setString(4,user.getEdad());
+            //ps.setString(3,user.getVezCursando());
+            ps.setString(3,user.getEdad());
             ps.execute();
            
             System.out.println("Alumno agregado en tabla Alumnos");
@@ -204,7 +204,7 @@ public class UserDAO {
             
         } catch (Exception ex) {
         	System.out.println("Error en crearUsuario() -->" + ex.getMessage());
-            if(ex.getMessage().contains("llave duplicada viola restricción de unicidad")){
+            if(ex.getMessage().contains("llave duplicada viola restricciï¿½n de unicidad")){
             	User userBean = new User();
             	userBean.setNombre1("duplicado");
             	return userBean;
@@ -219,7 +219,7 @@ public class UserDAO {
 		try{
 			
 			String query = "Select u.rut, u.pass, u.nombre1, u.nombre2, u.paterno, u.materno, "
-					+ "u.mail, u.tipo, a.ano_ingreso, a.vez_cursado, a.edad from usuarios u, alumnos a where u.rut = a.rut";
+					+ "u.mail, u.tipo, a.ano_ingreso, a.edad from usuarios u, alumnos a where u.rut = a.rut";
 			System.out.println("Query: " + query);
 
         	con = Database.getConnection();
@@ -238,8 +238,8 @@ public class UserDAO {
             	user.setMail(rs.getString(7));
             	user.setTipo(rs.getInt(8));
             	user.setAnyo(rs.getString(9));
-            	user.setVezCursando(rs.getString(10));
-            	user.setEdad(rs.getString(11));
+            	//user.setVezCursando(rs.getString(10));
+            	user.setEdad(rs.getString(10));
             	users.add(user);
             }
             
@@ -315,15 +315,15 @@ public class UserDAO {
             	
             }else if(user.getTipo() == 2){
 	            
-	            query = "UPDATE alumnos SET ano_ingreso=?, vez_cursado=?, edad=? WHERE rut=?";
+	            query = "UPDATE alumnos SET ano_ingreso=?, edad=? WHERE rut=?";
 				System.out.println("Query: " + query);
 				
 				con = Database.getConnection();
 	            ps = con.prepareStatement(query);
 	            ps.setString(1,user.getAnyo());
-	            ps.setString(2,user.getVezCursando());
-	            ps.setString(3,user.getEdad());
-	            ps.setString(4,user.getRut());
+	            //ps.setString(2,user.getVezCursando());
+	            ps.setString(2,user.getEdad());
+	            ps.setString(3,user.getRut());
 	            ps.execute();
 	                       
 	            System.out.println("Usuario editado en tabla Alumnos");

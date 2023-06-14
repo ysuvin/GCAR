@@ -11,8 +11,9 @@ create table usuarios(
 	);
 
 insert into usuarios values 
-('11111111','pass','Nombre1','Nombre2','Paterno','Materno','profesor@mail.com',1),
+('11111111','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2),
 ('22222222','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2),
+('33333333','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2),
 ('17134298','85638020','Sebastian','Andres','Segovia','Cordero','s.segovia.c@gmail.com',1),
 ('18851998','12345678','Yian','Suvin','Vera','Soto','yian.vera@gmail.com',1),
 ('11112222','12345678','Eliana','Eliana','Providel','Godoy','eliana.providel@uv.cl',1),
@@ -22,14 +23,15 @@ insert into usuarios values
 create table alumnos(
 	rut varchar(45),
 	ano_ingreso varchar(45),
-	vez_cursado varchar(45),
 	edad varchar(45),
 	primary key(rut),
 	foreign key(rut) references usuarios(rut) on delete cascade on update cascade
 	);
 	
 insert into alumnos values
-('22222222','2009','3','23');
+('11111111','2017','1998'),
+('22222222','2009','1996'),
+('33333333','2019','2000');
 -----------------------------------
 	
 create table profesores(

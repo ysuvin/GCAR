@@ -697,19 +697,9 @@ public class GestionarEjerciciosBean implements Serializable {
 		}
 	}
 
+	
 	private String obtenerOperador(String query) {
-	    String OperadorAR = null;
-
-	    if (query.contains(":=") || query.contains("SELECCIONAR") || query.contains("seleccionar") || query.contains("PROYECTAR") || query.contains("proyectar") 
-	    		|| query.contains("RENOMBRAR") || query.contains("renombrar") || query.contains("UNION") || query.contains("union")
-	    		|| query.contains("INTER") || query.contains("inter") || query.contains("DIFERENCIA") || query.contains("diferencia") 
-	    		|| query.contains("CRUZ") || query.contains("cruz") || query.contains("DIVISION") || query.contains("division") 
-	    		|| query.contains("REUNION_NATURAL") || query.contains("reunion_natural") || query.contains("REUNION_EXT_IZQ") || query.contains("reunion_ext_izq")
-	    		|| query.contains("REUNION_EXT_DER") || query.contains("reunion_ext_der") || query.contains("REUNION_EXT_FULL") || query.contains("reunion_ext_full")
-	    		|| query.contains("ORDENAR") || query.contains("ordenar") || query.contains("AGRUPAR") || query.contains("agrupar")
-	    		|| query.contains("MAX") || query.contains("max") || query.contains("MIN") || query.contains("min")
-        		|| query.contains("SUM") || query.contains("sum") || query.contains("COUNT") || query.contains("count") 
-	    		) {	    		    	
+	    String OperadorAR = null;   		    	
 	    	
 	        if (query.contains(":=")) {
 	        	OperadorAR = "ASIGNAR";
@@ -738,14 +728,13 @@ public class GestionarEjerciciosBean implements Serializable {
 	        } else if (query.contains("SELECCIONAR") || query.contains("seleccionar")) {
 	        	OperadorAR = "SELECCIONAR";
 	        } else if (query.contains("ORDENAR") || query.contains("ordenar")) {
-	        	OperadorAR = "ORDENAR";
+	        	OperadorAR = "ORDENAR POR";
 	        } else if (query.contains("AGRUPAR") || query.contains("agrupar")) {
-	        	OperadorAR = "AGRUPAR";
-	        } else if (query.contains("MAX") || query.contains("max") || query.contains("MIN") || query.contains("min") ||
+	        	OperadorAR = "AGRUPAR POR";
+	        } else if (query.contains("funcion_agregacion") ||query.contains("MAX") || query.contains("max") || query.contains("MIN") || query.contains("min") ||
 	        		query.contains("SUM") || query.contains("sum") || query.contains("COUNT") || query.contains("count")) {
 	        	OperadorAR = "FUNCION_AGREGACION";
 	        }
-	    }
 
 	    return OperadorAR;
 	}
@@ -1405,7 +1394,7 @@ public class GestionarEjerciciosBean implements Serializable {
 								
 								if(relacion != null && atributos.length == relacion.getAtributos().size()){
 									
-									
+									 
 									System.out.println(aux3[0]);
 									System.out.println(aux1[0]);
 									//System.out.println(att);

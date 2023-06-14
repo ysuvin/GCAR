@@ -11,11 +11,11 @@
   		<h:form>
   			<h:panelGrid columns="3" columnClasses="logoUV,titulo,login">
   				
-  				<h:graphicImage value="#{resource['img:logo_uv.png']}" styleClass="logo"/>
-  				
+  				<img id="logo_img" class="logo" alt="Logo UV" />
+			
   				<p:commandLink action="home" styleClass="linkTitulo" >
   					<h:panelGrid>
-  						<h:outputText id="titulo" value="GCAR - Gestión de Consultas en Álgebra Relacional" styleClass="tituloHeader"/>
+  						<h:outputText id="titulo" value="GCAR - Gestión de Consultas en Álgebra Relacional y SQL" styleClass="tituloHeader"/>
   					</h:panelGrid>
   				</p:commandLink>
   				
@@ -23,8 +23,13 @@
   				
   			</h:panelGrid>
    		</h:form>
-   	
-
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+			    var logo = document.getElementById('logo_img');
+			
+			    logo.src = "#{resource['img:logo_uv.png']}";
+			}, false);
+		</script>
 </h:body>
 
 </html>

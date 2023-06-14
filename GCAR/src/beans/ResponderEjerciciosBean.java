@@ -1,6 +1,7 @@
 package beans;
 	 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -21,6 +22,7 @@ import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
 
 import dao.ConsultaDAO;
+import dao.ConsultaDAOSQL;
 import dao.EjercicioDAO;
 import dao.ResultadoDAO;
 import parser.AlgebraRelacionalLexer;
@@ -34,6 +36,7 @@ import util.Respuesta;
 import util.Resultado;
 import util.TuplaBean;
 import util.UserBean;
+import util.EstadisticasEjecutorAR;
  
 @ManagedBean(name="dtResponderEjerciciosBean")
 @ViewScoped
@@ -378,6 +381,82 @@ public class ResponderEjerciciosBean implements Serializable {
 			return true;
 		}
 	}
+	
+	private String obtenerOperador(String query) {
+	    String OperadorAR = null;   		    	
+	    	
+	        if (query.contains(":=")) {
+	        	OperadorAR = "ASIGNAR";
+	        } else if (query.contains("PROYECTAR") || query.contains("proyectar")) {
+	        	OperadorAR = "PROYECTAR";
+	        } else if (query.contains("RENOMBRAR") || query.contains("renombrar")) {
+	        	OperadorAR = "RENOMBRAR";
+	        } else if (query.contains("INTER") || query.contains("inter")) {
+	        	OperadorAR = "INTERSECCION";
+	        } else if (query.contains("DIFERENCIA") || query.contains("diferencia") ) {
+	        	OperadorAR = "DIFERENCIA";
+	        } else if (query.contains("CRUZ") || query.contains("cruz") ) {
+	        	OperadorAR = "PRODUCTO CRUZ";
+	        } else if (query.contains("DIVISION") || query.contains("division") ) {
+	        	OperadorAR = "DIVISION";
+	        } else if (query.contains("REUNION_NATURAL") || query.contains("reunion_natural")) {
+	        	OperadorAR = "REUNION NATURAL";
+	        } else if (query.contains("REUNION_EXT_IZQ") || query.contains("reunion_ext_izq")) {
+	        	OperadorAR = "REUNION_EXT_IZQ";
+	        } else if (query.contains("REUNION_EXT_DER") || query.contains("reunion_ext_der")) {
+	        	OperadorAR = "REUNION_EXT_DER";
+	        } else if (query.contains("REUNION_EXT_FULL") || query.contains("reunion_ext_full")) {
+	        	OperadorAR = "REUNION_EXT_FULL";
+	        } else if (query.contains("UNION") || query.contains("union")) {
+	        	OperadorAR = "UNION";
+	        } else if (query.contains("SELECCIONAR") || query.contains("seleccionar")) {
+	        	OperadorAR = "SELECCIONAR";
+	        } else if (query.contains("ORDENAR") || query.contains("ordenar")) {
+	        	OperadorAR = "ORDENAR POR";
+	        } else if (query.contains("AGRUPAR") || query.contains("agrupar")) {
+	        	OperadorAR = "AGRUPAR POR";
+	        } else if (query.contains("funcion_agregacion") ||query.contains("MAX") || query.contains("max") || query.contains("MIN") || query.contains("min") ||
+	        		query.contains("SUM") || query.contains("sum") || query.contains("COUNT") || query.contains("count")) {
+	        	OperadorAR = "FUNCION_AGREGACION";
+	        }
+
+	    return OperadorAR;
+	}
+	
+	
+	private String clasificarError(String errorMessage) {
+        if (errorMessage == null) {
+            return null;
+        }
+        if (errorMessage.contains("no tables specified is not valid")) {
+            return "Tabla no especificada";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("does not exist")) {
+            return "Columna inexistente";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("specified more than once")) {
+            return "Columna duplicada";
+        }
+        if (errorMessage.contains("relation") && errorMessage.contains("does not exist")) {
+            return "Relacion inexistente";
+        }
+        if (errorMessage.contains("syntax error at or near")) {
+            return "Error de sintaxis";
+        }
+        if (errorMessage.contains("function") && errorMessage.contains("does not exist")) {
+            return "Funcion desconocida";
+        }
+        if (errorMessage.contains("argument of WHERE must be type boolean, not type")) {
+            return "Argumento Where incorrecto";
+        }
+        if (errorMessage.contains("column reference") && errorMessage.contains("is ambiguous")) {
+            return "Referencia columna ambigua";
+        }
+        return "otro";
+}
+
+	
+	
 
 	// Filtra consulta y luego las ejecuta
 	public void ejecutar(){
@@ -397,16 +476,35 @@ public class ResponderEjerciciosBean implements Serializable {
 			// Ejecuta la consulta
 			parser.st();
 			
+			ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+			UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
+				    .getELResolver().getValue(elContext, null, "usuario");
+			EsquemaBean esquema = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
+				    .getELResolver().getValue(elContext, null, "bd");
+			RelacionBean resultado = new RelacionBean();
+			
+			
+			EstadisticasEjecutorAR estadisticas = new EstadisticasEjecutorAR();
+			estadisticas.setRut(userBean.getRut());
+			estadisticas.setBd(esquema.getNombre());
+			estadisticas.setQuery(query);
+			estadisticas.setOperador(obtenerOperador(query));
+			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+			String fechaEjecucion = ConsultaDAOSQL.fechaHora(timestamp);
+			estadisticas.setFecha(fechaEjecucion);
+			
+			
+			
 			// Revisa si tiene errores de sintaxis
 			if(parser.getNumberOfSyntaxErrors() == 0){
 				System.out.println("Query AR: " + query);
-				
-				ELContext elContext = FacesContext.getCurrentInstance().getELContext();
-				UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
-					    .getELResolver().getValue(elContext, null, "usuario");
-				EsquemaBean esquema = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
-					    .getELResolver().getValue(elContext, null, "bd");
-				RelacionBean resultado = new RelacionBean();
+// cambio 1				
+//				ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+//				UserBean userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
+//					    .getELResolver().getValue(elContext, null, "usuario");
+//				EsquemaBean esquema = (EsquemaBean) FacesContext.getCurrentInstance().getApplication()
+//					    .getELResolver().getValue(elContext, null, "bd");
+//				RelacionBean resultado = new RelacionBean();
 				
 				if(query.contains(":=")){ // Revisa si es una consulta de asignacion
 					boolean band = false;
@@ -1093,6 +1191,10 @@ public class ResponderEjerciciosBean implements Serializable {
 							data.add(t.getAtributos());
 
 						queryList = queryList + query + "\n";
+						estadisticas.setQuery_correcta(true);
+			            estadisticas.setQuery_incorrecta(false);
+			            estadisticas.setDescripcion_error(null);
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
 						
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1104,6 +1206,13 @@ public class ResponderEjerciciosBean implements Serializable {
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 						System.out.println("Error: " + resultado.getNombre());
 						consulta.setError("Error Postgresql");
+						estadisticas.setQuery_correcta(false);
+			            estadisticas.setQuery_incorrecta(true);
+			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
+			            estadisticas.setDescripcion_error(resultado.getNombre());
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
+						
+						
 					}
 					
 				}else{					  // Consulta normal
@@ -1549,6 +1658,13 @@ public class ResponderEjerciciosBean implements Serializable {
 							data.add(t.getAtributos());
 						
 						queryList = queryList + query + "\n";
+						
+						estadisticas.setQuery_correcta(true);
+			            estadisticas.setQuery_incorrecta(false);
+			            estadisticas.setDescripcion_error(null);
+			            estadisticas.setDescripcion_error(null);
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
+					
 					
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1560,6 +1676,11 @@ public class ResponderEjerciciosBean implements Serializable {
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 						System.out.println("Error: " + resultado.getNombre());
 						consulta.setError("Error Postgresql");
+						estadisticas.setQuery_correcta(false);
+			            estadisticas.setQuery_incorrecta(true);
+			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
+			            estadisticas.setDescripcion_error(resultado.getNombre());
+			            ConsultaDAO.insertarEstadisticas(estadisticas);
 					}
 					
 					
@@ -1573,6 +1694,12 @@ public class ResponderEjerciciosBean implements Serializable {
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error de sintaxis en consulta de Algebra Relacional","");
 				consulta.setError("Error de sintaxis de lenguaje AR");
 	       		FacesContext.getCurrentInstance().addMessage(null, msg);
+	       		estadisticas.setQuery_correcta(false);
+	            estadisticas.setQuery_incorrecta(true);
+	            estadisticas.setClasificacion_error("Error de Sintaxis");
+	            estadisticas.setDescripcion_error("Error de sintaxis en consulta de Algebra Relacional");
+	            
+	            ConsultaDAO.insertarEstadisticas(estadisticas);
 			}
 		} catch (RecognitionException e) {
 			tableName = "";

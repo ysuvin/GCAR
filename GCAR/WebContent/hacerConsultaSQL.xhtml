@@ -32,15 +32,19 @@
 			<h:form id="form" onkeypress="if (event.keyCode == 13) {return false; }">
 				<p:growl id="growl" showDetail="false"/>
 				
-				<p:dialog id="help" widgetVar="dlg" header="Ayuda" resizable="false" showEffect="fade" hideEffect="fade">
-					<p:fieldset legend="Hacer Consulta SQL" style="font-weight: bold;" >
-						<h2/>
-						1. El nombre de las <h:outputText value="Relaciones" style="color:#e69700"/> de la Base de Datos cargada, adem&#225;s de las <h:outputText value="Relaciones Auxiliares" style="color:#e69700"/> generadas en cada consulta, se muestran a la Izquierda de la pantalla <p/>
-						2. Luego de ingresar la consulta, seleccione el bot&#243;n <p:commandButton value="Ejecutar" icon="ui-icon-check" readonly="true" /> para ejecutar la consulta SQL <p/>
-						3. En la secci&#243;n <p:commandButton value="Historial" readonly="true" /> se guarda el Historial de consultas realizadas <p/>
-						4. Todas las clausulas de <strong>Manipulaci&#243;n de Tablas</strong> estan bloqueadas. Solo se permiten Clausulas de Consulta. <p/>
-						<h2/>
-					</p:fieldset>
+				<p:dialog id="help" widgetVar="dlg" header="Ayuda" resizable="false" showEffect="fade" hideEffect="fade" style="width:1000px;">
+					<p:scrollPanel style="width:100%; height: auto; border: none;">
+						<p:fieldset legend="Hacer Consulta SQL" style="font-weight: bold;" >
+							<h2/>
+							1. En la secci&#243;n <h:outputText value="Consultas" style="color:#e69700"/> si usted posciciona el puntero sobre uno de los 16 botones, se desplgar&#225; un cuadro de ayuda para utilizar la <h:outputText value="Cl&#225;usula" style="color:#e69700"/> de SQL<p/>
+							2. En la secci&#243;n <h:outputText value="Consultas" style="color:#e69700"/> usted puede seleccionar cualquier bot&#243;n y se insertar&#225; la <h:outputText value="Cl&#225;usula" style="color:#e69700"/> dentro del cuadro de texto <p/>													
+							3. Luego de ingresar la consulta, seleccione el bot&#243;n <p:commandButton value="Ejecutar" icon="ui-icon-check" readonly="true" /> para ejecutar la consulta <p/>
+							4. En la secci&#243;n <p:commandButton value="Historial" readonly="true" /> se guarda el historial de consultas realizadas <p/>
+							5. El nombre de las <h:outputText value="Relaciones" style="color:#e69700"/>, <h:outputText value="Atributos" style="color:#e69700"/>, <h:outputText value="Tipo de Dato" style="color:#e69700"/> y <h:outputText value="Clave Primaria" style="color:#e69700"/> de la Base de Datos cargada, adem&#225;s de las <h:outputText value="Relaciones Auxiliares" style="color:#e69700"/> con todos sus datos, se muestran a la Izquierda de la pantalla <p/>
+							6. Todas las <h:outputText value="Cl&#225;usulas" style="color:#e69700"/> de <strong>Manipulaci&#243;n de Tablas</strong> estan bloqueadas. Solo se permiten <h:outputText value="Cl&#225;usulas" style="color:#e69700"/> de consulta <p/>
+							<h2/>
+						</p:fieldset>
+					</p:scrollPanel>
 			    </p:dialog>  
 			    
 				<p:fieldset styleClass="divs">
@@ -63,18 +67,17 @@
 								<p:tooltip for="selectButton" escape="false">
 							        <div>
 							            <strong>SELECT</strong><br/>
-							            Se usa para especificar los nombres de los campos que contienen los datos que quiere usar en una consulta.<br/>
+							            Se utiliza para especificar los nombres de los campos que contienen los datos que quiere usar en una consulta.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>" y "<strong>tabla</strong>"<br/>
-							            Ingresar nombre de las columnas a consultar o "<strong>*</strong>" (asterisco) para todas las columnas de una tabla en espec&#237;fico.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>"<br/>
+							            Por nombre de las columnas a consultar o "<strong>*</strong>" (asterisco) para todas las columnas de una tabla en espec&#237;fico.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-							            <br/>
-							            <strong>SELECT *</strong><br/>
-							            <strong>FROM trabajador;</strong>					            						            
+							            SELECT *<br/>
+							            FROM trabajador;					            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>		
@@ -88,15 +91,14 @@
 							            Especifica las tablas o consultas que contienen los datos que se usar&#225;n en la cl&#225;usula SELECT.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>" y "<strong>tabla</strong>"<br/>
-							            Ingresar nombre de las columnas a consultar o "<strong>*</strong>" (asterisco) para todas las columnas de una tabla en espec&#237;fico.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>"<br/>
+							            Por nombre de las columnas a consultar o "<strong>*</strong>" (asterisco) para todas las columnas de una tabla en espec&#237;fico.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-							            <br/>
-							            <strong>SELECT id_trabajador, nom_trabajador</strong><br/>
-							            <strong>FROM trabajador;</strong>					            						            
+							            SELECT id_trabajador, nom_trabajador<br/>
+							            FROM trabajador;				            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>	
@@ -111,17 +113,16 @@
 							            y operadores l&#243;gicos como "AND", "OR", "NOT".<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
 							            WHERE <strong>condiciones</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>", "<strong>tabla</strong>" y "<strong>condiciones</strong>"<br/>
-							            Ingresar columnas a consultar de una tabla en espec&#237;fico junto a las condiciones para filtrar los datos de estas.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>", "<strong>tabla</strong>" y "<strong>condiciones</strong>"<br/>
+							            Por columnas a consultar de una tabla en espec&#237;fico junto a las condiciones para filtrar los datos de estas.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", cosultando trabajadores que tengan una tarifa mayor a 100:</strong><br/>
-							            <br/>
-							            <strong>SELECT nom_trabajador, tarifa_sem</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>WHERE tarifa_sem > 100;</strong>					            						            
+							            SELECT nom_trabajador, tarifa_sem<br/>
+							            FROM trabajador<br/>
+							            WHERE tarifa_sem > 100;					            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -134,15 +135,14 @@
 							            Hace que la consulta omita los resultados duplicados.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT DISTINCT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT DISTINCT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>" y "<strong>tabla</strong>".<br/>
-							            Ingresar nombre de las columnas a consultar o "<strong>*</strong>" (asterisco) para todas las columnas de una tabla en espec&#237;fico.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>".<br/>
+							            Por nombre de las columnas a consultar o "<strong>*</strong>" (asterisco) para todas las columnas de una tabla en espec&#237;fico.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta los oficios existentes en la tabla trabajador:</strong><br/>
-							            <br/>
-							            <strong>SELECT DISTINCT oficio</strong><br/>
-							            <strong>FROM trabajador;</strong>				            						            
+							            SELECT DISTINCT oficio<br/>
+							            FROM trabajador;				            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -155,17 +155,16 @@
 							            Ordena el resultado de una consulta por uno o m&#225;s campos especificos en orden ascendente o descendente.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
-							            ORDER BY <strong>columna1 ASC/DESC, columna2 ASC/DESC, ...</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>", "<strong>tabla</strong>" y "<strong>columna1 ASC/DESC, columna2 ASC/DESC, ...</strong>".<br/>
-							            Ingresar la o las columnas de una tabla y la o las columnas a ordenar con un orden especifico.<br/>
+							            ORDER BY <strong>columna1 ASC/DESC, columna2 ASC/DESC, ..., columnaN ASC/DESC</strong>;<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>", "<strong>tabla</strong>" y "<strong>columna1 ASC/DESC, columna2 ASC/DESC, ..., columnaN ASC/DESC</strong>".<br/>
+							            Por la o las columnas de una tabla y la o las columnas a ordenar con un orden especifico.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consultan las tarifas de trabajadores en orden ascendente:</strong><br/>
-							            <br/>
 							            <strong>SELECT nom_trabajador, tarifa_sem</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>ORDER BY tarifa_sem ASC;</strong>				            						            
+							            FROM trabajador<br/>
+							            ORDER BY tarifa_sem ASC;				            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -180,17 +179,16 @@
 							            como "=", "&#60;", "&#62;", "&#60;=", "&#62;=", "&#60;&#62;" y operadores l&#243;gicos como "AND" y "OR".<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
 							            INNER JOIN <strong>tabla2</strong> ON <strong>condiciones</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
-							            Ingresar la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
+							            Por la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-							            <br/>
-							            <strong>SELECT *</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>INNER JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;</strong>		            						            
+							            SELECT *<br/>
+							            FROM trabajador<br/>
+							            INNER JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;	            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -206,17 +204,16 @@
 							            como "=", "&#60;", "&#62;", "&#60;=", "&#62;=", "&#60;&#62;" y operadores l&#243;gicos como "AND" y "OR".<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
 							            LEFT JOIN <strong>tabla2</strong> ON <strong>condiciones</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
-							            Ingresar la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
+							            Por la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-							            <br/>
-							            <strong>SELECT *</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>LEFT JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;</strong>		            						            
+							            SELECT *<br/>
+							            FROM trabajador<br/>
+							            LEFT JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;	            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -232,17 +229,16 @@
 							            como "=", "&#60;", "&#62;", "&#60;=", "&#62;=", "&#60;&#62;" y operadores l&#243;gicos como "AND" y "OR".<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
 							            RIGHT JOIN <strong>tabla2</strong> ON <strong>condiciones</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
-							            Ingresar la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
+							            Por la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-							            <br/>
-							            <strong>SELECT *</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>RIGHT JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;</strong>		            						            
+							            SELECT *<br/>
+							            FROM trabajador<br/>
+							            RIGHT JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -257,17 +253,16 @@
 							            "&#62;", "&#60;=", "&#62;=", "&#60;&#62;" y operadores l&#243;gicos como "AND" y "OR".<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>columna1, columna2, ...</strong><br/>
+							            SELECT <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
 							            FULL JOIN <strong>tabla2</strong> ON <strong>condiciones</strong>;<br/>
-							            Borrar "<strong>columna1, columna2, ...</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
-							            Ingresar la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
+							            Reemplazar "<strong>columna1, columna2, ..., columnaN</strong>", "<strong>tabla</strong>", "<strong>tabla2</strong>" y "<strong>condiciones</strong>".<br/>
+							            Por la o las columnas de una tabla y otra tabla con una o mas condiciones a combinar.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-							            <br/>
-							            <strong>SELECT *</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>FULL JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;</strong>		            						            
+							            SELECT *<br/>
+							            FROM trabajador<br/>
+							            FULL JOIN asignacion ON trabajador.id_trabajador = asignacion.id_trabajador1;	            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -283,17 +278,16 @@
 							            Funciones de agregaci&#243;n  disponibles SUM, AVG, COUNT, MAX, MIN.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>agregacion(columna1), columna2, ...</strong><br/>
+							            SELECT <strong>agregacion(columna1), columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
-							            GROUP BY <strong>columna1, columna2, ...</strong>;<br/>
-							            Borrar "<strong>agregacion(columna1), columna2, ...</strong>", "<strong>tabla</strong>" y "<strong>columna1, columna2, ...</strong>".<br/>
-							            Ingresar la o las columnas con una funcion de agregaci&#243;n, de una tabla y la o las columnas a agrupar.<br/>
+							            GROUP BY <strong>columna1, columna2, ..., columnaN</strong>;<br/>
+							            Reemplazar "<strong>agregacion(columna1), columna2, ..., columnaN</strong>", "<strong>tabla</strong>" y "<strong>columna1, columna2, ..., columnaN</strong>".<br/>
+							            Por la o las columnas con una funcion de agregaci&#243;n, de una tabla y la o las columnas a agrupar.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta el total de tarifa por oficio de los trabajdores:</strong><br/>
-							            <br/>
-							            <strong>SELECT oficio, SUM(tarifa_sem)</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>GROUP BY oficio;</strong>				            						            
+							            SELECT oficio, SUM(tarifa_sem)<br/>
+							            FROM trabajador<br/>
+							            GROUP BY oficio;				            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -308,19 +302,18 @@
 							            La condici&#243;n de agregaci&#243;n puede ser cualquier expresi&#243;n que utilice las funciones de agregaci&#243;n, operadores l&#243;gicos y de comparaci&#243;n.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>agregacion(columna1), columna2, ...</strong><br/>
+							            SELECT <strong>agregacion(columna1), columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong><br/>
-							            GROUP BY <strong>columna1, columna2, ...</strong><br/>
+							            GROUP BY <strong>columna1, columna2, ..., columnaN</strong><br/>
 							            HAVING <strong>condiciones</strong>;<br/>
-							            Borrar "<strong>agregacion(columna1), columna2, ...</strong>", "<strong>tabla</strong>" y "<strong>columna1, columna2, ...</strong>".<br/>
-							            Ingresar la o las columnas con una funci&#243;n de agregaci&#243;n, de una tabla, la o las columnas a agrupar y su condici&#243;n de agregaci&#243;n.<br/>
+							            Reemplazar "<strong>agregacion(columna1), columna2, ..., columnaN</strong>", "<strong>tabla</strong>" y "<strong>columna1, columna2, ..., columnaN</strong>".<br/>
+							            Por la o las columnas con una funci&#243;n de agregaci&#243;n, de una tabla, la o las columnas a agrupar y su condici&#243;n de agregaci&#243;n.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta el total mayor a 200 de tarifa por oficio de los trabajdores:</strong><br/>
-							            <br/>
-							            <strong>SELECT oficio, SUM(tarifa_sem)</strong><br/>
-							            <strong>FROM trabajador</strong><br/>
-							            <strong>GROUP BY oficio;</strong><br/>
-							            <strong>HAVING SUM(tarifa_sem) > 200;</strong>				            						            
+							            SELECT oficio, SUM(tarifa_sem)<br/>
+							            FROM trabajador<br/>
+							            GROUP BY oficio;<br/>
+							            HAVING SUM(tarifa_sem) > 200;				            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -330,19 +323,18 @@
 								<p:tooltip for="countButton" escape="false">
 							        <div>
 							            <strong>COUNT</strong><br/>
-							            Esta Funci&#243;n calcula el n&#233;mero de filas en una tabla o el n&#233;mero de valores no nulos en una columna.<br/>
+							            Esta Funci&#243;n calcula el n&#250;mero de filas en una tabla o el n&#250;mero de valores no nulos en una columna.<br/>
 							            La cl&#225;usula AS se utiliza para asignar un alias o nombre alternativo a una columna o una tabla en una consulta.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>COUNT(columna1) AS nuevo_nombre_columna, columna2, ...</strong><br/>
+							            SELECT <strong>COUNT(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>COUNT(columna1) AS nuevo_nombre_columna, columna2, ...</strong>" y "<strong>tabla</strong>"<br/>
-							            Ingresar columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
+							            Reemplazar "<strong>COUNT(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>"<br/>
+							            Por columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta el n&#233;mero total de trabajadores:</strong><br/>
-							            <br/>
-							            <strong>SELECT COUNT(*) AS total_trabajadores</strong><br/>
-							            <strong>FROM trabajador;</strong>					            						            
+							            SELECT COUNT(*) AS total_trabajadores<br/>
+							            FROM trabajador;					            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>	
@@ -356,15 +348,14 @@
 							            La cl&#225;usula AS se utiliza para asignar un alias o nombre alternativo a una columna o una tabla en una consulta.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>SUM(columna1) AS nuevo_nombre_columna, columna2, ...</strong><br/>
+							            SELECT <strong>SUM(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>SUM(columna1) AS nuevo_nombre_columna, columna2, ...</strong>" y "<strong>tabla</strong>"<br/>
-							            Ingresar columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
+							            Reemplazar "<strong>SUM(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>"<br/>
+							            Por columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta el total de tarifa de todos los trabajadores juntos:</strong><br/>
-							            <br/>
-							            <strong>SELECT SUM(tarifa_sem) AS total_tarifa</strong><br/>
-							            <strong>FROM trabajador;</strong>					            						            
+							            SELECT SUM(tarifa_sem) AS total_tarifa<br/>
+							            FROM trabajador;				            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -378,15 +369,14 @@
 							            La cl&#225;usula AS se utiliza para asignar un alias o nombre alternativo a una columna o una tabla en una consulta.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>AVG(columna1) AS nuevo_nombre_columna, columna2, ...</strong><br/>
+							            SELECT <strong>AVG(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>AVG(columna1) AS nuevo_nombre_columna, columna2, ...</strong>" y "<strong>tabla</strong>"<br/>
-							            Ingresar columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
+							            Reemplazar "<strong>AVG(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>"<br/>
+							            Por columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta el promedio de tarifa de todos los trabajadores:</strong><br/>
-							            <br/>
-							            <strong>SELECT AVG(tarifa_sem) AS promedio_tarifa</strong><br/>
-							            <strong>FROM trabajador;</strong>					            						            
+							            SELECT AVG(tarifa_sem) AS promedio_tarifa<br/>
+							            FROM trabajador;					            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -400,15 +390,14 @@
 							            La cl&#225;usula AS se utiliza para asignar un alias o nombre alternativo a una columna o una tabla en una consulta.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>MAX(columna1) AS nuevo_nombre_columna, columna2, ...</strong><br/>
+							            SELECT <strong>MAX(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>MAX(columna1) AS nuevo_nombre_columna, columna2, ...</strong>" y "<strong>tabla</strong>"<br/>
-							            Ingresar columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
+							            Reemplazar "<strong>MAX(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>"<br/>
+							            Por columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta la tarifa m&#225;s alta:</strong><br/>
-							            <br/>
-							            <strong>SELECT MAX(tarifa_sem) AS tarifa_max</strong><br/>
-							            <strong>FROM trabajador;</strong>					            						            
+							            SELECT MAX(tarifa_sem) AS tarifa_max<br/>
+							            FROM trabajador;					            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -422,15 +411,14 @@
 							            La cl&#225;usula AS se utiliza para asignar un alias o nombre alternativo a una columna o una tabla en una consulta.<br/>
 							            <br/>
 							            <strong>Estructura:</strong><br/>
-							            SELECT <strong>MIN(columna1) AS nuevo_nombre_columna, columna2, ...</strong><br/>
+							            SELECT <strong>MIN(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong><br/>
 							            FROM <strong>tabla</strong>;<br/>
-							            Borrar "<strong>MIN(columna1) AS nuevo_nombre_columna, columna2, ...</strong>" y "<strong>tabla</strong>"<br/>
-							            Ingresar columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
+							            Reemplazar "<strong>MIN(columna1) AS nuevo_nombre_columna, columna2, ..., columnaN</strong>" y "<strong>tabla</strong>"<br/>
+							            Por columna m&#225;s una funcion de agregaci&#243;n y un nuevo nombre de columna para aplicar a una tabla.<br/>
 							            <br/>
 							            <strong>Ejemplo de uso utilizando la BD "empleados_sv", donde se consulta la tarifa m&#225;s baja:</strong><br/>
-							            <br/>
-							            <strong>SELECT MIN(tarifa_sem) AS tarifa_min</strong><br/>
-							            <strong>FROM trabajador;</strong>					            						            
+							            SELECT MIN(tarifa_sem) AS tarifa_min<br/>
+							            FROM trabajador;					            						            
 							        </div>
 							    </p:tooltip>
 							</p:commandButton>
@@ -442,7 +430,7 @@
 				
 				<h:panelGrid columns="2" style="width:100%; position: relative;">
 				    <p:inputTextarea rows="5" style="width:90%; resize: none;" id="query" value="#{dtGestionarEjerciciosBeanSQL.query}" onkeypress="handleKeyPress(event)" />
-				    <p:commandButton id="ejecutar" type="submit" title="Ejecutar" value="Ejecutar" ajax="false" 
+				    <p:commandButton id="ejecutar" type="submit" title="Ejecutar" value="Ejecutar" ajax="true" 
 				        action="#{dtGestionarEjerciciosBeanSQL.ejecutar}" icon="ui-icon-check" update="form :formDataList"
 				        style="position: absolute; top: 0; right: 0; margin-top: 10px; margin-right: 10px;" /> 	
 				</h:panelGrid>

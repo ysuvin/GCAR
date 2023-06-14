@@ -145,15 +145,7 @@
 			                    	validatorMessage="Debe ingresar sólo dígitos">
 			                    	<f:validateRegex pattern="[0-9]*$" />
 			                    </p:inputText>
-			                    <p:message for="año"/>
-			 
-			                    <h:outputText value="Vez Cursando *" />
-			                    <p:inputText id="vezCursado" value="#{gestionarCuentasBean.user.vezCursando}"
-			                    	required="true" requiredMessage="Debe ingresar la cantidad de veces que ha cursado Modelo de Datos"
-			                    	validatorMessage="Debe ingresar sólo dígitos">
-			                    	<f:validateRegex pattern="[0-9]*$" />
-			                    </p:inputText>
-			                    <p:message for="vezCursado"/>
+			                    <p:message for="año"/>			 
 			 
 			                </h:panelGrid>
 			            </p:panel>
@@ -211,8 +203,8 @@
 			                        <h:outputText value="Año Ingreso: " styleClass="formato"/>
 			                        <h:outputText value="#{gestionarCuentasBean.user.anyo}" styleClass="outputLabel"/>
 			 
-			                        <h:outputText value="Vez Cursando: " styleClass="formato"/>
-			                        <h:outputText value="#{gestionarCuentasBean.user.vezCursando}" styleClass="outputLabel"/>
+			                        <h:outputText value=" "/>
+									<p:spacer/>
 			                        
 			                        <h:outputText value=" "/>
 			                        <p:spacer/>

@@ -144,7 +144,7 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 	    return clausulaSQL;
 	}
 
-	private String obtenerClausula(String query) {
+	private String obtenerClausula2(String query) {
 	    String clausulaSQL = "SELECT";
 
 	    if (query.contains("WHERE") || query.contains("where") || query.contains("ORDER BY") || query.contains("order by") || query.contains("JOIN") || query.contains("join") ||
@@ -174,7 +174,35 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 
 	    return clausulaSQL;
 	}
+	
+	private String obtenerClausula(String query) {
+	    String clausulaSQL = "SELECT";
+    	
+	        if (query.contains("WHERE") || query.contains("where")) {
+	            clausulaSQL = "WHERE";
+	        }else if (query.contains("SELECT") && query.contains("DISTINCT") || query.contains("select") && query.contains("distinct")) {
+	            clausulaSQL = "DISTINCT"; 
+			}else if (query.contains("ORDER BY") || query.contains("order by")) {
+	            clausulaSQL = "ORDER BY";	       
+	        } else if (query.contains("INNER") && query.contains("JOIN") || query.contains("inner") && query.contains("join")) {
+	            clausulaSQL = "INNER JOIN";
+	        } else if (query.contains("LEFT") && query.contains("JOIN") || query.contains("left") && query.contains("join")) {
+	            clausulaSQL = "LEFT JOIN";
+	        } else if (query.contains("RIGHT") && query.contains("JOIN") || query.contains("right") && query.contains("join") ) {
+	            clausulaSQL = "RIGHT JOIN";
+	        } else if (query.contains("FULL") && query.contains("JOIN") || query.contains("full") && query.contains("join") ) {
+	            clausulaSQL = "FULL JOIN";
+	        } else if (query.contains("HAVING") || query.contains("having")) {
+	            clausulaSQL = "HAVING";
+	        }else if (query.contains("GROUP BY") || query.contains("group by") ) {
+	            clausulaSQL = "GROUP BY";	        
+	        }else if (query.contains("JOIN") || query.contains("join")) {
+	            clausulaSQL = "JOIN";
+	        }
+	    
 
+	    return clausulaSQL;
+	}
 
 	private String clasificarError(String errorMessage) {
         if (errorMessage == null) {

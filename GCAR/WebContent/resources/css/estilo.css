@@ -64,8 +64,15 @@
 	font-size: small;
 	font-style: italic;
 }
-.logo{
-	width:115px;
+.logo {
+    width: 115px;
+}
+.logo2 {
+    width: 150px;
+}
+
+.hidden {
+    display: none;
 }
 
 .divs{
@@ -160,3 +167,16 @@ body {
 .miDataList ul {
   padding-left: 10px;
 }
+
+.alignCenterMenuEst {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectOneListbox {
+	width: 250px;
+	height: 100px;
+	overflow-y: auto;
+}
+

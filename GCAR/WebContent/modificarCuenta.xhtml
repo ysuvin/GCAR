@@ -82,9 +82,6 @@
 			        <p:column headerText="Mail" filterBy="#{user.mail}" filterStyle="display:none" filterMatchMode="contains">
 			            <h:outputText value="#{user.mail}" />
 			        </p:column>
-			  		<p:column headerText="Vez Cursando" filterBy="#{user.vezCursando}" filterStyle="display:none">
-				        <h:outputText value="#{user.vezCursando}" />
-				    </p:column>
 			        <p:column headerText="Año de Ingreso" filterStyle="display:none" filterBy="#{user.anyo}">
 			            <h:outputText value="#{user.anyo}" />
 			        </p:column>			        
@@ -146,14 +143,7 @@
 					            requiredMessage="El campo Año Ingreso no debe ser vacío" required="true" label="text"
 			                    validatorMessage="Debe ingresar sólo dígitos">
 			                    <f:validateRegex pattern="[0-9]*$" />
-			                </p:inputText>
-					        
-					        <h:outputLabel for="vezCursando" value="Vez Cursando: *" />
-					            <p:inputText value="#{gestionarCuentasBean.selectedUser.vezCursando}" 
-					            requiredMessage="El campo Vez Cursando no debe ser vacío" required="true" label="text"
-					            validatorMessage="Debe ingresar sólo dígitos">
-			                    <f:validateRegex pattern="[0-9]*$" />
-			               </p:inputText>
+			                </p:inputText>					        
 					        
 					        <h:outputLabel for="edad" value="Año de Nacimiento: *" />
 					       	<p:inputText value="#{gestionarCuentasBean.selectedUser.edad}"
