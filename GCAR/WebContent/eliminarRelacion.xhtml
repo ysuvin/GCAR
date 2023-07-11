@@ -55,7 +55,7 @@
 				
 			    <p:dataTable id="radioDT" var="relacion" value="#{gestionarRelacionBean.relaciones}" widgetVar="relacionesTable"
 			                 emptyMessage="No se encuentran Relaciones con este criterio" filteredValue="#{gestionarRelacionBean.filteredRelaciones}"
-			                 paginator="true" rows="10"
+			                 paginator="true" rows="12"
 				             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 			        <f:facet name="header">
 			      		<p:outputPanel style="text-align: right;">
@@ -64,7 +64,7 @@
 			            </p:outputPanel>
 			        </f:facet>
 			      	<p:column style="width:35px;text-align: center">
-             			<p:commandButton process="radioDT" update=":form:relacionDetail" oncomplete="PF('relacionDialog').show()" icon="ui-icon-circle-close" title="Eliminar">
+             			<p:commandButton process="radioDT" update=":form:relacionDetail" oncomplete="PF('relacionDialog').show()" icon="ui-icon-trash" title="Eliminar">
                 			<f:setPropertyActionListener value="#{relacion}" target="#{gestionarRelacionBean.selectedRelacion}" />
             			</p:commandButton>
             		</p:column>
@@ -102,7 +102,7 @@
 				    </p:fieldset>			    
 				    
 			        <h:panelGrid style="margin:0 auto !important;">    
-			            <p:commandButton update="form" icon="ui-icon-circle-close" value="Eliminar" ajax="false" action="#{gestionarRelacionBean.eliminarRelacion}" />
+			            <p:commandButton update="form" icon="ui-icon-trash" value="Eliminar" ajax="false" action="#{gestionarRelacionBean.eliminarRelacion}" />
 			        </h:panelGrid>
 			            	
 			        </p:outputPanel>

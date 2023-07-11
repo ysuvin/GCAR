@@ -1,4 +1,4 @@
-// $ANTLR null G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g 2023-05-30 17:17:44
+// $ANTLR null G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g 2023-07-04 17:34:48
 package parser;
 import org.antlr.runtime.*;
 import java.util.Stack;
@@ -8,20 +8,19 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class AlgebraRelacionalParser extends Parser {
 	public static final String[] tokenNames = new String[] {
-		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "CAD", "NUM", "WS", "'!='", "'('", 
-		"')'", "','", "'-'", "'.'", "':='", "'<'", "'<='", "'='", "'>'", "'>= '", 
-		"'AGRUPAR'", "'AND'", "'ASC'", "'AVG'", "'COUNT'", "'CRUZ'", "'DESC'", 
-		"'DIFERENCIA'", "'DIVISION'", "'INTER'", "'MAX'", "'MIN'", "'OR'", "'ORDENAR'", 
-		"'PROYECTAR'", "'RENOMBRAR'", "'REUNION'", "'REUNION_EXT_DER'", "'REUNION_EXT_FULL'", 
-		"'REUNION_EXT_IZQ'", "'REUNION_NATURAL'", "'SELECCIONAR'", "'SUM'", "'UNION'", 
-		"'\\u0027'", "'agrupar'", "'and'", "'asc'", "'avg'", "'count'", "'cruz'", 
-		"'desc'", "'diferencia'", "'division'", "'inter'", "'max'", "'min'", "'or'", 
-		"'ordenar'", "'proyectar'", "'renombrar'", "'reunion'", "'reunion_ext_der'", 
-		"'reunion_ext_full'", "'reunion_ext_izq'", "'reunion_natural'", "'seleccionar'", 
-		"'sum'", "'union'"
+		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "ASSIGN", "CAD", "NUM", "WS", 
+		"'!='", "'('", "')'", "','", "'-'", "'.'", "'<'", "'<='", "'='", "'>'", 
+		"'>= '", "'AGRUPAR'", "'AND'", "'ASC'", "'AVG'", "'COUNT'", "'CRUZ'", 
+		"'DESC'", "'DIFERENCIA'", "'DIVISION'", "'INTER'", "'MAX'", "'MIN'", "'OR'", 
+		"'ORDENAR'", "'PROYECTAR'", "'RENOMBRAR'", "'REUNION'", "'REUNION_EXT_DER'", 
+		"'REUNION_EXT_FULL'", "'REUNION_EXT_IZQ'", "'REUNION_NATURAL'", "'SELECCIONAR'", 
+		"'SUM'", "'UNION'", "'\\u0027'", "'agrupar'", "'and'", "'asc'", "'avg'", 
+		"'count'", "'cruz'", "'desc'", "'diferencia'", "'division'", "'inter'", 
+		"'max'", "'min'", "'or'", "'ordenar'", "'proyectar'", "'renombrar'", "'reunion'", 
+		"'reunion_ext_der'", "'reunion_ext_full'", "'reunion_ext_izq'", "'reunion_natural'", 
+		"'seleccionar'", "'sum'", "'union'"
 	};
 	public static final int EOF=-1;
-	public static final int T__7=7;
 	public static final int T__8=8;
 	public static final int T__9=9;
 	public static final int T__10=10;
@@ -82,9 +81,10 @@ public class AlgebraRelacionalParser extends Parser {
 	public static final int T__65=65;
 	public static final int T__66=66;
 	public static final int T__67=67;
-	public static final int CAD=4;
-	public static final int NUM=5;
-	public static final int WS=6;
+	public static final int ASSIGN=4;
+	public static final int CAD=5;
+	public static final int NUM=6;
+	public static final int WS=7;
 
 	// delegates
 	public Parser[] getDelegates() {
@@ -118,7 +118,7 @@ public class AlgebraRelacionalParser extends Parser {
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0==CAD) ) {
 				int LA1_1 = input.LA(2);
-				if ( (LA1_1==13) ) {
+				if ( (LA1_1==ASSIGN) ) {
 					alt1=1;
 				}
 				else if ( (LA1_1==24||LA1_1==26||LA1_1==28||(LA1_1 >= 36 && LA1_1 <= 39)||LA1_1==42||LA1_1==49||LA1_1==51||LA1_1==53||(LA1_1 >= 61 && LA1_1 <= 64)||LA1_1==67) ) {
@@ -138,7 +138,7 @@ public class AlgebraRelacionalParser extends Parser {
 				}
 
 			}
-			else if ( (LA1_0==8||(LA1_0 >= 22 && LA1_0 <= 23)||(LA1_0 >= 29 && LA1_0 <= 30)||(LA1_0 >= 32 && LA1_0 <= 34)||(LA1_0 >= 40 && LA1_0 <= 41)||(LA1_0 >= 47 && LA1_0 <= 48)||(LA1_0 >= 54 && LA1_0 <= 55)||(LA1_0 >= 57 && LA1_0 <= 59)||(LA1_0 >= 65 && LA1_0 <= 66)) ) {
+			else if ( (LA1_0==9||(LA1_0 >= 22 && LA1_0 <= 23)||(LA1_0 >= 29 && LA1_0 <= 30)||(LA1_0 >= 32 && LA1_0 <= 34)||(LA1_0 >= 40 && LA1_0 <= 41)||(LA1_0 >= 47 && LA1_0 <= 48)||(LA1_0 >= 54 && LA1_0 <= 55)||(LA1_0 >= 57 && LA1_0 <= 59)||(LA1_0 >= 65 && LA1_0 <= 66)) ) {
 				alt1=2;
 			}
 
@@ -186,17 +186,17 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "asg"
-	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:1: asg : rel ':=' con ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:1: asg : rel ASSIGN con ;
 	public final void asg() throws RecognitionException {
 		try {
-			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:5: ( rel ':=' con )
-			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:7: rel ':=' con
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:5: ( rel ASSIGN con )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:4:7: rel ASSIGN con
 			{
 			pushFollow(FOLLOW_rel_in_asg25);
 			rel();
 			state._fsp--;
 
-			match(input,13,FOLLOW_13_in_asg27); 
+			match(input,ASSIGN,FOLLOW_ASSIGN_in_asg27); 
 			pushFollow(FOLLOW_con_in_asg29);
 			con();
 			state._fsp--;
@@ -225,7 +225,322 @@ public class AlgebraRelacionalParser extends Parser {
 			{
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division | reunatural | reuizq | reuder | reuext )
 			int alt2=15;
-			alt2 = dfa2.predict(input);
+			switch ( input.LA(1) ) {
+			case CAD:
+				{
+				switch ( input.LA(2) ) {
+				case 24:
+				case 26:
+				case 28:
+				case 42:
+				case 49:
+				case 51:
+				case 53:
+				case 67:
+					{
+					alt2=1;
+					}
+					break;
+				case 39:
+				case 64:
+					{
+					alt2=12;
+					}
+					break;
+				case 38:
+				case 63:
+					{
+					alt2=13;
+					}
+					break;
+				case 36:
+				case 61:
+					{
+					alt2=14;
+					}
+					break;
+				case 37:
+				case 62:
+					{
+					alt2=15;
+					}
+					break;
+				default:
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 2, 1, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+				}
+				break;
+			case 40:
+			case 65:
+				{
+				alt2=2;
+				}
+				break;
+			case 33:
+			case 58:
+				{
+				alt2=3;
+				}
+				break;
+			case 34:
+			case 59:
+				{
+				int LA2_4 = input.LA(2);
+				if ( (LA2_4==9) ) {
+					alt2=6;
+				}
+				else if ( (LA2_4==CAD) ) {
+					int LA2_14 = input.LA(3);
+					if ( (LA2_14==9) ) {
+						int LA2_16 = input.LA(4);
+						if ( (LA2_16==CAD) ) {
+							int LA2_19 = input.LA(5);
+							if ( (LA2_19==11) ) {
+								alt2=4;
+							}
+							else if ( (LA2_19==10) ) {
+								int LA2_24 = input.LA(6);
+								if ( (LA2_24==9) ) {
+									alt2=4;
+								}
+								else if ( (LA2_24==EOF) ) {
+									alt2=5;
+								}
+
+								else {
+									int nvaeMark = input.mark();
+									try {
+										for (int nvaeConsume = 0; nvaeConsume < 6 - 1; nvaeConsume++) {
+											input.consume();
+										}
+										NoViableAltException nvae =
+											new NoViableAltException("", 2, 24, input);
+										throw nvae;
+									} finally {
+										input.rewind(nvaeMark);
+									}
+								}
+
+							}
+
+							else {
+								int nvaeMark = input.mark();
+								try {
+									for (int nvaeConsume = 0; nvaeConsume < 5 - 1; nvaeConsume++) {
+										input.consume();
+									}
+									NoViableAltException nvae =
+										new NoViableAltException("", 2, 19, input);
+									throw nvae;
+								} finally {
+									input.rewind(nvaeMark);
+								}
+							}
+
+						}
+
+						else {
+							int nvaeMark = input.mark();
+							try {
+								for (int nvaeConsume = 0; nvaeConsume < 4 - 1; nvaeConsume++) {
+									input.consume();
+								}
+								NoViableAltException nvae =
+									new NoViableAltException("", 2, 16, input);
+								throw nvae;
+							} finally {
+								input.rewind(nvaeMark);
+							}
+						}
+
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 2, 14, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+				}
+
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 2, 4, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+				}
+				break;
+			case 9:
+				{
+				int LA2_5 = input.LA(2);
+				if ( (LA2_5==CAD) ) {
+					int LA2_15 = input.LA(3);
+					if ( (LA2_15==10) ) {
+						int LA2_17 = input.LA(4);
+						if ( (LA2_17==35||LA2_17==60) ) {
+							alt2=7;
+						}
+						else if ( (LA2_17==19||LA2_17==44) ) {
+							alt2=8;
+						}
+
+						else {
+							int nvaeMark = input.mark();
+							try {
+								for (int nvaeConsume = 0; nvaeConsume < 4 - 1; nvaeConsume++) {
+									input.consume();
+								}
+								NoViableAltException nvae =
+									new NoViableAltException("", 2, 17, input);
+								throw nvae;
+							} finally {
+								input.rewind(nvaeMark);
+							}
+						}
+
+					}
+					else if ( (LA2_15==11) ) {
+						int LA2_18 = input.LA(4);
+						if ( (LA2_18==CAD) ) {
+							int LA2_22 = input.LA(5);
+							if ( (LA2_22==10) ) {
+								int LA2_25 = input.LA(6);
+								if ( (LA2_25==19||LA2_25==44) ) {
+									alt2=8;
+								}
+								else if ( (LA2_25==9) ) {
+									alt2=11;
+								}
+
+								else {
+									int nvaeMark = input.mark();
+									try {
+										for (int nvaeConsume = 0; nvaeConsume < 6 - 1; nvaeConsume++) {
+											input.consume();
+										}
+										NoViableAltException nvae =
+											new NoViableAltException("", 2, 25, input);
+										throw nvae;
+									} finally {
+										input.rewind(nvaeMark);
+									}
+								}
+
+							}
+							else if ( (LA2_22==11) ) {
+								alt2=8;
+							}
+
+							else {
+								int nvaeMark = input.mark();
+								try {
+									for (int nvaeConsume = 0; nvaeConsume < 5 - 1; nvaeConsume++) {
+										input.consume();
+									}
+									NoViableAltException nvae =
+										new NoViableAltException("", 2, 22, input);
+									throw nvae;
+								} finally {
+									input.rewind(nvaeMark);
+								}
+							}
+
+						}
+
+						else {
+							int nvaeMark = input.mark();
+							try {
+								for (int nvaeConsume = 0; nvaeConsume < 4 - 1; nvaeConsume++) {
+									input.consume();
+								}
+								NoViableAltException nvae =
+									new NoViableAltException("", 2, 18, input);
+								throw nvae;
+							} finally {
+								input.rewind(nvaeMark);
+							}
+						}
+
+					}
+
+					else {
+						int nvaeMark = input.mark();
+						try {
+							for (int nvaeConsume = 0; nvaeConsume < 3 - 1; nvaeConsume++) {
+								input.consume();
+							}
+							NoViableAltException nvae =
+								new NoViableAltException("", 2, 15, input);
+							throw nvae;
+						} finally {
+							input.rewind(nvaeMark);
+						}
+					}
+
+				}
+
+				else {
+					int nvaeMark = input.mark();
+					try {
+						input.consume();
+						NoViableAltException nvae =
+							new NoViableAltException("", 2, 5, input);
+						throw nvae;
+					} finally {
+						input.rewind(nvaeMark);
+					}
+				}
+
+				}
+				break;
+			case 32:
+			case 57:
+				{
+				alt2=9;
+				}
+				break;
+			case 22:
+			case 23:
+			case 29:
+			case 30:
+			case 41:
+			case 47:
+			case 48:
+			case 54:
+			case 55:
+			case 66:
+				{
+				alt2=10;
+				}
+				break;
+			default:
+				NoViableAltException nvae =
+					new NoViableAltException("", 2, 0, input);
+				throw nvae;
+			}
 			switch (alt2) {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:5:9: bin
@@ -547,18 +862,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_select161); 
+			match(input,9,FOLLOW_9_in_select161); 
 			pushFollow(FOLLOW_conds1_in_select162);
 			conds1();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_select163); 
-			match(input,8,FOLLOW_8_in_select164); 
+			match(input,10,FOLLOW_10_in_select163); 
+			match(input,9,FOLLOW_9_in_select164); 
 			pushFollow(FOLLOW_rel_in_select165);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_select166); 
+			match(input,10,FOLLOW_10_in_select166); 
 			}
 
 		}
@@ -589,18 +904,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_proy178); 
+			match(input,9,FOLLOW_9_in_proy178); 
 			pushFollow(FOLLOW_atts_in_proy179);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_proy180); 
-			match(input,8,FOLLOW_8_in_proy181); 
+			match(input,10,FOLLOW_10_in_proy180); 
+			match(input,9,FOLLOW_9_in_proy181); 
 			pushFollow(FOLLOW_rel_in_proy182);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_proy183); 
+			match(input,10,FOLLOW_10_in_proy183); 
 			}
 
 		}
@@ -635,18 +950,18 @@ public class AlgebraRelacionalParser extends Parser {
 			rel();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_renom1198); 
+			match(input,9,FOLLOW_9_in_renom1198); 
 			pushFollow(FOLLOW_atts_in_renom1199);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom1200); 
-			match(input,8,FOLLOW_8_in_renom1201); 
+			match(input,10,FOLLOW_10_in_renom1200); 
+			match(input,9,FOLLOW_9_in_renom1201); 
 			pushFollow(FOLLOW_rel_in_renom1202);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom1203); 
+			match(input,10,FOLLOW_10_in_renom1203); 
 			}
 
 		}
@@ -681,12 +996,12 @@ public class AlgebraRelacionalParser extends Parser {
 			rel();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_renom2218); 
+			match(input,9,FOLLOW_9_in_renom2218); 
 			pushFollow(FOLLOW_rel_in_renom2219);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom2220); 
+			match(input,10,FOLLOW_10_in_renom2220); 
 			}
 
 		}
@@ -717,18 +1032,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_renom3232); 
+			match(input,9,FOLLOW_9_in_renom3232); 
 			pushFollow(FOLLOW_atts_in_renom3233);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom3234); 
-			match(input,8,FOLLOW_8_in_renom3235); 
+			match(input,10,FOLLOW_10_in_renom3234); 
+			match(input,9,FOLLOW_9_in_renom3235); 
 			pushFollow(FOLLOW_rel_in_renom3236);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_renom3237); 
+			match(input,10,FOLLOW_10_in_renom3237); 
 			}
 
 		}
@@ -751,12 +1066,12 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:18:6: ( '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')' )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:18:8: '(' rel ')' ( 'reunion' | 'REUNION' ) '(' conds2 ')' '(' rel ')'
 			{
-			match(input,8,FOLLOW_8_in_join244); 
+			match(input,9,FOLLOW_9_in_join244); 
 			pushFollow(FOLLOW_rel_in_join245);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_join246); 
+			match(input,10,FOLLOW_10_in_join246); 
 			if ( input.LA(1)==35||input.LA(1)==60 ) {
 				input.consume();
 				state.errorRecovery=false;
@@ -765,18 +1080,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_join252); 
+			match(input,9,FOLLOW_9_in_join252); 
 			pushFollow(FOLLOW_conds2_in_join253);
 			conds2();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_join254); 
-			match(input,8,FOLLOW_8_in_join255); 
+			match(input,10,FOLLOW_10_in_join254); 
+			match(input,9,FOLLOW_9_in_join255); 
 			pushFollow(FOLLOW_rel_in_join256);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_join257); 
+			match(input,10,FOLLOW_10_in_join257); 
 			}
 
 		}
@@ -799,12 +1114,12 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:19:9: ( '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')' )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:19:11: '(' atts ')' ( 'agrupar' | 'AGRUPAR' ) fagregas '(' rel ')'
 			{
-			match(input,8,FOLLOW_8_in_groupby264); 
+			match(input,9,FOLLOW_9_in_groupby264); 
 			pushFollow(FOLLOW_atts_in_groupby266);
 			atts();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_groupby267); 
+			match(input,10,FOLLOW_10_in_groupby267); 
 			if ( input.LA(1)==19||input.LA(1)==44 ) {
 				input.consume();
 				state.errorRecovery=false;
@@ -817,12 +1132,12 @@ public class AlgebraRelacionalParser extends Parser {
 			fagregas();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_groupby277); 
+			match(input,9,FOLLOW_9_in_groupby277); 
 			pushFollow(FOLLOW_rel_in_groupby278);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_groupby279); 
+			match(input,10,FOLLOW_10_in_groupby279); 
 			}
 
 		}
@@ -857,12 +1172,12 @@ public class AlgebraRelacionalParser extends Parser {
 			orders();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_orderby296); 
+			match(input,9,FOLLOW_9_in_orderby296); 
 			pushFollow(FOLLOW_rel_in_orderby297);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_orderby298); 
+			match(input,10,FOLLOW_10_in_orderby298); 
 			}
 
 		}
@@ -896,12 +1211,12 @@ public class AlgebraRelacionalParser extends Parser {
 			att();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_agregation312); 
+			match(input,9,FOLLOW_9_in_agregation312); 
 			pushFollow(FOLLOW_rel_in_agregation313);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_agregation314); 
+			match(input,10,FOLLOW_10_in_agregation314); 
 			}
 
 			}
@@ -920,24 +1235,29 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 	// $ANTLR start "division"
-	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:1: division : '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:1: division : '(' att ',' att2 ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' ;
 	public final void division() throws RecognitionException {
 		try {
-			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:9: ( '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' )
-			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:11: '(' atts ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')'
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:9: ( '(' att ',' att2 ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')' )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:22:11: '(' att ',' att2 ')' '(' rel ')' ( 'division' | 'DIVISION' ) '(' att ')' '(' rel ')'
 			{
-			match(input,8,FOLLOW_8_in_division322); 
-			pushFollow(FOLLOW_atts_in_division323);
-			atts();
+			match(input,9,FOLLOW_9_in_division322); 
+			pushFollow(FOLLOW_att_in_division323);
+			att();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division324); 
-			match(input,8,FOLLOW_8_in_division325); 
-			pushFollow(FOLLOW_rel_in_division326);
+			match(input,11,FOLLOW_11_in_division325); 
+			pushFollow(FOLLOW_att2_in_division327);
+			att2();
+			state._fsp--;
+
+			match(input,10,FOLLOW_10_in_division329); 
+			match(input,9,FOLLOW_9_in_division330); 
+			pushFollow(FOLLOW_rel_in_division331);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division327); 
+			match(input,10,FOLLOW_10_in_division332); 
 			if ( input.LA(1)==27||input.LA(1)==52 ) {
 				input.consume();
 				state.errorRecovery=false;
@@ -946,18 +1266,18 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_division333); 
-			pushFollow(FOLLOW_att_in_division334);
+			match(input,9,FOLLOW_9_in_division338); 
+			pushFollow(FOLLOW_att_in_division339);
 			att();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division335); 
-			match(input,8,FOLLOW_8_in_division336); 
-			pushFollow(FOLLOW_rel_in_division337);
+			match(input,10,FOLLOW_10_in_division340); 
+			match(input,9,FOLLOW_9_in_division341); 
+			pushFollow(FOLLOW_rel_in_division342);
 			rel();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_division338); 
+			match(input,10,FOLLOW_10_in_division343); 
 			}
 
 		}
@@ -980,7 +1300,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:23:11: ( rel ( 'REUNION_NATURAL' | 'reunion_natural' ) '(' conds2 ')' rel )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:23:13: rel ( 'REUNION_NATURAL' | 'reunion_natural' ) '(' conds2 ')' rel
 			{
-			pushFollow(FOLLOW_rel_in_reunatural344);
+			pushFollow(FOLLOW_rel_in_reunatural349);
 			rel();
 			state._fsp--;
 
@@ -992,13 +1312,13 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_reunatural351); 
-			pushFollow(FOLLOW_conds2_in_reunatural352);
+			match(input,9,FOLLOW_9_in_reunatural356); 
+			pushFollow(FOLLOW_conds2_in_reunatural357);
 			conds2();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_reunatural353); 
-			pushFollow(FOLLOW_rel_in_reunatural355);
+			match(input,10,FOLLOW_10_in_reunatural358); 
+			pushFollow(FOLLOW_rel_in_reunatural360);
 			rel();
 			state._fsp--;
 
@@ -1024,7 +1344,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:24:7: ( rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) '(' conds2 ')' rel )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:24:9: rel ( 'reunion_ext_izq' | 'REUNION_EXT_IZQ' ) '(' conds2 ')' rel
 			{
-			pushFollow(FOLLOW_rel_in_reuizq361);
+			pushFollow(FOLLOW_rel_in_reuizq366);
 			rel();
 			state._fsp--;
 
@@ -1036,13 +1356,13 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_reuizq368); 
-			pushFollow(FOLLOW_conds2_in_reuizq369);
+			match(input,9,FOLLOW_9_in_reuizq373); 
+			pushFollow(FOLLOW_conds2_in_reuizq374);
 			conds2();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_reuizq370); 
-			pushFollow(FOLLOW_rel_in_reuizq372);
+			match(input,10,FOLLOW_10_in_reuizq375); 
+			pushFollow(FOLLOW_rel_in_reuizq377);
 			rel();
 			state._fsp--;
 
@@ -1068,7 +1388,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:25:7: ( rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) '(' conds2 ')' rel )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:25:9: rel ( 'reunion_ext_der' | 'REUNION_EXT_DER' ) '(' conds2 ')' rel
 			{
-			pushFollow(FOLLOW_rel_in_reuder378);
+			pushFollow(FOLLOW_rel_in_reuder383);
 			rel();
 			state._fsp--;
 
@@ -1080,13 +1400,13 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_reuder385); 
-			pushFollow(FOLLOW_conds2_in_reuder386);
+			match(input,9,FOLLOW_9_in_reuder390); 
+			pushFollow(FOLLOW_conds2_in_reuder391);
 			conds2();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_reuder387); 
-			pushFollow(FOLLOW_rel_in_reuder389);
+			match(input,10,FOLLOW_10_in_reuder392); 
+			pushFollow(FOLLOW_rel_in_reuder394);
 			rel();
 			state._fsp--;
 
@@ -1112,7 +1432,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:26:7: ( rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) '(' conds2 ')' rel )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:26:9: rel ( 'reunion_ext_full' | 'REUNION_EXT_FULL' ) '(' conds2 ')' rel
 			{
-			pushFollow(FOLLOW_rel_in_reuext395);
+			pushFollow(FOLLOW_rel_in_reuext400);
 			rel();
 			state._fsp--;
 
@@ -1124,13 +1444,13 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			match(input,8,FOLLOW_8_in_reuext402); 
-			pushFollow(FOLLOW_conds2_in_reuext403);
+			match(input,9,FOLLOW_9_in_reuext407); 
+			pushFollow(FOLLOW_conds2_in_reuext408);
 			conds2();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_reuext404); 
-			pushFollow(FOLLOW_rel_in_reuext406);
+			match(input,10,FOLLOW_10_in_reuext409); 
+			pushFollow(FOLLOW_rel_in_reuext411);
 			rel();
 			state._fsp--;
 
@@ -1156,7 +1476,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:6: ( att ( ',' att )* )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:8: att ( ',' att )*
 			{
-			pushFollow(FOLLOW_att_in_atts415);
+			pushFollow(FOLLOW_att_in_atts420);
 			att();
 			state._fsp--;
 
@@ -1165,7 +1485,7 @@ public class AlgebraRelacionalParser extends Parser {
 			while (true) {
 				int alt4=2;
 				int LA4_0 = input.LA(1);
-				if ( (LA4_0==10) ) {
+				if ( (LA4_0==11) ) {
 					alt4=1;
 				}
 
@@ -1173,8 +1493,8 @@ public class AlgebraRelacionalParser extends Parser {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:29:13: ',' att
 					{
-					match(input,10,FOLLOW_10_in_atts418); 
-					pushFollow(FOLLOW_att_in_atts420);
+					match(input,11,FOLLOW_11_in_atts423); 
+					pushFollow(FOLLOW_att_in_atts425);
 					att();
 					state._fsp--;
 
@@ -1208,7 +1528,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:30:8: ( cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )* )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:30:10: cond1 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond1 )*
 			{
-			pushFollow(FOLLOW_cond1_in_conds1429);
+			pushFollow(FOLLOW_cond1_in_conds1434);
 			cond1();
 			state._fsp--;
 
@@ -1233,7 +1553,7 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_cond1_in_conds1450);
+					pushFollow(FOLLOW_cond1_in_conds1455);
 					cond1();
 					state._fsp--;
 
@@ -1267,7 +1587,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:31:8: ( cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )* )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:31:10: cond2 ( ( 'and' | 'or' | 'AND' | 'OR' ) cond2 )*
 			{
-			pushFollow(FOLLOW_cond2_in_conds2459);
+			pushFollow(FOLLOW_cond2_in_conds2464);
 			cond2();
 			state._fsp--;
 
@@ -1292,7 +1612,7 @@ public class AlgebraRelacionalParser extends Parser {
 						MismatchedSetException mse = new MismatchedSetException(null,input);
 						throw mse;
 					}
-					pushFollow(FOLLOW_cond2_in_conds2480);
+					pushFollow(FOLLOW_cond2_in_conds2485);
 					cond2();
 					state._fsp--;
 
@@ -1331,9 +1651,9 @@ public class AlgebraRelacionalParser extends Parser {
 			int LA7_0 = input.LA(1);
 			if ( (LA7_0==CAD) ) {
 				int LA7_1 = input.LA(2);
-				if ( (LA7_1==7||(LA7_1 >= 14 && LA7_1 <= 18)) ) {
+				if ( (LA7_1==8||(LA7_1 >= 14 && LA7_1 <= 18)) ) {
 					int LA7_2 = input.LA(3);
-					if ( (LA7_2==NUM||LA7_2==11||LA7_2==43) ) {
+					if ( (LA7_2==NUM||LA7_2==12||LA7_2==43) ) {
 						alt7=1;
 					}
 					else if ( (LA7_2==CAD) ) {
@@ -1380,7 +1700,7 @@ public class AlgebraRelacionalParser extends Parser {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:11: con1
 					{
-					pushFollow(FOLLOW_con1_in_cond1491);
+					pushFollow(FOLLOW_con1_in_cond1496);
 					con1();
 					state._fsp--;
 
@@ -1389,7 +1709,7 @@ public class AlgebraRelacionalParser extends Parser {
 				case 2 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:32:17: con11
 					{
-					pushFollow(FOLLOW_con11_in_cond1494);
+					pushFollow(FOLLOW_con11_in_cond1499);
 					con11();
 					state._fsp--;
 
@@ -1425,16 +1745,16 @@ public class AlgebraRelacionalParser extends Parser {
 			int LA8_0 = input.LA(1);
 			if ( (LA8_0==CAD) ) {
 				int LA8_1 = input.LA(2);
-				if ( (LA8_1==12) ) {
+				if ( (LA8_1==13) ) {
 					int LA8_2 = input.LA(3);
 					if ( (LA8_2==CAD) ) {
 						int LA8_3 = input.LA(4);
-						if ( (LA8_3==7||(LA8_3 >= 14 && LA8_3 <= 18)) ) {
+						if ( (LA8_3==8||(LA8_3 >= 14 && LA8_3 <= 18)) ) {
 							int LA8_4 = input.LA(5);
 							if ( (LA8_4==CAD) ) {
 								alt8=1;
 							}
-							else if ( (LA8_4==NUM||LA8_4==11||LA8_4==43) ) {
+							else if ( (LA8_4==NUM||LA8_4==12||LA8_4==43) ) {
 								alt8=2;
 							}
 
@@ -1510,7 +1830,7 @@ public class AlgebraRelacionalParser extends Parser {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:11: con2
 					{
-					pushFollow(FOLLOW_con2_in_cond2505);
+					pushFollow(FOLLOW_con2_in_cond2510);
 					con2();
 					state._fsp--;
 
@@ -1519,7 +1839,7 @@ public class AlgebraRelacionalParser extends Parser {
 				case 2 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:33:17: con3
 					{
-					pushFollow(FOLLOW_con3_in_cond2508);
+					pushFollow(FOLLOW_con3_in_cond2513);
 					con3();
 					state._fsp--;
 
@@ -1550,22 +1870,22 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:8: ( att '(' order ')' ( ',' att '(' order ')' )* )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:10: att '(' order ')' ( ',' att '(' order ')' )*
 			{
-			pushFollow(FOLLOW_att_in_orders517);
+			pushFollow(FOLLOW_att_in_orders522);
 			att();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_orders519); 
-			pushFollow(FOLLOW_order_in_orders520);
+			match(input,9,FOLLOW_9_in_orders524); 
+			pushFollow(FOLLOW_order_in_orders525);
 			order();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_orders521); 
+			match(input,10,FOLLOW_10_in_orders526); 
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:26: ( ',' att '(' order ')' )*
 			loop9:
 			while (true) {
 				int alt9=2;
 				int LA9_0 = input.LA(1);
-				if ( (LA9_0==10) ) {
+				if ( (LA9_0==11) ) {
 					alt9=1;
 				}
 
@@ -1573,17 +1893,17 @@ public class AlgebraRelacionalParser extends Parser {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:34:27: ',' att '(' order ')'
 					{
-					match(input,10,FOLLOW_10_in_orders524); 
-					pushFollow(FOLLOW_att_in_orders526);
+					match(input,11,FOLLOW_11_in_orders529); 
+					pushFollow(FOLLOW_att_in_orders531);
 					att();
 					state._fsp--;
 
-					match(input,8,FOLLOW_8_in_orders528); 
-					pushFollow(FOLLOW_order_in_orders529);
+					match(input,9,FOLLOW_9_in_orders533); 
+					pushFollow(FOLLOW_order_in_orders534);
 					order();
 					state._fsp--;
 
-					match(input,9,FOLLOW_9_in_orders530); 
+					match(input,10,FOLLOW_10_in_orders535); 
 					}
 					break;
 
@@ -1644,22 +1964,22 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:9: ( fagrega '(' att ')' ( ',' fagrega '(' att ')' )* )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:11: fagrega '(' att ')' ( ',' fagrega '(' att ')' )*
 			{
-			pushFollow(FOLLOW_fagrega_in_fagregas564);
+			pushFollow(FOLLOW_fagrega_in_fagregas569);
 			fagrega();
 			state._fsp--;
 
-			match(input,8,FOLLOW_8_in_fagregas566); 
-			pushFollow(FOLLOW_att_in_fagregas567);
+			match(input,9,FOLLOW_9_in_fagregas571); 
+			pushFollow(FOLLOW_att_in_fagregas572);
 			att();
 			state._fsp--;
 
-			match(input,9,FOLLOW_9_in_fagregas568); 
+			match(input,10,FOLLOW_10_in_fagregas573); 
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:29: ( ',' fagrega '(' att ')' )*
 			loop10:
 			while (true) {
 				int alt10=2;
 				int LA10_0 = input.LA(1);
-				if ( (LA10_0==10) ) {
+				if ( (LA10_0==11) ) {
 					alt10=1;
 				}
 
@@ -1667,17 +1987,17 @@ public class AlgebraRelacionalParser extends Parser {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:36:30: ',' fagrega '(' att ')'
 					{
-					match(input,10,FOLLOW_10_in_fagregas571); 
-					pushFollow(FOLLOW_fagrega_in_fagregas573);
+					match(input,11,FOLLOW_11_in_fagregas576); 
+					pushFollow(FOLLOW_fagrega_in_fagregas578);
 					fagrega();
 					state._fsp--;
 
-					match(input,8,FOLLOW_8_in_fagregas575); 
-					pushFollow(FOLLOW_att_in_fagregas576);
+					match(input,9,FOLLOW_9_in_fagregas580); 
+					pushFollow(FOLLOW_att_in_fagregas581);
 					att();
 					state._fsp--;
 
-					match(input,9,FOLLOW_9_in_fagregas577); 
+					match(input,10,FOLLOW_10_in_fagregas582); 
 					}
 					break;
 
@@ -1738,11 +2058,11 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:38:6: ( att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:38:8: att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons
 			{
-			pushFollow(FOLLOW_att_in_con1633);
+			pushFollow(FOLLOW_att_in_con1638);
 			att();
 			state._fsp--;
 
-			if ( input.LA(1)==7||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
+			if ( input.LA(1)==8||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
 				input.consume();
 				state.errorRecovery=false;
 			}
@@ -1750,7 +2070,7 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_cons_in_con1659);
+			pushFollow(FOLLOW_cons_in_con1664);
 			cons();
 			state._fsp--;
 
@@ -1776,11 +2096,11 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:39:7: ( att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:39:9: att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) att
 			{
-			pushFollow(FOLLOW_att_in_con11666);
+			pushFollow(FOLLOW_att_in_con11671);
 			att();
 			state._fsp--;
 
-			if ( input.LA(1)==7||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
+			if ( input.LA(1)==8||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
 				input.consume();
 				state.errorRecovery=false;
 			}
@@ -1788,7 +2108,7 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_att_in_con11692);
+			pushFollow(FOLLOW_att_in_con11697);
 			att();
 			state._fsp--;
 
@@ -1814,16 +2134,16 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:40:6: ( rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:40:8: rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) rel '.' att
 			{
-			pushFollow(FOLLOW_rel_in_con2699);
+			pushFollow(FOLLOW_rel_in_con2704);
 			rel();
 			state._fsp--;
 
-			match(input,12,FOLLOW_12_in_con2700); 
-			pushFollow(FOLLOW_att_in_con2701);
+			match(input,13,FOLLOW_13_in_con2705); 
+			pushFollow(FOLLOW_att_in_con2706);
 			att();
 			state._fsp--;
 
-			if ( input.LA(1)==7||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
+			if ( input.LA(1)==8||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
 				input.consume();
 				state.errorRecovery=false;
 			}
@@ -1831,12 +2151,12 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_rel_in_con2727);
+			pushFollow(FOLLOW_rel_in_con2732);
 			rel();
 			state._fsp--;
 
-			match(input,12,FOLLOW_12_in_con2728); 
-			pushFollow(FOLLOW_att_in_con2729);
+			match(input,13,FOLLOW_13_in_con2733); 
+			pushFollow(FOLLOW_att_in_con2734);
 			att();
 			state._fsp--;
 
@@ -1862,16 +2182,16 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:41:6: ( rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:41:8: rel '.' att ( '=' | '<' | '<=' | '>' | '>= ' | '!=' ) cons
 			{
-			pushFollow(FOLLOW_rel_in_con3736);
+			pushFollow(FOLLOW_rel_in_con3741);
 			rel();
 			state._fsp--;
 
-			match(input,12,FOLLOW_12_in_con3737); 
-			pushFollow(FOLLOW_att_in_con3738);
+			match(input,13,FOLLOW_13_in_con3742); 
+			pushFollow(FOLLOW_att_in_con3743);
 			att();
 			state._fsp--;
 
-			if ( input.LA(1)==7||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
+			if ( input.LA(1)==8||(input.LA(1) >= 14 && input.LA(1) <= 18) ) {
 				input.consume();
 				state.errorRecovery=false;
 			}
@@ -1879,7 +2199,7 @@ public class AlgebraRelacionalParser extends Parser {
 				MismatchedSetException mse = new MismatchedSetException(null,input);
 				throw mse;
 			}
-			pushFollow(FOLLOW_cons_in_con3764);
+			pushFollow(FOLLOW_cons_in_con3769);
 			cons();
 			state._fsp--;
 
@@ -1908,7 +2228,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:8: ( num | cad )
 			int alt11=2;
 			int LA11_0 = input.LA(1);
-			if ( (LA11_0==NUM||LA11_0==11) ) {
+			if ( (LA11_0==NUM||LA11_0==12) ) {
 				alt11=1;
 			}
 			else if ( (LA11_0==43) ) {
@@ -1925,7 +2245,7 @@ public class AlgebraRelacionalParser extends Parser {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:10: num
 					{
-					pushFollow(FOLLOW_num_in_cons773);
+					pushFollow(FOLLOW_num_in_cons778);
 					num();
 					state._fsp--;
 
@@ -1934,7 +2254,7 @@ public class AlgebraRelacionalParser extends Parser {
 				case 2 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:42:16: cad
 					{
-					pushFollow(FOLLOW_cad_in_cons777);
+					pushFollow(FOLLOW_cad_in_cons782);
 					cad();
 					state._fsp--;
 
@@ -1968,14 +2288,14 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:7: ( '-' )?
 			int alt12=2;
 			int LA12_0 = input.LA(1);
-			if ( (LA12_0==11) ) {
+			if ( (LA12_0==12) ) {
 				alt12=1;
 			}
 			switch (alt12) {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:8: '-'
 					{
-					match(input,11,FOLLOW_11_in_num787); 
+					match(input,12,FOLLOW_12_in_num792); 
 					}
 					break;
 
@@ -1995,7 +2315,7 @@ public class AlgebraRelacionalParser extends Parser {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:14: NUM
 					{
-					match(input,NUM,FOLLOW_NUM_in_num791); 
+					match(input,NUM,FOLLOW_NUM_in_num796); 
 					}
 					break;
 
@@ -2010,14 +2330,14 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:19: ( '.' ( NUM )+ )?
 			int alt15=2;
 			int LA15_0 = input.LA(1);
-			if ( (LA15_0==12) ) {
+			if ( (LA15_0==13) ) {
 				alt15=1;
 			}
 			switch (alt15) {
 				case 1 :
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:20: '.' ( NUM )+
 					{
-					match(input,12,FOLLOW_12_in_num795); 
+					match(input,13,FOLLOW_13_in_num800); 
 					// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:23: ( NUM )+
 					int cnt14=0;
 					loop14:
@@ -2032,7 +2352,7 @@ public class AlgebraRelacionalParser extends Parser {
 						case 1 :
 							// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:43:24: NUM
 							{
-							match(input,NUM,FOLLOW_NUM_in_num797); 
+							match(input,NUM,FOLLOW_NUM_in_num802); 
 							}
 							break;
 
@@ -2071,9 +2391,9 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:44:5: ( '\\u0027' CAD '\\u0027' )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:44:7: '\\u0027' CAD '\\u0027'
 			{
-			match(input,43,FOLLOW_43_in_cad808); 
-			match(input,CAD,FOLLOW_CAD_in_cad809); 
-			match(input,43,FOLLOW_43_in_cad810); 
+			match(input,43,FOLLOW_43_in_cad813); 
+			match(input,CAD,FOLLOW_CAD_in_cad814); 
+			match(input,43,FOLLOW_43_in_cad815); 
 			}
 
 		}
@@ -2096,7 +2416,7 @@ public class AlgebraRelacionalParser extends Parser {
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:45:5: ( CAD )
 			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:45:7: CAD
 			{
-			match(input,CAD,FOLLOW_CAD_in_att817); 
+			match(input,CAD,FOLLOW_CAD_in_att822); 
 			}
 
 		}
@@ -2112,14 +2432,37 @@ public class AlgebraRelacionalParser extends Parser {
 
 
 
+	// $ANTLR start "att2"
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:1: att2 : CAD ;
+	public final void att2() throws RecognitionException {
+		try {
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:6: ( CAD )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:8: CAD
+			{
+			match(input,CAD,FOLLOW_CAD_in_att2829); 
+			}
+
+		}
+		catch (RecognitionException re) {
+			reportError(re);
+			recover(input,re);
+		}
+		finally {
+			// do for sure before leaving
+		}
+	}
+	// $ANTLR end "att2"
+
+
+
 	// $ANTLR start "rel"
-	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:1: rel : CAD ;
+	// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:47:1: rel : CAD ;
 	public final void rel() throws RecognitionException {
 		try {
-			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:5: ( CAD )
-			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:46:7: CAD
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:47:5: ( CAD )
+			// G:\\Mi unidad\\GCAR\\gramatica\\AlgebraRelacional.g:47:7: CAD
 			{
-			match(input,CAD,FOLLOW_CAD_in_rel824); 
+			match(input,CAD,FOLLOW_CAD_in_rel836); 
 			}
 
 		}
@@ -2136,95 +2479,11 @@ public class AlgebraRelacionalParser extends Parser {
 	// Delegated rules
 
 
-	protected DFA2 dfa2 = new DFA2(this);
-	static final String DFA2_eotS =
-		"\34\uffff";
-	static final String DFA2_eofS =
-		"\31\uffff\1\33\2\uffff";
-	static final String DFA2_minS =
-		"\1\4\1\30\2\uffff\2\4\10\uffff\1\10\1\11\1\4\1\10\1\4\1\11\3\uffff\1\11"+
-		"\1\uffff\2\10\1\uffff";
-	static final String DFA2_maxS =
-		"\1\102\1\103\2\uffff\1\10\1\4\10\uffff\1\10\1\12\1\4\1\74\1\4\1\12\3\uffff"+
-		"\1\12\1\uffff\1\10\1\54\1\uffff";
-	static final String DFA2_acceptS =
-		"\2\uffff\1\2\1\3\2\uffff\1\11\1\12\1\1\1\14\1\15\1\16\1\17\1\6\6\uffff"+
-		"\1\7\1\10\1\13\1\uffff\1\4\2\uffff\1\5";
-	static final String DFA2_specialS =
-		"\34\uffff}>";
-	static final String[] DFA2_transitionS = {
-			"\1\1\3\uffff\1\5\15\uffff\2\7\5\uffff\2\7\1\uffff\1\6\1\3\1\4\5\uffff"+
-			"\1\2\1\7\5\uffff\2\7\5\uffff\2\7\1\uffff\1\6\1\3\1\4\5\uffff\1\2\1\7",
-			"\1\10\1\uffff\1\10\1\uffff\1\10\7\uffff\1\13\1\14\1\12\1\11\2\uffff"+
-			"\1\10\6\uffff\1\10\1\uffff\1\10\1\uffff\1\10\7\uffff\1\13\1\14\1\12\1"+
-			"\11\2\uffff\1\10",
-			"",
-			"",
-			"\1\16\3\uffff\1\15",
-			"\1\17",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"",
-			"\1\20",
-			"\1\21\1\22",
-			"\1\23",
-			"\1\26\12\uffff\1\25\17\uffff\1\24\10\uffff\1\25\17\uffff\1\24",
-			"\1\27",
-			"\1\31\1\30",
-			"",
-			"",
-			"",
-			"\1\32\1\22",
-			"",
-			"\1\30",
-			"\1\26\12\uffff\1\25\30\uffff\1\25",
-			""
-	};
-
-	static final short[] DFA2_eot = DFA.unpackEncodedString(DFA2_eotS);
-	static final short[] DFA2_eof = DFA.unpackEncodedString(DFA2_eofS);
-	static final char[] DFA2_min = DFA.unpackEncodedStringToUnsignedChars(DFA2_minS);
-	static final char[] DFA2_max = DFA.unpackEncodedStringToUnsignedChars(DFA2_maxS);
-	static final short[] DFA2_accept = DFA.unpackEncodedString(DFA2_acceptS);
-	static final short[] DFA2_special = DFA.unpackEncodedString(DFA2_specialS);
-	static final short[][] DFA2_transition;
-
-	static {
-		int numStates = DFA2_transitionS.length;
-		DFA2_transition = new short[numStates][];
-		for (int i=0; i<numStates; i++) {
-			DFA2_transition[i] = DFA.unpackEncodedString(DFA2_transitionS[i]);
-		}
-	}
-
-	protected class DFA2 extends DFA {
-
-		public DFA2(BaseRecognizer recognizer) {
-			this.recognizer = recognizer;
-			this.decisionNumber = 2;
-			this.eot = DFA2_eot;
-			this.eof = DFA2_eof;
-			this.min = DFA2_min;
-			this.max = DFA2_max;
-			this.accept = DFA2_accept;
-			this.special = DFA2_special;
-			this.transition = DFA2_transition;
-		}
-		@Override
-		public String getDescription() {
-			return "5:7: ( bin | select | proy | renom1 | renom2 | renom3 | join | groupby | orderby | agregation | division | reunatural | reuizq | reuder | reuext )";
-		}
-	}
 
 	public static final BitSet FOLLOW_asg_in_st12 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_con_in_st16 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_asg25 = new BitSet(new long[]{0x0000000000002000L});
-	public static final BitSet FOLLOW_13_in_asg27 = new BitSet(new long[]{0x0EC1830760C00110L,0x0000000000000006L});
+	public static final BitSet FOLLOW_rel_in_asg25 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_ASSIGN_in_asg27 = new BitSet(new long[]{0x0EC1830760C00220L,0x0000000000000006L});
 	public static final BitSet FOLLOW_con_in_asg29 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_bin_in_con38 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_select_in_con42 = new BitSet(new long[]{0x0000000000000002L});
@@ -2242,174 +2501,177 @@ public class AlgebraRelacionalParser extends Parser {
 	public static final BitSet FOLLOW_reuder_in_con90 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_reuext_in_con94 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_rel_in_bin104 = new BitSet(new long[]{0x0000040000000000L,0x0000000000000008L});
-	public static final BitSet FOLLOW_set_in_bin106 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_set_in_bin106 = new BitSet(new long[]{0x0000000000000020L});
 	public static final BitSet FOLLOW_rel_in_bin112 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_rel_in_bin116 = new BitSet(new long[]{0x0020000010000000L});
-	public static final BitSet FOLLOW_set_in_bin118 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_set_in_bin118 = new BitSet(new long[]{0x0000000000000020L});
 	public static final BitSet FOLLOW_rel_in_bin124 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_rel_in_bin128 = new BitSet(new long[]{0x0008000004000000L});
-	public static final BitSet FOLLOW_set_in_bin130 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_set_in_bin130 = new BitSet(new long[]{0x0000000000000020L});
 	public static final BitSet FOLLOW_rel_in_bin136 = new BitSet(new long[]{0x0000000000000002L});
 	public static final BitSet FOLLOW_rel_in_bin140 = new BitSet(new long[]{0x0002000001000000L});
-	public static final BitSet FOLLOW_set_in_bin142 = new BitSet(new long[]{0x0000000000000010L});
+	public static final BitSet FOLLOW_set_in_bin142 = new BitSet(new long[]{0x0000000000000020L});
 	public static final BitSet FOLLOW_rel_in_bin148 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_select156 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_select161 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds1_in_select162 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_select163 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_select164 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_select165 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_select166 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_proy173 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_proy178 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_proy179 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_proy180 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_proy181 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_proy182 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_proy183 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_renom1190 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom1196 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom1198 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_renom1199 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom1200 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom1201 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom1202 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom1203 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_renom2210 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom2216 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom2218 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom2219 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom2220 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_renom3227 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom3232 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_renom3233 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom3234 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_renom3235 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_renom3236 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_renom3237 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_8_in_join244 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_join245 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_join246 = new BitSet(new long[]{0x1000000800000000L});
-	public static final BitSet FOLLOW_set_in_join247 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_join252 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds2_in_join253 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_join254 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_join255 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_join256 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_join257 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_8_in_groupby264 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_groupby266 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_groupby267 = new BitSet(new long[]{0x0000100000080000L});
+	public static final BitSet FOLLOW_set_in_select156 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_select161 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_conds1_in_select162 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_select163 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_select164 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_select165 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_select166 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_proy173 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_proy178 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_atts_in_proy179 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_proy180 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_proy181 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_proy182 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_proy183 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_renom1190 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_renom1196 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom1198 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_atts_in_renom1199 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_renom1200 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom1201 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_renom1202 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_renom1203 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_renom2210 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_renom2216 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom2218 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_renom2219 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_renom2220 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_renom3227 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom3232 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_atts_in_renom3233 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_renom3234 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_renom3235 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_renom3236 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_renom3237 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_9_in_join244 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_join245 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_join246 = new BitSet(new long[]{0x1000000800000000L});
+	public static final BitSet FOLLOW_set_in_join247 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_join252 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_conds2_in_join253 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_join254 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_join255 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_join256 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_join257 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_9_in_groupby264 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_atts_in_groupby266 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_groupby267 = new BitSet(new long[]{0x0000100000080000L});
 	public static final BitSet FOLLOW_set_in_groupby269 = new BitSet(new long[]{0x00C1820060C00000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_fagregas_in_groupby275 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_groupby277 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_groupby278 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_groupby279 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_set_in_orderby286 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_orders_in_orderby294 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_orderby296 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_orderby297 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_orderby298 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_fagrega_in_agregation306 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_agregation310 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_agregation312 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_agregation313 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_agregation314 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_8_in_division322 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_atts_in_division323 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division324 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_division325 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_division326 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division327 = new BitSet(new long[]{0x0010000008000000L});
-	public static final BitSet FOLLOW_set_in_division328 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_division333 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_division334 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division335 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_division336 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_division337 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_division338 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_reunatural344 = new BitSet(new long[]{0x0000008000000000L,0x0000000000000001L});
-	public static final BitSet FOLLOW_set_in_reunatural346 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_reunatural351 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds2_in_reunatural352 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_reunatural353 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_reunatural355 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_reuizq361 = new BitSet(new long[]{0x8000004000000000L});
-	public static final BitSet FOLLOW_set_in_reuizq363 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_reuizq368 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds2_in_reuizq369 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_reuizq370 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_reuizq372 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_reuder378 = new BitSet(new long[]{0x2000001000000000L});
-	public static final BitSet FOLLOW_set_in_reuder380 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_reuder385 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds2_in_reuder386 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_reuder387 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_reuder389 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_reuext395 = new BitSet(new long[]{0x4000002000000000L});
-	public static final BitSet FOLLOW_set_in_reuext397 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_reuext402 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_conds2_in_reuext403 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_reuext404 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_reuext406 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_att_in_atts415 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_10_in_atts418 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_atts420 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_cond1_in_conds1429 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_set_in_conds1432 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_cond1_in_conds1450 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_cond2_in_conds2459 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_set_in_conds2462 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_cond2_in_conds2480 = new BitSet(new long[]{0x0100200080100002L});
-	public static final BitSet FOLLOW_con1_in_cond1491 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_con11_in_cond1494 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_con2_in_cond2505 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_con3_in_cond2508 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_att_in_orders517 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_orders519 = new BitSet(new long[]{0x0004400002200000L});
-	public static final BitSet FOLLOW_order_in_orders520 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_orders521 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_10_in_orders524 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_orders526 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_orders528 = new BitSet(new long[]{0x0004400002200000L});
-	public static final BitSet FOLLOW_order_in_orders529 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_orders530 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_fagrega_in_fagregas564 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_fagregas566 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_fagregas567 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_fagregas568 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_10_in_fagregas571 = new BitSet(new long[]{0x00C1820060C00000L,0x0000000000000004L});
-	public static final BitSet FOLLOW_fagrega_in_fagregas573 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_8_in_fagregas575 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_fagregas576 = new BitSet(new long[]{0x0000000000000200L});
-	public static final BitSet FOLLOW_9_in_fagregas577 = new BitSet(new long[]{0x0000000000000402L});
-	public static final BitSet FOLLOW_att_in_con1633 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con1635 = new BitSet(new long[]{0x0000080000000820L});
-	public static final BitSet FOLLOW_cons_in_con1659 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_att_in_con11666 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con11668 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con11692 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_con2699 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_12_in_con2700 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con2701 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con2703 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_rel_in_con2727 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_12_in_con2728 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con2729 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_rel_in_con3736 = new BitSet(new long[]{0x0000000000001000L});
-	public static final BitSet FOLLOW_12_in_con3737 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_att_in_con3738 = new BitSet(new long[]{0x000000000007C080L});
-	public static final BitSet FOLLOW_set_in_con3740 = new BitSet(new long[]{0x0000080000000820L});
-	public static final BitSet FOLLOW_cons_in_con3764 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_num_in_cons773 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_cad_in_cons777 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_11_in_num787 = new BitSet(new long[]{0x0000000000000020L});
-	public static final BitSet FOLLOW_NUM_in_num791 = new BitSet(new long[]{0x0000000000001022L});
-	public static final BitSet FOLLOW_12_in_num795 = new BitSet(new long[]{0x0000000000000020L});
-	public static final BitSet FOLLOW_NUM_in_num797 = new BitSet(new long[]{0x0000000000000022L});
-	public static final BitSet FOLLOW_43_in_cad808 = new BitSet(new long[]{0x0000000000000010L});
-	public static final BitSet FOLLOW_CAD_in_cad809 = new BitSet(new long[]{0x0000080000000000L});
-	public static final BitSet FOLLOW_43_in_cad810 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CAD_in_att817 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_CAD_in_rel824 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_fagregas_in_groupby275 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_groupby277 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_groupby278 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_groupby279 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_set_in_orderby286 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_orders_in_orderby294 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_orderby296 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_orderby297 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_orderby298 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_fagrega_in_agregation306 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_agregation310 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_agregation312 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_agregation313 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_agregation314 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_9_in_division322 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_division323 = new BitSet(new long[]{0x0000000000000800L});
+	public static final BitSet FOLLOW_11_in_division325 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att2_in_division327 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_division329 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_division330 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_division331 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_division332 = new BitSet(new long[]{0x0010000008000000L});
+	public static final BitSet FOLLOW_set_in_division333 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_division338 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_division339 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_division340 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_division341 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_division342 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_division343 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reunatural349 = new BitSet(new long[]{0x0000008000000000L,0x0000000000000001L});
+	public static final BitSet FOLLOW_set_in_reunatural351 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reunatural356 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_conds2_in_reunatural357 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_reunatural358 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_reunatural360 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reuizq366 = new BitSet(new long[]{0x8000004000000000L});
+	public static final BitSet FOLLOW_set_in_reuizq368 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reuizq373 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_conds2_in_reuizq374 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_reuizq375 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_reuizq377 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reuder383 = new BitSet(new long[]{0x2000001000000000L});
+	public static final BitSet FOLLOW_set_in_reuder385 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reuder390 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_conds2_in_reuder391 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_reuder392 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_reuder394 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_reuext400 = new BitSet(new long[]{0x4000002000000000L});
+	public static final BitSet FOLLOW_set_in_reuext402 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_reuext407 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_conds2_in_reuext408 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_reuext409 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_reuext411 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_att_in_atts420 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_11_in_atts423 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_atts425 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_cond1_in_conds1434 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_set_in_conds1437 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_cond1_in_conds1455 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_cond2_in_conds2464 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_set_in_conds2467 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_cond2_in_conds2485 = new BitSet(new long[]{0x0100200080100002L});
+	public static final BitSet FOLLOW_con1_in_cond1496 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_con11_in_cond1499 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_con2_in_cond2510 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_con3_in_cond2513 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_att_in_orders522 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_orders524 = new BitSet(new long[]{0x0004400002200000L});
+	public static final BitSet FOLLOW_order_in_orders525 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_orders526 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_11_in_orders529 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_orders531 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_orders533 = new BitSet(new long[]{0x0004400002200000L});
+	public static final BitSet FOLLOW_order_in_orders534 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_orders535 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_fagrega_in_fagregas569 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_fagregas571 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_fagregas572 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_fagregas573 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_11_in_fagregas576 = new BitSet(new long[]{0x00C1820060C00000L,0x0000000000000004L});
+	public static final BitSet FOLLOW_fagrega_in_fagregas578 = new BitSet(new long[]{0x0000000000000200L});
+	public static final BitSet FOLLOW_9_in_fagregas580 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_fagregas581 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_10_in_fagregas582 = new BitSet(new long[]{0x0000000000000802L});
+	public static final BitSet FOLLOW_att_in_con1638 = new BitSet(new long[]{0x000000000007C100L});
+	public static final BitSet FOLLOW_set_in_con1640 = new BitSet(new long[]{0x0000080000001040L});
+	public static final BitSet FOLLOW_cons_in_con1664 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_att_in_con11671 = new BitSet(new long[]{0x000000000007C100L});
+	public static final BitSet FOLLOW_set_in_con11673 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_con11697 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_con2704 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_13_in_con2705 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_con2706 = new BitSet(new long[]{0x000000000007C100L});
+	public static final BitSet FOLLOW_set_in_con2708 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_rel_in_con2732 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_13_in_con2733 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_con2734 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_rel_in_con3741 = new BitSet(new long[]{0x0000000000002000L});
+	public static final BitSet FOLLOW_13_in_con3742 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_att_in_con3743 = new BitSet(new long[]{0x000000000007C100L});
+	public static final BitSet FOLLOW_set_in_con3745 = new BitSet(new long[]{0x0000080000001040L});
+	public static final BitSet FOLLOW_cons_in_con3769 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_num_in_cons778 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_cad_in_cons782 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_12_in_num792 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_NUM_in_num796 = new BitSet(new long[]{0x0000000000002042L});
+	public static final BitSet FOLLOW_13_in_num800 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_NUM_in_num802 = new BitSet(new long[]{0x0000000000000042L});
+	public static final BitSet FOLLOW_43_in_cad813 = new BitSet(new long[]{0x0000000000000020L});
+	public static final BitSet FOLLOW_CAD_in_cad814 = new BitSet(new long[]{0x0000080000000000L});
+	public static final BitSet FOLLOW_43_in_cad815 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CAD_in_att822 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CAD_in_att2829 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_CAD_in_rel836 = new BitSet(new long[]{0x0000000000000002L});
 }

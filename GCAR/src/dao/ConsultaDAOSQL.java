@@ -37,7 +37,6 @@ public class ConsultaDAOSQL {
 			
 			System.out.println("Schema a cargar: load" + bd);
 			System.out.println("Query a ejecutar: " + query);
-			//System.out.println(java.sql.DriverManager.getDriver("jdbc:postgresql://localhost:5432/mydatabase").getClass().getName());
 			
 			con = Database.getConnection();
 			//String schema = con.getSchema();

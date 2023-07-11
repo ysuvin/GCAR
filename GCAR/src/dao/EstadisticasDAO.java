@@ -151,7 +151,7 @@ public class EstadisticasDAO {  //consulta las variables de la BD para enviarsea
     public static List<EstadisticaTodo> selectTodo(){
     	try{
     		
-    		String query = 	"select	result.id as \"id_resultado\",result.rut, result.bd, result.fecha_bd, " +
+    		String query = 	"select	result.id as \"id_resultado\", result.rut, result.bd, result.fecha_bd, " +
     						"result.cant_ejercicios, result.cant_correctas, result.cant_erroneas, " +
 				    		"result.cant_omitidas, result.fecha as \"fecha_resultado\", " +
 				    		"resp.id as \"id_respuesta\", resp.rut as \"rut_alumno\", resp.ejercicio, " + 
@@ -170,36 +170,37 @@ public class EstadisticasDAO {  //consulta las variables de la BD para enviarsea
     		con = Database.getConnection();	
 			ps = con.prepareStatement(query);
 			ResultSet rs = ps.executeQuery();
-			
+			System.out.println("-----------Query EJECUTADA ");
 			List<EstadisticaTodo> todos= new ArrayList<EstadisticaTodo>();
 			
 			while(rs.next()){
 				EstadisticaTodo todo = new EstadisticaTodo();
 				todo.setIdResultado(rs.getInt(1));
-				todo.setBd(rs.getString(2));
-				todo.setFechaBd(rs.getString(3));
-				todo.setCantEjercicios(rs.getInt(4));
-				todo.setCantCorrectas(rs.getInt(5));
-				todo.setCantErroneas(rs.getInt(6));
-				todo.setCantOmitidas(rs.getInt(7));
-				todo.setFechaResultado(rs.getString(8));
-				todo.setIdRespuesta(rs.getInt(9));
-				todo.setRut(rs.getString(10));
-				todo.setEjercicio(rs.getInt(11));
-				todo.setResultadoEjercicio(rs.getBoolean(12));
-				todo.setIntentoEjercicio(rs.getInt(13));
-				todo.setTiempoEjercicio(rs.getString(14));
-				todo.setTiempoSesion(rs.getString(15));
-				todo.setFechaEjercicio(rs.getString(16));
-				todo.setIdConsulta(rs.getInt(17));
-				todo.setNumeroConsulta(rs.getInt(18));
-				todo.setQuery(rs.getString(19));
+				todo.setRut(rs.getString(2));
+				todo.setBd(rs.getString(3));
+				todo.setFechaBd(rs.getString(4));
+				todo.setCantEjercicios(rs.getInt(5));
+				todo.setCantCorrectas(rs.getInt(6));
+				todo.setCantErroneas(rs.getInt(7));
+				todo.setCantOmitidas(rs.getInt(8));
+				todo.setFechaResultado(rs.getString(9));
+				todo.setIdRespuesta(rs.getInt(10));
+				todo.setRut(rs.getString(11));
+				todo.setEjercicio(rs.getInt(12));
+				todo.setResultadoEjercicio(rs.getBoolean(13));
+				todo.setIntentoEjercicio(rs.getInt(14));
+				todo.setTiempoEjercicio(rs.getString(15));
+				todo.setTiempoSesion(rs.getString(16));
+				todo.setFechaEjercicio(rs.getString(17));
+				todo.setIdConsulta(rs.getInt(18));
+				todo.setNumeroConsulta(rs.getInt(19));
+				todo.setQuery(rs.getString(20));
 				if(rs.getString(5) == null){
 					todo.setErrorQuery("");
 				}else{
-					todo.setErrorQuery(rs.getString(20));
+					todo.setErrorQuery(rs.getString(21));
 				}
-				todo.setFechaConsulta(rs.getString(21));
+				todo.setFechaConsulta(rs.getString(22));
 				todos.add(todo);
 			}
 			
@@ -284,7 +285,7 @@ public class EstadisticasDAO {  //consulta las variables de la BD para enviarsea
 				estadisticasSQL.add(estadistica);
 			}
 			
-			System.out.println("Carga: lista de estadísticas de ejecutor SQL");
+			System.out.println("Carga: lista de estadisticas de ejecutor SQL");
 			
 			return estadisticasSQL;			
 	

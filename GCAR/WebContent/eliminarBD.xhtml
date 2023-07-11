@@ -50,7 +50,7 @@
 				
 			    <p:dataTable id="radioDT" var="bd" value="#{gestionarEsquemasBean.bds}" widgetVar="bdsTable" currentPageReportTemplate="hola"
 			                 emptyMessage="No se encuentran Bases de Datos con este criterio" filteredValue="#{gestionarEsquemasBean.filteredBds}"
-			                 paginator="true" rows="6"
+			                 paginator="true" rows="12"
 				             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 			        <f:facet name="header">
 			      		<p:outputPanel style="text-align: right;">
@@ -58,11 +58,12 @@
 			                <p:inputText id="globalFilter" onkeyup="PF('bdsTable').filter()" style="width:150px" placeholder="Buscar" value="#{gestionarEsquemasBean.search}"/>
 			            </p:outputPanel>
 			        </f:facet>			        
-			        <p:column style="width:35px;text-align: center">
-             			<p:commandButton process="radioDT" update=":form:bdDetail" oncomplete="PF('bdDialog').show()" icon="ui-icon-circle-close" title="Eliminar">
-                			<f:setPropertyActionListener value="#{bd}" target="#{gestionarEsquemasBean.selectedBd}" />
-            			</p:commandButton>
-            		</p:column>			      	
+			        <p:column style="width: 35px; text-align: center">
+					    <p:commandButton process="radioDT" update=":form:bdDetail" oncomplete="PF('bdDialog').show()" icon="ui-icon-trash" title="Eliminar">
+					        <f:setPropertyActionListener value="#{bd}" target="#{gestionarEsquemasBean.selectedBd}" />
+					    </p:commandButton>
+					</p:column>
+			      	
 			        <p:column headerText="Rut del Creador" filterBy="#{bd.rut}" filterStyle="display:none">
 			            <h:outputText value="#{bd.rut}" />
 			        </p:column>
@@ -100,7 +101,7 @@
 			            </p:fieldset>
 			            
 			            <h:panelGrid style="margin: 0 auto !important">
-			            	<p:commandButton update="form" icon="ui-icon-circle-close" value="Eliminar" ajax="false" action="#{gestionarEsquemasBean.borrar}" />
+			            	<p:commandButton update="form" icon="ui-icon-trash" value="Eliminar" ajax="false" action="#{gestionarEsquemasBean.borrar}" />
 			            </h:panelGrid>	
 			        </p:outputPanel>
 			    </p:dialog>

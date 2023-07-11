@@ -58,6 +58,8 @@ public class ResponderEjerciciosBean implements Serializable {
 	private List<Consulta> consultas;
 	private Consulta consulta;
 	
+	private String errorMessage;
+	
     @PostConstruct
     public void init() {
     	
@@ -441,7 +443,7 @@ public class ResponderEjerciciosBean implements Serializable {
             return "Relacion inexistente";
         }
         if (errorMessage.contains("syntax error at or near")) {
-            return "Error de sintaxis";
+            return "Error de Sintaxis";
         }
         if (errorMessage.contains("function") && errorMessage.contains("does not exist")) {
             return "Funcion desconocida";
@@ -452,6 +454,27 @@ public class ResponderEjerciciosBean implements Serializable {
         if (errorMessage.contains("column reference") && errorMessage.contains("is ambiguous")) {
             return "Referencia columna ambigua";
         }
+        if (errorMessage.contains("No results were returned by the query")) {
+            return "Consulta vacia";
+        }
+        if (errorMessage.contains("syntax error at end of input")) {
+            return "Error de sintaxis";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("must appear in the")) {
+            return "Referencia columna ambigua";
+        }
+        if (errorMessage.contains("argument") && errorMessage.contains("type boolean")) {
+            return "Error de tipo booleano";
+        }
+        if (errorMessage.contains("operator does not exist") && errorMessage.contains("No operator matches")) {
+            return "Error de condición";
+        }
+        if (errorMessage.contains("invalid input") && errorMessage.contains("syntax")) {
+            return "Error de condición";
+        }
+        if (errorMessage.contains("FULL JOIN") && errorMessage.contains("only supported")) {
+            return "Full join no compatible";
+        }
         return "otro";
 }
 
@@ -460,7 +483,7 @@ public class ResponderEjerciciosBean implements Serializable {
 
 	// Filtra consulta y luego las ejecuta
 	public void ejecutar(){
-		
+		errorMessage = null;
 		AlgebraRelacionalLexer lexer = new AlgebraRelacionalLexer(new ANTLRStringStream(query));
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		AlgebraRelacionalParser parser = new AlgebraRelacionalParser(tokens);
@@ -515,10 +538,18 @@ public class ResponderEjerciciosBean implements Serializable {
 						resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 						consulta.setError("Consulta utiliza Tokens");
 						band = true;
+						errorMessage = resultado.getNombre();
+				        data = null;
+				        tableName = "";
+				        columnNames = null;
 					}else if(esquema.isRelacion(test[0])){
 						resultado.setNombre("ERROR: no puedes reasignar una relación de la lista de Relaciones");
 						consulta.setError("Consulta renombra Relacion del Esquema original");
 						band = true;
+						errorMessage = resultado.getNombre();
+				        data = null;
+				        tableName = "";
+				        columnNames = null;
 					}
 					
 					//Asignar Reunion Natural
@@ -540,9 +571,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						System.out.println(aux3[1]);
 						
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.reunionNatural(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -570,9 +609,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						System.out.println(aux3[1]);
 						
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.reunionExtFull(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -601,9 +648,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						System.out.println(aux3[1]);
 						
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.reunionExtIzq(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -632,9 +687,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						System.out.println(aux3[1]);
 						
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux3[1])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.reunionExtDer(aux1[0],aux2[0],aux3[1],aux3[0],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -670,9 +733,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						if(aux[0].equals(aux1[0]) || aux[0].equals(aux2[2])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
 							consulta.setError("Asignacion recursiva de variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 							consulta.setError("Consulta utiliza Tokens");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.reunion(aux[0],aux1[0],aux2[2],aux2[1],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -699,9 +770,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
 							consulta.setError("Asignacion recursiva de variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 							consulta.setError("Consulta utiliza Tokens");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.union(aux1[0],aux2[0],aux2[1],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -729,9 +808,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
 							consulta.setError("Asignacion recursiva de variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 							consulta.setError("Consulta utiliza Tokens");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.inter(aux1[0],aux2[0],aux2[1],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -758,9 +845,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
 							consulta.setError("Asignacion recursiva de variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 							consulta.setError("Consulta utiliza Tokens");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.diferencia(aux1[0],aux2[0],aux2[1],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -786,9 +881,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						if(aux1[0].equals(aux2[0]) || aux1[0].equals(aux2[1])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
 							consulta.setError("Asignacion recursiva de variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 							consulta.setError("Consulta utiliza Tokens");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.cruz(aux1[0],aux2[0],aux2[1],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -817,9 +920,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						if(aux1[0].equals(aux[2])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
 							consulta.setError("Asignacion recursiva de variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 							consulta.setError("Consulta utiliza Tokens");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.proyectar(aux1[0],aux[1],aux[2],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -847,9 +958,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						if(aux1[0].equals(aux[2])){
 							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
 							consulta.setError("Asignacion recursiva de variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux1[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 							consulta.setError("Consulta utiliza Tokens");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.seleccionar(aux1[0],aux[1],aux[2],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -896,9 +1015,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						System.out.println("--------------------------------------");
 						
 						if(aux20[0].equals(auxdiv[0]) || aux20[0].equals(auxdiv[1])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux20[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							//resultado = ConsultaDAO.division(auxdiv11[0],auxdiv11[1],auxdiv1[2],auxdiv2[1],auxdiv2[2],userBean.getRut());
 							resultado = ConsultaDAO.division(aux20[0],auxdiv11[0],auxdiv11[1],auxdiv1[2],auxdiv2[1],auxdiv2[2],userBean.getRut());
@@ -941,9 +1068,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						
 						
 						if(aux11[0].equals(aux13[2])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux11[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.agrupar(aux11[0],aux12[0],aux13[1],aux13[2],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -976,9 +1111,17 @@ public class ResponderEjerciciosBean implements Serializable {
 						System.out.println(aux10[1]);
 					
 						if(aux30[0].equals(aux10[1])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux30[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.funcionAgregacion(aux30[0],aux9[1],aux9[2],aux10[1],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -1011,9 +1154,17 @@ public class ResponderEjerciciosBean implements Serializable {
 
 						
 						if(aux15[0].equals(aux16[2])){
-							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+							resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else if(!nombreValido(aux15[0])){
 							resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
+							errorMessage = resultado.getNombre();
+					        data = null;
+					        tableName = "";
+					        columnNames = null;
 						}else{
 							resultado = ConsultaDAO.ordenar(aux15[0],aux166[1],aux16[1],aux16[2],userBean.getRut());
 							System.out.println(resultado.getNombre());
@@ -1063,10 +1214,18 @@ public class ResponderEjerciciosBean implements Serializable {
 								
 								if(aux3[0].equals(relacion.getNombre())){
 									consulta.setError("Asignacion recursiva de variable");
-									resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");	
+									resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
+									errorMessage = resultado.getNombre();
+							        data = null;
+							        tableName = "";
+							        columnNames = null;
 								}else if(!nombreValido(aux3[0])){
 									resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 									consulta.setError("Consulta utiliza Tokens");
+									errorMessage = resultado.getNombre();
+							        data = null;
+							        tableName = "";
+							        columnNames = null;
 								}else{
 									//resultado = ConsultaDAO.renombrar(aux3[0],relacion.getNombre(),att,userBean.getRut());
 									tableName = resultado.getNombre().toLowerCase();
@@ -1075,6 +1234,10 @@ public class ResponderEjerciciosBean implements Serializable {
 							}else{
 								resultado.setNombre("ERROR: La relacion no existe o la cantidad de atributos a renombrar no concuerda");
 								consulta.setError("Relacion a renombrar inexistente o cantidad invalida de atributos al renombrar");
+								errorMessage = resultado.getNombre();
+						        data = null;
+						        tableName = "";
+						        columnNames = null;
 							}
 								
 						}else{
@@ -1108,9 +1271,17 @@ public class ResponderEjerciciosBean implements Serializable {
 									if(aux3[0].equals(relacion.getNombre())){
 										resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
 										consulta.setError("Asignacion recursiva de variable");
+										errorMessage = resultado.getNombre();
+								        data = null;
+								        tableName = "";
+								        columnNames = null;
 									}else if(!nombreValido(aux3[0])){
 										resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 										consulta.setError("Consulta utiliza Tokens");
+										errorMessage = resultado.getNombre();
+								        data = null;
+								        tableName = "";
+								        columnNames = null;
 									}else{
 										resultado = ConsultaDAO.asigRenombrarRelAtt(aux3[0],relacion.getNombre(),aux1[0],atributos,userBean.getRut());
 										tableName = aux3[0].toLowerCase();
@@ -1119,6 +1290,10 @@ public class ResponderEjerciciosBean implements Serializable {
 								}else{
 									resultado.setNombre("ERROR: La relacion no existe o la cantidad de atributos a renombrar no concuerda");
 									consulta.setError("Relacion a renombrar inexistente o cantidad invalida de atributos al renombrar");
+									errorMessage = resultado.getNombre();
+							        data = null;
+							        tableName = "";
+							        columnNames = null;
 								}
 															
 							}else{
@@ -1137,9 +1312,17 @@ public class ResponderEjerciciosBean implements Serializable {
 									if(aux3[0].equals(relacion.getNombre())){
 										resultado.setNombre("ERROR: no puedes asignar recursivamente una variable");
 										consulta.setError("Asignacion recursiva de variable");
+										errorMessage = resultado.getNombre();
+								        data = null;
+								        tableName = "";
+								        columnNames = null;
 									}else if(!nombreValido(aux3[0])){
 										resultado.setNombre("ERROR: no puedes usar etiquetas del lenguaje como nombre");
 										consulta.setError("Consulta utiliza Tokens");
+										errorMessage = resultado.getNombre();
+								        data = null;
+								        tableName = "";
+								        columnNames = null;
 									}else{
 										resultado = ConsultaDAO.verRelacion(aux3[0],relacion.getNombre(),userBean.getRut());
 										tableName = aux3[0].toLowerCase();
@@ -1148,6 +1331,10 @@ public class ResponderEjerciciosBean implements Serializable {
 								}else{
 									resultado.setNombre("ERROR: La relacion " + aux1[1] + " no existe");
 									consulta.setError("Relacion a renombar inexistente");
+									errorMessage = resultado.getNombre();
+							        data = null;
+							        tableName = "";
+							        columnNames = null;
 								}
 							}						
 						}
@@ -1198,14 +1385,21 @@ public class ResponderEjerciciosBean implements Serializable {
 						
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
+			       		errorMessage = null;
 					}else{
 						tableName = null;
 						columnNames = null;
 						data = null;
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta: " + resultado.getNombre(),"");
+						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta: ","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 						System.out.println("Error: " + resultado.getNombre());
 						consulta.setError("Error Postgresql");
+						resultado.setNombre("Error de sintaxis en consulta de Algebra Relacional");
+						errorMessage = resultado.getNombre();
+				        data = null;
+				        tableName = "";
+				        columnNames = null;
+				        
 						estadisticas.setQuery_correcta(false);
 			            estadisticas.setQuery_incorrecta(true);
 			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
@@ -1593,6 +1787,10 @@ public class ResponderEjerciciosBean implements Serializable {
 								
 							}else{
 								resultado.setNombre("ERROR: La relacion no existe o la cantidad de atributos a renombrar no concuerda");
+								errorMessage = resultado.getNombre();
+						        data = null;
+						        tableName = "";
+						        columnNames = null;
 							}
 								
 						}else{
@@ -1619,6 +1817,10 @@ public class ResponderEjerciciosBean implements Serializable {
 								}else{
 									resultado.setNombre("ERROR: La relacion no existe o la cantidad de atributos a renombrar no concuerda");
 									consulta.setError("Relacion a renombrar inexistente o cantidad invalida de atributos al renombrar");
+									errorMessage = resultado.getNombre();
+							        data = null;
+							        tableName = "";
+							        columnNames = null;
 								}
 															
 							}else{
@@ -1639,6 +1841,10 @@ public class ResponderEjerciciosBean implements Serializable {
 								}else{
 									resultado.setNombre("ERROR: La relacion " + aux1[0] + "no existe");
 									consulta.setError("Relacion a renombrar inexistente");
+									errorMessage = resultado.getNombre();
+							        data = null;
+							        tableName = "";
+							        columnNames = null;
 								}
 							}						
 						}
@@ -1668,14 +1874,18 @@ public class ResponderEjerciciosBean implements Serializable {
 					
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
+			       		errorMessage = null;
 					}else{
 						tableName = "";
 						columnNames = null;
 						data = null;
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta: " + resultado.getNombre(),"");
+						resultado.setNombre("Error de sintaxis en consulta de Algebra Relacional");
+						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta ","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 						System.out.println("Error: " + resultado.getNombre());
 						consulta.setError("Error Postgresql");
+						errorMessage = resultado.getNombre();
+
 						estadisticas.setQuery_correcta(false);
 			            estadisticas.setQuery_incorrecta(true);
 			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
@@ -1691,8 +1901,14 @@ public class ResponderEjerciciosBean implements Serializable {
 				tableName = "";
 				columnNames = null;
 				data = null;
+				resultado.setNombre("Error de sintaxis en consulta de Algebra Relacional");
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error de sintaxis en consulta de Algebra Relacional","");
 				consulta.setError("Error de sintaxis de lenguaje AR");
+				errorMessage = resultado.getNombre();
+		        data = null;
+		        tableName = "";
+		        columnNames = null;
+				
 	       		FacesContext.getCurrentInstance().addMessage(null, msg);
 	       		estadisticas.setQuery_correcta(false);
 	            estadisticas.setQuery_incorrecta(true);
@@ -1712,6 +1928,15 @@ public class ResponderEjerciciosBean implements Serializable {
 		consultas.add(consulta);
 
 	}
+	
+	public void limpiarResultados() {
+	    data = null;
+	    tableName = null;
+	    columnNames = null;
+	    errorMessage = null;
+	    //query = null;
+	}
+	
 	
 	public void ayudaSeleccionar(){
 		query = "SELECCIONAR (Lista_de_condiciones) (relacion) ";
@@ -1779,6 +2004,14 @@ public class ResponderEjerciciosBean implements Serializable {
 	
 	public void ayudaFuncionAgregacion(){
 		query = "funcion_agregacion atributo (relacion) ";
+	}
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 
 }

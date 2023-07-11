@@ -21,7 +21,7 @@
 					<h:panelGrid columns="3" cellpadding="5">
 						<h:commandLink value="Inicio" styleClass="linkTitulo" action="home"/>
 						>
-						<h:outputText value="Ver Estadísticas" styleClass="tituloPagina"/>
+						<h:outputText value="Visualización de Estadísticas" styleClass="tituloPagina"/>
 					</h:panelGrid>
 				</p:panel>
 			</h:form>
@@ -88,13 +88,14 @@
 											<f:selectItems value="#{estadisticasView.bds}"/>
 										</p:selectOneListbox>
 									</h:panelGrid>
-									<h:panelGrid  id="fechas" columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
-										<h:outputText value="Seleccione una Fecha" />
-										<p:selectOneListbox value="#{estadisticasView.selectedFecha}" style="width:225px; height:75px; overflow-y: auto;">
-											<p:ajax update=":form:ruts" listener="#{estadisticasView.onFechaBdChangue}"/>
-											<f:selectItems value="#{estadisticasView.fechas}"/>
-										</p:selectOneListbox>
+									<h:panelGrid id="fechas" columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
+									    <h:outputText value="Seleccione una Fecha" />
+									    <p:selectOneListbox value="#{estadisticasView.selectedFecha}" style="width:225px; height:75px; overflow-y: auto; overflow-x: hidden;">
+									        <p:ajax update=":form:ruts" listener="#{estadisticasView.onFechaBdChangue}"/>
+									        <f:selectItems value="#{estadisticasView.fechas}"/>
+									    </p:selectOneListbox>
 									</h:panelGrid>
+
 									<h:panelGrid id="ruts" columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
 										<h:outputText value="Seleccione un usuario" />
 										<p:selectOneListbox value="#{estadisticasView.selectedRut}" style="width:175px; height:75px; overflow-y: auto;">
@@ -120,55 +121,59 @@
 								<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
 								
 									<h:panelGrid rendered="#{estadisticasView.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-   										<p:outputLabel value="Estadísticas GLOBALES" style="font-size: 12px; font-style: italic; display: block; text-align: left;"/>
+   										<p:outputLabel value="Estadísticas GLOBALES" style=" font-style: italic; display: block; text-align: left;"/>
 									</h:panelGrid >
 									<h:panelGrid rendered="#{!estadisticasView.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-										<p:outputLabel value="Estadísticas #{estadisticasView.cargarDatosUsuario()}" style="font-size: 12px; font-style: italic; display: block; text-align: left;"/>
+										<p:outputLabel value="Estadísticas #{estadisticasView.cargarDatosUsuario()}" style="font-style: italic; display: block; text-align: left;"/>
 									</h:panelGrid >
 									<!-- GLOBAL -->
 									<h:panelGrid rendered="#{estadisticasView.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-										<p:outputLabel value="Estadísticas de Ejecución de Ejercicios AR" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
-										<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
+										<p:outputLabel value="Estadísticas de Ejecución de Ejercicios AR" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
 											
-											<h:outputText value="Cantidad de Guías Resueltas" style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.cantidadResp}" style="font-size: 18px;"/>
+										<h:panelGrid columns="3" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+											    	
 											
-											<h:outputText value="Porcentaje de Respuestas Correctas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioPorcentaje}%" style="font-size: 18px;"/>
+											<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+											    <h:outputText value="Cantidad de Guías Resueltas:" style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.cantidadResp}" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Porcentaje de Respuestas Correctas: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioPorcentaje}%" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Promedio Respuestas Correctas: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioAcertadas}" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Promedio Respuestas Erroneas: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioErroneas}" style=" text-align: left;"/>
+											</h:panelGrid> 
 											
-											<h:outputText value="Promedio Respuestas Correctas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioAcertadas}" style="font-size: 18px;"/>
+											<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">  
 											
-										</h:panelGrid>	
-										<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">	
-											
-											<h:outputText value="Promedio Respuestas Erroneas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioErroneas}" style="font-size: 18px;"/>
-											
-											<h:outputText value="Promedio Respuestas Omitidas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioOmitidas}" style="font-size: 18px;"/>
-											
-											<h:outputText value="Promedio Intento de Respuestas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioIntentosRespuestas}" style="font-size: 18px;"/>
-	
-										</h:panelGrid>	
-										<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">	
-																				
-											<h:outputText value="Promedio Tiempo de Respuestas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" style="font-size: 18px;"/>
-												
+											</h:panelGrid> 
+											   
+											<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">    
+											    <h:outputText value="Promedio Respuestas Omitidas: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioOmitidas}" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Promedio Intento de Respuestas: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioIntentosRespuestas}" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Promedio Tiempo de Respuestas: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" style=" text-align: left;"/>
+											</h:panelGrid>
 										</h:panelGrid>
+
 									</h:panelGrid>
 									<!-- USUARIOS -->
 									<h:panelGrid rendered="#{!estadisticasView.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-										<p:outputLabel value="Estadísticas de Ejecución de Ejercicios AR" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
-										<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
+										<p:outputLabel value="Estadísticas de Ejecución de Ejercicios AR" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+										<h:panelGrid columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
 											
-											<h:outputText value="Promedio Tiempo de Respuestas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" style="font-size: 18px;"/>
-										
-											<h:outputText value="Promedio Intento de Respuestas: " style="font-size: 18px;"/>
-											<h:outputText value="#{estadisticasView.promedioIntentosRespuestas}" style="font-size: 18px;"/>
+											<h:outputText value="Promedio Tiempo de Respuestas: " />
+											<h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" />
+											
+											<h:outputText value="Promedio Intento de Respuestas: " />
+											<h:outputText value="#{estadisticasView.promedioIntentosRespuestas}" />
 											
 										</h:panelGrid>									
 										
@@ -177,7 +182,7 @@
 										
 									<hr style="border-top: 1px solid black; margin: 10px 0;" />
 									<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
-										<p:outputLabel value="Gráfico de Respuestas" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>									
+										<p:outputLabel value="Gráfico de Respuestas" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>									
 										<p:chart type="bar" model="#{estadisticasView.animatedModel2}" style="width:950px;height:400px;"/>	
 									</h:panelGrid>			
 							</h:panelGrid>												
@@ -186,7 +191,7 @@
 							
 							<p:spacer/>
 							
-							<p:panel header="Descargar"  >
+							<p:panel header="Descargar Datos Globales"  >
 								<h:panelGrid style="margin: 0 auto !important">
 									<p:commandButton icon="ui-icon-check" value="Generar Descarga" update=":form:botonesDescargas :form:growl" 
 										actionListener="#{estadisticasView.generarDescarga}" />
@@ -236,41 +241,66 @@
 								<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
 								
 									<h:panelGrid rendered="#{estadisticasViewSQL.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-   										<p:outputLabel value="Estadísticas GLOBALES" style="font-size: 12px; font-style: italic; display: block; text-align: left;"/>
+   										<p:outputLabel value="Estadísticas GLOBALES" style=" font-style: italic; display: block; text-align: left;"/>
 									</h:panelGrid >
 									<h:panelGrid rendered="#{!estadisticasViewSQL.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-										<p:outputLabel value="Estadísticas #{estadisticasViewSQL.cargarDatosUsuario()}" style="font-size: 12px; font-style: italic; display: block; text-align: left;"/>
+										<p:outputLabel value="Estadísticas #{estadisticasViewSQL.cargarDatosUsuario()}" style=" font-style: italic; display: block; text-align: left;"/>
 									</h:panelGrid >
 									
-									<p:outputLabel value="Estadísticas de Ejecución" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
-									<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">										
-										<h:outputText value="Cantidad de Consultas Ejecutadas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewSQL.cantQueryEjec}" style="font-size: 18px;"/>
+									<p:outputLabel value="Estadísticas de Ejecución" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+									<h:panelGrid columns="1" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">									
+										<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+											<h:outputText value="Cantidad de Consultas Ejecutadas: " />
+											<h:outputText value="#{estadisticasViewSQL.cantQueryEjec}" />
+											
+											<h:outputText value="Cantidad de Consultas Validas: " />
+											<h:outputText value="#{estadisticasViewSQL.cantQueryCorrecta}"/>
+											
+											<h:outputText value="Cantidad de Consultas Invalidas: "/>
+											<h:outputText value="#{estadisticasViewSQL.cantQueryIncorrecta}" />    							    
+										</h:panelGrid> 
+												
 										
-										<h:outputText value="Cantidad de Consultas Validas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewSQL.cantQueryCorrecta}" style="font-size: 18px;"/>
-										
-										<h:outputText value="Cantidad de Consultas Invalidas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewSQL.cantQueryIncorrecta}" style="font-size: 18px;"/>
-									</h:panelGrid >
-									<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
-										<h:outputText value="Porcentaje de Consultas Validas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewSQL.porcQueryCorrecta.concat('%')}" style="font-size: 18px;"/>
-										
-										<h:outputText value="Porcentaje de Consultas Invalidas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewSQL.porcQueryIncorrecta.concat('%')}" style="font-size: 18px;"/>
-									</h:panelGrid >
+									</h:panelGrid>  
+
 									<hr style="border-top: 1px solid black; margin: 10px 0;" />
 									<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
-										<p:outputLabel value="Clasificación de Errores" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
-										<p:chart type="bar" model="#{estadisticasViewSQL.errorModel}" style="width:950px;height:350px;" />
+										
+										<p:outputLabel value="Desempeño en Consultas Ejecutadas" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+										<p:chart type="pie" model="#{estadisticasViewSQL.pieConsultas}" style="width:950px;height:350px;" styleClass="custom-pie-chart"/>										
+										
 										<hr style="border-top: 1px solid black; margin: 10px 0;" />
-										<p:outputLabel value="Cláusulas Ejecutadas" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
+										<p:outputLabel value="Clasificación de Errores" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+										<p:chart type="bar" model="#{estadisticasViewSQL.errorModel}" style="width:950px;height:350px;" />
+										
+										<hr style="border-top: 1px solid black; margin: 10px 0;" />
+										<p:outputLabel value="Cláusulas Ejecutadas" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
 										<p:chart type="bar" model="#{estadisticasViewSQL.barClausulas}" style="width:950px;height:350px;"/>
+			
 										
 									</h:panelGrid>	
 								</h:panelGrid>												
 							
+							</p:panel>
+							
+							
+							<p:spacer/>
+							
+							<p:panel header="Descargar Datos Globales"  >
+								<h:panelGrid style="margin: 0 auto !important">
+									<p:commandButton icon="ui-icon-check" value="Generar Descarga" update=":form:botonesDescargasSQL :form:growl" 
+										actionListener="#{estadisticasViewSQL.generarDescarga}" />
+								</h:panelGrid>
+												
+								<h:panelGrid id="botonesDescargasSQL" columns="3" cellpadding="5" style="margin: 0 auto !important" >
+									
+									<p:commandButton icon="ui-icon-document" value="Descargar Datos Ejecutor SQL" ajax="false"
+										actionListener="#{estadisticasViewSQL.descargarEjecutorSQL}" disabled="#{!estadisticasViewSQL.descargar}">	
+										<p:fileDownload value="#{estadisticasViewSQL.file}"/>
+									</p:commandButton>						
+
+								</h:panelGrid>
+											
 							</p:panel>
 				        
 				        
@@ -293,41 +323,66 @@
 								<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
 									
 									<h:panelGrid rendered="#{estadisticasViewAR.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-   										<p:outputLabel value="Estadísticas GLOBALES" style="font-size: 12px; font-style: italic; display: block; text-align: left;"/>
+   										<p:outputLabel value="Estadísticas GLOBALES" style=" font-style: italic; display: block; text-align: left;"/>
 									</h:panelGrid >
 									<h:panelGrid rendered="#{!estadisticasViewAR.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-										<p:outputLabel value="Estadísticas #{estadisticasViewAR.cargarDatosUsuario()}" style="font-size: 12px; font-style: italic; display: block; text-align: left;"/>
+										<p:outputLabel value="Estadísticas #{estadisticasViewAR.cargarDatosUsuario()}" style=" font-style: italic; display: block; text-align: left;"/>
 									</h:panelGrid >
 									
-									<p:outputLabel value="Estadísticas de Ejecución" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
-									<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">					
-										<h:outputText value="Cantidad de Consultas Ejecutadas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewAR.cantQueryEjec}" style="font-size: 18px;"/>
+									<p:outputLabel value="Estadísticas de Ejecución" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+									<h:panelGrid columns="1" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">									
 										
-										<h:outputText value="Cantidad de Consultas Validas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewAR.cantQueryCorrecta}" style="font-size: 18px;"/>
-										
-										<h:outputText value="Cantidad de Consultas Invalidas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewAR.cantQueryIncorrecta}" style="font-size: 18px;"/>
-									</h:panelGrid >
-									<h:panelGrid columns="6" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
-										<h:outputText value="Porcentaje de Consultas Validas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewAR.porcQueryCorrecta.concat('%')}" style="font-size: 18px;"/>
-										
-										<h:outputText value="Porcentaje de Consultas Invalidas: " style="font-size: 18px;"/>
-										<h:outputText value="#{estadisticasViewAR.porcQueryIncorrecta.concat('%')}" style="font-size: 18px;"/>
-									</h:panelGrid >
+										<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+											<h:outputText value="Cantidad de Consultas Ejecutadas: " />
+											<h:outputText value="#{estadisticasViewAR.cantQueryEjec}" />
+											
+											<h:outputText value="Cantidad de Consultas Validas: " />
+											<h:outputText value="#{estadisticasViewAR.cantQueryCorrecta}" />
+											
+											<h:outputText value="Cantidad de Consultas Invalidas: " />
+											<h:outputText value="#{estadisticasViewAR.cantQueryIncorrecta}" />  							    
+										</h:panelGrid> 
+									</h:panelGrid> 
+												
+		
 									<hr style="border-top: 1px solid black; margin: 10px 0;" />
 									<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
-										<p:outputLabel value="Clasificación de Errores" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
-										<p:chart type="bar" model="#{estadisticasViewAR.errorModel}" style="width:950px;height:350px;" />
+										
+										<p:outputLabel value="Desempeño en Consultas Ejecutadas" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+										<p:chart type="pie" model="#{estadisticasViewAR.pieConsultas}" style="width:950px;height:350px;" styleClass="custom-pie-chart"/>
+										
 										<hr style="border-top: 1px solid black; margin: 10px 0;" />
-										<p:outputLabel value="Operadores Ejecutados" style="font-size: 24px; font-weight: bold; display: block; text-align: center;"/>
+										<p:outputLabel value="Clasificación de Errores" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+										<p:chart type="bar" model="#{estadisticasViewAR.errorModel}" style="width:950px;height:350px;" />
+										
+										<hr style="border-top: 1px solid black; margin: 10px 0;" />
+										<p:outputLabel value="Operadores Ejecutados" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
 										<p:chart type="bar" model="#{estadisticasViewAR.barOperadores}" style="width:950px;height:350px;"/>
+										
+										
 										
 									</h:panelGrid>	
 								</h:panelGrid>																			
-							</p:panel>  
+							</p:panel>
+							<p:spacer/>
+							
+							<p:panel header="Descargar Datos Globales"  >
+								<h:panelGrid style="margin: 0 auto !important">
+									<p:commandButton icon="ui-icon-check" value="Generar Descarga" update=":form:botonesDescargasAR :form:growl" 
+										actionListener="#{estadisticasViewAR.generarDescarga}" />
+								</h:panelGrid>
+												
+								<h:panelGrid id="botonesDescargasAR" columns="3" cellpadding="5" style="margin: 0 auto !important" >
+									
+									<p:commandButton icon="ui-icon-document" value="Descargar Datos Ejecutor AR" ajax="false"
+										actionListener="#{estadisticasViewAR.descargarEjecutorAR}" disabled="#{!estadisticasViewAR.descargar}">	
+										<p:fileDownload value="#{estadisticasViewAR.file}"/>
+									</p:commandButton>						
+
+								</h:panelGrid>
+											
+							</p:panel>
+							  
 													
 				    </p:panel>
 				    

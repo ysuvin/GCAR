@@ -54,7 +54,7 @@
 				 	
 					<p:dataTable id="radioDT" var="user" value="#{gestionarCuentasBean.users}" widgetVar="usersTable"              
 				                 emptyMessage="No se encuentran EstudianteS con este criterio" filteredValue="#{gestionarCuentasBean.filteredUsers}"
-				                 paginator="true" rows="6"
+				                 paginator="true" rows="12"
 				                 paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 				        <f:facet name="header">
 				      		<p:outputPanel style="text-align: right;">
@@ -63,7 +63,7 @@
 				            </p:outputPanel>
 				        </f:facet>
 				        <p:column style="width:35px;text-align: center">
-	             			<p:commandButton process="radioDT" update=":form:userDetail" oncomplete="PF('userDialog').show()" icon="ui-icon-circle-close" title="Eliminar">
+	             			<p:commandButton process="radioDT" update=":form:userDetail" oncomplete="PF('userDialog').show()" icon="ui-icon-trash" title="Eliminar">
 	                			<f:setPropertyActionListener value="#{user}" target="#{gestionarCuentasBean.selectedUser}" />
 	            			</p:commandButton>
 	            		</p:column>			   
@@ -128,7 +128,7 @@
 			            </p:fieldset>
 			            
 			            <h:panelGrid style="margin:0 auto !important;">
-			            	<p:commandButton update="form" icon="ui-icon-circle-close" value="Eliminar" ajax="false" action="#{gestionarCuentasBean.delete}" />			            
+			            	<p:commandButton update="form" icon="ui-icon-trash" value="Eliminar" ajax="false" action="#{gestionarCuentasBean.delete}" />			            
 			            </h:panelGrid>	
 			            	
 			        </p:outputPanel>

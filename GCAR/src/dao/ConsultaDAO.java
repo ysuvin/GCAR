@@ -1775,7 +1775,7 @@ public class ConsultaDAO {
 		try{  // adiv11Y= atributo R.Y ; adiv11X = atributo R.X ; rel1 = R ; adiv2X = atributo S.X; rel2 = S
 		
 			String query =  "select " + adiv11Y + " from load"+rut+"."+rel1 + 
-						   	    " where " +adiv11X+ " in (select " + adiv11X+ " from load"+rut+"."+rel2+")"+
+						   	    " where " +adiv11X+ " in (select " + adiv2X+ " from load"+rut+"."+rel2+")"+
 						   	    " group by "+ adiv11Y +
 						   	    " having count(*) = (select count(*) from load"+rut+"."+rel2+")"
 						   			;
@@ -1842,7 +1842,7 @@ public class ConsultaDAO {
 			
 			String query =  "create table load" + rut + "." + res + " as " +
 							"select " + adiv11Y + " from load"+rut+"."+rel1 + 
-			   	    		" where " +adiv11X+ " in (select " + adiv11X+ " from load"+rut+"."+rel2+")"+
+			   	    		" where " +adiv11X+ " in (select " + adiv2X+ " from load"+rut+"."+rel2+")"+
 			   	    		" group by "+ adiv11Y +
 			   	    		" having count(*) = (select count(*) from load"+rut+"."+rel2+")";
 
@@ -2150,7 +2150,7 @@ public class ConsultaDAO {
 		try{
 			String query;
 			if(agregacion.equalsIgnoreCase("avg")) {
-				query = "select ROUND(" + agregacion +"("+ atributoFa +"),2)"+ " from load" + rut + "." + rel1;
+				query = "select ROUND(" + agregacion +"("+ atributoFa +"),2) AS avg"+ " from load" + rut + "." + rel1;
 				System.out.println("Query: " + query);
 				
 			}else {
@@ -2220,7 +2220,7 @@ public class ConsultaDAO {
 			
 			if(agregacion.equalsIgnoreCase("avg")) {
 				query = "create  table load" + rut + "." + res + " as " + 
-						   "select ROUND(" + agregacion +"("+ atributoFa +"),2)"+ 
+						   "select ROUND(" + agregacion +"("+ atributoFa +"),2) AS avg"+ 
 						   " from load" + rut + "." + rel1;
 				System.out.println("Query: " + query);
 				

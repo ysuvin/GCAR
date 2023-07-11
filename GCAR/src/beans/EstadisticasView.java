@@ -368,7 +368,7 @@ public class EstadisticasView implements Serializable {
         //animatedModel2.setTitle("Grafico de Respuestas");
         animatedModel2.setAnimate(true);
         animatedModel2.setLegendPosition("ne");
-        animatedModel2.setSeriesColors("1484e6,e69700,fcde4c");
+        animatedModel2.setSeriesColors("1484e6,ff7675,e69700,fcde4c");
         
         Axis yAxis = animatedModel2.getAxis(AxisType.Y);
         Axis xAxis = animatedModel2.getAxis(AxisType.X);
@@ -393,6 +393,9 @@ public class EstadisticasView implements Serializable {
         ChartSeries acertadas = new ChartSeries();
         acertadas.setLabel("Acertadas");
         
+        ChartSeries erroneas = new ChartSeries();
+        erroneas.setLabel("Erroneas");
+        
         ChartSeries cantRes = new ChartSeries();
         cantRes.setLabel("Total Respuestas");
         
@@ -404,6 +407,7 @@ public class EstadisticasView implements Serializable {
 	        	int acert = 0;
 	        	int resp = 0;
 	        	int intent = 0;
+	        	int erro = 0;
 	        	for(Respuesta r : respuestas){
 	        		if(r.getEjercicio() == i){
 	        			resp++;
@@ -412,16 +416,21 @@ public class EstadisticasView implements Serializable {
 	        			}
 	        			if(r.isResultado()){
 	        				acert++;
+	        				
+	        			}else {
+	        			    erro++;
 	        			}
 	        		}
 	        	}
 	        	acertadas.set((i+1),acert);
 	        	cantRes.set((i+1),resp);
 	        	intentos.set((i+1),intent);
+	        	erroneas.set((i+1),erro);
 	        }
         }
         
         model.addSeries(acertadas);
+        model.addSeries(erroneas);
         model.addSeries(cantRes);
         model.addSeries(intentos);
         

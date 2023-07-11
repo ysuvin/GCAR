@@ -34,6 +34,7 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 	
 	private Ejercicio selectedEjercicio;
 
+	private String errorMessage;
 	
     @PreDestroy
     public void destroy(){
@@ -226,11 +227,32 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
         if (errorMessage.contains("function") && errorMessage.contains("does not exist")) {
             return "Funcion desconocida";
         }
-        if (errorMessage.contains("argument of WHERE must be type boolean, not type")) {
+        if (errorMessage.contains("argument of WHERE")&& errorMessage.contains("not type")) {
             return "Argumento Where incorrecto";
         }
         if (errorMessage.contains("column reference") && errorMessage.contains("is ambiguous")) {
             return "Referencia columna ambigua";
+        }
+        if (errorMessage.contains("No results were returned by the query")) {
+            return "Consulta vacia";
+        }
+        if (errorMessage.contains("syntax error at end of input")) {
+            return "Error de sintaxis";
+        }
+        if (errorMessage.contains("column") && errorMessage.contains("must appear in the")) {
+            return "Referencia columna ambigua";
+        }
+        if (errorMessage.contains("argument") && errorMessage.contains("type boolean")) {
+            return "Error de tipo booleano";
+        }
+        if (errorMessage.contains("operator does not exist") && errorMessage.contains("No operator matches")) {
+            return "Error de condición";
+        }
+        if (errorMessage.contains("invalid input") && errorMessage.contains("syntax")) {
+            return "Error de condición";
+        }
+        if (errorMessage.contains("FULL JOIN") && errorMessage.contains("only supported")) {
+            return "Full join no compatible";
         }
         return "otro";
 }
@@ -256,7 +278,7 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 			tableName = "";
 			columnNames = null;
 			data = null;
-			
+			//estadisticas 
 			EstadisticasEjecutorSQL estadisticas = new EstadisticasEjecutorSQL();
 			estadisticas.setRut(userBean.getRut());
 			estadisticas.setBd(esquemaActual.getNombre());
@@ -272,9 +294,13 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 			ConsultaDAOSQL.insertarEstadisticas(estadisticas);
 			
 			
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Clausula no permitida en la consulta de SQL","");
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta","");
 			FacesContext.getCurrentInstance().addMessage(null, msg);
-			
+			errorMessage = "Las clausulas de modificacion de datos no estan permitidas";
+			// Limpia los datos
+	        data = null;
+	        tableName = "";
+	        columnNames = null;
 
 			
 			
@@ -322,6 +348,9 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 				
 					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 		       		FacesContext.getCurrentInstance().addMessage(null, msg);
+		       		errorMessage = null;
+		       		
+		       	//estadisticas
 		       		estadisticas.setQuery_correcta(true);
 		            estadisticas.setQuery_incorrecta(false);
 		            estadisticas.setClasificacion_error(null);
@@ -329,21 +358,45 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 		            
 			}else{
 					tableName = "";
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta: " + resultado.getNombre(),"");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta","");
 		       		FacesContext.getCurrentInstance().addMessage(null, msg);
 					System.out.println("Error: " + resultado.getNombre());
+					
+					errorMessage = resultado.getNombre();
+					// Limpia los datos
+			        data = null;
+			        tableName = "";
+			        columnNames = null;
+			        
+				//estadisticas
 					estadisticas.setQuery_correcta(false);
 		            estadisticas.setQuery_incorrecta(true);
 		            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
 		            estadisticas.setDescripcion_error(resultado.getNombre());
 				}
-			
+		//estadisticas
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			String fechaEjecucion = ConsultaDAOSQL.fechaHora(timestamp);
 			estadisticas.setFecha(fechaEjecucion);	
 			ConsultaDAOSQL.insertarEstadisticas(estadisticas);	
 			}
 		}
+	public void limpiarResultados() {
+	    data = null;
+	    tableName = null;
+	    columnNames = null;
+	    errorMessage = null;
+	}
+
+
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
+	}
 }
 
 

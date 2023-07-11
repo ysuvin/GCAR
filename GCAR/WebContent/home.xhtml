@@ -50,10 +50,7 @@
 							<h:outputText value="#{usuario.nombre1} #{usuario.nombre2} #{usuario.paterno} #{usuario.materno}" />
 							
 							<h:outputText value="Mail: " />
-							<h:outputText value="#{usuario.mail}" />
-							
-							<h:outputText rendered="#{usuario.tipo == 2}" value="Edad: " />
-							<h:outputText rendered="#{usuario.tipo == 2}" value="#{usuario.edad}" />
+							<h:outputText value="#{usuario.mail}" />							
 						
 							<h:outputText rendered="#{usuario.tipo == 2}" value="Año de Ingreso: " />
 							<h:outputText rendered="#{usuario.tipo == 2}" value="#{usuario.anyo}" />

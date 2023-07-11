@@ -1,6 +1,6 @@
 package beans;
 
-
+/// No se utiliza este archivo.
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;

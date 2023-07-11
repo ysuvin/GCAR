@@ -69,6 +69,8 @@ public class EstadisticasViewAR implements Serializable {
    private String tipoEstadisticaSeleccionada = "ejerciciosAR";
    
    private int cantQueryEjec;
+   private int cantQueryCorrectas;
+   private int cantQueryIncorrectas;
    private String cantQueryCorrecta;
    private String cantQueryIncorrecta;
    private String porcQueryCorrecta;
@@ -86,8 +88,13 @@ public class EstadisticasViewAR implements Serializable {
    
    private BarChartModel errorModel;
    private BarChartModel barOperadores;
+   private PieChartModel pieOperadores;
+   private PieChartModel pieConsultas;
    
-   
+   private boolean descargar = false;
+   private StreamedContent file;
+   private String path;
+   private String contentType;
    
    
    
@@ -213,7 +220,58 @@ public class EstadisticasViewAR implements Serializable {
 	public void setBarOperadores(BarChartModel barOperadores) {
 		this.barOperadores = barOperadores;
 	}
+	public List<User> getNombres() {
+		return nombres;
+	}
+	public void setNombres(List<User> nombres) {
+		this.nombres = nombres;
+	}
+	public User getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
+	public int getCantQueryCorrectas() {
+		return cantQueryCorrectas;
+	}
+	public void setCantQueryCorrectas(int cantQueryCorrectas) {
+		this.cantQueryCorrectas = cantQueryCorrectas;
+	}
+	public int getCantQueryIncorrectas() {
+		return cantQueryIncorrectas;
+	}
+	public void setCantQueryIncorrectas(int cantQueryIncorrectas) {
+		this.cantQueryIncorrectas = cantQueryIncorrectas;
+	}
+	public PieChartModel getPieOperadores() {
+		return pieOperadores;
+	}
+	public void setPieOperadores(PieChartModel pieOperadores) {
+		this.pieOperadores = pieOperadores;
+	}
+	public PieChartModel getPieConsultas() {
+		return pieConsultas;
+	}
+	public void setPieConsultas(PieChartModel pieConsultas) {
+		this.pieConsultas = pieConsultas;
+	}
+    
 
+	
+	//DESCARGAS
+		public boolean isDescargar() {
+	   		return descargar;
+		}
+		public void setDescargar(boolean descargar) {
+			this.descargar = descargar;
+		}
+		public StreamedContent getFile() {
+			return file;
+		}
+		public void setFile(StreamedContent file) {
+			this.file = file;
+		}
 	
 	@PostConstruct
 	public void init(){	         
@@ -265,6 +323,8 @@ public class EstadisticasViewAR implements Serializable {
 				int cantQueryIncorrecta = 0;
 				float porcQueryCorrecta = 0;
 				float porcQueryIncorrecta = 0;
+				int cantQueryCorrectas = 0;
+		        int cantQueryIncorrectas = 0;
 
 				for(EstadisticasEjecutorAR e : dataar){
 					cantQueryCorrecta = cantQueryCorrecta + (e.isQuery_correcta() ? 1 : 0);
@@ -276,8 +336,12 @@ public class EstadisticasViewAR implements Serializable {
 				this.cantQueryIncorrecta = df.format(cantQueryIncorrecta);
 				this.porcQueryCorrecta = df.format((cantQueryCorrecta * 100)/dataar.size());
 				this.porcQueryIncorrecta = df.format((cantQueryIncorrecta * 100)/dataar.size());
+				this.cantQueryCorrectas = cantQueryCorrecta;
+		        this.cantQueryIncorrectas = cantQueryIncorrecta;
 				createErrorModel();
 				createBarOperadores();
+				createPieOperadores();
+				createPieConsultas();
 				
 			}else{
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar las respuestas","");
@@ -350,6 +414,51 @@ public class EstadisticasViewAR implements Serializable {
 	    System.out.println("CREATEBARCLAUSULAS CREADO");
 	}
 	
+	private void createPieOperadores() {
+	    operadoresUtilizadas.clear();
+	    for (EstadisticasEjecutorAR data : dataar) {
+	        if(data.getOperador() != null){
+	            operadoresUtilizadas.add(data.getOperador());
+	        }
+	    }
+	    Collections.sort(operadoresUtilizadas);        
+	    pieOperadores = new PieChartModel();
+
+	    for (String clauType : operadoresUtilizadas) {
+	        int frequency = Collections.frequency(operadoresUtilizadas, clauType);
+	        pieOperadores.set(clauType, frequency);
+	    }
+
+	    //pieClausulas.setTitle("Operadores Ejecutados");
+	    pieOperadores.setLegendPosition("ne");
+	    //pieClausulas.setFill(false);
+	    pieOperadores.setShowDataLabels(true);
+	    pieOperadores.setDiameter(300);
+	    pieOperadores.setShadow(true);
+
+	    System.out.println("PIEOperador CREADO");
+	}
+
+	private void createPieConsultas() {
+	    pieConsultas = new PieChartModel();
+
+	    pieConsultas.set("Correctas", cantQueryCorrectas);
+	    pieConsultas.set("Incorrectas", cantQueryIncorrectas);
+
+	    //pieConsultas.setTitle("Consultas Ejecutadas");
+	    pieConsultas.setLegendPosition("ne");
+	    pieConsultas.setShowDataLabels(true);
+	    pieConsultas.setDiameter(300);
+	    pieConsultas.setSeriesColors("1484e6, ff7675");
+
+	    System.out.println("PIE desempeño creado");
+	}
+	
+	
+	
+	
+	
+	
 	public boolean isGlobalSelected() {
         return "GLOBAL".equalsIgnoreCase(selectedRut);
     }
@@ -364,17 +473,66 @@ public class EstadisticasViewAR implements Serializable {
 	    }
 	}
 	
-	public List<User> getNombres() {
-		return nombres;
-	}
-	public void setNombres(List<User> nombres) {
-		this.nombres = nombres;
-	}
-	public User getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(User usuario) {
-		this.usuario = usuario;
-	}
-    
+	public void generarDescarga(){
+    	System.out.println("Preparando Descarga datos Ejecutor AR");
+    	
+	    FileWriter f = null;
+	    PrintWriter pw = null;
+	    List<EstadisticasEjecutorAR> todos = EstadisticasDAO.selectEjecutorAR();
+    	
+    	if(todos != null){    
+		    try{
+		    	 			    	
+		    	f = new FileWriter("C:\\Repositorios\\Segovia\\EjecutorAR.arff");
+		    	pw = new PrintWriter(f);  	
+		    	
+		    	pw.println("@RELATION ejecutorAR");
+		    	pw.println("");
+		    	pw.println("@ATTRIBUTE idQueryAR NUMERIC");
+		    	pw.println("@ATTRIBUTE rutUsuario STRING");		    	
+		    	pw.println("@ATTRIBUTE bd STRING");		  
+		    	pw.println("@ATTRIBUTE queryEjecutada STRING");
+		    	pw.println("@ATTRIBUTE operadorAR STRING");
+		    	pw.println("@ATTRIBUTE queryCorrecta {true,false}");
+		    	pw.println("@ATTRIBUTE queryIncorrecta {true,false}");
+		    	pw.println("@ATTRIBUTE clasificacionError STRING");
+		    	pw.println("@ATTRIBUTE descripcionError STRING");
+		    	pw.println("@ATTRIBUTE fechaEjecucion DATE \"yyyy-MM-dd HH:mm:ss\"");	
+		    	pw.println("");
+		    	pw.println("@DATA");
+		    	for(EstadisticasEjecutorAR t : todos){
+		    		pw.println(t.getId() + ",'" + t.getRut() + "',\"" + t.getBd() + "\"," + 
+		    				t.getQuery() + "," + t.getOperador() + "," + 
+		    				t.isQuery_correcta() + "," + t.isQuery_incorrecta() + ",\"" + 
+		    				t.getClasificacion_error() + "\"," + t.getDescripcion_error() + ",'" + t.getFecha() + "\"");
+		    	}
+		      	
+		    }catch(Exception e){
+		      	System.out.println("Error crear archivo de todo -> " + e.getMessage());
+		      	
+		      	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al crear el archivo de todas las estadisticas","");
+	       		FacesContext.getCurrentInstance().addMessage(null, msg);
+		    }finally{
+		      	try{
+		      		if(f != null)
+		      			f.close();
+		    	}catch(Exception e2){
+		      		System.out.println("Error cerrar archivo de todas las estadisticas -> " + e2.getMessage());
+		      	}
+		    }
+    	}else{
+    		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar todas las estadisticas","");
+       		FacesContext.getCurrentInstance().addMessage(null, msg);
+    	}
+    	
+    	descargar = true;
+    	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Se han generado todas las Estadisticas","");
+   		FacesContext.getCurrentInstance().addMessage(null, msg);	
+    }
+    public void descargarEjecutorAR() throws IOException{
+    	path = "C:\\Repositorios\\Segovia\\EjecutorAR.arff";  
+    	contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(path);
+    	file = new DefaultStreamedContent(new FileInputStream(path), contentType, "EjecutorAR.arff");
+    }
+	
 }

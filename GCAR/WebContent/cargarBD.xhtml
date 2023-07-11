@@ -50,7 +50,7 @@
 				
 			    <p:dataTable id="radioDT" var="bd" value="#{gestionarEsquemasBean.bds}" widgetVar="bdsTable"
 			                 emptyMessage="No se encuentran Bases de Datos con este criterio" filteredValue="#{gestionarEsquemasBean.filteredBds}"
-			                 paginator="true" rows="10"
+			                 paginator="true" rows="12"
 				             paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 <!-- 			                 selectionMode="single" selection="#{gestionarEsquemasBean.selectedBd}" rowKey="#{bd.nombre}"> -->
 			        		 
@@ -72,6 +72,9 @@
 			        </p:column>
 			        <p:column headerText="Nombre" filterBy="#{bd.nombre}" filterStyle="display:none" filterMatchMode="contains">
 			            <h:outputText value="#{bd.nombre}" />
+			        </p:column>
+			        <p:column headerText="Visibilidad" filterBy="#{bd.visible}" filterStyle="display:none" filterMatchMode="contains">
+			            <h:outputText value="#{bd.visible}" />
 			        </p:column>
 			    </p:dataTable>
 			    </p:fieldset>

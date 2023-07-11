@@ -119,7 +119,7 @@
 						            Reemplazar "<strong>nuevo_nombre</strong>" y "<strong>relacion</strong>" por un nuevo nombre para la relaci&#243;n y la relaci&#243;n a renombrar. Esta forma no modifica los atributos.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-						            1. Relaci&#243;n y todos los Atributos: RENOMBRAR aux(id_asignacion, id_trabajador1, id_edificio1, fecha_inicio) (asignacion)<br/>
+						            1. Relaci&#243;n y todos los Atributos: RENOMBRAR aux(id_asignacion, id_trabajador, id_edificio, fecha_inicio) (asignacion)<br/>
 						            2. Solo Relaci&#243;n: RENOMBRAR aux(asignacion)            						            
 						        </div>
 						    </p:tooltip>
@@ -217,7 +217,7 @@
 						            por atributos y relaciones para dividir.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									(id_trabajador1, id_edificio1) (asignacion) DIVISION (id_edificio) (edificio)
+									(id_trabajador, id_edificio) (asignacion) DIVISION (id_edificio) (edificio)
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -228,15 +228,15 @@
 						    <p:tooltip for="rnaturalButton" escape="false">
 						        <div>
 						            <strong>REUNION NATURAL</strong><br/>
-						            Combina relaciones cuando las columnas comunes tienen tuplas iguales.<br/>
+						            Combina las tuplas de ambas relaciones (izquierda y derecha), cuando los atributos comunes tienen tuplas iguales.<br/>
 						            <br/>
 						            <strong>Estructura:</strong><br/>
 						            <strong>relacion</strong> REUNION_NATURAL (<strong>condicion_de_igualdad</strong>) <strong>relacion</strong><br/>
-						            Reemplazar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>"<br/>
+						            Reemplazar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>" 
 						            por las relaciones a combinar y su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									asignacion REUNION_NATURAL (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador
+									asignacion REUNION_NATURAL (asignacion.id_trabajador = trabajador.id_trabajador) trabajador
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -254,7 +254,7 @@
 						            Reemplazar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>" por las relaciones a combinar y su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									asignacion REUNION_EXT_IZQ (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador
+									asignacion REUNION_EXT_IZQ (asignacion.id_trabajador = trabajador.id_trabajador) trabajador
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -272,7 +272,7 @@
 						            Reemplazar "<strong>relacion</strong>", "<strong>condicion_de_igualdad</strong>" y "<strong>relacion</strong>" por las relaciones a combinar y su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									asignacion REUNION_EXT_DER (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador
+									asignacion REUNION_EXT_DER (asignacion.id_trabajador = trabajador.id_trabajador) trabajador
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -291,7 +291,7 @@
 						            su condici&#243;n de igualdad.<br/>
 						            <br/>
 						            <strong>Ejemplo de uso utilizando la BD "empleados_sv":</strong><br/>
-									asignacion REUNION_EXT_FULL (asignacion.id_trabajador1 = trabajador.id_trabajador) trabajador
+									asignacion REUNION_EXT_FULL (asignacion.id_trabajador = trabajador.id_trabajador) trabajador
 		            						            
 						        </div>
 						    </p:tooltip>
@@ -394,20 +394,47 @@
 				</h:panelGrid>
 				
 				<p:spacer/>
-				<p:fieldset legend="Resultado">
-						<p:dataTable value="#{dtGestionarEjerciciosBean.data}" scrollable="true" scrollHeight="250" var="item" style="width:100%!important;"
-							emptyMessage="Ingrese su consulta en Algebra Relacional"> 
-							<f:facet name="header">
-								<h:outputText value="#{dtGestionarEjerciciosBean.tableName}" />
-							</f:facet>
-		    				<p:columns value="#{dtGestionarEjerciciosBean.columnNames}" var="columnName" columnIndexVar="i"> 
-		        				<f:facet name="header">
-		        					<h:outputText value="#{columnName}"/>
-		        				</f:facet>
-		        				<h:outputText value="#{item[i] != null ? item[i] : 'Nulo'}"/>
-		    				</p:columns> 
-						</p:dataTable>
-				</p:fieldset>
+				
+				
+				
+				<p:fieldset legend="Resultado" style="height: 225px; overflow: auto;">
+					    <h:panelGroup rendered="#{not empty dtGestionarEjerciciosBean.errorMessage}">
+					        <p:panel id="errorPanel" style="border: none; background: none; height: 100%;">
+					            <p:outputLabel value="#{dtGestionarEjerciciosBean.errorMessage}" escape="false"
+					                style="color: red; background-color: #ffdddd; padding: 10px; border: 1px solid #ff0000; display: inline-block; height: 100%; width: 100%;">
+					                <p:tooltip for="errorPanel" value="Error" showEffect="fade" hideEffect="fade" />
+					            </p:outputLabel>
+					        </p:panel>
+					    </h:panelGroup>
+					
+					    <h:panelGroup rendered="#{empty dtGestionarEjerciciosBean.errorMessage}" style="height: 100%;">
+					        <div style="height: 100%;">
+					            <p:dataTable value="#{dtGestionarEjerciciosBean.data}" var="item" style="width:100%!important;"
+					                emptyMessage="Ingrese su consulta en Algebra Relacional">
+					                <f:facet name="header">
+					                    <h:outputText value="#{dtGestionarEjerciciosBean.tableName}" />
+					                </f:facet>
+					                <p:columns value="#{dtGestionarEjerciciosBean.columnNames}" var="columnName" columnIndexVar="i">
+					                    <f:facet name="header">
+					                        <h:outputText value="#{columnName}" />
+					                    </f:facet>
+					                    <h:outputText value="#{item[i] != null ? item[i] : 'Nulo'}" />
+					                </p:columns>
+					            </p:dataTable>
+					        </div>
+					    </h:panelGroup>
+					</p:fieldset>
+
+					<h:panelGrid columns="1" style="width:100%; position: relative;">
+					    <p:commandButton value="Limpiar Resultado" action="#{dtGestionarEjerciciosBean.limpiarResultados}"
+					        icon="ui-icon-trash" update="form :formDataList" style="float: right;">
+					    </p:commandButton>
+					</h:panelGrid>
+				
+				
+				
+				
+				
 					
 				<p:spacer/>	
 							

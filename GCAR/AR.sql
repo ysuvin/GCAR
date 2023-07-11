@@ -243,7 +243,6 @@ create table control2_18851998.edificio(
 	);
 
 insert into control2_18851998.edificio values
-	(5432,'Francia 123','oficina',1,4),
 	(2000,'Francia 124','oficina',2,3),
 	(1000,'Francia 125','negocio',1,4);
 

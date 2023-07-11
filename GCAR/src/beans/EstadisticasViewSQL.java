@@ -67,6 +67,8 @@ public class EstadisticasViewSQL implements Serializable {
    private String rut;
    
    private int cantQueryEjec;
+   private int cantQueryCorrectas;
+   private int cantQueryIncorrectas;
    private String cantQueryCorrecta;
    private String cantQueryIncorrecta;
    private String porcQueryCorrecta;
@@ -84,6 +86,14 @@ public class EstadisticasViewSQL implements Serializable {
 
    private BarChartModel errorModel;
    private BarChartModel barClausulas;
+   private PieChartModel pieClausulas;
+   private PieChartModel pieConsultas;
+   
+   
+   private boolean descargar = false;
+   private StreamedContent file;
+   private String path;
+   private String contentType;
 
 
 	public boolean getVer(){
@@ -194,7 +204,57 @@ public class EstadisticasViewSQL implements Serializable {
 	public void setSelectedFecha(String selectedFecha) {
 		this.selectedFecha = selectedFecha;
 	}
+	public List<User> getNombres() {
+		return nombres;
+	}
+	public void setNombres(List<User> nombres) {
+		this.nombres = nombres;
+	}
+	public User getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
+	public PieChartModel getPieClausulas() {
+        return pieClausulas;
+    }
+
+    public void setPieClausulas(PieChartModel pieClausulas) {
+        this.pieClausulas = pieClausulas;
+    }
+    public PieChartModel getPieConsultas() {
+		return pieConsultas;
+	}
+	public void setPieConsultas(PieChartModel pieConsultas) {
+		this.pieConsultas = pieConsultas;
+	}
+	public int getCantQueryCorrectas() {
+		return cantQueryCorrectas;
+	}
+	public void setCantQueryCorrectas(int cantQueryCorrectas) {
+		this.cantQueryCorrectas = cantQueryCorrectas;
+	}
+	public int getCantQueryIncorrectas() {
+		return cantQueryIncorrectas;
+	}
+	public void setCantQueryIncorrectas(int cantQueryIncorrectas) {
+		this.cantQueryIncorrectas = cantQueryIncorrectas;
+	}
 	
+	//DESCARGAS
+	public boolean isDescargar() {
+   		return descargar;
+	}
+	public void setDescargar(boolean descargar) {
+		this.descargar = descargar;
+	}
+	public StreamedContent getFile() {
+		return file;
+	}
+	public void setFile(StreamedContent file) {
+		this.file = file;
+	}
 	
 	@PostConstruct
 	public void init(){	   
@@ -245,6 +305,8 @@ public class EstadisticasViewSQL implements Serializable {
 				int cantQueryIncorrecta = 0;
 				float porcQueryCorrecta = 0;
 				float porcQueryIncorrecta = 0;
+				int cantQueryCorrectas = 0;
+		        int cantQueryIncorrectas = 0;
 
 				for(EstadisticasEjecutorSQL e : datasql){
 					cantQueryCorrecta = cantQueryCorrecta + (e.isQuery_correcta() ? 1 : 0);
@@ -254,9 +316,13 @@ public class EstadisticasViewSQL implements Serializable {
 				this.cantQueryIncorrecta = df.format(cantQueryIncorrecta);
 				this.porcQueryCorrecta = df.format((cantQueryCorrecta * 100)/datasql.size());
 				this.porcQueryIncorrecta = df.format((cantQueryIncorrecta * 100)/datasql.size());
-				
+				this.cantQueryCorrectas = cantQueryCorrecta;
+		        this.cantQueryIncorrectas = cantQueryIncorrecta;
+		        
 				createErrorModel();
 				createBarClausulas(); 
+				createPieClausulas();
+				createPieConsultas();
 
 			}else{
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar las estadisticas del ejecutor sql","");
@@ -343,26 +409,126 @@ public class EstadisticasViewSQL implements Serializable {
 	    System.out.println("CREATEBARCLAUSULAS CREADO");
 	}
 	
-    public boolean isGlobalSelected() {
-        return "GLOBAL".equalsIgnoreCase(selectedRut);
-    }
+	
+	private void createPieClausulas() {
+	    clausulasUtilizadas.clear();
+	    for (EstadisticasEjecutorSQL data : datasql) {
+	        if(data.getClausula() != null){
+	            clausulasUtilizadas.add(data.getClausula());
+	        }
+	    }
+	    Collections.sort(clausulasUtilizadas);        
+	    pieClausulas = new PieChartModel();
+
+	    for (String clauType : clausulasUtilizadas) {
+	        int frequency = Collections.frequency(clausulasUtilizadas, clauType);
+	        pieClausulas.set(clauType, frequency);
+	    }
+
+	    //pieClausulas.setTitle("Clausulas Ejecutadas");
+	    pieClausulas.setLegendPosition("ne");
+	    //pieClausulas.setFill(false);
+	    pieClausulas.setShowDataLabels(true);
+	    pieClausulas.setDiameter(300);
+	    pieClausulas.setShadow(true);
+
+	    System.out.println("PIECLAUSULAS CREADO");
+	}
+
+	private void createPieConsultas() {
+	    pieConsultas = new PieChartModel();
+
+	    pieConsultas.set("Correctas", cantQueryCorrectas);
+	    pieConsultas.set("Incorrectas", cantQueryIncorrectas);
+
+	    //pieConsultas.setTitle("Consultas Ejecutadas");
+	    pieConsultas.setLegendPosition("ne");
+	    pieConsultas.setShowDataLabels(true);
+	    pieConsultas.setDiameter(300);
+	    pieConsultas.setSeriesColors("1484e6, ff7675");
+
+	    System.out.println("PIE desempeño creado");
+	}
 
 	
 	
 	
 	
-	public List<User> getNombres() {
-		return nombres;
-	}
-	public void setNombres(List<User> nombres) {
-		this.nombres = nombres;
-	}
-	public User getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(User usuario) {
-		this.usuario = usuario;
-	}
 	
+	
+    public boolean isGlobalSelected() {
+        return "GLOBAL".equalsIgnoreCase(selectedRut);
+    }
+
+    public void generarDescarga(){
+    	System.out.println("Preparando Descarga datos Ejecutor SQL");
+    	
+	    FileWriter f = null;
+	    PrintWriter pw = null;
+	    List<EstadisticasEjecutorSQL> todos = EstadisticasDAO.selectEjecutorSQL();
+    	
+    	if(todos != null){    
+		    try{
+		    	 			    	
+		    	f = new FileWriter("C:\\Repositorios\\Segovia\\EjecutorSQL.arff");
+		    	pw = new PrintWriter(f);  	
+		    	
+		    	pw.println("@RELATION ejecutorSQL");
+		    	pw.println("");
+		    	pw.println("@ATTRIBUTE idQuerySQL NUMERIC");
+		    	pw.println("@ATTRIBUTE rutUsuario STRING");		    	
+		    	pw.println("@ATTRIBUTE bd STRING");		  
+		    	pw.println("@ATTRIBUTE queryEjecutada STRING");
+		    	pw.println("@ATTRIBUTE clausulaSQL STRING");
+		    	pw.println("@ATTRIBUTE queryCorrecta {true,false}");
+		    	pw.println("@ATTRIBUTE queryIncorrecta {true,false}");
+		    	pw.println("@ATTRIBUTE clasificacionError STRING");
+		    	pw.println("@ATTRIBUTE descripcionError STRING");
+		    	pw.println("@ATTRIBUTE fechaEjecucion DATE \"yyyy-MM-dd HH:mm:ss\"");	
+		    	pw.println("");
+		    	pw.println("@DATA");
+		    	for(EstadisticasEjecutorSQL t : todos){
+		    		pw.println(t.getId() + ",'" + t.getRut() + "',\"" + t.getBd() + "\"," + 
+		    				t.getQuery() + "," + t.getClausula() + "," + 
+		    				t.isQuery_correcta() + "," + t.isQuery_incorrecta() + ",\"" + 
+		    				t.getClasificacion_error() + "\"," + t.getDescripcion_error() + ",'" + t.getFecha() + "\"");
+		    	}
+		      	
+		    }catch(Exception e){
+		      	System.out.println("Error crear archivo de todo -> " + e.getMessage());
+		      	
+		      	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al crear el archivo de todas las estadisticas","");
+	       		FacesContext.getCurrentInstance().addMessage(null, msg);
+		    }finally{
+		      	try{
+		      		if(f != null)
+		      			f.close();
+		    	}catch(Exception e2){
+		      		System.out.println("Error cerrar archivo de todas las estadisticas -> " + e2.getMessage());
+		      	}
+		    }
+    	}else{
+    		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar todas las estadisticas","");
+    		
+       		FacesContext.getCurrentInstance().addMessage(null, msg);
+    	}
+    	
+    	descargar = true;
+    	FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Se han generado todas las Estadisticas","");
+   		FacesContext.getCurrentInstance().addMessage(null, msg);	
+    }
+    public void descargarEjecutorSQL() throws IOException{
+    	path = "C:\\Repositorios\\Segovia\\EjecutorSQL.arff";  
+    	contentType = FacesContext.getCurrentInstance().getExternalContext().getMimeType(path);
+    	file = new DefaultStreamedContent(new FileInputStream(path), contentType, "EjecutorSQL.arff");
+    }
+	
+    
+    
+    
+    
+	
+	
+
     
 }
