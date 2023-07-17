@@ -57,7 +57,7 @@
 						
 						<h:outputText value="Eliminar Tupla: " style="color:#e69700"/> <p/>
 						a. Seleccione una Tupla marcando el botón <p:selectOneRadio style="display:inline-block"><f:selectItem/></p:selectOneRadio> <p/>
-						b. Seleccione el botón <p:commandButton value="Eliminar Tupla" icon="ui-icon-circle-close" readonly="true" /> para eliminar la Tupla Seleccionada<p/>
+						b. Seleccione el botón <p:commandButton value="Eliminar Tupla" icon="ui-icon-trash" readonly="true" /> para eliminar la Tupla Seleccionada<p/>
 						
 						<h:outputText value="Modificar Tupla: " style="color:#e69700"/> <p/>
 						a. Seleccione una Tupla marcando el botón <p:selectOneRadio style="display:inline-block"><f:selectItem/></p:selectOneRadio> <p/>
@@ -134,7 +134,7 @@
 									<p:commandButton value="Agregar Tupla" id="agregarTupla" icon="ui-icon-circle-plus" actionListener="#{gestionarTuplasBean.agregarTupla}"
 									update=":form:tuplas"/>
 									
-									<p:commandButton value="Eliminar Tupla" id="eliminarTupla" icon="ui-icon-circle-close" actionListener="#{gestionarTuplasBean.eliminarTupla}"
+									<p:commandButton value="Eliminar Tupla" id="eliminarTupla" icon="ui-icon-trash" actionListener="#{gestionarTuplasBean.eliminarTupla}"
 									update=":form:tuplas :form:growl"/>
 									
 									<p:commandButton value="Editar Tupla" id="modificarTupla" icon="ui-icon-pencil" oncomplete="PF('editarDialog').show()"
@@ -207,7 +207,7 @@
 										<p:commandButton value="Agregar Tupla" id="agregarTupla2" icon="ui-icon-circle-plus" actionListener="#{gestionarTuplasBean.agregarTupla}"
 										update=":form:tuplas2"/>
 										
-										<p:commandButton value="Eliminar Tupla" id="eliminarTupla2" icon="ui-icon-circle-close" actionListener="#{gestionarTuplasBean.eliminarTupla}"
+										<p:commandButton value="Eliminar Tupla" id="eliminarTupla2" icon="ui-icon-trash" actionListener="#{gestionarTuplasBean.eliminarTupla}"
 										update=":form:tuplas2 :form:growl"/>
 										
 										<p:commandButton value="Editar Tupla" id="modificarTupla2" icon="ui-icon-pencil" oncomplete="PF('editarDialog').show()"
@@ -263,7 +263,7 @@
 							
 								<p:fieldset styleClass="divs">
 									<f:facet name="legend">
-										<h:panelGrid columns="2" cellpadding="5">
+										<h:panelGrid columns="2" cellpadding="10">
 											<h:outputText value="Gestionar Tupla" />
 											<h:outputLink value="javascript:void(0)" onclick="PF('dlg3').show();" >
 												<span class="ui-icon ui-icon-help" />

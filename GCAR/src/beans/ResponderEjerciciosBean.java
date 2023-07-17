@@ -467,10 +467,10 @@ public class ResponderEjerciciosBean implements Serializable {
             return "Error de tipo booleano";
         }
         if (errorMessage.contains("operator does not exist") && errorMessage.contains("No operator matches")) {
-            return "Error de condición";
+            return "Error de condicion";
         }
         if (errorMessage.contains("invalid input") && errorMessage.contains("syntax")) {
-            return "Error de condición";
+            return "Error de condicion";
         }
         if (errorMessage.contains("FULL JOIN") && errorMessage.contains("only supported")) {
             return "Full join no compatible";

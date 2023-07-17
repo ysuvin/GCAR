@@ -33,20 +33,19 @@
 				
 				<p:dialog id="help" widgetVar="dlg" header="Ayuda" resizable="false" showEffect="fade" hideEffect="fade" style="width:1000px;">
 					<p:scrollPanel style="width:100%; height: auto; border: none;">
-						<p:fieldset legend="Ver Estadísticas" style="font-weight: bold;" >
+						<p:fieldset legend="Visualización de Estadísticas" style="font-weight: bold;" >
 							<h2/>
 							<h:outputText value="Estadísticas: " style="color:#e69700"/> <p/>
-							a. En <h:outputText value="Seleccione un Tipo de Estadistica" style="color:#e69700"/> podra escoger entre <h:outputText value="Estadísticas Ejecutor SQL" style="color:#e69700"/>, <h:outputText value="Estadísticas Ejecutor AR" style="color:#e69700"/> y <h:outputText value="Estadísticas Ejercicios AR" style="color:#e69700"/> para la visualización de las estadisticas<p/>
+							a. En <h:outputText value="Seleccione un Tipo de Estadistica" style="color:#e69700"/> podra escoger entre <h:outputText value="Estadísticas Ejecutor SQL" style="color:#e69700"/>, <h:outputText value="Estadísticas Ejecutor AR" style="color:#e69700"/> y <h:outputText value="Estadísticas Ejercicios AR" style="color:#e69700"/> para la visualización de las estadísticas<p/>
 							b. Al ingresar a <h:outputText value="Estadísticas Ejercicios AR" style="color:#e69700"/>, deberá seleccionar una Base de Datos, la Fecha de la versión de la Base de Datos que contiene la guía de ejercicios y el tipo de usuario a visualizar, donde podrá escoger entre una visualización GLOBAL o el Rut de un Estudiante y presionando el botón <p:commandButton value="Ver Estadísticas" icon="ui-icon-zoomin" readonly="true" /><p/>
 							c. Al ingresar a <h:outputText value="Estadísticas Ejecutor SQL" style="color:#e69700"/> y <h:outputText value="Estadísticas Ejecutor AR" style="color:#e69700"/> por defecto su configuración se ejecutará en GLOBAL, en <h:outputText value="Seleccione un Usuario" style="color:#e69700"/> podra visualizar un Estudiante por su Rut, seleccionando este y presionando el botón <p:commandButton value="Ver Estadísticas" icon="ui-icon-zoomin" readonly="true" /><p/>
 																					
 							<h:outputText value="Descargas: " style="color:#e69700"/> <p/>
-							a. En la sección <h:outputText value="Descargar" style="color:#e69700"/>, dentro de <h:outputText value="Estadísticas Ejercicios AR" style="color:#e69700"/> se pueden descargar los datos del trabajo de los alumnos mientras realizan los Ejercicios <p/>
+							a. En la sección <h:outputText value="Descargar" style="color:#e69700"/>, dentro de <h:outputText value="Estadísticas Ejercicios AR" style="color:#e69700"/>, <h:outputText value="Estadísticas Ejecutor SQL" style="color:#e69700"/> y <h:outputText value="Estadísticas Ejecutor AR" style="color:#e69700"/> se pueden descargar los datos globables generados por los usuarios <p/>
 							b. Seleccione el botón <p:commandButton value="Generar Descarga" icon="ui-icon-check" readonly="true" /> para generar la descarga de archivos en formato <h:outputText value="ARFF" style="color:#e69700"/> <p/>
-							c. Seleccione el botón <p:commandButton value="Descargar Todo" icon="ui-icon-document" readonly="true" /> para descargar Todos los datos de los alumnos <p/>
-							d. Seleccione el botón <p:commandButton value="Descargar Resultados" icon="ui-icon-document" readonly="true" /> para descargar sólo los Resultados de los alumnos <p/>
-							e. Seleccione el botón <p:commandButton value="Descargar Respuestas" icon="ui-icon-document" readonly="true" /> para descargar sólo las Respuestas de los alumnos <p/>
-							f. Seleccione el botón <p:commandButton value="Descargar Consultas" icon="ui-icon-document" readonly="true" /> para descargar sólo las Consultas de los alumnos <p/>
+							c. En <h:outputText value="Estadísticas Ejercicios AR" style="color:#e69700"/> seleccione el botón <p:commandButton value="Descargar Todo" icon="ui-icon-document" readonly="true" /> para descargar Todos los datos, <p:commandButton value="Descargar Resultados" icon="ui-icon-document" readonly="true" /> para descargar sólo los Resultados, <p:commandButton value="Descargar Respuestas" icon="ui-icon-document" readonly="true" /> para descargar sólo las Respuestas y <p:commandButton value="Descargar Consultas" icon="ui-icon-document" readonly="true" /> para descargar sólo las Consultas <p/>
+							d. En <h:outputText value="Estadísticas Ejecutor SQL" style="color:#e69700"/> seleccione el botón <p:commandButton value="Descargar Datos Ejecutor SQL" icon="ui-icon-document" readonly="true" /> para descargar todos los datos <p/>
+							e. En <h:outputText value="Estadísticas Ejecutor AR" style="color:#e69700"/> seleccione el botón <p:commandButton value="Descargar Datos Ejecutor AR" icon="ui-icon-document" readonly="true" /> para descargar todos los datos <p/>
 													
 							<h2/>
 						</p:fieldset>

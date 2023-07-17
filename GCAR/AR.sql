@@ -16,6 +16,7 @@ insert into usuarios values
 ('33333333','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2),
 ('17134298','85638020','Sebastian','Andres','Segovia','Cordero','s.segovia.c@gmail.com',1),
 ('18851998','12345678','Yian','Suvin','Vera','Soto','yian.vera@gmail.com',1),
+('44444444','12345678','Profesor','nombre 2','Paterno','Materno','profebd@uv.cl',1),
 ('11112222','12345678','Eliana','Eliana','Providel','Godoy','eliana.providel@uv.cl',1),
 ('33334444','12345678','Marcelo','Marcelo','Estay','Estay','marcelo.estay@alumnos.uv.cl',1),
 ('22333444','t1','Yian2','Suvin2','Vera2','Soto2','yian.vera2@gmail.com',3);
@@ -43,6 +44,7 @@ create table profesores(
 
 insert into profesores values
 ('11111111','2014'),
+('44444444','2014'),
 ('17134298','2014'),
 ('11112222','2014'),
 ('33334444','2017'),
@@ -122,7 +124,7 @@ insert into esquemas values
 ('17134298','ejemplo',(select current_timestamp),true);
 
 insert into esquemas values
-('18851998','control2',(select current_timestamp),true);
+('18851998','empleados_sv',(select current_timestamp),true);
 
 --Esquema ejemplo
 create schema ejemplo_17134298;
@@ -215,9 +217,9 @@ insert into ejemplo_17134298.S values
 
 -----------schema o bd control2---------------------
 
-create schema control2_18851998;
+create schema empleados_sv_18851998;
 
-create table control2_18851998.trabajador(
+create table empleados_sv_18851998.trabajador(
 	id_trabajador int,
 	nom_trabajador text,
 	tarifa_sem int,
@@ -226,14 +228,14 @@ create table control2_18851998.trabajador(
 	primary key(id_trabajador)
 	);
 
-insert into control2_18851998.trabajador values
+insert into empleados_sv_18851998.trabajador values
 	(1,'Andres',100,'electricista',11),
 	(2, 'Pedro',100,'electricista',11),
 	(3,'Josefa',200,'guardia',12),
 	(4,'esteban',200,'conserje',12),
 	(5,'Romina',150,'conserje', 12);
 
-create table control2_18851998.edificio(
+create table empleados_sv_18851998.edificio(
 	id_edificio int,
 	dir_edificio text,
 	tipo text,
@@ -242,11 +244,11 @@ create table control2_18851998.edificio(
 	primary key(id_edificio)
 	);
 
-insert into control2_18851998.edificio values
+insert into empleados_sv_18851998.edificio values
 	(2000,'Francia 124','oficina',2,3),
 	(1000,'Francia 125','negocio',1,4);
 
-create table control2_18851998.asignacion(
+create table empleados_sv_18851998.asignacion(
 	id_asignacion int,
 	id_trabajador1 int,
 	id_edificio1 int,
@@ -254,14 +256,14 @@ create table control2_18851998.asignacion(
 	primary key(id_asignacion)
 	);
 
-insert into control2_18851998.asignacion values
+insert into empleados_sv_18851998.asignacion values
 	(1,1,5432,'2020-01-01'),
 	(2,2,5432,'2020-02-01'),
 	(3,3,2000,'2019-12-01'),
 	(4,4,2000,'2019-11-01'),
 	(5,3,1000,'2019-11-01');
 
-create table control2_18851998._resp(
+create table empleados_sv_18851998._resp(
 	id int,
 	pregunta text,
 	relacion varchar(60),
