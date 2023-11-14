@@ -312,7 +312,7 @@ public class ResponderEjerciciosBean implements Serializable {
 			
 			Resultado resultado = new Resultado();
 			resultado.setBd(esquemaBean.getNombre() + "_" + esquemaBean.getRut());
-			resultado.setRut(esquemaBean.getRut());
+			resultado.setRut(userBean.getRut());
 			resultado.setFechaBd(esquemaBean.getFecha());
 			resultado.setCantCorrectas(cantCorrectas);
 			resultado.setCantEjercicios(cantEjercicios);

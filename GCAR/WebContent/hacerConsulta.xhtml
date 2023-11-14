@@ -398,32 +398,33 @@
 				
 				
 				<p:fieldset legend="Resultado" style="height: 225px; overflow: auto;">
-					    <h:panelGroup rendered="#{not empty dtGestionarEjerciciosBean.errorMessage}">
-					        <p:panel id="errorPanel" style="border: none; background: none; height: 100%;">
-					            <p:outputLabel value="#{dtGestionarEjerciciosBean.errorMessage}" escape="false"
-					                style="color: red; background-color: #ffdddd; padding: 10px; border: 1px solid #ff0000; display: inline-block; height: 100%; width: 100%;">
-					                <p:tooltip for="errorPanel" value="Error" showEffect="fade" hideEffect="fade" />
-					            </p:outputLabel>
-					        </p:panel>
-					    </h:panelGroup>
-					
-					    <h:panelGroup rendered="#{empty dtGestionarEjerciciosBean.errorMessage}" style="height: 100%;">
-					        <div style="height: 100%;">
-					            <p:dataTable value="#{dtGestionarEjerciciosBean.data}" var="item" style="width:100%!important;"
-					                emptyMessage="Ingrese su consulta en Algebra Relacional">
-					                <f:facet name="header">
-					                    <h:outputText value="#{dtGestionarEjerciciosBean.tableName}" />
-					                </f:facet>
-					                <p:columns value="#{dtGestionarEjerciciosBean.columnNames}" var="columnName" columnIndexVar="i">
-					                    <f:facet name="header">
-					                        <h:outputText value="#{columnName}" />
-					                    </f:facet>
-					                    <h:outputText value="#{item[i] != null ? item[i] : 'Nulo'}" />
-					                </p:columns>
-					            </p:dataTable>
-					        </div>
-					    </h:panelGroup>
-					</p:fieldset>
+				    <h:panelGroup rendered="#{not empty dtGestionarEjerciciosBean.errorMessage}">
+				        <p:panel id="errorPanel" style="border: none; background: none; height: 100%;">
+				            <p:outputLabel value="#{dtGestionarEjerciciosBean.errorMessage}" escape="false"
+				                style="color: red; background-color: #ffdddd; padding: 10px; border: 1px solid #ff0000; display: inline-block; height: 100%; width: 100%;">
+				                <p:tooltip for="errorPanel" value="Error" showEffect="fade" hideEffect="fade" />
+				            </p:outputLabel>
+				        </p:panel>
+				    </h:panelGroup>
+				
+				    <h:panelGroup rendered="#{empty dtGestionarEjerciciosBean.errorMessage}" style="height: 100%;">
+				        <div style="height: 100%;">
+				            <p:dataTable value="#{dtGestionarEjerciciosBean.data}" var="item" style="width:100%!important;"
+				                emptyMessage="#{dtGestionarEjerciciosBean.primerCarga ? 'Ingrese su consulta en Algebra Relacional' : 'La relaci&#243;n est&#225; vac&#237;a'}">
+				                <f:facet name="header">
+				                    <h:outputText value="#{dtGestionarEjerciciosBean.tableName}" />
+				                </f:facet>
+				                <p:columns value="#{dtGestionarEjerciciosBean.columnNames}" var="columnName" columnIndexVar="i">
+				                    <f:facet name="header">
+				                        <h:outputText value="#{columnName}" />
+				                    </f:facet>
+				                    <h:outputText value="#{item[i] != null ? item[i] : 'Nulo'}" />
+				                </p:columns>
+				            </p:dataTable>
+				        </div>
+				    </h:panelGroup>
+				</p:fieldset>
+
 
 					<h:panelGrid columns="1" style="width:100%; position: relative;">
 					    <p:commandButton value="Limpiar Resultado" action="#{dtGestionarEjerciciosBean.limpiarResultados}"
@@ -443,6 +444,8 @@
 				<p:scrollPanel mode="native" style="height:200px" styleClass="divs">		
 					<p:inputTextarea rows="10" style="width:98%" id="grupoConsultas" disabled="false" value="#{dtGestionarEjerciciosBean.queryList}"/>				
 				</p:scrollPanel>
+				<div style="float: right; font-style: italic;"
+					>El Historial tambi&#233;n funciona como borrador, su contenido es editable.</div>	
 				
 				</p:fieldset>
 				

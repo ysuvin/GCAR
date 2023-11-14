@@ -32,10 +32,11 @@
 							Para <strong>ejecutar</strong> una consulta en <strong>SQL</strong> o <strong>Álgebra Relacional</strong>, primero debe <strong>cargar</strong> una <strong>Base de Datos</strong>  <p/>					
 						
 						<h:panelGrid columns="3" cellpadding="4"  >
-							<p:commandButton value="Cargar Base de Datos" ajax="false" action="cargarBD" />
-							<p:commandButton value="Hacer Consulta SQL" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsultaSQL}" />
-							<p:commandButton value="Hacer Consulta AR" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsulta}" />							
-						</h:panelGrid>				
+							<p:commandButton value="Cargar Base de Datos" ajax="false" action="cargarBD" style="height: 60px;" />
+							<p:commandButton value="Hacer Consulta SQL" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsultaSQL}" style="height: 60px;" />
+							<p:commandButton value="Hacer Consulta AR" ajax="false" disabled="#{bd == null}" action="#{menuView.hacerConsulta}" style="height: 60px;" />						
+						</h:panelGrid>			
+							
 					</p:fieldset>
 					
 					<p:spacer />

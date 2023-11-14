@@ -66,7 +66,7 @@
 				<h:panelGrid columns="2" cellpadding="5" style="width:100%" styleClass="alignCenterMenuEst">
 				    <h:outputText value="Seleccione un Tipo de Estadística" />
 				    <p:selectOneMenu value="#{estadisticasView.tipoEstadisticaSeleccionada}">
-				        <f:selectItem itemLabel="Estadísticas Ejercicios AR" itemValue="ejerciciosAR" />
+				        <f:selectItem itemLabel="Estadísticas Guías AR" itemValue="ejerciciosAR" />
 				        <f:selectItem itemLabel="Estadísticas Ejecutor SQL" itemValue="ejecutorSQL" />
 				        <f:selectItem itemLabel="Estadísticas Ejecutor AR" itemValue="ejecutorAR" />			         
 				        <p:ajax update=":form:panelesEstadisticas" />
@@ -75,7 +75,7 @@
 						
 				
 				<p:outputPanel id="panelesEstadisticas">
-				    <p:panel header="Estadísticas Ejercicios AR" rendered="#{estadisticasView.tipoEstadisticaSeleccionada eq 'ejerciciosAR'}">
+				    <p:panel header="Estadísticas Guías AR" rendered="#{estadisticasView.tipoEstadisticaSeleccionada eq 'ejerciciosAR'}">
 	<!-- PANEL EJERCICIOS AR -->			        			        
 				
 							<p:panel styleClass="divs">
@@ -127,39 +127,31 @@
 									</h:panelGrid >
 									<!-- GLOBAL -->
 									<h:panelGrid rendered="#{estadisticasView.isGlobalSelected()}" columns="1" cellpadding="5" columnClasses="left,right" style="width:100%">
-										<p:outputLabel value="Estadísticas de Ejecución de Ejercicios AR" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
+										<p:outputLabel value="Estadísticas de Resolución de Guías AR" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
 											
-										<h:panelGrid columns="3" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+										<h:panelGrid columns="1" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
 											    	
 											
 											<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
 											    <h:outputText value="Cantidad de Guías Resueltas:" style=" text-align: right;"/>
 											    <h:outputText value="#{estadisticasView.cantidadResp}" style=" text-align: left;"/>
 											    
-											    <h:outputText value="Porcentaje de Respuestas Correctas: " style=" text-align: right;"/>
+											    <h:outputText value="Porcentaje de Ejercicios Correctos: " style=" text-align: right;"/>
 											    <h:outputText value="#{estadisticasView.promedioPorcentaje}%" style=" text-align: left;"/>
 											    
-											    <h:outputText value="Promedio Respuestas Correctas: " style=" text-align: right;"/>
+											    <h:outputText value="Cantidad de Ejercicios Correctos: " style=" text-align: right;"/>
 											    <h:outputText value="#{estadisticasView.promedioAcertadas}" style=" text-align: left;"/>
 											    
-											    <h:outputText value="Promedio Respuestas Erroneas: " style=" text-align: right;"/>
+											    <h:outputText value="Cantidad de Ejercicios Erroneos: " style=" text-align: right;"/>
 											    <h:outputText value="#{estadisticasView.promedioErroneas}" style=" text-align: left;"/>
-											</h:panelGrid> 
-											
-											<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">  
-											
-											</h:panelGrid> 
-											   
-											<h:panelGrid columns="2" cellpadding="5" style="width: 100%; display: flex; flex-direction: column; align-items: center;">    
-											    <h:outputText value="Promedio Respuestas Omitidas: " style=" text-align: right;"/>
+											    
+											    <h:outputText value="Cantidad de Ejercicios Omitidos: " style=" text-align: right;"/>
 											    <h:outputText value="#{estadisticasView.promedioOmitidas}" style=" text-align: left;"/>
 											    
-											    <h:outputText value="Promedio Intento de Respuestas: " style=" text-align: right;"/>
-											    <h:outputText value="#{estadisticasView.promedioIntentosRespuestas}" style=" text-align: left;"/>
-											    
 											    <h:outputText value="Promedio Tiempo de Respuestas: " style=" text-align: right;"/>
-											    <h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" style=" text-align: left;"/>
-											</h:panelGrid>
+											    <h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" style="text-align: left;"/>
+											</h:panelGrid> 
+																						
 										</h:panelGrid>
 
 									</h:panelGrid>
@@ -168,11 +160,23 @@
 										<p:outputLabel value="Estadísticas de Ejecución de Ejercicios AR" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>
 										<h:panelGrid columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
 											
-											<h:outputText value="Promedio Tiempo de Respuestas: " />
-											<h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" />
-											
-											<h:outputText value="Promedio Intento de Respuestas: " />
-											<h:outputText value="#{estadisticasView.promedioIntentosRespuestas}" />
+												<h:outputText value="Cantidad de Guías Resueltas:" style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.cantidadResp}" style=" text-align: left;"/>
+												
+												<h:outputText value="Porcentaje de Ejercicios Correctos: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioPorcentaje}%" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Cantidad de Ejercicios Correctos: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioAcertadas}" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Cantidad de Ejercicios Erroneos: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioErroneas}" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Cantidad de Ejercicios Omitidos: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioOmitidas}" style=" text-align: left;"/>
+											    
+											    <h:outputText value="Promedio Tiempo de Respuestas: " style=" text-align: right;"/>
+											    <h:outputText value="#{estadisticasView.promedioTiempoRespuestas}" style="text-align: left;"/>
 											
 										</h:panelGrid>									
 										
@@ -182,8 +186,43 @@
 									<hr style="border-top: 1px solid black; margin: 10px 0;" />
 									<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
 										<p:outputLabel value="Gráfico de Respuestas" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>									
-										<p:chart type="bar" model="#{estadisticasView.animatedModel2}" style="width:950px;height:400px;"/>	
-									</h:panelGrid>			
+										<p:chart type="bar" model="#{estadisticasView.animatedModel2}" style="width:950px;height:400px;"/>
+										<ul>
+										    <li>
+										        <strong>Definición de Estadísticas:</strong>
+										        <ul>
+										            <li>Intento Acertado = Es la cantidad de relaciones resultantes utilizadas como respuesta a un ejercicio y esta es la respuesta correcta.</li>
+										            <li>Intento Erroneo = Es la cantidad de relaciones resultantes utilizadas como respuesta a un ejercicio y esta es la respuesta incorrecta.</li>
+										            <li>Total de Respuestas = Es la cantidad total de relaciones resultantes utilizadas como respuesta a un ejercicio, entre respuestas correctas e incorrectas.</li>
+										            <li>Consultas Ejecutadas = Es la cantidad de consultas realizadas en el Ejecutor AR para obtener una relación resultante y utilizarla como respuesta del<br/>ejercicio, generando un Intento Acertado o Erroneo.</li>
+										        </ul>
+										    </li>
+										</ul>     
+										<ul>    
+										    <li>
+										        <strong>Otras Definiciones:</strong>
+										        <ul>
+										            <li>Relación Resultante = Hace referencia a la relación auxiliar que es utilizada como respuesta para un ejercicio.</li>
+										            <li>Intento = Es la acción de comenzar un ejercicio y finalizar un ejercicio ingresando una relación resultante para dar solución a este. Un intento <br/>finalizado sin relación resultante es un ejercicio omitido.</li>
+										        </ul>
+										    </li>
+										</ul>
+
+									</h:panelGrid>
+									
+									
+								 <!--	<hr style="border-top: 1px solid black; margin: 10px 0;" />
+									<h:panelGrid columns="1" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
+										<p:outputLabel value="Gráfico de Respuestas" style="font-size: 18px; font-weight: bold; display: block; text-align: center;"/>									
+										<ui:repeat var="entry" value="#{estadisticasView.promediosTiemposPorEjercicio.entrySet().toArray()}">
+										    <div class="ejercicio-box">
+										        <h3>Ejercicio #{entry.key}</h3>
+										        <p>Promedio de tiempo: #{entry.value} segundos</p>
+										    </div>
+										</ui:repeat>
+									</h:panelGrid>  -->
+																		
+
 							</h:panelGrid>												
 							
 							</p:panel>

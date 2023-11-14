@@ -431,6 +431,9 @@
 					
 					<p:spacer/>
 					
+					
+					
+					
 					<p:fieldset legend="Resultado" style="height: 225px; overflow: auto;">
 					    <h:panelGroup rendered="#{not empty dtGestionarEjerciciosBeanSQL.errorMessage}">
 					        <p:panel id="errorPanel" style="border: none; background: none; height: 100%;">
@@ -444,7 +447,7 @@
 					    <h:panelGroup rendered="#{empty dtGestionarEjerciciosBeanSQL.errorMessage}" style="height: 100%;">
 					        <div style="height: 100%;">
 					            <p:dataTable value="#{dtGestionarEjerciciosBeanSQL.data}" var="item" style="width:100%!important;"
-					                emptyMessage="Ingrese su consulta en SQL">
+					                emptyMessage="#{dtGestionarEjerciciosBeanSQL.primerCarga ? 'Ingrese su consulta en SQL' : 'La relaci&#243;n est&#225; vac&#237;a'}">
 					                <f:facet name="header">
 					                    <h:outputText value="#{dtGestionarEjerciciosBeanSQL.tableName}" />
 					                </f:facet>
@@ -464,33 +467,20 @@
 					        icon="ui-icon-trash" update="form :formDataList" style="float: right;">
 					    </p:commandButton>
 					</h:panelGrid>
-
-
-
-					
-
-
-
-
-
-
-
-				
-				
+			
 				
 				<p:spacer/> 
 				
 				
 							
-				<p:fieldset legend="Historial">
-				
-				<p:scrollPanel mode="native" style="height:200px" styleClass="divs">		
-					<p:inputTextarea rows="10" style="width:98%" id="grupoConsultas" disabled="false" value="#{dtGestionarEjerciciosBeanSQL.queryList}"/>				
-				</p:scrollPanel>
-				
+				<p:fieldset legend="Historial">				
+					<p:scrollPanel mode="native" style="height:200px" styleClass="divs">		
+						<p:inputTextarea rows="10" style="width:98%" id="grupoConsultas" disabled="false" value="#{dtGestionarEjerciciosBeanSQL.queryList}"/>				
+					</p:scrollPanel>
+					<div style="float: right; font-style: italic;"
+						>El Historial tambi&#233;n funciona como borrador, su contenido es editable.</div>											
 				</p:fieldset>
-				
-							
+
 				</p:panel>
 				
 				<script>

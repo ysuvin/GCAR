@@ -36,7 +36,7 @@ public class ResultadoDAO {
 							"(select * from load" + respuesta.getRut() + "." + ejercicio.getRespuestaAlumno() +
 							" except " +
 							"select * from " + respuesta.getBd() + "." + ejercicio.getRespuesta() + ")";
-			System.out.println("Query: " + query);
+			System.out.println("revisarRespuesta Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -62,7 +62,8 @@ public class ResultadoDAO {
 		try{
 			String query = 	"insert into resultados (bd,rut,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas,fecha) values " +
 							"(?, ?, ?,?,?,?,?,(select current_timestamp))";
-			System.out.println("Query: " + query);
+			System.out.println("guardarResultado Query: " + query);
+			System.out.println("guardarResultado RUT  : " + resultado.getRut());
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -91,7 +92,7 @@ public class ResultadoDAO {
 			
 				String query = 	"insert into respuestas (rut,bd,fecha_bd,ejercicio,resultado,intento,tiempo_ejercicio,tiempo_sesion,fecha) values " +
 						"(?,?,?,?,?,?,?,?,(select current_timestamp))";
-				System.out.println("Query: " + query);
+				System.out.println("guardarRespuestas Query: " + query);
 				
 				Time tiempoEjercicio = new Time(r.getTiempoEjercicio().getTimeInMillis());
 				Time tiempoSesion = new Time(r.getTiempoSesion().getTimeInMillis());
@@ -144,7 +145,8 @@ public class ResultadoDAO {
 	public static List<Resultado> cargarResultado(String bd, String fecha){
 		try{
 			String query = 	"select id,rut,bd,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas from resultados where bd = ? and fecha_bd = '" + fecha + "'";
-			System.out.println("Query: " + query);
+			System.out.println("cargarResultado Query: " + query);
+			System.out.println("--------cargarRespuestas: GLOBAL");
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -179,7 +181,8 @@ public class ResultadoDAO {
 	public static List<Respuesta> cargarRespuestas(String bd, String fecha){
 		try{
 			String query = 	"select * from respuestas where bd = ? and fecha_bd = '" + fecha + "'";
-			System.out.println("Query: " + query);
+			System.out.println("--------cargarRespuestas Query: " + query);
+			System.out.println("--------cargarRespuestas      : GLOBAL");
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -244,7 +247,7 @@ public class ResultadoDAO {
 		try{
 			String query = 	"select id,bd,fecha_bd,cant_ejercicios,cant_correctas,cant_erroneas,cant_omitidas from resultados "
 					+ "where bd = ? and fecha_bd = '" + fecha + "' and rut = '"+rut+"'";
-			System.out.println("Query: " + query);
+			System.out.println("cargarResultadoRut Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -279,7 +282,7 @@ public class ResultadoDAO {
 		try{
 			String query = 	"select * from respuestas "
 					+ "where bd = ? and fecha_bd = '" + fecha + "' and rut = '"+ rut+"'";
-			System.out.println("Query: " + query);
+			System.out.println("cargarRespuestasRut Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -344,7 +347,7 @@ public class ResultadoDAO {
 	public static List<String> obtenerEsquemas(){
 		try{
 			String query = "select distinct bd from resultados";
-			System.out.println("Query: " + query);
+			System.out.println("obtenerEsquemas Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -371,7 +374,7 @@ public class ResultadoDAO {
 	public static List<String> obtenerFechas(String bd){
 		try{
 			String query = "select distinct fecha_bd from resultados where bd=?";
-			System.out.println("Query: " + query);
+			System.out.println("obtenerFechas Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -399,7 +402,7 @@ public class ResultadoDAO {
 	public static List<String> obtenerRuts(String fechabd){
 		try{
 			String query = "select distinct rut from respuestas where fecha_bd= '"+fechabd+"'";
-			System.out.println("Query: " + query);
+			System.out.println("obtenerRuts Query: " + query);
 			
 			con = Database.getConnection();
 			ps = con.prepareStatement(query);
@@ -424,5 +427,37 @@ public class ResultadoDAO {
 		}
 	}	
 
+	public static List<Ejercicio> ejerciciosList(String bd){ //incompleto, la idea es obtener el nombre de los ejercicios y mezclar esta info con los resultados
+		try{
+					
+			String query = "select * from " + bd + "._resp";
+			System.out.println("Query: " + query); 
+			
+			con = Database.getConnection();	
+			ps = con.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			
+			List<Ejercicio> ejercicios = new ArrayList<Ejercicio>();
+			
+			while(rs.next()){
+				Ejercicio e = new Ejercicio();
+				e.setId(rs.getInt(1));
+				e.setPregunta(rs.getString(2));
+				e.setRespuesta(rs.getString(3));
+				e.setConsultas(rs.getString(4));
+				e.setQueryList(e.getConsultas());
+				ejercicios.add(e);
+			}
+			
+			System.out.println("Ejercicios cargados");
 
+			return ejercicios;
+			
+		} catch (Exception ex) {
+			System.out.println("Error en cargarEjercicios() -->" + ex.getMessage());
+			return null;
+		} finally {
+			Database.close(con);
+		}
+	}
 }

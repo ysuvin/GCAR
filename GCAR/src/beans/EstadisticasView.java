@@ -13,9 +13,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 import java.util.LinkedHashSet;
+
+import java.util.HashMap;
 
 
 import javax.faces.application.FacesMessage;
@@ -30,6 +34,10 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
+
+import org.primefaces.model.chart.CategoryAxis;
 
 import dao.EstadisticasDAO;
 import dao.ResultadoDAO;
@@ -44,7 +52,10 @@ import util.EstadisticaResultado;
 import util.EstadisticaTodo;
 import util.Respuesta;
 import util.Resultado;
+import util.Ejercicio;
 import util.User;
+
+
 
  
 @ManagedBean(name = "estadisticasView")
@@ -60,14 +71,25 @@ public class EstadisticasView implements Serializable {
    private String promedioIntentosRespuestas;
    private String promedioPorcentaje;
    private boolean ver = false;
+   private List<Integer> maxEjercicios; //lista que contiene el id de cada ejercicio
+   private List<Double> promedioTiempos; // lista que contiene el tiempo promedio de cada ejercicio
+   
+   private List<Integer> ejerciciosYTiempoSegundos = new ArrayList<>();
+   private Map<Integer, Double> promediosTiemposPorEjercicio = new HashMap<>();
+
+
    
    private List<Respuesta> respuestas;
    private List<Resultado> resultados;
+   private List<Ejercicio> ejercicios;
    private List<EstadisticasEjecutorSQL> datasql;
+   
    
    private DecimalFormat df = new DecimalFormat("##.##");
    
    private BarChartModel animatedModel2;
+   private LineChartModel chartTiempoEjercicio;
+   private LineChartModel lineModel;
    
    private List<String> bds;
    private String selectedBd;
@@ -161,6 +183,22 @@ public class EstadisticasView implements Serializable {
 		this.selectedRut = selectedRut;
 	}
 	
+	public List<User> getNombres() {
+		return nombres;
+	}
+
+	public void setNombres(List<User> nombres) {
+		this.nombres = nombres;
+	}
+
+	public List<Ejercicio> getEjercicios() {
+		return ejercicios;
+	}
+
+	public void setEjercicios(List<Ejercicio> ejercicios) {
+		this.ejercicios = ejercicios;
+	}
+
 	
 	// ESTADISTICAS EJERCICIOS AR
 	public String getNombreBd() {
@@ -230,6 +268,14 @@ public class EstadisticasView implements Serializable {
 		this.animatedModel2 = animatedModel2;
 	}
 	
+	public LineChartModel getChartTiempoEjercicio() {
+	    return chartTiempoEjercicio;
+	}
+
+	public void setChartTiempoEjercicio(LineChartModel chartTiempoEjercicio) {
+	    this.chartTiempoEjercicio = chartTiempoEjercicio;
+	}
+	
 	// ESTADISTICAS EJECUTOR SQL
 	public int getCantQueryEjec() {
 		return cantQueryEjec;
@@ -259,8 +305,10 @@ public class EstadisticasView implements Serializable {
 		nombreBd = "";		
 		resultados = new ArrayList<Resultado>();
 		respuestas = new ArrayList<Respuesta>();
+		ejercicios = new ArrayList<Ejercicio>();
 		cantidadResp = resultados.size();
-		//crear lista de ruts, llenarlas aqui?		
+
+		
 		this.promedioPorcentaje = df.format(0);
 		this.promedioAcertadas = df.format(0);
 		this.promedioErroneas = df.format(0);
@@ -270,7 +318,9 @@ public class EstadisticasView implements Serializable {
 		
 		selectedRut = "GLOBAL";
 		//isGlobalSelected();
-		createAnimatedModels();	
+		createAnimatedModels();
+
+		
 	}
 		
 	
@@ -297,12 +347,14 @@ public class EstadisticasView implements Serializable {
 		nombreBd = selectedBd;
 		fecha = selectedFecha;
 		
-		resultados = ResultadoDAO.cargarResultado(selectedBd,selectedFecha);	
+		resultados = ResultadoDAO.cargarResultado(selectedBd,selectedFecha);
+		
 		
 		if(resultados != null){
 			
 			if (!"GLOBAL".equals(selectedRut)) {
 			    respuestas = ResultadoDAO.cargarRespuestasRut(selectedBd, selectedFecha, selectedRut);
+			    resultados = ResultadoDAO.cargarResultadoRut(selectedBd,selectedFecha, selectedRut);
 			    cargarDatosUsuario();
 		        isGlobalSelected();
 			}else {	
@@ -324,21 +376,47 @@ public class EstadisticasView implements Serializable {
 					promedioErroneas = promedioErroneas + r.getCantErroneas();
 					promedioOmitidas = promedioOmitidas + r.getCantOmitidas();
 					totales = totales + r.getCantEjercicios();
+														
+					
 				}
-				this.promedioPorcentaje = df.format((promedioAcertadas * 100)/totales);
-				this.promedioAcertadas = df.format(promedioAcertadas/resultados.size());
-				this.promedioErroneas = df.format(promedioErroneas/resultados.size());
-				this.promedioOmitidas = df.format(promedioOmitidas/resultados.size());
+				this.promedioPorcentaje = df.format((promedioAcertadas * 100)/totales); //se queda
+				this.promedioAcertadas = df.format(promedioAcertadas); // /resultados.size()); // se rehace a cantidad acertadas ya no es promedio
+				this.promedioErroneas = df.format(promedioErroneas); // /resultados.size()); // se rehace a cantidad aerroneas ya no es promedio
+				this.promedioOmitidas = df.format(promedioOmitidas); // /resultados.size());  // se rehace a cantidad omitidas ya no es promedio
 				
 				float promedioIntentosRespuestas = 0;
 				Calendar tiempoR = new GregorianCalendar();
+				promediosTiemposPorEjercicio.clear();
+				Map<Integer, List<Double>> tiemposPorEjercicio = new HashMap<>();
 				long tiempoRespuesta = 0;
 				for(Respuesta r : respuestas){				
 					tiempoRespuesta = tiempoRespuesta + r.getTiempoEjercicio().getTimeInMillis();
 					promedioIntentosRespuestas = promedioIntentosRespuestas + r.getConsultas().size();
+					
+			        
+			        
+			        int ejercicio = r.getEjercicio();
+			        long tiempoEjercicio = r.getTiempoEjercicio().getTimeInMillis();
+			        // Convierte el tiempo de tipo long a Double.
+			        Double tiempoEjercicioDouble = (double) tiempoEjercicio;
+			        // Agrega el tiempo del ejercicio actual a la lista correspondiente en el mapa.
+			        tiemposPorEjercicio.computeIfAbsent(ejercicio, k -> new ArrayList<>()).add(tiempoEjercicioDouble);
 				}
+				
+				
+				
+				
+				for (Map.Entry<Integer, List<Double>> entry : tiemposPorEjercicio.entrySet()) {
+			        int ejercicio = entry.getKey();
+			        List<Double> tiempos = entry.getValue();
+			        double promedio = tiempos.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
+			        promediosTiemposPorEjercicio.put(ejercicio, promedio);
+			    }			    						
+
+				
+				
 				if(respuestas.size() != 0){
-					this.promedioIntentosRespuestas = df.format(promedioIntentosRespuestas/respuestas.size());
+					this.promedioIntentosRespuestas = df.format(promedioIntentosRespuestas); // /respuestas.size()); // se rehace a cantidad INTENTOS
 					tiempoR.setTimeInMillis((long)tiempoRespuesta/respuestas.size());
 					promedioTiempoRespuestas =	Integer.toString(tiempoR.get(Calendar.HOUR_OF_DAY)) + ":" +
 												Integer.toString(tiempoR.get(Calendar.MINUTE)) + ":" +
@@ -346,6 +424,8 @@ public class EstadisticasView implements Serializable {
 					
 				}
 				createAnimatedModels();
+
+
 				
 			}else{
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al cargar las respuestas","");
@@ -391,16 +471,16 @@ public class EstadisticasView implements Serializable {
         }
         
         ChartSeries acertadas = new ChartSeries();
-        acertadas.setLabel("Acertadas");
+        acertadas.setLabel("Intento Acertado");
         
         ChartSeries erroneas = new ChartSeries();
-        erroneas.setLabel("Erroneas");
+        erroneas.setLabel("Intento Erroneo");
         
         ChartSeries cantRes = new ChartSeries();
-        cantRes.setLabel("Total Respuestas");
+        cantRes.setLabel("Total de Respuestas");
         
         ChartSeries intentos = new ChartSeries();
-        intentos.setLabel("Intentos");
+        intentos.setLabel("Consultas Ejecutadas");
                 
         if(respuestas != null){
 	        for(int i = 0 ; i <= max ; i++){
@@ -435,7 +515,9 @@ public class EstadisticasView implements Serializable {
         model.addSeries(intentos);
         
         return model;
-    }  
+    } 
+        	
+    
    
     public String cargarDatosUsuario() {
 	    List<User> nombres = ConsultaDAOSQL.cargarDatosUser(selectedRut);
@@ -446,14 +528,11 @@ public class EstadisticasView implements Serializable {
 	        return "Usuario no encontrado";
 	    }
 	}
-    
-    
+       
     public boolean isGlobalSelected() {
         return "GLOBAL".equalsIgnoreCase(selectedRut);
     }
-
-    
-
+  
     public void generarDescarga(){
     	System.out.println("Preparando Descarga");
     	
@@ -678,13 +757,30 @@ public class EstadisticasView implements Serializable {
     	file = new DefaultStreamedContent(new FileInputStream(path), contentType, "Todos.arff");
     }
 
-	public List<User> getNombres() {
-		return nombres;
+	public List<Integer> getEjerciciosYTiempoSegundos() {
+		return ejerciciosYTiempoSegundos;
 	}
 
-	public void setNombres(List<User> nombres) {
-		this.nombres = nombres;
+	public void setEjerciciosYTiempoSegundos(List<Integer> ejerciciosYTiempoSegundos) {
+		this.ejerciciosYTiempoSegundos = ejerciciosYTiempoSegundos;
 	}
+
+	public LineChartModel getLineModel() {
+		return lineModel;
+	}
+
+	public void setLineModel(LineChartModel lineModel) {
+		this.lineModel = lineModel;
+	}
+
+	public Map<Integer, Double> getPromediosTiemposPorEjercicio() {
+		return promediosTiemposPorEjercicio;
+	}
+
+	public void setPromediosTiemposPorEjercicio(Map<Integer, Double> promediosTiemposPorEjercicio) {
+		this.promediosTiemposPorEjercicio = promediosTiemposPorEjercicio;
+	}
+
 
 
     

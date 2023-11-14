@@ -28,6 +28,7 @@ import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.PieChartModel;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -48,6 +49,9 @@ import util.EstadisticaTodo;
 import util.Respuesta;
 import util.Resultado;
 import util.User;
+
+
+import java.util.concurrent.ThreadLocalRandom; //borrar, librearia de prueba
 
  
 @ManagedBean(name = "estadisticasViewSQL")
@@ -449,7 +453,6 @@ public class EstadisticasViewSQL implements Serializable {
 
 	    System.out.println("PIE desempeño creado");
 	}
-
 	
 	
 	
@@ -487,12 +490,18 @@ public class EstadisticasViewSQL implements Serializable {
 		    	pw.println("@ATTRIBUTE fechaEjecucion DATE \"yyyy-MM-dd HH:mm:ss\"");	
 		    	pw.println("");
 		    	pw.println("@DATA");
-		    	for(EstadisticasEjecutorSQL t : todos){
-		    		pw.println(t.getId() + ",'" + t.getRut() + "',\"" + t.getBd() + "\"," + 
-		    				t.getQuery() + "," + t.getClausula() + "," + 
-		    				t.isQuery_correcta() + "," + t.isQuery_incorrecta() + ",\"" + 
-		    				t.getClasificacion_error() + "\"," + t.getDescripcion_error() + ",'" + t.getFecha() + "\"");
+		    	for (EstadisticasEjecutorSQL t : todos) {
+		    	    String newQuery = (t.getQuery() != null) ? t.getQuery().replace(",", "").replace(";", "").replace("\n", " ").replace("\r", "").replace("\"", "") : null;
+		    	    String newDescripcionError = (t.getDescripcion_error() != null) ? t.getDescripcion_error().replace(",", "").replace(";", "").replace("\n", " ").replace("\r", "").replace("\"", "") : null;
+
+		    	    // Imprime los valores
+		    	    pw.print(t.getId() + ",'" + t.getRut() + "',\"" + t.getBd() + "\"," +"\""+
+		    	    		newQuery +"\""+ "," + "\"" + t.getClausula() + "\"" + "," +
+		    	             t.isQuery_correcta() + "," + t.isQuery_incorrecta() + ",\"" +
+		    	             t.getClasificacion_error() + "\"," +"\""+ newDescripcionError +"\""+ ",'" + t.getFecha() + "\"");
+		    	    pw.println(""); // Agregar un salto de línea al final de cada línea
 		    	}
+
 		      	
 		    }catch(Exception e){
 		      	System.out.println("Error crear archivo de todo -> " + e.getMessage());

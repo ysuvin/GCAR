@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.Ejercicio;
+import util.EsquemaBean;
 import util.EstadisticaConsulta;
 import util.EstadisticaRespuesta;
 import util.EstadisticaResultado;

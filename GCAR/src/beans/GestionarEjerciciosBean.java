@@ -64,6 +64,8 @@ public class GestionarEjerciciosBean implements Serializable {
 	
 	private String errorMessage;
 	
+	private boolean primerCarga = true;
+	
     @PreDestroy
     public void destroy(){
 //    	Util.reloadBd();
@@ -225,6 +227,14 @@ public class GestionarEjerciciosBean implements Serializable {
     
 	public void setQuery(String query) {
 		this.query = query;
+	}
+	
+	public boolean isPrimerCarga() {
+	    return primerCarga;
+	}
+
+	public void setPrimerCarga(boolean primerCarga) {
+	    this.primerCarga = primerCarga;
 	}
 	
 	
@@ -831,7 +841,11 @@ public class GestionarEjerciciosBean implements Serializable {
 			EstadisticasEjecutorAR estadisticas = new EstadisticasEjecutorAR();
 			estadisticas.setRut(userBean.getRut());
 			estadisticas.setBd(esquema.getNombre());
-			estadisticas.setQuery(query);
+			
+			estadisticas.setQuery(query); //guarda la query sin modificar, modifiedquery la altera para evitar problemas de formato dentro de la base de datos y los archivos para weka
+			//String modifiedQuery = query.replace(",", " ").replace(";", " ").replace("\n", " ").replace("\r", "");
+			//estadisticas.setQuery(modifiedQuery);
+
 			estadisticas.setOperador(obtenerOperador(query));
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			String fechaEjecucion = ConsultaDAOSQL.fechaHora(timestamp);
@@ -1689,6 +1703,7 @@ public class GestionarEjerciciosBean implements Serializable {
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 			       		errorMessage = null;
+			       		primerCarga = false;
 				        
 
 					}else{
@@ -1700,7 +1715,8 @@ public class GestionarEjerciciosBean implements Serializable {
 						estadisticas.setQuery_correcta(false);
 			            estadisticas.setQuery_incorrecta(true);
 			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
-			            estadisticas.setDescripcion_error(resultado.getNombre());
+			            String descripcionError = resultado.getNombre().replace("\n", " ").replace("\r", "");
+			            estadisticas.setDescripcion_error(descripcionError);
 			            ConsultaDAO.insertarEstadisticas(estadisticas);
 					}
 					
@@ -2184,13 +2200,14 @@ public class GestionarEjerciciosBean implements Serializable {
 						
 						estadisticas.setQuery_correcta(true);
 			            estadisticas.setQuery_incorrecta(false);
-			            estadisticas.setDescripcion_error(null);
+			            estadisticas.setClasificacion_error(null);
 			            estadisticas.setDescripcion_error(null);
 			            ConsultaDAO.insertarEstadisticas(estadisticas);
 					
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 			       		FacesContext.getCurrentInstance().addMessage(null, msg);
 			       		errorMessage = null;
+			       		primerCarga = false;
 					}else{
 						tableName = "";
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error al realizar la consulta ","");
@@ -2204,7 +2221,8 @@ public class GestionarEjerciciosBean implements Serializable {
 						estadisticas.setQuery_correcta(false);
 			            estadisticas.setQuery_incorrecta(true);
 			            estadisticas.setClasificacion_error(clasificarError(resultado.getNombre()));
-			            estadisticas.setDescripcion_error(resultado.getNombre());
+			            String descripcionError = resultado.getNombre().replace("\n", " ").replace("\r", "");
+			            estadisticas.setDescripcion_error(descripcionError);
 			            ConsultaDAO.insertarEstadisticas(estadisticas);
 					}
 					
@@ -2249,6 +2267,7 @@ public class GestionarEjerciciosBean implements Serializable {
 	    columnNames = null;
 	    errorMessage = null;
 	    //query = null;
+	    primerCarga = true;
 	}
 	
 	

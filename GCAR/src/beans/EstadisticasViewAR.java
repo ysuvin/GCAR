@@ -500,12 +500,25 @@ public class EstadisticasViewAR implements Serializable {
 		    	pw.println("@ATTRIBUTE fechaEjecucion DATE \"yyyy-MM-dd HH:mm:ss\"");	
 		    	pw.println("");
 		    	pw.println("@DATA");
-		    	for(EstadisticasEjecutorAR t : todos){
-		    		pw.println(t.getId() + ",'" + t.getRut() + "',\"" + t.getBd() + "\"," + 
-		    				t.getQuery() + "," + t.getOperador() + "," + 
-		    				t.isQuery_correcta() + "," + t.isQuery_incorrecta() + ",\"" + 
-		    				t.getClasificacion_error() + "\"," + t.getDescripcion_error() + ",'" + t.getFecha() + "\"");
+		    	for (EstadisticasEjecutorAR t : todos) {
+		    	    String newQuery = (t.getQuery() != null) ? t.getQuery().replace(",", "").replace(";", "").replace("\n", " ").replace("\r", "").replace("\"", "") : null;
+		    	    String newDescripcionError = (t.getDescripcion_error() != null) ? t.getDescripcion_error().replace(",", "").replace(";", "").replace("\n", " ").replace("\r", "").replace("\"", "") : null;
+
+		    	    // Imprime los valores
+		    	    pw.print(t.getId() + ",'" + t.getRut() + "',\"" + t.getBd() + "\"," +"\""+
+		    	    		newQuery +"\""+ "," + "\"" + t.getOperador() + "\"" + "," +
+		    	             t.isQuery_correcta() + "," + t.isQuery_incorrecta() + ",\"" +
+		    	             t.getClasificacion_error() + "\"," +"\""+ newDescripcionError +"\""+ ",'" + t.getFecha() + "\"");
+		    	    pw.println(""); // Agregar un salto de línea al final de cada línea
 		    	}
+
+
+
+
+
+
+
+
 		      	
 		    }catch(Exception e){
 		      	System.out.println("Error crear archivo de todo -> " + e.getMessage());

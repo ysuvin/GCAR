@@ -12,7 +12,7 @@
 		<f:event listener="#{newLoginBean.loadBD}" type="preRenderView" />
 	</f:metadata>
 	
-	<ui:composition template="/templates/consultaTemplate.xhtml">
+	<ui:composition template="/templates/responderTemplate.xhtml">
 		<ui:define name="title">Algebra Relacional - UV</ui:define>
 		<ui:define name="content">
 		
@@ -35,9 +35,9 @@
 					<p:fieldset legend="Responder Ejercicios" style="font-weight: bold;" >
 						<h2/>
 						1. Elija un ejercicio en las pestañas de la sección <h:outputText value="Ejercicios" style="color:#e69700"/> <p/>
-						2. Seleccione el botón <p:commandButton value="Responder" icon="ui-icon-pencil" readonly="true" /> para responder el Ejercicio seleccionado <p/>
+						2. Seleccione el botón <p:commandButton value="Comenzar Ejercicio" icon="ui-icon-pencil" readonly="true" /> para comenzar a resolver el Ejercicio seleccionado <p/>
 						3. Utilize la herramienta de la sección <h:outputText value="Consultas" style="color:#e69700"/> para generar la Relación Resultantes del Ejercicio a responder <p/>
-						4. Seleccione el botón <p:commandButton value="Aceptar" icon="ui-icon-check" readonly="true" />	para terminar de responder el Ejercicio seleccionado <p/>
+						4. Seleccione el botón <p:commandButton value="Finalizar Ejercicio" icon="ui-icon-check" readonly="true" />	para terminar de responder el Ejercicio seleccionado <p/>
 						5. Seleccione el botón <p:commandButton value="Enviar Respuestas" icon="ui-icon-check" readonly="true" /> para terminar de responder los Ejercicios y obtener una calificación <p/>					
 						<h2/>
 					</p:fieldset>
@@ -76,12 +76,12 @@
           							rendered="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'false' : 'true'}" />
 				                
 				                <p:spacer/>
-				                <p:commandButton value="Responder" process="radioDT" action="#{dtResponderEjerciciosBean.responder()}" icon="ui-icon-pencil" title="Modificar" update="@form"
+				                <p:commandButton value="Comenzar Ejercicio" process="radioDT" action="#{dtResponderEjerciciosBean.responder()}" icon="ui-icon-pencil" title="Modificar" update="@form"
 				                	rendered="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}" ajax="true" >           					
                 					<f:setPropertyActionListener value="#{ejercicio}" target="#{dtResponderEjerciciosBean.selectedEjercicio}" />
             					</p:commandButton>
             					   					
-	            				<p:commandButton value="Aceptar"  icon="ui-icon-check" title="Aceptar" update="@form" ajax="true"
+	            				<p:commandButton value="Finalizar Ejercicio"  icon="ui-icon-check" title="Aceptar" update="@form" ajax="true"
 	            					rendered="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'false' : 'true'}" action="#{dtResponderEjerciciosBean.aceptar}">
 	            				</p:commandButton>
             					
@@ -510,7 +510,9 @@
 						<p:scrollPanel mode="native" style="height:140px" styleClass="divs">	
 							<p:inputTextarea rows="7" style="width:98%" id="grupoConsultas" value="#{dtResponderEjerciciosBean.queryList}"	
 								disabled="#{dtResponderEjerciciosBean.selectedEjercicio == null ? 'true' : 'false'}"/>					
-						</p:scrollPanel>					
+						</p:scrollPanel>
+						<div style="float: right; font-style: italic;"
+							>El Historial tambi&#233;n funciona como borrador, su contenido es editable.</div>						
 					</p:fieldset>	
 								
 				</p:panel>

@@ -36,6 +36,8 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 
 	private String errorMessage;
 	
+	private boolean primerCarga = true;
+	
     @PreDestroy
     public void destroy(){
 //    	Util.reloadBd();
@@ -80,6 +82,22 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
     
 	public void setQuery(String query) {
 		this.query = query;
+	}
+	
+	public boolean isPrimerCarga() {
+	    return primerCarga;
+	}
+
+	public void setPrimerCarga(boolean primerCarga) {
+	    this.primerCarga = primerCarga;
+	}
+	
+	public String getErrorMessage() {
+		return errorMessage;
+	}
+
+	public void setErrorMessage(String errorMessage) {
+		this.errorMessage = errorMessage;
 	}
 	
 	private boolean clausulaBloqueada(String query){
@@ -349,6 +367,7 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Consulta realizada satisfactoriamente","");
 		       		FacesContext.getCurrentInstance().addMessage(null, msg);
 		       		errorMessage = null;
+		       		primerCarga = false;
 		       		
 		       	//estadisticas
 		       		estadisticas.setQuery_correcta(true);
@@ -386,17 +405,11 @@ public class GestionarEjerciciosBeanSQL implements Serializable {
 	    tableName = null;
 	    columnNames = null;
 	    errorMessage = null;
+	    primerCarga = true;
 	}
 
 
-	public String getErrorMessage() {
-		return errorMessage;
-	}
 
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
 }
 
 
