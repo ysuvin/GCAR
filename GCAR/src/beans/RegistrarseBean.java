@@ -9,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import util.UserBean;
 import dao.UserDAO;
 
@@ -70,6 +72,25 @@ public class RegistrarseBean {
 								"Bienvenido " + userBean.getNombre1() + " " + userBean.getPaterno(),
 								""));
 				context.getExternalContext().getFlash().setKeepMessages(true);
+				
+				if (!userBean.isIs_hashed()) {
+		            // Si la contraseña ingresada coincide con la contraseña en la base de datos
+		            
+		                System.out.println("###########ACTUALIZANDO CONTRASEÑA A HASH##########");
+		                String hashedPassword = BCrypt.hashpw(userBean.getPass(), BCrypt.gensalt());
+
+		                // Actualizar la contraseña en el objeto userBean y en la base de datos
+		                userBean.setPass(hashedPassword);
+		                userBean.setIs_hashed(true);
+		                UserDAO.actualizarPassword(userBean.getRut(), hashedPassword);
+
+		                //System.out.println("Contraseña actualizada a hash: " + hashedPassword);
+
+		                UserDAO.estadoHash(userBean.getRut(), userBean);
+		                //System.out.println("al finalizar hasheo userBean HASH: " + userBean.isIs_hashed());
+		            
+		        }
+				
 
 				return "home";
 

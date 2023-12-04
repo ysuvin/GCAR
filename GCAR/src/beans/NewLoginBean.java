@@ -16,6 +16,10 @@ import util.UserBean;
 import dao.EsquemaDAO;
 import dao.UserDAO;
 
+import org.mindrot.jbcrypt.BCrypt;
+
+
+
 @ManagedBean(name = "newLoginBean")
 public class NewLoginBean {
 
@@ -31,24 +35,81 @@ public class NewLoginBean {
 
 	public String loginUser() {
 
-		try {
-			Calendar inicioSesion = new GregorianCalendar();
+		try { //crear dos logins, uno para entrar de forma normal y actualizar al hash y otro cuado falle el primer login que me permita entrar con el hash
+			 System.out.println("///////////////////////INICIO LOGIN//////////////////////////");
+			
+			HttpSession session = Util.getSession();
+	        
+	        Calendar inicioSesion = new GregorianCalendar();
 
-			ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+	        ELContext elContext = FacesContext.getCurrentInstance().getELContext();
+	        userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
+	                .getELResolver().getValue(elContext, null, "userBean");
+	        
+	        //System.out.println("userBean: " + userBean);
+	        //System.out.println("userBean RUT: " + userBean.getRut());
+	        //System.out.println("userBean pass (ingresada): " + userBean.getPass());
+	        String plaintextPassword = userBean.getPass();
+	        //System.out.println("userBean HASH: " + userBean.isIs_hashed());
+	        UserDAO.estadoHash(userBean.getRut(), userBean);
+	        //System.out.println("userBean HASH: " + userBean.isIs_hashed());
 
-			System.out.println(elContext);
-			userBean = (UserBean) FacesContext.getCurrentInstance().getApplication()
-					.getELResolver().getValue(elContext, null, "userBean");
 
-			System.out.println(userBean);
+	        UserDAO.obtenerPass(userBean.getRut(), userBean);
+	        //System.out.println("userBean pass (BASE DE DATOS): " + userBean.getPass());
+	        String actualPassword = userBean.getPass();
+	        //System.out.println("userBean pass (variable actualpassword): " + actualPassword);
 
-			userBean = UserDAO.login(userBean.getRut(), userBean.getPass());
-			System.out.println(userBean);		
+	        if (!userBean.isIs_hashed()) {
+	            // Si la contraseña ingresada coincide con la contraseña en la base de datos
+	            if (plaintextPassword.equals(actualPassword)) {
+	                System.out.println("###########ACTUALIZANDO CONTRASEÑA A HASH##########");
+	                String hashedPassword = BCrypt.hashpw(userBean.getPass(), BCrypt.gensalt());
 
+	                // Actualizar la contraseña en el objeto userBean y en la base de datos
+	                userBean.setPass(hashedPassword);
+	                userBean.setIs_hashed(true);
+	                UserDAO.actualizarPassword(userBean.getRut(), hashedPassword);
+
+	                //System.out.println("Contraseña actualizada a hash: " + hashedPassword);
+
+	                UserDAO.estadoHash(userBean.getRut(), userBean);
+	                //System.out.println("al finalizar hasheo userBean HASH: " + userBean.isIs_hashed());
+	            } else {
+	                System.out.println("La contraseña ingresada no coincide con la almacenada en la base de datos.");
+	                // Manejar el caso en el que la contraseña no coincide (podría mostrar un mensaje de error o realizar alguna acción)
+	                FacesContext  context = FacesContext.getCurrentInstance();
+					context.addMessage(
+							null,
+							new FacesMessage(FacesMessage.SEVERITY_WARN,
+									"Datos inválidos. Por favor, intente denuevo.",""));
+					context.getExternalContext().getFlash().setKeepMessages(true);
+
+					session.invalidate();
+					return "login";
+	            }
+	        }
+
+	        
+	        UserDAO.obtenerPass(userBean.getRut(), userBean);
+	        //System.out.println("userBean pass (BASE DE DATOS): "+userBean.getPass());
+	        //System.out.println("userBean pass (INGRESADA en variable): "+plaintextPassword);
+	        //System.out.println("userBean HASH: "+userBean.isIs_hashed());
+	        // Verificar si la contraseña proporcionada es un hash
+	        if (!BCrypt.checkpw(plaintextPassword, userBean.getPass())) {
+	            // Convertir la contraseña proporcionada a un hash
+	            String hashedPassword = BCrypt.hashpw(userBean.getPass(), BCrypt.gensalt());
+	            userBean.setPass(hashedPassword);
+	        }
+
+	        // Intentar iniciar sesión con las credenciales ingresadas (texto plano)
+	        userBean = UserDAO.login(userBean.getRut(), userBean.getPass());
+	        
 			if (userBean != null) {
 
-				// get Http Session and store username
-				HttpSession session = Util.getSession();				
+				
+				
+				
 				userBean.setInicioSesion(inicioSesion);
 
 
@@ -64,8 +125,15 @@ public class NewLoginBean {
 						new FacesMessage(FacesMessage.SEVERITY_INFO,
 								"Bienvenido " + userBean.getNombre1() + " " + userBean.getPaterno(),
 								""));
-				context.getExternalContext().getFlash().setKeepMessages(true);				
-
+				context.getExternalContext().getFlash().setKeepMessages(true);		
+				
+				System.out.println("Bienvenido " + userBean.getNombre1() + " " + userBean.getPaterno()
+						+ "	");
+				System.out.println("userBean RUT: "+userBean.getRut());
+				
+				UserDAO.estadoHash(userBean.getRut(), userBean);
+				//System.out.println("userBean HASH: "+userBean.isIs_hashed());
+				
 				return "home";
 
 			} else {
@@ -73,9 +141,9 @@ public class NewLoginBean {
 				context.addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_WARN,
-								"Datos inv�lidos. Por favor, intente denuevo.",""));
+								"Datos inválidos. Por favor, intente denuevo.",""));
 				context.getExternalContext().getFlash().setKeepMessages(true);
-				HttpSession session = Util.getSession();
+
 				session.invalidate();
 				return "login";
 			}
@@ -97,6 +165,8 @@ public class NewLoginBean {
 		HttpSession session = Util.getSession();
 		session.setAttribute("userBean", null);
 		session.invalidate();
+		UserDAO.estadoHash(userBean.getRut(), userBean);
+		System.out.println("userBean HASH: "+userBean.isIs_hashed());
 		return "login";
 	}	
 

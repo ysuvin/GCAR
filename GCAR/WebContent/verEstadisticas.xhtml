@@ -82,14 +82,14 @@
 								<h:panelGrid columns="3" cellpadding="10" style="width:100%">
 									<h:panelGrid columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
 										<h:outputText value="Seleccione una Base de Datos" />
-										<p:selectOneListbox value="#{estadisticasView.selectedBd}" style="width:175px; height:75px; overflow-y: auto;">
+										<p:selectOneListbox value="#{estadisticasView.selectedBd}" style="width:175px; height:150px; overflow-y: auto;">
 											<p:ajax update=":form:fechas" listener="#{estadisticasView.onBdChangue}"/>
 											<f:selectItems value="#{estadisticasView.bds}"/>
 										</p:selectOneListbox>
 									</h:panelGrid>
 									<h:panelGrid id="fechas" columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
 									    <h:outputText value="Seleccione una Fecha" />
-									    <p:selectOneListbox value="#{estadisticasView.selectedFecha}" style="width:225px; height:75px; overflow-y: auto; overflow-x: hidden;">
+									    <p:selectOneListbox value="#{estadisticasView.selectedFecha}" style="width:225px; height:150px;  overflow-x: hidden;">
 									        <p:ajax update=":form:ruts" listener="#{estadisticasView.onFechaBdChangue}"/>
 									        <f:selectItems value="#{estadisticasView.fechas}"/>
 									    </p:selectOneListbox>
@@ -97,7 +97,7 @@
 
 									<h:panelGrid id="ruts" columns="2" cellpadding="5" columnClasses="left,right" style="width: 100%; display: flex; justify-content: center;">
 										<h:outputText value="Seleccione un usuario" />
-										<p:selectOneListbox value="#{estadisticasView.selectedRut}" style="width:175px; height:75px; overflow-y: auto;">
+										<p:selectOneListbox value="#{estadisticasView.selectedRut}" style="width:175px; height:150px; overflow-y: auto;">
 											<p:ajax update=":form:verEstadisticas"/>
 											<f:selectItems value="#{estadisticasView.ruts}"/>
 										</p:selectOneListbox>

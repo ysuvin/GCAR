@@ -11,6 +11,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 import util.User;
 import util.UserBean;
 import dao.UserDAO;
@@ -161,6 +163,25 @@ public class GestionarCuentasBean implements Serializable {
     					new FacesMessage(FacesMessage.SEVERITY_INFO,
     							"Se ha creado el usuario " + user.getNombre1() + " " + user.getPaterno(),""));
     			context.getExternalContext().getFlash().setKeepMessages(true);
+    			
+    			//HASHHHHHHHHH
+    			System.out.println("user RUT: " + user.getRut());
+    			//System.out.println("user pass (ingresada): " + user.getPass());
+    			//System.out.println("userBean RUT: " + userBean.getRut());
+    			//System.out.println("userBean pass (ingresada): " + userBean.getPass());
+    			System.out.println("###########ACTUALIZANDO CONTRASEÑA A HASH##########");
+    			
+                String hashedPassword = BCrypt.hashpw(user.getPass(), BCrypt.gensalt());
+                // Actualizar la contraseña en el objeto userBean y en la base de datos
+                user.setPass(hashedPassword);
+                user.setIs_hashed(true);
+                UserDAO.actualizarPassword(user.getRut(), hashedPassword);
+
+                //System.out.println("Contraseña actualizada a hash: " + hashedPassword);
+
+                UserDAO.estadoHash(user.getRut(), userBean);
+                //System.out.println("al finalizar hasheo userBean HASH: " + user.isIs_hashed());
+    			
                 
                 return "home";
     		}        
@@ -201,15 +222,35 @@ public class GestionarCuentasBean implements Serializable {
 		//user.setVezCursando(userBean.getVezCursando());
 		user.setEdad(userBean.getEdad());
 		
+		UserDAO.actualizarIsHashed(userBean.getRut());
+		user.setIs_hashed(userBean.isIs_hashed());
+		
 		if(UserDAO.modificarUsuario(user)){
 			
 			HttpSession session = Util.getSession();
+			System.out.println("###########HTTPSESION##########");
 			
 			session.setAttribute("rut", userBean.getRut());
 			session.setAttribute("nombre", userBean.getNombre1());
-			session.setAttribute("pass", userBean.getPass());
+
 			session.setAttribute("tipo", userBean.getTipo());
-			session.setAttribute("usuario", userBean); 	
+			
+            System.out.println("###########ACTUALIZANDO CONTRASEÑA A HASH##########");
+            String hashedPassword = BCrypt.hashpw(userBean.getPass(), BCrypt.gensalt());
+
+            // Actualizar la contraseña en el objeto userBean y en la base de datos
+            userBean.setPass(hashedPassword);
+            userBean.setIs_hashed(true);
+            UserDAO.actualizarPassword(userBean.getRut(), hashedPassword);
+
+            //System.out.println("Contraseña actualizada a hash: " + hashedPassword);
+
+            UserDAO.estadoHash(userBean.getRut(), userBean);
+            //System.out.println("al finalizar hasheo userBean HASH: " + userBean.isIs_hashed());
+
+            session.setAttribute("pass", userBean.getPass());
+            session.setAttribute("usuario", userBean); 
+
 			
 	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Se ha creado el usuario :" + user.getNombre1() + " " + user.getPaterno(),"");
 	        FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -243,18 +284,43 @@ public class GestionarCuentasBean implements Serializable {
 		//user.setVezCursando(userBean.getVezCursando());
 		user.setEdad(userBean.getEdad());
 		
+		UserDAO.actualizarIsHashed(userBean.getRut());
+		user.setIs_hashed(userBean.isIs_hashed());
+		
+		
 		if(UserDAO.modificarUsuario(user)){
 			
 			HttpSession session = Util.getSession();
-			
+			 System.out.println("###########HTTPSESION##########");
 			session.setAttribute("rut", userBean.getRut());
 			session.setAttribute("nombre", userBean.getNombre1());
-			session.setAttribute("pass", userBean.getPass());
+			
 			session.setAttribute("tipo", userBean.getTipo());
-			session.setAttribute("usuario", userBean); 	
+				
+			
+
+	            
+	                System.out.println("###########ACTUALIZANDO CONTRASEÑA A HASH##########");
+	                String hashedPassword = BCrypt.hashpw(userBean.getPass(), BCrypt.gensalt());
+
+	                // Actualizar la contraseña en el objeto userBean y en la base de datos
+	                userBean.setPass(hashedPassword);
+	                userBean.setIs_hashed(true);
+	                UserDAO.actualizarPassword(userBean.getRut(), hashedPassword);
+
+	                System.out.println("Contraseña actualizada a hash: " + hashedPassword);
+
+	                UserDAO.estadoHash(userBean.getRut(), userBean);
+	                System.out.println("al finalizar hasheo userBean HASH: " + userBean.isIs_hashed());
+
+			session.setAttribute("pass", userBean.getPass());
+			session.setAttribute("usuario", userBean); 
 			
 	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Se ha modificado la cuenta","" );
 	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        
+
+	        
 	        return "home";
 		}else{
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ha sido imposible modificar la cuenta","");

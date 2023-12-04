@@ -22,6 +22,7 @@ public class UserBean implements Serializable {
 	//private String vezCursando;
 	private String edad;
 	private int tipo;
+	private boolean is_hashed;
 
 	private Calendar inicioSesion;
 	private List<Ejercicio> ejercicios;
@@ -133,6 +134,14 @@ public class UserBean implements Serializable {
 
 	public void setResultado(Resultado resultado) {
 		this.resultado = resultado;
+	}
+
+	public boolean isIs_hashed() {
+		return is_hashed;
+	}
+
+	public void setIs_hashed(boolean is_hashed) {
+		this.is_hashed = is_hashed;
 	}
 
 

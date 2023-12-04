@@ -17,6 +17,97 @@ public class UserDAO {
 	static Connection con = null;
     static PreparedStatement ps = null;
     static Statement cs = null;
+    
+    
+    public static void actualizarIsHashed(String rut) {
+        try {
+            con = Database.getConnection();
+
+            String query = "UPDATE usuarios SET is_hashed = false WHERE rut = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, rut);
+            int rowsUpdated = ps.executeUpdate();
+            
+            if (rowsUpdated > 0) {
+                System.out.println("El estado is_hashed del usuario con Rut " + rut + " ha sido actualizado a false.");
+            } else {
+                System.out.println("No se actualizó el estado is_hashed del usuario con Rut " + rut + ".");
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al actualizar el estado is_hashed del usuario: " + ex.getMessage());
+        } finally {
+            Database.close(con);
+        }
+    }
+
+    
+    
+    public static void obtenerPass(String rut, UserBean userBean) {
+        try {
+            con = Database.getConnection();
+
+            String query = "SELECT pass FROM usuarios WHERE rut = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, rut);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("Ejecutado userDAO ------ obtenerPass");
+
+            if (rs.next()) {
+                String hashedPassword = rs.getString("pass");
+                userBean.setPass(hashedPassword);
+            }
+            System.out.println("Ejecutado userDAO ------ obtenerPass");
+        } catch (Exception ex) {
+            System.out.println("Error al obtener la contraseña del usuario: " + ex.getMessage());
+        } finally {
+            Database.close(con);
+        }
+    }
+
+    
+    public static void estadoHash(String rut, UserBean userBean) {
+        try {
+            con = Database.getConnection();
+
+            String query = "SELECT is_hashed FROM usuarios WHERE rut = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, rut);
+            ResultSet rs = ps.executeQuery();
+            System.out.println("Ejecutado userDAO ------ estadoHash");
+
+            if (rs.next()) {
+                boolean isHashed = rs.getBoolean("is_hashed");
+                userBean.setIs_hashed(isHashed);
+            }
+        } catch (Exception ex) {
+            System.out.println("Error al obtener el estado hashed del usuario: " + ex.getMessage());
+        } finally {
+            Database.close(con);
+        }
+    }
+    
+    
+    public static void actualizarPassword(String rut, String nuevaPasswordHash) {
+        try {
+            String query = "UPDATE usuarios SET pass = ?, is_hashed = true WHERE rut = ?";
+            System.out.println("Query: " + query);
+
+            con = Database.getConnection();
+            ps = con.prepareStatement(query);
+            ps.setString(1, nuevaPasswordHash);
+            ps.setString(2, rut);
+            ps.executeUpdate();
+
+            System.out.println("Contraseña actualizada para el usuario con rut: " + rut);
+        } catch (Exception ex) {
+            System.out.println("Error al actualizar la contraseña del usuario con rut " + rut + ": " + ex.getMessage());
+        } finally {
+            Database.close(con);
+        }
+    }
+
+    
+    
 	
 	public static UserBean login(String rut, String pass) {
         try {
@@ -48,6 +139,7 @@ public class UserDAO {
         		userBean.setMaterno(rs.getString(6));
         		userBean.setMail(rs.getString(7));
         		userBean.setTipo(rs.getInt(8));
+        		userBean.setIs_hashed(rs.getBoolean(9));
         		
         		System.out.println("Usuario cargado");
         		
@@ -107,7 +199,7 @@ public class UserDAO {
         		
             }
             else {
-            	System.out.println("No encontro usuario");
+            	System.out.println("No encontro usuario - login userDAO");
                 return null;
             }
         } catch (Exception ex) {
@@ -156,7 +248,7 @@ public class UserDAO {
         	return user;
         } catch (Exception ex) {
             System.out.println("Error en crearUsuario() -->" + ex.getMessage());
-            if(ex.getMessage().contains("llave duplicada viola restricci�n de unicidad")){
+            if(ex.getMessage().contains("llave duplicada viola restricción de unicidad")){
             	UserBean userBean = new UserBean();
             	userBean.setNombre1("duplicado");
             	return userBean;
@@ -186,7 +278,7 @@ public class UserDAO {
         	ps.setString(7,user.getMail());
         	ps.execute();
         	
-            System.out.println("Alumno agregado en tabla Usuario");
+            System.out.println("Alumno agregado en tabla Usuario crearUsuario");
             
             query = "INSERT INTO alumnos VALUES (?,?,?)";
             ps = con.prepareStatement(query);
@@ -196,7 +288,7 @@ public class UserDAO {
             ps.setString(3,user.getEdad());
             ps.execute();
            
-            System.out.println("Alumno agregado en tabla Alumnos");
+            System.out.println("Alumno agregado en tabla Alumnos crearUsuario");
             
             user.setTipo(2);
             
@@ -204,7 +296,7 @@ public class UserDAO {
             
         } catch (Exception ex) {
         	System.out.println("Error en crearUsuario() -->" + ex.getMessage());
-            if(ex.getMessage().contains("llave duplicada viola restricci�n de unicidad")){
+            if(ex.getMessage().contains("llave duplicada viola restricción de unicidad")){
             	User userBean = new User();
             	userBean.setNombre1("duplicado");
             	return userBean;
@@ -282,7 +374,7 @@ public class UserDAO {
 	public static boolean modificarUsuario(User user){
 		try{
 			
-			String query = "UPDATE usuarios SET rut=?, pass=?, nombre1=?, nombre2=?, paterno=?, materno=?, mail=? WHERE rut =?";
+			String query = "UPDATE usuarios SET rut=?, pass=?, nombre1=?, nombre2=?, paterno=?, materno=?, mail=?, is_hashed=? WHERE rut =?";
 			System.out.println("Query: " + query);
 			
 			con = Database.getConnection();
@@ -294,7 +386,9 @@ public class UserDAO {
             ps.setString(5,user.getPaterno());
             ps.setString(6,user.getMaterno());
             ps.setString(7,user.getMail());
-            ps.setString(8,user.getRut());
+            ps.setBoolean(8,user.isIs_hashed());
+            ps.setString(9,user.getRut());
+            
             ps.execute();
            
             System.out.println("Usuario editado en tabla Usuarios");

@@ -14,6 +14,7 @@ public class User implements Serializable {
 	// private String vezCursando;
 	 private String edad;
 	 private int tipo;
+	 private boolean is_hashed;
 	 
 	public User(){
 		 
@@ -97,6 +98,14 @@ public class User implements Serializable {
 
 	public void setEdad(String edad) {
 		this.edad = edad;
+	}
+
+	public boolean isIs_hashed() {
+		return is_hashed;
+	}
+
+	public void setIs_hashed(boolean is_hashed) {
+		this.is_hashed = is_hashed;
 	}
 	
 }

@@ -1,25 +1,26 @@
 create table usuarios(
 	rut varchar(45),
-	pass varchar(100),
+	pass varchar(255),
 	nombre1 varchar(45),
 	nombre2 varchar(45),
 	paterno varchar(45),
 	materno varchar(45),
 	mail varchar(45),
 	tipo int,
+	is_hashed boolean,
 	primary key(rut)
 	);
 
 insert into usuarios values 
-('11111111','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2),
-('22222222','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2),
-('33333333','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2),
-('17134298','85638020','Sebastian','Andres','Segovia','Cordero','s.segovia.c@gmail.com',1),
-('18851998','12345678','Yian','Suvin','Vera','Soto','yian.vera@gmail.com',1),
-('44444444','12345678','Profesor','nombre 2','Paterno','Materno','profebd@uv.cl',1),
-('11112222','12345678','Eliana','Eliana','Providel','Godoy','eliana.providel@uv.cl',1),
-('33334444','12345678','Marcelo','Marcelo','Estay','Estay','marcelo.estay@alumnos.uv.cl',1),
-('22333444','t1','Yian2','Suvin2','Vera2','Soto2','yian.vera2@gmail.com',3);
+('11111111','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2,false),
+('22222222','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2,false),
+('33333333','pass','Nombre1','Nombre2','Paterno','Materno','alumno@mail.com',2,false),
+('17134298','85638020','Sebastian','Andres','Segovia','Cordero','s.segovia.c@gmail.com',1,false),
+('18851998','12345678','Yian','Suvin','Vera','Soto','yian.vera@gmail.com',1,false),
+('44444444','12345678','Profesor','nombre 2','Paterno','Materno','profebd@uv.cl',1,false),
+('11112222','12345678','Eliana','Eliana','Providel','Godoy','eliana.providel@uv.cl',1,false),
+('33334444','12345678','Marcelo','Marcelo','Estay','Estay','marcelo.estay@alumnos.uv.cl',1,false),
+('22333444','t1','Yian2','Suvin2','Vera2','Soto2','yian.vera2@gmail.com',3,false);
 ------------------------------
 create table alumnos(
 	rut varchar(45),
